@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinder 2nd Edition Dice Roller</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #1a0e2e 0%, #3d1a00 25%, #2e1a0e 50%, #1a3d00 75%, #0e2e1a 100%);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 25% 25%, rgba(184, 134, 11, 0.1) 2px, transparent 2px),
+                        radial-gradient(circle at 75% 75%, rgba(220, 38, 127, 0.08) 1px, transparent 1px),
+                        radial-gradient(circle at 50% 10%, rgba(79, 70, 229, 0.06) 1px, transparent 1px);
+            background-size: 100px 100px, 150px 150px, 200px 200px;
+            z-index: -1;
+            animation: mystical-drift 30s ease-in-out infinite;
+        }
+        
+        @keyframes mystical-drift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(10px, -5px) rotate(1deg); }
+            66% { transform: translate(-5px, 10px) rotate(-1deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3.8em;
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px #b8860b, 0 0 40px #b8860b;
+            color: #daa520;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.4em;
+            color: #dc267f;
+            margin-bottom: 30px;
+            font-style: italic;
+            text-shadow: 0 0 10px #dc267f;
+            font-weight: bold;
+        }
+        
+        .dice-section {
+            background: rgba(218, 165, 32, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(218, 165, 32, 0.3);
+            box-shadow: 0 10px 30px rgba(218, 165, 32, 0.2);
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .quick-btn {
+            background: linear-gradient(45deg, #8b4513, #a0522d);
+            border: 2px solid #daa520;
+            border-radius: 12px;
+            color: #daa520;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-weight: bold;
+        }
+        
+        .quick-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .quick-btn:hover::before {
+            left: 100%;
+        }
+        
+        .quick-btn:hover {
+            background: linear-gradient(45deg, #a0522d, #cd853f);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(218, 165, 32, 0.4);
+        }
+        
+        .dice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .die-type {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 15px;
+            border: 2px solid;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .die-type::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, transparent, currentColor, transparent);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .die-type:hover::before {
+            opacity: 0.3;
+        }
+        
+        .die-type:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .d4 { border-color: #dc267f; color: #dc267f; }
+        .d6 { border-color: #ff6900; color: #ff6900; }
+        .d8 { border-color: #ffb000; color: #ffb000; }
+        .d10 { border-color: #06d6a0; color: #06d6a0; }
+        .d12 { border-color: #4cc9f0; color: #4cc9f0; }
+        .d20 { border-color: #daa520; color: #daa520; }
+        .d100 { border-color: #7209b7; color: #7209b7; }
+        
+        .die-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        .die-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        
+        .die-count {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 6px 10px;
+            color: white;
+            text-align: center;
+            width: 50px;
+            font-size: 1em;
+            backdrop-filter: blur(5px);
+        }
+        
+        .die-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            backdrop-filter: blur(5px);
+        }
+        
+        .die-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+        
+        .modifier-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .modifier-label {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #daa520;
+            text-shadow: 0 0 10px #daa520;
+        }
+        
+        .modifier-input {
+            background: rgba(218, 165, 32, 0.1);
+            border: 2px solid #daa520;
+            border-radius: 10px;
+            padding: 10px 15px;
+            color: #daa520;
+            text-align: center;
+            width: 80px;
+            font-size: 1.1em;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modifier-input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(218, 165, 32, 0.5);
+        }
+        
+        .dc-section {
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid rgba(79, 70, 229, 0.3);
+        }
+        
+        .dc-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        .dc-label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #4f46e5;
+            text-shadow: 0 0 8px #4f46e5;
+        }
+        
+        .dc-input {
+            background: rgba(79, 70, 229, 0.1);
+            border: 2px solid #4f46e5;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #4f46e5;
+            text-align: center;
+            width: 70px;
+            font-size: 1em;
+        }
+        
+        .hero-section {
+            background: rgba(220, 38, 127, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid rgba(220, 38, 127, 0.3);
+        }
+        
+        .hero-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-btn {
+            background: rgba(220, 38, 127, 0.2);
+            border: 2px solid #dc267f;
+            border-radius: 10px;
+            color: #dc267f;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .hero-btn.active {
+            background: rgba(220, 38, 127, 0.4);
+            box-shadow: 0 0 15px rgba(220, 38, 127, 0.5);
+        }
+        
+        .roll-btn {
+            background: linear-gradient(45deg, #daa520, #b8860b);
+            border: none;
+            border-radius: 25px;
+            color: #2c1810;
+            padding: 20px 50px;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 30px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 30px rgba(218, 165, 32, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .roll-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .roll-btn:hover::before {
+            left: 100%;
+        }
+        
+        .roll-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(218, 165, 32, 0.5);
+        }
+        
+        .clear-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #666;
+            border-radius: 15px;
+            color: white;
+            padding: 12px 25px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #999;
+            transform: translateY(-2px);
+        }
+        
+        .results {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 3px solid #daa520;
+            box-shadow: 0 15px 40px rgba(218, 165, 32, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .result-total {
+            font-size: 4em;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 25px;
+            background: rgba(218, 165, 32, 0.2);
+            border-radius: 15px;
+            border: 2px solid #daa520;
+            color: #daa520;
+            text-shadow: 0 0 20px #daa520;
+        }
+        
+        .degree-of-success {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        .critical-success {
+            background: rgba(34, 197, 94, 0.3);
+            border: 2px solid #22c55e;
+            color: #22c55e;
+        }
+        
+        .success {
+            background: rgba(59, 130, 246, 0.3);
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+        }
+        
+        .failure {
+            background: rgba(239, 68, 68, 0.3);
+            border: 2px solid #ef4444;
+            color: #ef4444;
+        }
+        
+        .critical-failure {
+            background: rgba(127, 29, 29, 0.5);
+            border: 2px solid #7f1d1d;
+            color: #fca5a5;
+        }
+        
+        .result-breakdown {
+            font-size: 1.2em;
+            margin: 15px 0;
+            opacity: 0.9;
+            color: #cccccc;
+        }
+        
+        .dice-results {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .result-die {
+            width: 55px;
+            height: 55px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border: 2px solid;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-die.critical {
+            animation: critical-glow 1s infinite alternate;
+        }
+        
+        .result-die.fumble {
+            animation: fumble-shake 0.5s infinite alternate;
+        }
+        
+        @keyframes critical-glow {
+            from { 
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+                transform: scale(1);
+            }
+            to { 
+                box-shadow: 0 4px 25px rgba(218, 165, 32, 0.8), 0 0 30px rgba(218, 165, 32, 0.5);
+                transform: scale(1.1);
+            }
+        }
+        
+        @keyframes fumble-shake {
+            from { transform: translateX(-3px) rotate(-1deg); }
+            to { transform: translateX(3px) rotate(1deg); }
+        }
+        
+        .critical-text {
+            color: #22c55e;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin: 15px 0;
+            text-shadow: 0 0 15px #22c55e;
+            animation: pulse 1s infinite alternate;
+        }
+        
+        .fumble-text {
+            color: #ef4444;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin: 15px 0;
+            text-shadow: 0 0 15px #ef4444;
+            animation: pulse 1s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+        
+        .hero-result {
+            background: rgba(220, 38, 127, 0.2);
+            border: 2px solid #dc267f;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #dc267f;
+            font-weight: bold;
+        }
+        
+        .proficiency-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .proficiency-btn {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #666;
+            border-radius: 8px;
+            color: white;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .proficiency-btn.active {
+            border-color: #daa520;
+            background: rgba(218, 165, 32, 0.3);
+            color: #daa520;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pathfinder</h1>
+        <div class="subtitle">2nd Edition Dice Roller</div>
+        
+        <div class="dice-section">
+            <h2>⚔️ Quick Actions</h2>
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="quickRoll('1d20', 'attack')">⚔️ Strike</button>
+                <button class="quick-btn" onclick="quickRoll('1d20', 'save')">🛡️ Saving Throw</button>
+                <button class="quick-btn" onclick="quickRoll('1d20', 'skill')">🎯 Skill Check</button>
+                <button class="quick-btn" onclick="quickRoll('1d20', 'perception')">👁️ Perception</button>
+                <button class="quick-btn" onclick="quickRoll('1d20', 'initiative')">⚡ Initiative</button>
+                <button class="quick-btn" onclick="quickRoll('4d6', 'ability')">📊 Ability Score</button>
+                <button class="quick-btn" onclick="quickRoll('1d100')">🎲 Percentile</button>
+                <button class="quick-btn" onclick="quickRoll('1d20', 'spell')">✨ Spell Attack</button>
+            </div>
+        </div>
+        
+        <div class="dice-section">
+            <h2>🎯 Custom Roll</h2>
+            <div class="dice-grid">
+                <div class="die-type d4">
+                    <div class="die-name">d4</div>
+                    <div class="die-controls">
+                        <button class="die-btn" onclick="changeDieCount('d4', -1)">-</button>
+                        <input type="number" class="die-count" id="d4-count" value="0" min="0" max="99" />
+                        <button class="die-btn" onclick="changeDieCount('d4', 1)">+</button>
+                    </div>
+                </div>
+                
+                <div class="die-type d6">
+                    <div class="die-name">d6</div>
+                    <div class="die-controls">
+                        <button class="die-btn" onclick="changeDieCount('d6', -1)">-</button>
+                        <input type="number" class="die-count" id="d6-count" value="0" min="0" max="99" />
+                        <button class="die-btn" onclick="changeDieCount('d6', 1)">+</button>
+                    </div>
+                </div>
+                
+                <div class="die-type d8">
+                    <div class="die-name">d8</div>
+                    <div class="die-controls">
+                        <button class="die-btn" onclick="changeDieCount('d8', -1)">-</button>
+                        <input type="number" class="die-count" id="d8-count" value="0" min="0" max="99" />
+                        <button class="die-btn" onclick="changeDieCount('d8', 1)">+</button>
+                    </div>
+                </div>
+                
+                <div class="die-type d10">
+                    <div class="die-name">d10</div>
+                    <div class="die-controls">
+                        <button class="die-btn" onclick="changeDieCount('d10', -1)">-</button>
+                        <input type="number" class="die-count" id="d10-count" value="0" min="0" max="99" />
+                        <button class="die-btn" onclick="changeDieCount('d10', 1)">+</button>
+                    </div>
+                </div>
+                
+                <div class="die-type d12">
+                    <div class="die-name">d12</div>
+                    <div class="die-controls">
+                        <button class="die-btn" onclick="changeDieCount('d12', -1)">-</button>
+                        <input type="number" class="die-count" id="d12-count" value="0" min="0" max="99" />
+                        <button class="die-btn" onclick="changeDieCount('d12', 1)">+</button>
+                    </div>
+                </div>
+                
+                <div class="die-type d20">
+                    <div class="die-name">d20</div>
+                    <div class="die-controls">
+                        <button class="die-btn" onclick="changeDieCount('d20', -1)">-</button>
+                        <input type="number" class="die-count" id="d20-count" value="0" min="0" max="99" />
+                        <button class="die-btn" onclick="changeDieCount('d20', 1)">+</button>
+                    </div>
+                </div>
+                
+                <div class="die-type d100">
+                    <div class="die-name">d100</div>
+                    <div class="die-controls">
+                        <button class="die-btn" onclick="changeDieCount('d100', -1)">-</button>
+                        <input type="number" class="die-count" id="d100-count" value="0" min="0" max="99" />
+                        <button class="die-btn" onclick="changeDieCount('d100', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modifier-section">
+                <span class="modifier-label">Total Modifier:</span>
+                <input type="number" class="modifier-input" id="modifier" value="0" placeholder="0" />
+            </div>
+            
+            <div class="proficiency-section">
+                <span class="modifier-label">Proficiency:</span>
+                <button class="proficiency-btn active" id="prof-none" onclick="setProficiency('none')">None</button>
+                <button class="proficiency-btn" id="prof-trained" onclick="setProficiency('trained')">Trained</button>
+                <button class="proficiency-btn" id="prof-expert" onclick="setProficiency('expert')">Expert</button>
+                <button class="proficiency-btn" id="prof-master" onclick="setProficiency('master')">Master</button>
+                <button class="proficiency-btn" id="prof-legendary" onclick="setProficiency('legendary')">Legendary</button>
+            </div>
+            
+            <div class="dc-section">
+                <h3>🎯 Difficulty Class (DC)</h3>
+                <div class="dc-controls">
+                    <span class="dc-label">Target DC:</span>
+                    <input type="number" class="dc-input" id="target-dc" value="15" placeholder="15" />
+                    <button class="hero-btn" onclick="setCommonDC(10)">Simple (10)</button>
+                    <button class="hero-btn" onclick="setCommonDC(15)">Moderate (15)</button>
+                    <button class="hero-btn" onclick="setCommonDC(20)">Hard (20)</button>
+                    <button class="hero-btn" onclick="setCommonDC(25)">Very Hard (25)</button>
+                    <button class="hero-btn" onclick="setCommonDC(30)">Extreme (30)</button>
+                </div>
+            </div>
+            
+            <div class="hero-section">
+                <h3>⭐ Hero Points</h3>
+                <div class="hero-controls">
+                    <button class="hero-btn active" id="no-hero" onclick="setHeroPoint('none')">No Hero Point</button>
+                    <button class="hero-btn" id="use-hero" onclick="setHeroPoint('use')">Use Hero Point (Reroll)</button>
+                </div>
+            </div>
+            
+            <button class="roll-btn" onclick="rollDice()">🎲 Roll</button>
+            <button class="clear-btn" onclick="clearAll()">Clear All</button>
+        </div>
+        
+        <div id="results" class="results" style="display: none;">
+            <div class="result-total" id="total-result">0</div>
+            <div id="degree-result" class="degree-of-success" style="display: none;"></div>
+            <div class="result-breakdown" id="breakdown"></div>
+            <div class="dice-results" id="dice-display"></div>
+            <div id="special-text"></div>
+            <div id="hero-text" class="hero-result" style="display: none;"></div>
+        </div>
+    </div>
+    
+    <script>
+        let currentHeroPoint = 'none';
+        let currentProficiency = 'none';
+        let characterLevel = 1;
+        
+        const dieColors = {
+            'd4': '#dc267f',
+            'd6': '#ff6900',
+            'd8': '#ffb000',
+            'd10': '#06d6a0',
+            'd12': '#4cc9f0',
+            'd20': '#daa520',
+            'd100': '#7209b7'
+        };
+        
+        const proficiencyBonus = {
+            'none': 0,
+            'trained': 2,
+            'expert': 4,
+            'master': 6,
+            'legendary': 8
+        };
+        
+        function changeDieCount(dieType, change) {
+            const input = document.getElementById(dieType + '-count');
+            const newValue = Math.max(0, Math.min(99, parseInt(input.value) + change));
+            input.value = newValue;
+        }
+        
+        function setHeroPoint(type) {
+            currentHeroPoint = type;
+            document.querySelectorAll('.hero-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(type === 'none' ? 'no-hero' : 'use-hero').classList.add('active');
+        }
+        
+        function setProficiency(level) {
+            currentProficiency = level;
+            document.querySelectorAll('.proficiency-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('prof-' + level).classList.add('active');
+        }
+        
+        function setCommonDC(dc) {
+            document.getElementById('target-dc').value = dc;
+        }
+        
+        // Add dice for quick actions
+        function addDiceForQuickAction(type) {
+            // Clear only dice counts, preserve settings
+            const diceTypes = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100'];
+            diceTypes.forEach(dieType => {
+                document.getElementById(dieType + '-count').value = 0;
+            });
+            document.getElementById('modifier').value = 0;
+            
+            // Add appropriate dice based on action type
+            if (type === 'ability') {
+                // Ability score generation uses 4d6
+                document.getElementById('d6-count').value = 4;
+            } else {
+                // Most actions use 1d20
+                document.getElementById('d20-count').value = 1;
+            }
+        }
+        
+        function quickRoll(diceString, type = '') {
+            // Clear dice but preserve DC and proficiency settings
+            addDiceForQuickAction(type);
+            document.getElementById('results').style.display = 'none';
+            
+            // Parse dice string (e.g., "1d20", "4d6", "2d6+6")
+            const parts = diceString.split('+');
+            const dicepart = parts[0];
+            const bonus = parts[1] ? parseInt(parts[1]) : 0;
+            
+            const match = dicepart.match(/(\d+)d(\d+)/);
+            if (match) {
+                const count = parseInt(match[1]);
+                const sides = match[2];
+                document.getElementById('d' + sides + '-count').value = count;
+            }
+            
+            if (bonus) {
+                document.getElementById('modifier').value = bonus;
+            }
+            
+            // Set suggested proficiency and DC for certain rolls, but don't override user settings
+            if (type === 'attack' || type === 'skill' || type === 'spell') {
+                // Only set if currently at default values
+                if (currentProficiency === 'none') setProficiency('trained');
+                if (document.getElementById('target-dc').value == 15) setCommonDC(15);
+            } else if (type === 'save') {
+                if (currentProficiency === 'none') setProficiency('trained');
+                if (document.getElementById('target-dc').value == 15) setCommonDC(20);
+            } else if (type === 'perception') {
+                if (currentProficiency === 'none') setProficiency('expert');
+                if (document.getElementById('target-dc').value == 15) setCommonDC(15);
+            } else if (type === 'initiative') {
+                if (currentProficiency === 'none') setProficiency('trained');
+                // Initiative doesn't use DC, clear it
+                document.getElementById('target-dc').value = '';
+            }
+            
+            rollDice();
+        }
+        
+        function rollDice() {
+            const diceTypes = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100'];
+            const modifier = parseInt(document.getElementById('modifier').value) || 0;
+            const profBonus = proficiencyBonus[currentProficiency] + characterLevel;
+            const targetDC = parseInt(document.getElementById('target-dc').value) || null;
+            
+            let allRolls = [];
+            let baseTotal = modifier + (currentProficiency !== 'none' ? profBonus : 0);
+            let hasD20 = false;
+            let naturalRoll = 0;
+            
+            // Roll each type of die
+            diceTypes.forEach(dieType => {
+                const count = parseInt(document.getElementById(dieType + '-count').value);
+                if (count > 0) {
+                    const sides = parseInt(dieType.substring(1));
+                    if (sides === 20) hasD20 = true;
+                    
+                    for (let i = 0; i < count; i++) {
+                        let roll = Math.floor(Math.random() * sides) + 1;
+                        
+                        // Track natural d20 roll for degree of success calculation
+                        if (sides === 20 && hasD20) {
+                            naturalRoll = roll;
+                            
+                            // Hero Point reroll
+                            if (currentHeroPoint === 'use' && roll <= 10) {
+                                const reroll = Math.floor(Math.random() * sides) + 1;
+                                roll = Math.max(roll, reroll);
+                            }
+                        }
+                        
+                        allRolls.push({ value: roll, type: dieType, sides: sides });
+                        baseTotal += roll;
+                    }
+                }
+            });
+            
+            displayResults(allRolls, baseTotal, modifier, profBonus, hasD20, naturalRoll, targetDC);
+        }
+        
+        function calculateDegreeOfSuccess(total, naturalRoll, targetDC) {
+            if (!targetDC) return null;
+            
+            const margin = total - targetDC;
+            
+            // Critical success: Natural 20 OR beat DC by 10+
+            if (naturalRoll === 20 || margin >= 10) {
+                return { degree: 'critical-success', text: '🌟 CRITICAL SUCCESS! 🌟', margin: margin };
+            }
+            // Success: Meet or beat DC
+            else if (margin >= 0) {
+                return { degree: 'success', text: '✅ SUCCESS!', margin: margin };
+            }
+            // Critical failure: Natural 1 OR fail by 10+
+            else if (naturalRoll === 1 || margin <= -10) {
+                return { degree: 'critical-failure', text: '💥 CRITICAL FAILURE! 💥', margin: margin };
+            }
+            // Failure: Didn't meet DC
+            else {
+                return { degree: 'failure', text: '❌ FAILURE', margin: margin };
+            }
+        }
+        
+        function displayResults(rolls, total, modifier, profBonus, hasD20, naturalRoll, targetDC) {
+            const resultsDiv = document.getElementById('results');
+            const totalDiv = document.getElementById('total-result');
+            const breakdownDiv = document.getElementById('breakdown');
+            const diceDisplay = document.getElementById('dice-display');
+            const specialText = document.getElementById('special-text');
+            const heroText = document.getElementById('hero-text');
+            const degreeDiv = document.getElementById('degree-result');
+            
+            // Display total
+            totalDiv.textContent = total;
+            
+            // Calculate degree of success for d20 rolls
+            if (hasD20 && targetDC) {
+                const degreeResult = calculateDegreeOfSuccess(total, naturalRoll, targetDC);
+                if (degreeResult) {
+                    degreeDiv.style.display = 'block';
+                    degreeDiv.className = `degree-of-success ${degreeResult.degree}`;
+                    degreeDiv.textContent = `${degreeResult.text} (by ${Math.abs(degreeResult.margin)})`;
+                }
+            } else {
+                degreeDiv.style.display = 'none';
+            }
+            
+            // Create breakdown text
+            const groupedRolls = {};
+            rolls.forEach(roll => {
+                if (!groupedRolls[roll.type]) {
+                    groupedRolls[roll.type] = [];
+                }
+                groupedRolls[roll.type].push(roll.value);
+            });
+            
+            const parts = [];
+            Object.keys(groupedRolls).forEach(dieType => {
+                const values = groupedRolls[dieType];
+                parts.push(`${values.length}${dieType}: ${values.join(', ')}`);
+            });
+            
+            if (modifier !== 0) {
+                parts.push(`Modifier: ${modifier >= 0 ? '+' : ''}${modifier}`);
+            }
+            
+            if (currentProficiency !== 'none') {
+                parts.push(`Proficiency (${currentProficiency}): +${profBonus}`);
+            }
+            
+            if (targetDC) {
+                parts.push(`vs DC ${targetDC}`);
+            }
+            
+            breakdownDiv.textContent = parts.join(' | ');
+            
+            // Display individual dice
+            diceDisplay.innerHTML = '';
+            rolls.forEach(roll => {
+                const die = document.createElement('div');
+                die.className = 'result-die';
+                die.style.backgroundColor = dieColors[roll.type];
+                die.style.borderColor = dieColors[roll.type];
+                die.textContent = roll.value;
+                
+                // Check for critical hit/miss on d20
+                if (roll.sides === 20) {
+                    if (roll.value === 20) {
+                        die.classList.add('critical');
+                    } else if (roll.value === 1) {
+                        die.classList.add('fumble');
+                    }
+                }
+                
+                diceDisplay.appendChild(die);
+            });
+            
+            // Special text for criticals
+            specialText.innerHTML = '';
+            const d20Rolls = rolls.filter(r => r.sides === 20);
+            if (d20Rolls.length > 0) {
+                const hasNat20 = d20Rolls.some(r => r.value === 20);
+                const hasNat1 = d20Rolls.some(r => r.value === 1);
+                
+                if (hasNat20) {
+                    specialText.innerHTML += '<div class="critical-text">🎉 NATURAL 20! 🎉</div>';
+                }
+                if (hasNat1) {
+                    specialText.innerHTML += '<div class="fumble-text">💀 NATURAL 1! 💀</div>';
+                }
+            }
+            
+            // Hero point usage
+            if (currentHeroPoint === 'use' && hasD20) {
+                heroText.style.display = 'block';
+                heroText.innerHTML = '⭐ Hero Point Used: Best of two rolls taken!<br><small>Remember to mark off 1 Hero Point from your character sheet.</small>';
+            } else {
+                heroText.style.display = 'none';
+            }
+            
+            resultsDiv.style.display = 'block';
+        }
+        
+        function clearAll() {
+            const diceTypes = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100'];
+            diceTypes.forEach(dieType => {
+                document.getElementById(dieType + '-count').value = 0;
+            });
+            document.getElementById('modifier').value = 0;
+            document.getElementById('target-dc').value = 15;
+            setProficiency('none');
+            setHeroPoint('none');
+            document.getElementById('results').style.display = 'none';
+        }
+        
+        // Level input for proficiency calculation
+        function setLevel(level) {
+            characterLevel = Math.max(1, Math.min(20, level));
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                rollDice();
+            } else if (e.key === 'Escape') {
+                clearAll();
+            } else if (e.key === 'h' || e.key === 'H') {
+                setHeroPoint(currentHeroPoint === 'use' ? 'none' : 'use');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Character Creation - Pathfinder 2.0</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Advanced Character Creation</h1>
+        <p class="subtitle">Mastering the Art of Character Optimization and Synergy</p>
+    </header>
+
+    <main>
+        <section class="introduction">
+            <h2>Beyond Basic Builds: The Symphony of Synergy</h2>
+            <p>If basic character creation is like learning to play a musical instrument, advanced character creation is like composing a symphony. You're not just combining random elements - you're creating a harmonious whole where every choice amplifies and enhances every other choice. Think of it as the difference between throwing ingredients into a pot versus being a master chef who understands how flavors interact, complement, and transform each other.</p>
+            
+            <p>Advanced character creation isn't about making "overpowered" characters - it's about creating characters whose mechanical elements tell a coherent story and work together seamlessly. Like a well-designed sports car where every component is engineered to support peak performance, your character should have no wasted elements and maximum synergy between all parts.</p>
+
+            <div class="synergy-concept">
+                <h3>The Four Pillars of Character Synergy</h3>
+                <div class="synergy-diagram">
+                    <div class="mermaid">
+                        graph TB
+                            A[CHARACTER SYNERGY] --> B[Mechanical Harmony<br/>Stats, feats, and abilities work together]
+                            A --> C[Thematic Coherence<br/>Story and mechanics align perfectly]
+                            A --> D[Party Integration<br/>Complements team strengths and covers weaknesses]
+                            A --> E[Growth Potential<br/>Improves consistently across all levels]
+                            
+                            B --> F[Ability score efficiency]
+                            B --> G[Feat combinations]
+                            B --> H[Action economy optimization]
+                            
+                            C --> I[Background supports class]
+                            C --> J[Ancestry enhances concept]
+                            C --> K[Equipment reflects identity]
+                            
+                            D --> L[Unique party role]
+                            D --> M[Collaborative abilities]
+                            D --> N[Backup capabilities]
+                            
+                            E --> O[Scaling advantages]
+                            E --> P[Feat progression paths]
+                            E --> Q[Late-game power spikes]
+                            
+                            style A fill:#9c27b0,color:#fff
+                            style B fill:#2196f3,color:#fff
+                            style C fill:#ff9800,color:#fff
+                            style D fill:#4caf50,color:#fff
+                            style E fill:#f44336,color:#fff
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="optimization-principles">
+            <h2>Optimization Principles: The Science of Character Design</h2>
+            <p>Character optimization in PF2e follows certain mathematical and strategic principles, like engineering principles in building design. Understanding these principles helps you make informed decisions rather than random choices.</p>
+
+            <div class="principle-breakdown">
+                <h3>Core Optimization Concepts</h3>
+                
+                <div class="principle-grid">
+                    <div class="principle-card">
+                        <h4>🎯 Opportunity Cost Analysis</h4>
+                        <p><strong>The Economic Mindset:</strong> Every choice has alternatives - what are you giving up?</p>
+                        
+                        <div class="opportunity-examples">
+                            <h5>Real-World Application</h5>
+                            <p>Like choosing between a college major in engineering vs. art, every character choice has trade-offs.</p>
+                            
+                            <div class="cost-example">
+                                <h6>Example: Feat Selection at Level 2</h6>
+                                <p><strong>Options for a Fighter:</strong></p>
+                                <ul>
+                                    <li><strong>Power Attack:</strong> More damage per hit, but accuracy penalty</li>
+                                    <li><strong>Shield Block:</strong> Better defense, but requires shield and reaction</li>
+                                    <li><strong>Intimidating Strike:</strong> Damage + debuff, but requires Intimidation skill</li>
+                                </ul>
+                                
+                                <p><strong>Analysis Framework:</strong></p>
+                                <ul>
+                                    <li><em>What does this enable that I couldn't do before?</em></li>
+                                    <li><em>What other options am I giving up?</em></li>
+                                    <li><em>How does this fit my long-term build plan?</em></li>
+                                    <li><em>Does this synergize with my existing abilities?</em></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="principle-card">
+                        <h4>📈 Scaling and Breakpoints</h4>
+                        <p><strong>The Growth Mindset:</strong> How will this choice perform at levels 1, 5, 10, 15, and 20?</p>
+                        
+                        <div class="scaling-analysis">
+                            <h5>Understanding Character Progression</h5>
+                            <p>Like investing for retirement, character choices have different returns over time.</p>
+                            
+                            <div class="scaling-example">
+                                <h6>Example: Weapon Choice Scaling</h6>
+                                <canvas id="weaponScalingChart" width="600" height="300"></canvas>
+                                
+                                <p><strong>Key Insights:</strong></p>
+                                <ul>
+                                    <li><strong>Early Game (1-5):</strong> Weapon choice matters less, proficiency dominates</li>
+                                    <li><strong>Mid Game (6-12):</strong> Weapon traits become crucial, striking runes scale damage</li>
+                                    <li><strong>Late Game (13-20):</strong> Specialization feats create dramatic differences</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="principle-card">
+                        <h4>🔗 Synergy Multiplication</h4>
+                        <p><strong>The Network Effect:</strong> 1 + 1 = 3 when abilities work together</p>
+                        
+                        <div class="synergy-examples">
+                            <h5>Synergy in Action</h5>
+                            <p>Like a basketball team where good passing makes everyone's shooting better.</p>
+                            
+                            <div class="synergy-case">
+                                <h6>Case Study: The Intimidating Warrior</h6>
+                                <p><strong>Base Concept:</strong> Fighter who demoralizes enemies</p>
+                                
+                                <p><strong>Individual Elements:</strong></p>
+                                <ul>
+                                    <li><strong>High Charisma:</strong> Better Intimidation checks</li>
+                                    <li><strong>Intimidating Strike:</strong> Attack + demoralize in one action</li>
+                                    <li><strong>Frightening weapon rune:</strong> Automatic fear on crits</li>
+                                    <li><strong>Dreadful aspect ancestry feat:</strong> Fear aura</li>
+                                </ul>
+                                
+                                <p><strong>Synergistic Result:</strong></p>
+                                <ul>
+                                    <li>High Charisma improves all fear effects</li>
+                                    <li>Multiple fear sources stack and reinforce each other</li>
+                                    <li>Frightened enemies are easier to hit (feeding more fear)</li>
+                                    <li>Party benefits from enemies' reduced effectiveness</li>
+                                </ul>
+                                
+                                <p><em>The whole becomes greater than the sum of its parts!</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="principle-card">
+                        <h4>⚖️ Action Economy Efficiency</h4>
+                        <p><strong>The Time Management Principle:</strong> How much value per action does this provide?</p>
+                        
+                        <div class="action-efficiency">
+                            <h5>Measuring Action Value</h5>
+                            <p>Like productivity analysis in business - what's your return on investment per time unit?</p>
+                            
+                            <div class="efficiency-framework">
+                                <h6>Action Value Categories</h6>
+                                <div class="value-grid">
+                                    <div class="value-card high">
+                                        <h6>🌟 High Value Actions</h6>
+                                        <ul>
+                                            <li><strong>Multi-effect abilities:</strong> Attack + debuff</li>
+                                            <li><strong>Area effects:</strong> Hit multiple targets</li>
+                                            <li><strong>Long duration:</strong> One cast, many rounds of benefit</li>
+                                            <li><strong>Passive bonuses:</strong> Always on, no action cost</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="value-card medium">
+                                        <h6>⚡ Medium Value Actions</h6>
+                                        <ul>
+                                            <li><strong>Single-target effects:</strong> Good impact, limited scope</li>
+                                            <li><strong>Situational abilities:</strong> Powerful when applicable</li>
+                                            <li><strong>Setup actions:</strong> Enable bigger payoffs later</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="value-card low">
+                                        <h6>📉 Low Value Actions</h6>
+                                        <ul>
+                                            <li><strong>Redundant effects:</strong> Do what you already do</li>
+                                            <li><strong>Niche applications:</strong> Rarely useful</li>
+                                            <li><strong>Poor scaling:</strong> Become obsolete quickly</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="advanced-ancestry-selection">
+            <h2>Advanced Ancestry Selection: Beyond the Obvious</h2>
+            <p>While basic character creation focuses on ability score bonuses, advanced selection considers the entire ancestry package - how heritage choices, ancestry feats, and cultural elements create unique character opportunities that might not be immediately obvious.</p>
+
+            <div class="ancestry-deep-analysis">
+                <h3>Hidden Ancestry Synergies</h3>
+                
+                <div class="ancestry-case-studies">
+                    <div class="case-study">
+                        <h4>🧝 Case Study: The Surprising Elf Barbarian</h4>
+                        <p><strong>Conventional Wisdom:</strong> "Elves are too fragile for barbarians"</p>
+                        <p><strong>Advanced Analysis:</strong> Elf features create unexpected barbarian synergies</p>
+                        
+                        <div class="elf-barbarian-breakdown">
+                            <h5>Why It Works</h5>
+                            <div class="synergy-analysis">
+                                <div class="synergy-point">
+                                    <h6>🏃 Speed Advantage</h6>
+                                    <p><strong>Elf Speed:</strong> 30 feet (vs Human 25 feet)</p>
+                                    <p><strong>Barbarian Benefit:</strong> Better positioning, easier charges, escape options</p>
+                                    <p><strong>Real-world analogy:</strong> Like a boxer with longer reach - use mobility to control engagement</p>
+                                </div>
+
+                                <div class="synergy-point">
+                                    <h6>👁️ Keen Senses</h6>
+                                    <p><strong>Elf Feature:</strong> Expert in Perception automatically</p>
+                                    <p><strong>Barbarian Benefit:</strong> Better initiative, spot ambushes, find hidden enemies</p>
+                                    <p><strong>Tactical Value:</strong> Strike first, avoid surprises</p>
+                                </div>
+
+                                <div class="synergy-point">
+                                    <h6>🔮 Elven Weapon Familiarity</h6>
+                                    <p><strong>Access:</strong> Elven curve blade (two-handed, finesse, forceful)</p>
+                                    <p><strong>Unique Benefit:</strong> Only two-handed finesse weapon</p>
+                                    <p><strong>Build Option:</strong> Dex-based barbarian with full two-handed damage</p>
+                                </div>
+
+                                <div class="synergy-point">
+                                    <h6>🛡️ Magic Resistance Heritage</h6>
+                                    <p><strong>Seer Elf Heritage:</strong> Bonus to saves vs mental effects</p>
+                                    <p><strong>Barbarian Weakness:</strong> Low Will saves, vulnerable to charm/fear</p>
+                                    <p><strong>Perfect Match:</strong> Shore up your biggest weakness</p>
+                                </div>
+                            </div>
+                            
+                            <div class="build-summary">
+                                <h5>Final Build Vision</h5>
+                                <p><strong>Character Concept:</strong> A graceful, deadly warrior who flows like wind through battle</p>
+                                <p><strong>Combat Style:</strong> Mobile striker who dances around enemies with a curved blade</p>
+                                <p><strong>Mechanical Identity:</strong> Fast, perceptive, magically resistant barbarian</p>
+                                <p><strong>Story Hook:</strong> Perhaps an elf raised by human barbarians, or an elven warrior tradition that emphasizes primal fury</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4>🧙‍♀️ Case Study: The Goblin Wizard Scholar</h4>
+                        <p><strong>Surface Contradiction:</strong> Goblins seem chaotic and impulsive, wizards need discipline</p>
+                        <p><strong>Hidden Synergy:</strong> Goblin traits create unique wizard advantages</p>
+                        
+                        <div class="goblin-wizard-analysis">
+                            <h5>Unexpected Advantages</h5>
+                            <div class="advantage-grid">
+                                <div class="advantage-point">
+                                    <h6>🎯 Size and Stealth</h6>
+                                    <p><strong>Small Size:</strong> Better at hiding, harder to target</p>
+                                    <p><strong>Wizard Benefit:</strong> Fragile spellcasters need survival tools</p>
+                                    <p><strong>Tactical Application:</strong> Hide behind larger allies, use cover effectively</p>
+                                </div>
+
+                                <div class="advantage-point">
+                                    <h6>⚡ Charisma Boost</h6>
+                                    <p><strong>Unexpected Asset:</strong> Good social stats for a "monster" race</p>
+                                    <p><strong>Wizard Application:</strong> Better at gathering information, making contacts</p>
+                                    <p><strong>Character Development:</strong> The charming scholar who surprises people</p>
+                                </div>
+
+                                <div class="advantage-point">
+                                    <h6>🔥 Goblin Ancestry Feats</h6>
+                                    <p><strong>Goblin Scuttle:</strong> Move when allies move near you</p>
+                                    <p><strong>Very Sneaky:</strong> Better stealth in groups</p>
+                                    <p><strong>Wizard Synergy:</strong> Mobility without spending your own actions</p>
+                                </div>
+
+                                <div class="advantage-point">
+                                    <h6>🧠 Intelligence Focus</h6>
+                                    <p><strong>No Ability Conflicts:</strong> Cha boost doesn't compete with Int</p>
+                                    <p><strong>Skill Synergy:</strong> High Int + social skills = perfect researcher</p>
+                                    <p><strong>Build Efficiency:</strong> All ancestry features contribute</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="heritage-optimization">
+                <h3>Heritage Selection Strategy</h3>
+                <p>Heritages are like specialized degree programs within your ancestry - they define how your bloodline manifests and often provide the key to unique build opportunities.</p>
+                
+                <div class="heritage-examples">
+                    <div class="heritage-showcase">
+                        <h4>🔥 Elemental Heritage Combinations</h4>
+                        
+                        <div class="elemental-builds">
+                            <div class="elemental-build">
+                                <h5>Flame Oracle + Ifrit Heritage</h5>
+                                <p><strong>Synergy:</strong> Fire resistance protects against your own curse backlash</p>
+                                <p><strong>Thematic Coherence:</strong> Born of fire, blessed by fire, surrounded by fire</p>
+                                <p><strong>Mechanical Advantage:</strong> Can use fire spells more aggressively</p>
+                            </div>
+
+                            <div class="elemental-build">
+                                <h5>Storm Druid + Undine Heritage</h5>
+                                <p><strong>Synergy:</strong> Water spells + weather magic = hurricane theme</p>
+                                <p><strong>Resistance Benefits:</strong> Fire resistance balances elemental weakness</p>
+                                <p><strong>Spell Selection:</strong> Access to both primal and elemental magic</p>
+                            </div>
+
+                            <div class="elemental-build">
+                                <h5>Mountain Monk + Oread Heritage</h5>
+                                <p><strong>Synergy:</strong> Earth magic + ki powers = earthbending monk</p>
+                                <p><strong>Defensive Bonus:</strong> Acid resistance + high AC = incredible durability</p>
+                                <p><strong>Flavor Integration:</strong> Stone-like endurance with martial arts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feat-synergy-mastery">
+            <h2>Feat Synergy Mastery: Building Feat Chains</h2>
+            <p>Advanced character building treats feats like links in a chain - each one should connect to and strengthen the others. Think of it like building a house: you don't just throw materials together, you create a structure where each element supports and enhances the whole.</p>
+
+            <div class="feat-chain-concepts">
+                <h3>Understanding Feat Chains</h3>
+                
+                <div class="chain-types">
+                    <div class="chain-type">
+                        <h4>🎯 Linear Progression Chains</h4>
+                        <p><strong>Structure:</strong> Each feat builds directly on the previous one</p>
+                        <p><strong>Real-world analogy:</strong> Like learning martial arts - white belt → yellow belt → green belt</p>
+                        
+                        <div class="linear-example">
+                            <h5>Example: The Archer's Path</h5>
+                            <div class="feat-progression">
+                                <div class="feat-step">
+                                    <h6>Level 1: Point-Blank Shot</h6>
+                                    <p><strong>Effect:</strong> Better accuracy at close range</p>
+                                    <p><strong>Foundation:</strong> Establishes ranged combat focus</p>
+                                </div>
+                                <div class="feat-arrow">↓</div>
+                                <div class="feat-step">
+                                    <h6>Level 2: Precise Shot</h6>
+                                    <p><strong>Requirement:</strong> Point-Blank Shot</p>
+                                    <p><strong>Effect:</strong> No penalty for shooting into melee</p>
+                                    <p><strong>Builds On:</strong> Solves ranged combat problems</p>
+                                </div>
+                                <div class="feat-arrow">↓</div>
+                                <div class="feat-step">
+                                    <h6>Level 4: Double Shot</h6>
+                                    <p><strong>Requirement:</strong> Precise Shot</p>
+                                    <p><strong>Effect:</strong> Fire two arrows with one action</p>
+                                    <p><strong>Payoff:</strong> Dramatic increase in damage potential</p>
+                                </div>
+                                <div class="feat-arrow">↓</div>
+                                <div class="feat-step">
+                                    <h6>Level 6: Multi-Shot</h6>
+                                    <p><strong>Requirement:</strong> Double Shot</p>
+                                    <p><strong>Effect:</strong> Hit multiple targets with one shot</p>
+                                    <p><strong>Mastery:</strong> Area control through archery</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-type">
+                        <h4>🕸️ Web Synergy Chains</h4>
+                        <p><strong>Structure:</strong> Multiple feats that reinforce a central theme</p>
+                        <p><strong>Real-world analogy:</strong> Like a spider web - many interconnected strands supporting the structure</p>
+                        
+                        <div class="web-example">
+                            <h5>Example: The Social Manipulator</h5>
+                            <div class="web-visualization">
+                                <svg width="400" height="300" viewBox="0 0 400 300">
+                                    <!-- Central concept -->
+                                    <circle cx="200" cy="150" r="40" fill="#ff9800" stroke="#333" stroke-width="2"/>
+                                    <text x="200" y="155" text-anchor="middle" font-size="12" font-weight="bold">Social Control</text>
+                                    
+                                    <!-- Supporting feats -->
+                                    <circle cx="100" cy="80" r="25" fill="#2196f3" stroke="#333" stroke-width="1"/>
+                                    <text x="100" y="85" text-anchor="middle" font-size="10">Bon Mot</text>
+                                    
+                                    <circle cx="300" cy="80" r="25" fill="#2196f3" stroke="#333" stroke-width="1"/>
+                                    <text x="300" y="85" text-anchor="middle" font-size="10">Charming Touch</text>
+                                    
+                                    <circle cx="80" cy="220" r="25" fill="#2196f3" stroke="#333" stroke-width="1"/>
+                                    <text x="80" y="225" text-anchor="middle" font-size="10">Intimidating Glare</text>
+                                    
+                                    <circle cx="320" cy="220" r="25" fill="#2196f3" stroke="#333" stroke-width="1"/>
+                                    <text x="320" y="225" text-anchor="middle" font-size="10">Fascinating Performance</text>
+                                    
+                                    <circle cx="200" cy="250" r="25" fill="#4caf50" stroke="#333" stroke-width="1"/>
+                                    <text x="200" y="255" text-anchor="middle" font-size="10">Group Impression</text>
+                                    
+                                    <!-- Connection lines -->
+                                    <line x1="200" y1="150" x2="100" y2="80" stroke="#666" stroke-width="2"/>
+                                    <line x1="200" y1="150" x2="300" y2="80" stroke="#666" stroke-width="2"/>
+                                    <line x1="200" y1="150" x2="80" y2="220" stroke="#666" stroke-width="2"/>
+                                    <line x1="200" y1="150" x2="320" y2="220" stroke="#666" stroke-width="2"/>
+                                    <line x1="200" y1="150" x2="200" y2="250" stroke="#666" stroke-width="2"/>
+                                    
+                                    <!-- Cross-connections -->
+                                    <line x1="100" y1="80" x2="300" y2="80" stroke="#ddd" stroke-width="1" stroke-dasharray="3,3"/>
+                                    <line x1="80" y1="220" x2="320" y2="220" stroke="#ddd" stroke-width="1" stroke-dasharray="3,3"/>
+                                </svg>
+                            </div>
+                            
+                            <div class="web-breakdown">
+                                <h6>How the Web Works</h6>
+                                <ul>
+                                    <li><strong>Central Theme:</strong> Controlling enemies through social manipulation</li>
+                                    <li><strong>Bon Mot:</strong> Uses Diplomacy to make enemies flat-footed</li>
+                                    <li><strong>Intimidating Glare:</strong> Fear effects without speaking</li>
+                                    <li><strong>Charming Touch:</strong> Make enemies friendly temporarily</li>
+                                    <li><strong>Fascinating Performance:</strong> Entrance multiple enemies</li>
+                                    <li><strong>Group Impression:</strong> Affect multiple targets with social skills</li>
+                                </ul>
+                                
+                                <p><strong>Synergy Effect:</strong> Each feat makes the others more powerful by providing more options for social control.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-type">
+                        <h4>🔄 Combo Enabler Chains</h4>
+                        <p><strong>Structure:</strong> Feats that create powerful two or three-feat combinations</p>
+                        <p><strong>Real-world analogy:</strong> Like a chef combining ingredients that individually taste okay but together create something amazing</p>
+                        
+                        <div class="combo-example">
+                            <h5>Example: The Critical Fishing Build</h5>
+                            <div class="combo-breakdown">
+                                <div class="combo-feat">
+                                    <h6>🎯 Improved Critical</h6>
+                                    <p><strong>Base Effect:</strong> Critical hit on 19-20 instead of just 20</p>
+                                    <p><strong>Standalone Value:</strong> Moderate - 5% more crits</p>
+                                </div>
+                                
+                                <p class="combo-plus">+</p>
+                                
+                                <div class="combo-feat">
+                                    <h6>💀 Critical Specialization</h6>
+                                    <p><strong>Base Effect:</strong> Special effects on critical hits</p>
+                                    <p><strong>Standalone Value:</strong> Good - adds utility to crits</p>
+                                </div>
+                                
+                                <p class="combo-plus">+</p>
+                                
+                                <div class="combo-feat">
+                                    <h6>⚡ Deadly Weapon</h6>
+                                    <p><strong>Base Effect:</strong> Extra damage dice on critical hits</p>
+                                    <p><strong>Standalone Value:</strong> Good - more crit damage</p>
+                                </div>
+                                
+                                <p class="combo-equals">=</p>
+                                
+                                <div class="combo-result">
+                                    <h6>🌟 Devastating Critical Machine</h6>
+                                    <p><strong>Combined Effect:</strong> Frequent crits that deal massive damage and special effects</p>
+                                    <p><strong>Synergy Value:</strong> Incredible - each feat multiplies the value of the others</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feat-planning-strategy">
+                <h3>Strategic Feat Planning</h3>
+                
+                <div class="planning-framework">
+                    <div class="framework-step">
+                        <h4>🎯 Define Your End Goal</h4>
+                        <p><strong>Question:</strong> What do you want your character to be amazing at by level 20?</p>
+                        
+                        <div class="goal-examples">
+                            <h5>Example Goals</h5>
+                            <ul>
+                                <li><strong>"The Master Archer":</strong> Incredible accuracy and multiple attacks per turn</li>
+                                <li><strong>"The Battlefield Controller":</strong> Lock down multiple enemies with conditions</li>
+                                <li><strong>"The Social Chameleon":</strong> Solve any problem through conversation</li>
+                                <li><strong>"The Magical Tank":</strong> Nearly unkillable through magic and armor</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="framework-step">
+                        <h4>🗺️ Map the Requirements</h4>
+                        <p><strong>Process:</strong> Work backwards from your goal to identify required feats</p>
+                        
+                        <div class="mapping-example">
+                            <h5>Example: Master Archer Analysis</h5>
+                            <div class="requirement-chain">
+                                <p><strong>Ultimate Goal:</strong> Triple Shot (Level 12 feat)</p>
+                                <p class="requirement-arrow">↑ Requires</p>
+                                <p><strong>Prerequisite:</strong> Double Shot (Level 4 feat)</p>
+                                <p class="requirement-arrow">↑ Requires</p>
+                                <p><strong>Prerequisite:</strong> Precise Shot (Level 2 feat)</p>
+                                <p class="requirement-arrow">↑ Requires</p>
+                                <p><strong>Prerequisite:</strong> Point-Blank Shot (Level 1 feat)</p>
+                                
+                                <p><strong>Planning Result:</strong> Need to commit feat slots at levels 1, 2, 4, and 12</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="framework-step">
+                        <h4>⚖️ Balance Immediate vs Future Needs</h4>
+                        <p><strong>Challenge:</strong> Some feat chains require "investment" feats that aren't immediately powerful</p>
+                        
+                        <div class="balance-strategy">
+                            <h5>Balancing Approaches</h5>
+                            <div class="approach-options">
+                                <div class="approach">
+                                    <h6>🚀 Full Commitment</h6>
+                                    <p><strong>Strategy:</strong> Rush to your ultimate combo as fast as possible</p>
+                                    <p><strong>Pros:</strong> Powerful late-game, clear identity</p>
+                                    <p><strong>Cons:</strong> Weaker early game, vulnerable to disruption</p>
+                                </div>
+
+                                <div class="approach">
+                                    <h6>⚖️ Gradual Build</h6>
+                                    <p><strong>Strategy:</strong> Mix chain feats with immediately useful options</p>
+                                    <p><strong>Pros:</strong> Consistent power level, adaptable</p>
+                                    <p><strong>Cons:</strong> May delay ultimate power, requires more planning</p>
+                                </div>
+
+                                <div class="approach">
+                                    <h6>🌟 Hybrid Approach</h6>
+                                    <p><strong>Strategy:</strong> Build towards multiple smaller combos</p>
+                                    <p><strong>Pros:</strong> Multiple options, less vulnerability</p>
+                                    <p><strong>Cons:</strong> May lack focus, spread thin</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="multiclass-mastery">
+            <h2>Multiclass Archetypes: Expanding Your Horizons</h2>
+            <p>Multiclassing in PF2e is like learning a second language while maintaining fluency in your first - you don't lose your core identity, but you gain new ways to express yourself and solve problems. Unlike systems where multiclassing can weaken your character, PF2e's archetype system lets you dabble in other classes while maintaining your primary class's progression.</p>
+
+            <div class="archetype-philosophy">
+                <h3>Understanding Archetype Design</h3>
+                
+                <div class="archetype-principles">
+                    <div class="principle-card">
+                        <h4>🎭 Flavor Without Sacrifice</h4>
+                        <p><strong>Core Concept:</strong> Add new abilities without weakening your primary class</p>
+                        
+                        <div class="flavor-examples">
+                            <h5>Archetype Applications</h5>
+                            <ul>
+                                <li><strong>Fighter + Wizard Archetype:</strong> "The Eldritch Knight" - martial prowess with magical utility</li>
+                                <li><strong>Rogue + Cleric Archetype:</strong> "The Divine Trickster" - stealth and shadows with holy power</li>
+                                <li><strong>Barbarian + Druid Archetype:</strong> "The Primal Warrior" - rage enhanced by nature magic</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="principle-card">
+                        <h4>📚 Dedication System</h4>
+                        <p><strong>Mechanics:</strong> Special dedication feats unlock archetype abilities</p>
+                        
+                        <div class="dedication-progression">
+                            <h5>How Archetypes Work</h5>
+                            <div class="progression-steps">
+                                <div class="step">
+                                    <h6>Step 1: Take Dedication Feat</h6>
+                                    <p><strong>Requirements:</strong> Usually specific ability scores and skills</p>
+                                    <p><strong>Benefit:</strong> Basic abilities from the archetype class</p>
+                                    <p><strong>Restriction:</strong> Can't take other archetype dedications until you have 2+ archetype feats</p>
+                                </div>
+
+                                <div class="step">
+                                    <h6>Step 2: Develop the Archetype</h6>
+                                    <p><strong>Options:</strong> Additional archetype feats using your class feat slots</p>
+                                    <p><strong>Benefit:</strong> More powerful abilities from the archetype</p>
+                                    <p><strong>Choice:</strong> Go deep in one archetype or add others</p>
+                                </div>
+
+                                <div class="step">
+                                    <h6>Step 3: Integrate with Build</h6>
+                                    <p><strong>Synergy:</strong> Look for combinations between main class and archetype</p>
+                                    <p><strong>Identity:</strong> Develop a coherent character concept</p>
+                                    <p><strong>Optimization:</strong> Use archetype to shore up weaknesses or enhance strengths</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="archetype-case-studies">
+                <h3>Archetype Combination Case Studies</h3>
+                
+                <div class="case-study-grid">
+                    <div class="case-study">
+                        <h4>⚔️🧙 The Magus Build: Fighter + Wizard Archetype</h4>
+                        <p><strong>Concept:</strong> A warrior who weaves magic into their swordwork</p>
+                        
+                        <div class="build-analysis">
+                            <h5>Build Breakdown</h5>
+                            <div class="build-components">
+                                <div class="component">
+                                    <h6>🎯 Primary Class: Fighter</h6>
+                                    <ul>
+                                        <li><strong>Why Fighter:</strong> Best attack progression, weapon specialization</li>
+                                        <li><strong>Key Features:</strong> Attack of Opportunity, combat expertise</li>
+                                        <li><strong>Fighting Style:</strong> One-handed weapon + free hand for spells</li>
+                                    </ul>
+                                </div>
+
+                                <div class="component">
+                                    <h6>🔮 Archetype: Wizard</h6>
+                                    <ul>
+                                        <li><strong>Dedication Benefits:</strong> Spellcasting, cantrips, spell slots</li>
+                                        <li><strong>Spell Selection:</strong> Focus on utility and battlefield control</li>
+                                        <li><strong>Advanced Feats:</strong> More spells, wizard focus spells</li>
+                                    </ul>
+                                </div>
+
+                                <div class="component">
+                                    <h6>🌟 Synergy Points</h6>
+                                    <ul>
+                                        <li><strong>Shield Spell:</strong> Fighter tactics + magical defense</li>
+                                        <li><strong>True Strike:</strong> Guarantee important attacks hit</li>
+                                        <li><strong>Utility Magic:</strong> Solve problems weapons can't</li>
+                                        <li><strong>Prestidigitation:</strong> Endless minor magical tricks</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="progression-timeline">
+                                <h5>Feat Progression Example</h5>
+                                <ul>
+                                    <li><strong>Level 2:</strong> Wizard Dedication (gain cantrips and 1st level spells)</li>
+                                    <li><strong>Level 4:</strong> Basic Wizard Spellcasting (more spell slots)</li>
+                                    <li><strong>Level 6:</strong> Advanced Wizard Spellcasting (2nd level spells)</li>
+                                    <li><strong>Level 8:</strong> Either more wizard feats or return to fighter specialization</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4>🗡️⛪ The Divine Agent: Rogue + Cleric Archetype</h4>
+                        <p><strong>Concept:</strong> A holy assassin or temple spy</p>
+                        
+                        <div class="build-analysis">
+                            <h5>Unexpected Synergies</h5>
+                            <div class="synergy-breakdown">
+                                <div class="synergy">
+                                    <h6>🎯 Stealth + Blessing</h6>
+                                    <p><strong>Combination:</strong> Sneak into position, then cast Bless on the party</p>
+                                    <p><strong>Benefit:</strong> Support from unexpected position</p>
+                                </div>
+
+                                <div class="synergy">
+                                    <h6>💚 Healing + Stealth</h6>
+                                    <p><strong>Combination:</strong> Emergency healing without revealing position</p>
+                                    <p><strong>Benefit:</strong> Party medic who can't be targeted</p>
+                                </div>
+
+                                <div class="synergy">
+                                    <h6>🔍 Divine Knowledge</h6>
+                                    <p><strong>Combination:</strong> Religion skill + Detect Evil</p>
+                                    <p><strong>Benefit:</strong> Perfect spy for fighting undead and fiends</p>
+                                </div>
+
+                                <div class="synergy">
+                                    <h6>⚡ Harm + Sneak Attack</h6>
+                                    <p><strong>Combination:</strong> Harm spell delivers via touch + sneak attack damage</p>
+                                    <p><strong>Benefit:</strong> Devastating surprise attack option</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <h4>🏹🌿 The Wilderness Guardian: Ranger + Druid Archetype</h4>
+                        <p><strong>Concept:</strong> Nature's protector with both martial and magical tools</p>
+                        
+                        <div class="build-analysis">
+                            <h5>Natural Harmony</h5>
+                            <div class="harmony-elements">
+                                <div class="element">
+                                    <h6>🌱 Shared Philosophy</h6>
+                                    <p><strong>Common Ground:</strong> Both classes protect nature</p>
+                                    <p><strong>Mechanical Overlap:</strong> Similar spells and abilities</p>
+                                    <p><strong>Character Coherence:</strong> No conflicts in worldview</p>
+                                </div>
+
+                                <div class="element">
+                                    <h6>🦅 Animal Companions</h6>
+                                    <p><strong>Ranger Feature:</strong> Animal companion</p>
+                                    <p><strong>Druid Addition:</strong> Wild empathy, speak with animals</p>
+                                    <p><strong>Enhanced Bond:</strong> Better communication and control</p>
+                                </div>
+
+                                <div class="element">
+                                    <h6>🌍 Environmental Mastery</h6>
+                                    <p><strong>Ranger Skills:</strong> Survival, nature lore</p>
+                                    <p><strong>Druid Magic:</strong> Environmental spells</p>
+                                    <p><strong>Combined Result:</strong> Master of wilderness survival</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="archetype-selection-strategy">
+                <h3>Choosing the Right Archetype</h3>
+                
+                <div class="selection-framework">
+                    <div class="framework-question">
+                        <h4>🎯 What's Your Goal?</h4>
+                        <div class="goal-categories">
+                            <div class="goal-option">
+                                <h5>🔧 Fix a Weakness</h5>
+                                <p><strong>Example:</strong> Fighter takes Cleric archetype for healing</p>
+                                <p><strong>Strategy:</strong> Identify your biggest vulnerability and address it</p>
+                            </div>
+
+                            <div class="goal-option">
+                                <h5>💪 Enhance a Strength</h5>
+                                <p><strong>Example:</strong> Rogue takes Ranger archetype for better stealth and tracking</p>
+                                <p><strong>Strategy:</strong> Double down on what you already do well</p>
+                            </div>
+
+                            <div class="goal-option">
+                                <h5>🌟 Unique Identity</h5>
+                                <p><strong>Example:</strong> Barbarian takes Bard archetype to be a "war chanter"</p>
+                                <p><strong>Strategy:</strong> Create a character concept that's uniquely yours</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="framework-question">
+                        <h4>⚖️ Cost vs Benefit Analysis</h4>
+                        <div class="analysis-factors">
+                            <div class="factor">
+                                <h5>💰 Feat Investment</h5>
+                                <p><strong>Consider:</strong> How many feats will you spend on this archetype?</p>
+                                <p><strong>Rule of Thumb:</strong> Minimum 2-3 feats to be worthwhile</p>
+                            </div>
+
+                            <div class="factor">
+                                <h5>📊 Ability Score Requirements</h5>
+                                <p><strong>Consider:</strong> Does the archetype need stats you're not using?</p>
+                                <p><strong>Example:</strong> Wizard archetype needs Intelligence - do you have it?</p>
+                            </div>
+
+                            <div class="factor">
+                                <h5>⚡ Action Economy</h5>
+                                <p><strong>Consider:</strong> Will you actually use these new abilities in combat?</p>
+                                <p><strong>Warning:</strong> Don't overload yourself with too many options</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="practice-activities">
+            <h2>Practice Activities</h2>
+            
+            <div class="activity-one">
+                <h3>Activity One: Synergy Analysis Challenge</h3>
+                <p>Analyze character combinations to identify hidden synergies and optimization opportunities:</p>
+                
+                <div class="synergy-scenarios">
+                    <div class="scenario-exercise">
+                        <h4>Scenario A: The Unconventional Combination</h4>
+                        <p><strong>Challenge:</strong> Find synergies in this seemingly contradictory combination</p>
+                        <p><strong>Character Concept:</strong> Goblin Cleric with Charlatan background</p>
+                        
+                        <div class="analysis-framework">
+                            <p><strong>Your Task:</strong> Identify at least 3 unexpected synergies</p>
+                            
+                            <div class="analysis-sections">
+                                <h5>Mechanical Synergies</h5>
+                                <p>How do the ability scores, skills, and features work together?</p>
+                                <ul>
+                                    <li>Synergy 1: _______________</li>
+                                    <li>Synergy 2: _______________</li>
+                                    <li>Synergy 3: _______________</li>
+                                </ul>
+
+                                <h5>Thematic Coherence</h5>
+                                <p>What story explains this unusual combination?</p>
+                                <p>Character backstory: _______________</p>
+
+                                <h5>Party Role</h5>
+                                <p>What unique niche does this character fill?</p>
+                                <p>Party contribution: _______________</p>
+                            </div>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Expert Analysis</summary>
+                            <div class="solution">
+                                <p><strong>Hidden Synergies:</strong></p>
+                                <ul>
+                                    <li><strong>Charisma + Divine:</strong> Goblin Cha boost enhances divine social skills and some divine magic</li>
+                                    <li><strong>Small Size + Healer:</strong> Harder to target the party's primary healer</li>
+                                    <li><strong>Charlatan + Religion:</strong> Perfect for infiltrating corrupt religious organizations</li>
+                                    <li><strong>Deception + Divine Magic:</strong> "Faith healing" covers for actual magical healing</li>
+                                </ul>
+                                
+                                <p><strong>Character Story:</strong> A former con artist who found genuine faith but uses old skills to fight corruption from within religious institutions.</p>
+                                
+                                <p><strong>Unique Party Role:</strong> The "undercover healer" - provides healing and support while maintaining social infiltration capabilities.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="scenario-exercise">
+                        <h4>Scenario B: Feat Chain Optimization</h4>
+                        <p><strong>Challenge:</strong> Design an optimal feat progression for a specific goal</p>
+                        <p><strong>Goal:</strong> Human Fighter who wants to be the ultimate mounted combatant by level 10</p>
+                        
+                        <div class="optimization-task">
+                            <p><strong>Requirements to Consider:</strong></p>
+                            <ul>
+                                <li>Need a mount (animal companion or purchased)</li>
+                                <li>Must be effective both mounted and on foot</li>
+                                <li>Should maximize the advantages of mounted combat</li>
+                                <li>Must remain viable if mount is unavailable</li>
+                            </ul>
+                            
+                            <div class="feat-planning">
+                                <h5>Your Feat Progression Plan</h5>
+                                <p><strong>Level 1 (Ancestry):</strong> _______________</p>
+                                <p><strong>Level 1 (Background):</strong> _______________</p>
+                                <p><strong>Level 1 (Class):</strong> _______________</p>
+                                <p><strong>Level 2:</strong> _______________</p>
+                                <p><strong>Level 3:</strong> _______________</p>
+                                <p><strong>Level 4:</strong> _______________</p>
+                                <p><strong>Level 5:</strong> _______________</p>
+                                <p><strong>Level 6:</strong> _______________</p>
+                                <p><strong>Level 8:</strong> _______________</p>
+                                <p><strong>Level 10:</strong> _______________</p>
+                                
+                                <h5>Strategy Explanation</h5>
+                                <p>Why this progression: _______________</p>
+                                <p>Key synergies: _______________</p>
+                                <p>Backup plan if dismounted: _______________</p>
+                            </div>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Mounted Mastery</summary>
+                            <div class="solution">
+                                <p><strong>Optimal Mounted Fighter Progression:</strong></p>
+                                <ul>
+                                    <li><strong>Level 1 (Human):</strong> Natural Ambition → Additional class feat</li>
+                                    <li><strong>Level 1 (Background):</strong> Animal Whisperer → Handle Animal</li>
+                                    <li><strong>Level 1 (Class):</strong> Reactive Shield</li>
+                                    <li><strong>Level 1 (Bonus):</strong> Power Attack</li>
+                                    <li><strong>Level 2:</strong> Cavalier Dedication → Gain mount</li>
+                                    <li><strong>Level 3:</strong> Toughness → More survivability</li>
+                                    <li><strong>Level 4:</strong> Mounted Shield → Defend mount</li>
+                                    <li><strong>Level 5:</strong> Weapon Specialization → Class feature</li>
+                                    <li><strong>Level 6:</strong> Charge Attack → Mounted damage</li>
+                                    <li><strong>Level 8:</strong> Trampling Charge → Area control</li>
+                                    <li><strong>Level 10:</strong> Spirited Charge → Devastating charges</li>
+                                </ul>
+                                
+                                <p><strong>Strategy:</strong> Early mount acquisition, then build around mounted advantages while maintaining ground combat capability through core fighter features.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-two">
+                <h3>Activity Two: Archetype Integration Workshop</h3>
+                <p>Practice combining archetypes with main classes for optimal synergy:</p>
+                
+                <div class="archetype-scenarios">
+                    <div class="integration-challenge">
+                        <h4>Challenge: The Healing Tank</h4>
+                        <p><strong>Concept:</strong> A frontline fighter who can also serve as the party's primary healer</p>
+                        <p><strong>Core Class Options:</strong> Fighter, Champion, or Monk</p>
+                        <p><strong>Archetype Options:</strong> Cleric, Druid, or Oracle</p>
+                        
+                        <div class="integration-planning">
+                            <h5>Design Your Healing Tank</h5>
+                            
+                            <div class="design-choices">
+                                <h6>Primary Class Selection</h6>
+                                <p>Chosen Class: _______________</p>
+                                <p>Reasoning: _______________</p>
+                                
+                                <h6>Archetype Selection</h6>
+                                <p>Chosen Archetype: _______________</p>
+                                <p>Reasoning: _______________</p>
+                                
+                                <h6>Ability Score Priorities</h6>
+                                <p>Primary: _______ (for combat effectiveness)</p>
+                                <p>Secondary: _______ (for archetype requirements)</p>
+                                <p>Tertiary: _______ (for survivability)</p>
+                                
+                                <h6>Key Synergies</h6>
+                                <p>Synergy 1: _______________</p>
+                                <p>Synergy 2: _______________</p>
+                                <p>Synergy 3: _______________</p>
+                                
+                                <h6>Action Economy Plan</h6>
+                                <p>Typical turn structure: _______________</p>
+                                <p>Emergency healing protocol: _______________</p>
+                            </div>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Optimal Healing Tank</summary>
+                            <div class="solution">
+                                <p><strong>Recommended Build: Champion + Cleric Archetype</strong></p>
+                                
+                                <p><strong>Why This Combination:</strong></p>
+                                <ul>
+                                    <li><strong>Champion Base:</strong> High AC, reaction to protect allies, divine spells</li>
+                                    <li><strong>Cleric Archetype:</strong> More healing spells, divine font</li>
+                                    <li><strong>Ability Synergy:</strong> Both use Charisma for divine magic</li>
+                                    <li><strong>Thematic Coherence:</strong> Holy warrior perfectly matches healing priest</li>
+                                </ul>
+                                
+                                <p><strong>Key Features:</strong></p>
+                                <ul>
+                                    <li><strong>Champion's Reaction:</strong> Protect allies automatically</li>
+                                    <li><strong>Divine Font:</strong> Unlimited healing per day</li>
+                                    <li><strong>Heavy Armor:</strong> Frontline survivability</li>
+                                    <li><strong>Lay on Hands:</strong> Quick touch healing</li>
+                                </ul>
+                                
+                                <p><strong>Action Economy:</strong> Use reactions to protect, actions to heal, movement to position between allies and enemies.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-three">
+                <h3>Activity Three: Build Optimization Competition</h3>
+                <p>Design competing builds for the same concept to compare optimization approaches:</p>
+                
+                <div class="optimization-challenge">
+                    <h4>The Challenge: Design the Ultimate Scout</h4>
+                    <p><strong>Requirements:</strong> Character excel at reconnaissance, stealth, and information gathering</p>
+                    <p><strong>Party Role:</strong> Primary scout and infiltrator</p>
+                    <p><strong>Level Target:</strong> Optimize for levels 5-10 play</p>
+                    
+                    <div class="build-competition">
+                        <h5>Create Three Different Approaches</h5>
+                        
+                        <div class="approach-templates">
+                            <div class="approach">
+                                <h6>Approach A: The Skill Specialist</h6>
+                                <p><strong>Focus:</strong> Maximum skill bonuses and skill feat synergies</p>
+                                <p>Core Class: _______________</p>
+                                <p>Key Skills: _______________</p>
+                                <p>Critical Feats: _______________</p>
+                                <p>Unique Advantage: _______________</p>
+                            </div>
+
+                            <div class="approach">
+                                <h6>Approach B: The Magical Scout</h6>
+                                <p><strong>Focus:</strong> Magical reconnaissance and stealth enhancement</p>
+                                <p>Core Class: _______________</p>
+                                <p>Archetype/Spells: _______________</p>
+                                <p>Key Abilities: _______________</p>
+                                <p>Unique Advantage: _______________</p>
+                            </div>
+
+                            <div class="approach">
+                                <h6>Approach C: The Hybrid Solution</h6>
+                                <p><strong>Focus:</strong> Balance of skills, magic, and combat capability</p>
+                                <p>Core Class: _______________</p>
+                                <p>Secondary Focus: _______________</p>
+                                <p>Balancing Strategy: _______________</p>
+                                <p>Unique Advantage: _______________</p>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-analysis">
+                            <h5>Compare Your Builds</h5>
+                            <p><strong>Best at Pure Stealth:</strong> _______________</p>
+                            <p><strong>Best at Information Gathering:</strong> _______________</p>
+                            <p><strong>Most Versatile:</strong> _______________</p>
+                            <p><strong>Best Combat Backup:</strong> _______________</p>
+                            <p><strong>Most Unique/Creative:</strong> _______________</p>
+                        </div>
+                    </div>
+                    
+                    <details>
+                        <summary>Click for Expert Scout Builds</summary>
+                        <div class="solution">
+                            <p><strong>Approach A: Rogue Skill Master</strong></p>
+                            <ul>
+                                <li><strong>Core:</strong> Rogue with Investigator archetype</li>
+                                <li><strong>Skills:</strong> Stealth, Investigation, Perception, Society</li>
+                                <li><strong>Feats:</strong> Skill Mastery, Legendary Sneak, Terrain Expertise</li>
+                                <li><strong>Advantage:</strong> Unmatched skill bonuses and legendary capabilities</li>
+                            </ul>
+                            
+                            <p><strong>Approach B: Druid Shapeshifter Scout</strong></p>
+                            <ul>
+                                <li><strong>Core:</strong> Druid with animal focus</li>
+                                <li><strong>Magic:</strong> Wild Shape, Pass Without Trace, Speak with Animals</li>
+                                <li><strong>Forms:</strong> Bird for aerial recon, small animals for infiltration</li>
+                                <li><strong>Advantage:</strong> Can go places no humanoid can access</li>
+                            </ul>
+                            
+                            <p><strong>Approach C: Ranger Information Broker</strong></p>
+                            <ul>
+                                <li><strong>Core:</strong> Ranger with Rogue archetype</li>
+                                <li><strong>Balance:</strong> Hunting abilities + thievery skills</li>
+                                <li><strong>Features:</strong> Track anything, sneak attack, animal companion</li>
+                                <li><strong>Advantage:</strong> Works in any environment, has backup in combat</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-steps">
+            <h2>What's Next?</h2>
+            <p>You've now mastered the advanced arts of character optimization and synergy! From understanding opportunity costs and scaling to building complex feat chains and integrating archetypes, you have the tools to create characters that are both mechanically excellent and thematically coherent. These skills will serve you well whether you're optimizing for power, creativity, or perfect party integration.</p>
+            
+            <div class="upcoming-topics">
+                <h3>Continuing Your Pathfinder Journey</h3>
+                <ul>
+                    <li><strong>Campaign and Adventure Design:</strong> Creating memorable stories and balanced challenges for players</li>
+                    <li><strong>Advanced Game Master Techniques:</strong> Running complex scenarios with multiple character types</li>
+                    <li><strong>Party Dynamics and Team Building:</strong> Optimizing group synergy and role distribution</li>
+                    <li><strong>High-Level Play Mastery:</strong> Managing complex abilities and epic-tier adventures</li>
+                    <li><strong>Variant Rules and Customization:</strong> Adapting the system to your table's preferences</li>
+                </ul>
+            </div>
+
+            <div class="advanced-mastery-checklist">
+                <h3>Advanced Character Creation Mastery Checklist</h3>
+                <ul>
+                    <li>✅ Understand opportunity cost analysis for character choices</li>
+                    <li>✅ Plan feat chains and long-term character progression</li>
+                    <li>✅ Identify unexpected ancestry and heritage synergies</li>
+                    <li>✅ Design effective archetype combinations</li>
+                    <li>✅ Optimize action economy and resource management</li>
+                    <li>✅ Balance mechanical power with thematic coherence</li>
+                    <li>🎯 Create builds that enhance party dynamics</li>
+                    <li>🎯 Develop signature optimization techniques</li>
+                    <li>🎯 Master the art of creative constraint solutions</li>
+                </ul>
+            </div>
+
+            <div class="optimization-resources">
+                <h3>Advanced Character Building Resources</h3>
+                <ul>
+                    <li><strong>Character Optimization Forums:</strong> Community discussions on advanced builds</li>
+                    <li><strong>Feat Chain Calculators:</strong> Tools for planning long-term progressions</li>
+                    <li><strong>Synergy Databases:</strong> Collections of tested ability combinations</li>
+                    <li><strong>Build Competition Archives:</strong> Examples of optimized characters for inspiration</li>
+                    <li><strong>Theoretical Optimization Guides:</strong> Mathematical analysis of game mechanics</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Your mastery of character creation knows no bounds - forge legends through perfect synergy!</p>
+    </footer>
+
+    <script>
+        // Weapon scaling comparison chart
+        const canvas = document.getElementById('weaponScalingChart');
+        const ctx = canvas.getContext('2d');
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Data for weapon effectiveness over levels
+        const levels = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        
+        // Different weapon approaches (normalized effectiveness scores)
+        const basicWeapon = [5, 7, 10, 12, 15, 17, 20, 22, 25, 27];
+        const specializedWeapon = [4, 6, 12, 16, 20, 25, 32, 38, 45, 52];
+        const magicalWeapon = [3, 5, 8, 15, 22, 30, 38, 47, 56, 65];
+        
+        const chartWidth = 500;
+        const chartHeight = 200;
+        const startX = 50;
+        const startY = 250;
+        
+        //

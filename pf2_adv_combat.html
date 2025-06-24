@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Combat Tactics - Pathfinder 2.0</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Advanced Combat Tactics</h1>
+        <p class="subtitle">Mastering the Battlefield Through Strategy and Positioning</p>
+    </header>
+
+    <main>
+        <section class="introduction">
+            <h2>Beyond Basic Combat: The Art of Tactical Warfare</h2>
+            <p>If basic combat is like a street fight, advanced combat tactics are like three-dimensional chess played at lightning speed. Every position matters, every condition creates opportunities, and the environment itself becomes a weapon. Think of yourself as a military strategist who must adapt to constantly changing battlefield conditions while coordinating with allies and exploiting enemy weaknesses.</p>
+            
+            <p>Mastering advanced combat tactics transforms you from someone who merely survives fights into someone who controls them. You'll learn to see the battlefield as a dynamic system where positioning, timing, conditions, and environmental factors create cascading effects that can turn inevitable defeat into spectacular victory.</p>
+
+            <div class="tactical-layers">
+                <h3>The Five Layers of Tactical Mastery</h3>
+                <div class="layers-diagram">
+                    <div class="mermaid">
+                        graph TB
+                            A[TACTICAL MASTERY] --> B[Positioning<br/>Where you stand matters]
+                            A --> C[Conditions<br/>Status effects change everything]
+                            A --> D[Environment<br/>The battlefield is a tool]
+                            A --> E[Timing<br/>When you act determines success]
+                            A --> F[Coordination<br/>Teamwork multiplies power]
+                            
+                            B --> G[Line of sight control]
+                            B --> H[Flanking opportunities]
+                            B --> I[Escape routes]
+                            
+                            C --> J[Applying debuffs]
+                            C --> K[Removing enemy buffs]
+                            C --> L[Protecting key assets]
+                            
+                            D --> M[Using terrain features]
+                            D --> N[Creating obstacles]
+                            D --> O[Environmental hazards]
+                            
+                            E --> P[Initiative management]
+                            E --> Q[Action economy optimization]
+                            E --> R[Delayed/Ready actions]
+                            
+                            F --> S[Combo attacks]
+                            F --> T[Coordinated positioning]
+                            F --> U[Resource sharing]
+                            
+                            style A fill:#9c27b0,color:#fff
+                            style B fill:#2196f3,color:#fff
+                            style C fill:#ff9800,color:#fff
+                            style D fill:#4caf50,color:#fff
+                            style E fill:#f44336,color:#fff
+                            style F fill:#607d8b,color:#fff
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="conditions-mastery">
+            <h2>Conditions: The Hidden Language of Combat</h2>
+            <p>Conditions in PF2e are like status effects in a video game, but with much more strategic depth. They're not just penalties or bonuses - they're tools for reshaping the battlefield, creating opportunities, and turning the tide of battle. Understanding conditions is like learning a secret language that unlocks advanced tactical possibilities.</p>
+
+            <div class="condition-categories">
+                <h3>The Condition Spectrum: From Helpful to Harmful</h3>
+                
+                <div class="condition-overview">
+                    <div class="condition-scale">
+                        <canvas id="conditionScale" width="800" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="beneficial-conditions">
+                    <h4>🌟 Beneficial Conditions: Empowering Your Heroes</h4>
+                    
+                    <div class="beneficial-grid">
+                        <div class="condition-card positive">
+                            <h5>💪 Inspired</h5>
+                            <div class="condition-mechanics">
+                                <p><strong>Effect:</strong> +1 status bonus to attack rolls, damage rolls, saves, and skill checks</p>
+                                <p><strong>Source:</strong> Bard performances, Rally activities</p>
+                                <p><strong>Duration:</strong> Usually 1 round, renewable</p>
+                            </div>
+                            <div class="tactical-applications">
+                                <h6>Tactical Applications:</h6>
+                                <ul>
+                                    <li><strong>Pre-Combat:</strong> Rally the party before engaging</li>
+                                    <li><strong>Critical Moments:</strong> Boost accuracy for important attacks</li>
+                                    <li><strong>Save-or-Die:</strong> Improve chances against dangerous effects</li>
+                                    <li><strong>Skill Challenges:</strong> Edge needed for crucial skill checks</li>
+                                </ul>
+                            </div>
+                            <div class="condition-strategy">
+                                <p><strong>Strategy:</strong> Stack with other bonuses for maximum effect. Time activation for moments when the bonus matters most.</p>
+                            </div>
+                        </div>
+
+                        <div class="condition-card positive">
+                            <h5>⚡ Hasted</h5>
+                            <div class="condition-mechanics">
+                                <p><strong>Effect:</strong> +1 action per turn, +1 to AC and Reflex saves</p>
+                                <p><strong>Source:</strong> Haste spell, magical items</p>
+                                <p><strong>Duration:</strong> Usually 1 minute</p>
+                            </div>
+                            <div class="tactical-applications">
+                                <h6>Tactical Applications:</h6>
+                                <ul>
+                                    <li><strong>Action Economy:</strong> Four actions per turn instead of three</li>
+                                    <li><strong>Positioning:</strong> Move and attack more freely</li>
+                                    <li><strong>Defense:</strong> Better AC and Reflex saves</li>
+                                    <li><strong>Versatility:</strong> More options each turn</li>
+                                </ul>
+                            </div>
+                            <div class="condition-strategy">
+                                <p><strong>Strategy:</strong> Game-changing condition. Prioritize protecting the hasted character. Best on characters who can use extra actions effectively.</p>
+                            </div>
+                        </div>
+
+                        <div class="condition-card positive">
+                            <h5>🔍 Guided</h5>
+                            <div class="condition-mechanics">
+                                <p><strong>Effect:</strong> Next attack automatically hits</p>
+                                <p><strong>Source:</strong> True Strike spell, certain abilities</p>
+                                <p><strong>Duration:</strong> Until next attack or end of turn</p>
+                            </div>
+                            <div class="tactical-applications">
+                                <h6>Tactical Applications:</h6>
+                                <ul>
+                                    <li><strong>High-Value Targets:</strong> Guarantee important attacks land</li>
+                                    <li><strong>Power Attacks:</strong> Combine with high-damage abilities</li>
+                                    <li><strong>Touch Spells:</strong> Ensure spell delivery attacks succeed</li>
+                                    <li><strong>Critical Fishing:</strong> Natural 20s still critically hit</li>
+                                </ul>
+                            </div>
+                            <div class="condition-strategy">
+                                <p><strong>Strategy:</strong> Save for crucial moments. Combine with your most powerful attacks or when missing would be catastrophic.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detrimental-conditions">
+                    <h4>💀 Detrimental Conditions: Crippling Your Enemies</h4>
+                    
+                    <div class="detrimental-grid">
+                        <div class="condition-card negative">
+                            <h5>😨 Frightened</h5>
+                            <div class="condition-mechanics">
+                                <p><strong>Effect:</strong> -1 to -4 status penalty to all checks and DCs</p>
+                                <p><strong>Source:</strong> Intimidation, fear spells, monster abilities</p>
+                                <p><strong>Duration:</strong> Decreases by 1 each turn until gone</p>
+                            </div>
+                            <div class="tactical-applications">
+                                <h6>Tactical Applications:</h6>
+                                <ul>
+                                    <li><strong>Accuracy Reduction:</strong> Enemies miss more attacks</li>
+                                    <li><strong>Save Penalties:</strong> Spells more likely to affect them</li>
+                                    <li><strong>Skill Debuffs:</strong> Worse at Athletics, Perception, etc.</li>
+                                    <li><strong>Stacking Effect:</strong> Combines with other penalties</li>
+                                </ul>
+                            </div>
+                            <div class="condition-strategy">
+                                <p><strong>Strategy:</strong> Apply early in combat for maximum duration. Focus on maintaining fear effects on dangerous enemies.</p>
+                            </div>
+                        </div>
+
+                        <div class="condition-card negative">
+                            <h5>🕷️ Restrained</h5>
+                            <div class="condition-mechanics">
+                                <p><strong>Effect:</strong> Can't move, -2 to attacks, flat-footed, -2 to Reflex saves</p>
+                                <p><strong>Source:</strong> Web spells, grappling, entangle effects</p>
+                                <p><strong>Duration:</strong> Until escaped or effect ends</p>
+                            </div>
+                            <div class="tactical-applications">
+                                <h6>Tactical Applications:</h6>
+                                <ul>
+                                    <li><strong>Mobility Denial:</strong> Enemy can't reposition</li>
+                                    <li><strong>Easier Targeting:</strong> Flat-footed condition aids attacks</li>
+                                    <li><strong>Area Control:</strong> Keeps enemies in spell/effect areas</li>
+                                    <li><strong>Escape Prevention:</strong> Stops retreat attempts</li>
+                                </ul>
+                            </div>
+                            <div class="condition-strategy">
+                                <p><strong>Strategy:</strong> Ideal for controlling key enemies. Follow up with area effects or focused fire to eliminate restrained targets.</p>
+                            </div>
+                        </div>
+
+                        <div class="condition-card negative">
+                            <h5>🤕 Slowed</h5>
+                            <div class="condition-mechanics">
+                                <p><strong>Effect:</strong> Lose 1 action per turn (2 actions instead of 3)</p>
+                                <p><strong>Source:</strong> Slow spell, certain attacks, magic items</p>
+                                <p><strong>Duration:</strong> Usually 1 minute or until removed</p>
+                            </div>
+                            <div class="tactical-applications">
+                                <h6>Tactical Applications:</h6>
+                                <ul>
+                                    <li><strong>Action Denial:</strong> Enemies can't do as much per turn</li>
+                                    <li><strong>Positioning Issues:</strong> Harder to move and attack</li>
+                                    <li><strong>Reduced Threat:</strong> Fewer attacks or actions possible</li>
+                                    <li><strong>Spell Disruption:</strong> Multi-action spells become impossible</li>
+                                </ul>
+                            </div>
+                            <div class="condition-strategy">
+                                <p><strong>Strategy:</strong> Excellent for reducing enemy effectiveness over time. Particularly good against spellcasters and mobile threats.</p>
+                            </div>
+                        </div>
+
+                        <div class="condition-card negative">
+                            <h5>🎯 Flat-Footed</h5>
+                            <div class="condition-mechanics">
+                                <p><strong>Effect:</strong> -2 circumstance penalty to AC</p>
+                                <p><strong>Source:</strong> Flanking, being off-guard, surprise, many abilities</p>
+                                <p><strong>Duration:</strong> Usually until start of your next turn</p>
+                            </div>
+                            <div class="tactical-applications">
+                                <h6>Tactical Applications:</h6>
+                                <ul>
+                                    <li><strong>Easier Hits:</strong> 10% better chance to hit flat-footed enemies</li>
+                                    <li><strong>Critical Fishing:</strong> Better crit chances on important attacks</li>
+                                    <li><strong>Sneak Attack:</strong> Enables rogue damage bonuses</li>
+                                    <li><strong>Spell Attacks:</strong> Touch spells more likely to hit</li>
+                                </ul>
+                            </div>
+                            <div class="condition-strategy">
+                                <p><strong>Strategy:</strong> Set up through flanking or abilities, then focus fire. Essential for maximizing damage against tough enemies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="condition-interactions">
+                <h3>Condition Interactions and Stacking</h3>
+                <p>Understanding how conditions interact is crucial for advanced tactics. Some stack, some don't, and some create powerful synergies.</p>
+                
+                <div class="stacking-rules">
+                    <h4>📊 Stacking Rules</h4>
+                    
+                    <div class="stacking-examples">
+                        <div class="stacking-card">
+                            <h5>✅ Conditions That Stack</h5>
+                            <ul>
+                                <li><strong>Different Types:</strong> Circumstance + Status + Item bonuses all stack</li>
+                                <li><strong>Unnamed Bonuses:</strong> Multiple sources of unnamed bonuses stack</li>
+                                <li><strong>Different Conditions:</strong> Frightened + Sickened + Clumsy all apply</li>
+                            </ul>
+                            <div class="stacking-example">
+                                <p><strong>Example:</strong> Frightened 2 (-2 status) + Flanked (-2 circumstance to AC) = -4 total penalty to enemy's AC</p>
+                            </div>
+                        </div>
+
+                        <div class="stacking-card">
+                            <h5>❌ Conditions That Don't Stack</h5>
+                            <ul>
+                                <li><strong>Same Type:</strong> Only highest status bonus applies</li>
+                                <li><strong>Same Condition:</strong> Frightened 2 + Frightened 1 = Frightened 2</li>
+                                <li><strong>Duplicate Sources:</strong> Two Bless spells don't stack</li>
+                            </ul>
+                            <div class="stacking-example">
+                                <p><strong>Example:</strong> Inspire Courage (+1 status) + Heroism (+1 status) = +1 total (not +2)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="condition-synergies">
+                    <h4>🔗 Powerful Condition Synergies</h4>
+                    
+                    <div class="synergy-examples">
+                        <div class="synergy-card">
+                            <h5>🎯 The Accuracy Cascade</h5>
+                            <p><strong>Combination:</strong> Flat-Footed + Frightened + True Strike</p>
+                            <div class="synergy-breakdown">
+                                <p><strong>Effects:</strong></p>
+                                <ul>
+                                    <li>Flat-Footed: -2 to enemy AC</li>
+                                    <li>Frightened 2: -2 to enemy's AC</li>
+                                    <li>True Strike: Next attack automatically hits</li>
+                                </ul>
+                                <p><strong>Result:</strong> Guaranteed hit with effective +4 bonus (great for critical fishing)</p>
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <h5>🕷️ The Control Lock</h5>
+                            <p><strong>Combination:</strong> Restrained + Slowed + Prone</p>
+                            <div class="synergy-breakdown">
+                                <p><strong>Effects:</strong></p>
+                                <ul>
+                                    <li>Restrained: Can't move, -2 attacks, flat-footed</li>
+                                    <li>Slowed: Only 2 actions per turn</li>
+                                    <li>Prone: -2 to attacks, flat-footed to melee</li>
+                                </ul>
+                                <p><strong>Result:</strong> Enemy is nearly helpless and easy to finish off</p>
+                            </div>
+                        </div>
+
+                        <div class="synergy-card">
+                            <h5>🧠 The Mental Breakdown</h5>
+                            <p><strong>Combination:</strong> Confused + Stupefied + Fascinated</p>
+                            <div class="synergy-breakdown">
+                                <p><strong>Effects:</strong></p>
+                                <ul>
+                                    <li>Confused: Random actions, might attack allies</li>
+                                    <li>Stupefied: Penalties to mental abilities</li>
+                                    <li>Fascinated: Must focus on one thing</li>
+                                </ul>
+                                <p><strong>Result:</strong> Enemy becomes unpredictable and ineffective</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="condition-application">
+                <h3>Applying and Removing Conditions</h3>
+                
+                <div class="application-strategies">
+                    <div class="strategy-section">
+                        <h4>🎯 Applying Conditions Effectively</h4>
+                        
+                        <div class="application-methods">
+                            <div class="method-card">
+                                <h5>⚔️ Combat Maneuvers</h5>
+                                <ul>
+                                    <li><strong>Grapple:</strong> Grab enemy to inflict Grabbed condition</li>
+                                    <li><strong>Trip:</strong> Knock enemy down for Prone condition</li>
+                                    <li><strong>Shove:</strong> Push enemy around and make them Off-Guard</li>
+                                    <li><strong>Disarm:</strong> Remove weapons to reduce threat</li>
+                                </ul>
+                                <p><strong>Best For:</strong> Fighters, monks, characters with high Athletics</p>
+                            </div>
+
+                            <div class="method-card">
+                                <h5>🧙 Spellcasting</h5>
+                                <ul>
+                                    <li><strong>Save-or-Suck:</strong> Spells that disable on failed saves</li>
+                                    <li><strong>Area Effects:</strong> Hit multiple enemies with conditions</li>
+                                    <li><strong>Duration Control:</strong> Long-lasting effects for sustained advantage</li>
+                                    <li><strong>Selective Targeting:</strong> Hit enemies while sparing allies</li>
+                                </ul>
+                                <p><strong>Best For:</strong> Wizards, sorcerers, clerics, prepared casters</p>
+                            </div>
+
+                            <div class="method-card">
+                                <h5>🗣️ Skill-Based Applications</h5>
+                                <ul>
+                                    <li><strong>Intimidation:</strong> Demoralize for Frightened condition</li>
+                                    <li><strong>Performance:</strong> Fascinate enemies or inspire allies</li>
+                                    <li><strong>Medicine:</strong> Treat conditions during combat</li>
+                                    <li><strong>Athletics:</strong> Various combat maneuvers</li>
+                                </ul>
+                                <p><strong>Best For:</strong> Bards, rogues, skill-focused characters</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategy-section">
+                        <h4>🛡️ Removing Harmful Conditions</h4>
+                        
+                        <div class="removal-methods">
+                            <div class="removal-priority">
+                                <h5>🚨 Condition Triage Priority</h5>
+                                <ol>
+                                    <li><strong>Life-Threatening:</strong> Dying, unconscious, petrified</li>
+                                    <li><strong>Action-Denying:</strong> Paralyzed, stunned, confused</li>
+                                    <li><strong>Severely Limiting:</strong> Restrained, slowed, blinded</li>
+                                    <li><strong>Moderately Harmful:</strong> Frightened, sickened, enfeebled</li>
+                                    <li><strong>Minor Inconveniences:</strong> Clumsy, flat-footed (temporary)</li>
+                                </ol>
+                            </div>
+
+                            <div class="removal-techniques">
+                                <h5>🔧 Removal Techniques</h5>
+                                <div class="technique-grid">
+                                    <div class="technique-card">
+                                        <h6>✨ Magical Removal</h6>
+                                        <ul>
+                                            <li><strong>Remove Fear:</strong> Eliminates frightened</li>
+                                            <li><strong>Remove Disease:</strong> Cures diseases and related conditions</li>
+                                            <li><strong>Restoration:</strong> Removes ability damage and drain</li>
+                                            <li><strong>Dispel Magic:</strong> Removes magical conditions</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="technique-card">
+                                        <h6>🏥 Mundane Treatment</h6>
+                                        <ul>
+                                            <li><strong>Medicine Skill:</strong> Treat wounds, disease, poison</li>
+                                            <li><strong>Rest:</strong> Many conditions fade with time</li>
+                                            <li><strong>Environmental:</strong> Fresh air for poison, light for blindness</li>
+                                            <li><strong>Physical Aid:</strong> Help allies escape grapples</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="technique-card">
+                                        <h6>⚔️ Combat Solutions</h6>
+                                        <ul>
+                                            <li><strong>Escape Artist:</strong> Get out of restraints</li>
+                                            <li><strong>Break Free:</strong> Athletics to escape grapples</li>
+                                            <li><strong>Destroy Source:</strong> Attack the web/trap causing condition</li>
+                                            <li><strong>Reposition:</strong> Move to safer locations</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="battlefield-control">
+            <h2>Battlefield Control: Shaping the Environment</h2>
+            <p>True tactical mastery means treating the battlefield itself as a weapon. Every wall, doorway, pit, and elevated position becomes a tool for victory. Think like a military engineer who can reshape terrain to favor your forces while hindering your enemies.</p>
+
+            <div class="terrain-mastery">
+                <h3>Understanding Terrain Types</h3>
+                
+                <div class="terrain-grid">
+                    <div class="terrain-category">
+                        <h4>🚧 Difficult Terrain</h4>
+                        <p><strong>Effect:</strong> Costs 2 squares of movement per square entered</p>
+                        
+                        <div class="terrain-details">
+                            <h5>Natural Examples</h5>
+                            <ul>
+                                <li><strong>Thick undergrowth:</strong> Vines, brambles, dense forest</li>
+                                <li><strong>Rubble:</strong> Collapsed buildings, rocky slopes</li>
+                                <li><strong>Shallow water:</strong> Streams, flooded areas, swamps</li>
+                                <li><strong>Snow/Ice:</strong> Deep snow, slippery surfaces</li>
+                            </ul>
+
+                            <h5>Created Examples</h5>
+                            <ul>
+                                <li><strong>Grease spells:</strong> Slippery surfaces</li>
+                                <li><strong>Entangle effects:</strong> Grasping plants and roots</li>
+                                <li><strong>Caltrops:</strong> Scattered spikes</li>
+                                <li><strong>Oil spills:</strong> Flammable and slippery</li>
+                            </ul>
+
+                            <h5>Tactical Applications</h5>
+                            <ul>
+                                <li><strong>Mobility Denial:</strong> Slow enemy advances</li>
+                                <li><strong>Escape Routes:</strong> Create barriers to pursuit</li>
+                                <li><strong>Channeling:</strong> Force enemies into preferred paths</li>
+                                <li><strong>Time Buying:</strong> Delay enemy engagement</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="terrain-category">
+                        <h4>🏔️ Elevation and Cover</h4>
+                        <p><strong>Benefits:</strong> High ground provides tactical advantages</p>
+                        
+                        <div class="terrain-details">
+                            <h5>Elevation Advantages</h5>
+                            <ul>
+                                <li><strong>Ranged Superiority:</strong> Better angles for arrows and spells</li>
+                                <li><strong>Line of Sight:</strong> See over obstacles and enemies</li>
+                                <li><strong>Psychological Edge:</strong> Intimidating position</li>
+                                <li><strong>Defensive Bonus:</strong> Harder for enemies to reach you</li>
+                            </ul>
+
+                            <h5>Cover Types</h5>
+                            <div class="cover-types">
+                                <div class="cover-example">
+                                    <h6>🛡️ Standard Cover</h6>
+                                    <p><strong>Effect:</strong> +2 circumstance bonus to AC</p>
+                                    <p><strong>Examples:</strong> Trees, pillars, walls, other creatures</p>
+                                </div>
+                                <div class="cover-example">
+                                    <h6>🏰 Greater Cover</h6>
+                                    <p><strong>Effect:</strong> +4 circumstance bonus to AC</p>
+                                    <p><strong>Examples:</strong> Arrow slits, thick walls, murder holes</p>
+                                </div>
+                            </div>
+
+                            <h5>Creating Cover</h5>
+                            <ul>
+                                <li><strong>Wall of Stone:</strong> Permanent barriers</li>
+                                <li><strong>Summon spells:</strong> Creatures as mobile cover</li>
+                                <li><strong>Portable barriers:</strong> Shields, pavises, mobile defenses</li>
+                                <li><strong>Environmental use:</strong> Overturning tables, barricades</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="terrain-category">
+                        <h4>🕳️ Hazardous Terrain</h4>
+                        <p><strong>Effect:</strong> Damages or impedes creatures that enter</p>
+                        
+                        <div class="terrain-details">
+                            <h5>Natural Hazards</h5>
+                            <ul>
+                                <li><strong>Lava/Fire:</strong> Ongoing fire damage</li>
+                                <li><strong>Acid pools:</strong> Corrosive damage</li>
+                                <li><strong>Spike pits:</strong> Fall damage plus piercing</li>
+                                <li><strong>Quicksand:</strong> Restraining and drowning</li>
+                            </ul>
+
+                            <h5>Magical Hazards</h5>
+                            <ul>
+                                <li><strong>Wall of Fire:</strong> Damage for passing through</li>
+                                <li><strong>Spike Growth:</strong> Piercing damage and difficult terrain</li>
+                                <li><strong>Cloudkill:</strong> Poison damage in area</li>
+                                <li><strong>Blade Barrier:</strong> Slashing damage wall</li>
+                            </ul>
+
+                            <h5>Using Hazards Tactically</h5>
+                            <ul>
+                                <li><strong>Area Denial:</strong> Block paths and retreat routes</li>
+                                <li><strong>Damage Over Time:</strong> Persistent threat to enemies</li>
+                                <li><strong>Forced Movement:</strong> Push enemies into hazards</li>
+                                <li><strong>Protection:</strong> Barriers between you and enemies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="battlefield-shaping">
+                <h3>Battlefield Shaping Techniques</h3>
+                
+                <div class="shaping-strategies">
+                    <div class="strategy-category">
+                        <h4>🧱 Creating Barriers</h4>
+                        
+                        <div class="barrier-examples">
+                            <div class="barrier-spell">
+                                <h5>🔥 Wall of Fire</h5>
+                                <div class="spell-details">
+                                    <p><strong>Dimensions:</strong> 60-foot line, 10 feet high</p>
+                                    <p><strong>Effect:</strong> Blocks line of sight, damages creatures passing through</p>
+                                    <p><strong>Duration:</strong> 1 minute</p>
+                                </div>
+                                <div class="tactical-uses">
+                                    <h6>Tactical Applications:</h6>
+                                    <ul>
+                                        <li><strong>Split the Battlefield:</strong> Separate enemy groups</li>
+                                        <li><strong>Escape Cover:</strong> Block pursuit while retreating</li>
+                                        <li><strong>Funnel Enemies:</strong> Force them through chokepoints</li>
+                                        <li><strong>Area Denial:</strong> Block reinforcements</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="barrier-spell">
+                                <h5>🕷️ Web</h5>
+                                <div class="spell-details">
+                                    <p><strong>Area:</strong> 20-foot burst</p>
+                                    <p><strong>Effect:</strong> Difficult terrain, possible restraining</p>
+                                    <p><strong>Duration:</strong> 1 minute</p>
+                                </div>
+                                <div class="tactical-uses">
+                                    <h6>Tactical Applications:</h6>
+                                    <ul>
+                                        <li><strong>Crowd Control:</strong> Slow multiple enemies</li>
+                                        <li><strong>Escape Prevention:</strong> Block retreat routes</li>
+                                        <li><strong>Setup Combos:</strong> Hold enemies for area spells</li>
+                                        <li><strong>Doorway Blocking:</strong> Seal passages</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="barrier-spell">
+                                <h5>🗿 Wall of Stone</h5>
+                                <div class="spell-details">
+                                    <p><strong>Dimensions:</strong> Customizable panels</p>
+                                    <p><strong>Effect:</strong> Permanent physical barrier</p>
+                                    <p><strong>Duration:</strong> Permanent until destroyed</p>
+                                </div>
+                                <div class="tactical-uses">
+                                    <h6>Tactical Applications:</h6>
+                                    <ul>
+                                        <li><strong>Fortification:</strong> Create defensive positions</li>
+                                        <li><strong>Maze Creation:</strong> Reshape battlefield layout</li>
+                                        <li><strong>Bridge Building:</strong> Cross gaps and hazards</li>
+                                        <li><strong>Siege Breaking:</strong> Create or destroy chokepoints</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategy-category">
+                        <h4>🌪️ Area Control Spells</h4>
+                        
+                        <div class="control-examples">
+                            <div class="control-spell">
+                                <h5>🌿 Entangle</h5>
+                                <div class="control-mechanics">
+                                    <p><strong>Area:</strong> 40-foot burst</p>
+                                    <p><strong>Effect:</strong> Difficult terrain, saves to avoid restraining</p>
+                                    <p><strong>Advantage:</strong> Large area, multiple enemies affected</p>
+                                </div>
+                            </div>
+
+                            <div class="control-spell">
+                                <h5>🧊 Grease</h5>
+                                <div class="control-mechanics">
+                                    <p><strong>Area:</strong> 10-foot square</p>
+                                    <p><strong>Effect:</strong> Difficult terrain, saves to avoid falling prone</p>
+                                    <p><strong>Advantage:</strong> Low level, reliable effect</p>
+                                </div>
+                            </div>
+
+                            <div class="control-spell">
+                                <h5>⚡ Lightning Storm</h5>
+                                <div class="control-mechanics">
+                                    <p><strong>Area:</strong> Large cylinder</p>
+                                    <p><strong>Effect:</strong> Ongoing damage and difficult terrain</p>
+                                    <p><strong>Advantage:</strong> Damage + control combination</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategy-category">
+                        <h4>🏗️ Environmental Manipulation</h4>
+                        
+                        <div class="manipulation-techniques">
+                            <div class="technique-card">
+                                <h5>🪓 Destructive Tactics</h5>
+                                <ul>
+                                    <li><strong>Collapse Ceilings:</strong> Damage structural supports</li>
+                                    <li><strong>Destroy Bridges:</strong> Prevent crossing or escape</li>
+                                    <li><strong>Breach Walls:</strong> Create new paths or deny old ones</li>
+                                    <li><strong>Trigger Traps:</strong> Use enemy defenses against them</li>
+                                </ul>
+                            </div>
+
+                            <div class="technique-card">
+                                <h5>🛠️ Creative Construction</h5>
+                                <ul>
+                                    <li><strong>Barricades:</strong> Overturn furniture, pile debris</li>
+                                    <li><strong>Ramps:</strong> Use spells to create elevation</li>
+                                    <li><strong>Bridges:</strong> Cross gaps with magic or materials</li>
+                                    <li><strong>Fortifications:</strong> Improve defensive positions</li>
+                                </ul>
+                            </div>
+
+                            <div class="technique-card">
+                                <h5>🌊 Elemental Shaping</h5>
+                                <ul>
+                                    <li><strong>Shape Earth:</strong> Create holes, walls, ramps</li>
+                                    <li><strong>Control Water:</strong> Create currents, barriers, floods</li>
+                                    <li><strong>Wind Control:</strong> Create updrafts, barriers, movement</li>
+                                    <li><strong>Plant Growth:</strong> Instant difficult terrain</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="positioning-mastery">
+            <h2>Advanced Positioning: The Chess Master's Approach</h2>
+            <p>Positioning in advanced combat is like chess played in three dimensions with moving pieces. Every step matters, every angle creates opportunities, and perfect positioning can turn a desperate situation into an overwhelming advantage.</p>
+
+            <div class="positioning-fundamentals">
+                <h3>The Geometry of Combat</h3>
+                
+                <div class="geometry-concepts">
+                    <div class="concept-card">
+                        <h4>📐 Lines of Effect and Sight</h4>
+                        
+                        <div class="line-mechanics">
+                            <h5>Understanding Lines</h5>
+                            <div class="line-types">
+                                <div class="line-type">
+                                    <h6>👁️ Line of Sight</h6>
+                                    <p><strong>Requirement:</strong> Unblocked path from any corner of your square to any corner of target's square</p>
+                                    <p><strong>Blocks LoS:</strong> Solid barriers, total concealment, total cover</p>
+                                    <p><strong>Needed For:</strong> Targeting with most spells and abilities</p>
+                                </div>
+                                <div class="line-type">
+                                    <h6>⚡ Line of Effect</h6>
+                                    <p><strong>Requirement:</strong> Unblocked path for magical energy to reach target</p>
+                                    <p><strong>Blocks LoE:</strong> Solid barriers that would block physical projectiles</p>
+                                    <p><strong>Needed For:</strong> All targeted spells and supernatural abilities</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="line-tactics">
+                            <h5>Tactical Applications</h5>
+                            <ul>
+                                <li><strong>Breaking LoS:</strong> Use cover to prevent enemy targeting</li>
+                                <li><strong>Creating Angles:</strong> Position to see around obstacles</li>
+                                <li><strong>Indirect Fire:</strong> Use area effects when direct targeting fails</li>
+                                <li><strong>Spell Shaping:</strong> Some spells don't require LoS to origin point</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h4>🎯 Flanking and Positioning</h4>
+                        
+                        <div class="flanking-mechanics">
+                            <h5>Flanking Rules</h5>
+                            <div class="flanking-requirements">
+                                <p><strong>Requirements for Flanking:</strong></p>
+                                <ul>
+                                    <li>You and an ally are adjacent to the same enemy</li>
+                                    <li>You are on opposite sides or corners of the enemy</li>
+                                    <li>Both you and your ally can attack the enemy</li>
+                                    <li>Both you and your ally threaten the enemy</li>
+                                </ul>
+                                <p><strong>Benefit:</strong> Enemy is flat-footed to both flanking attackers</p>
+                            </div>
+                        </div>
+
+                        <div class="flanking-tactics">
+                            <h5>Advanced Flanking Tactics</h5>
+                            <div class="flanking-examples">
+                                <div class="flanking-scenario">
+                                    <h6>🔄 The Pincer Movement</h6>
+                                    <p><strong>Setup:</strong> Two melee fighters approach enemy from opposite sides</p>
+                                    <p><strong>Execution:</strong> Coordinate movement to establish flanking</p>
+                                    <p><strong>Benefit:</strong> Guaranteed flat-footed condition, enables sneak attacks</p>
+                                </div>
+
+                                <div class="flanking-scenario">
+                                    <h6>🐺 The Pack Tactics</h6>
+                                    <p><strong>Setup:</strong> Multiple allies surround high-value target</p>
+                                    <p><strong>Execution:</strong> Everyone gets flanking bonuses</p>
+                                    <p><strong>Benefit:</strong> Focus fire with improved accuracy</p>
+                                </div>
+
+                                <div class="flanking-scenario">
+                                    <h6>🎭 The False Retreat</h6>
+                                    <p><strong>Setup:</strong> One ally appears to retreat</p>
+                                    <p><strong>Execution:</strong> Enemy follows, walks into flanking position</p>
+                                    <p><strong>Benefit:</strong> Tactical positioning through misdirection</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h4>🏰 Chokepoint Control</h4>
+                        
+                        <div class="chokepoint-strategy">
+                            <h5>Identifying Chokepoints</h5>
+                            <ul>
+                                <li><strong>Doorways:</strong> Single-file movement restrictions</li>
+                                <li><strong>Bridges:</strong> Natural bottlenecks</li>
+                                <li><strong>Staircases:</strong> Elevation and width restrictions</li>
+                                <li><strong>Created Barriers:</strong> Wall spells forcing movement</li>
+                            </ul>
+
+                            <h5>Chokepoint Tactics</h5>
+                            <div class="chokepoint-uses">
+                                <div class="use-case">
+                                    <h6>🛡️ Defensive Chokepoints</h6>
+                                    <p><strong>Strategy:</strong> Force enemies through narrow passages</p>
+                                    <p><strong>Benefits:</strong> Face fewer enemies at once, maximize defensive abilities</p>
+                                    <p><strong>Setup:</strong> Tank in chokepoint, support behind with ranged attacks</p>
+                                </div>
+
+                                <div class="use-case">
+                                    <h6>⚔️ Offensive Chokepoints</h6>
+                                    <p><strong>Strategy:</strong> Create bottlenecks to trap enemies</p>
+                                    <p><strong>Benefits:</strong> Area spells hit more targets, prevent escape</p>
+                                    <p><strong>Setup:</strong> Wall spells to funnel, area effects to punish</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advanced-positioning">
+                <h3>Advanced Positioning Techniques</h3>
+                
+                <div class="positioning-techniques">
+                    <div class="technique-category">
+                        <h4>🎯 Threat Range Management</h4>
+                        
+                        <div class="threat-concepts">
+                            <h5>Understanding Threat Ranges</h5>
+                            <div class="threat-examples">
+                                <div class="threat-range">
+                                    <h6>⚔️ Melee Threats</h6>
+                                    <ul>
+                                        <li><strong>Standard Reach:</strong> 5-foot radius around creature</li>
+                                        <li><strong>Long Reach:</strong> 10-foot radius (glaives, large creatures)</li>
+                                        <li><strong>Variable Reach:</strong> Some abilities extend normal reach</li>
+                                    </ul>
+                                </div>
+
+                                <div class="threat-range">
+                                    <h6>🏹 Ranged Threats</h6>
+                                    <ul>
+                                        <li><strong>Bow Range:</strong> 150+ feet effective range</li>
+                                        <li><strong>Spell Range:</strong> Varies by spell (30-500+ feet)</li>
+                                        <li><strong>Area Effects:</strong> Burst/cone ranges and sizes</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h5>Threat Range Tactics</h5>
+                            <ul>
+                                <li><strong>Range Advantage:</strong> Stay at maximum effective range</li>
+                                <li><strong>Dead Zones:</strong> Position where enemies can't effectively attack</li>
+                                <li><strong>Range Stacking:</strong> Multiple ranged attackers at different ranges</li>
+                                <li><strong>Reach Superiority:</strong> Use longer reach to attack without retaliation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="technique-category">
+                        <h4>🌊 Flow Control</h4>
+                        
+                        <div class="flow-concepts">
+                            <h5>Battlefield Flow Principles</h5>
+                            <div class="flow-principles">
+                                <div class="principle">
+                                    <h6>🚰 Channeling</h6>
+                                    <p><strong>Concept:</strong> Guide enemy movement into advantageous positions</p>
+                                    <p><strong>Methods:</strong> Barriers, hazards, threats, positioning</p>
+                                    <p><strong>Goal:</strong> Enemies go where you want them</p>
+                                </div>
+
+                                <div class="principle">
+                                    <h6>🌪️ Disruption</h6>
+                                    <p><strong>Concept:</strong> Break up enemy formations and plans</p>
+                                    <p><strong>Methods:</strong> Forced movement, splitting, confusion</p>
+                                    <p><strong>Goal:</strong> Prevent coordinated enemy actions</p>
+                                </div>
+
+                                <div class="principle">
+                                    <h6>🎯 Convergence</h6>
+                                    <p><strong>Concept:</strong> Bring multiple advantages to bear simultaneously</p>
+                                    <p><strong>Methods:</strong> Flanking, focus fire, spell combinations</p>
+                                    <p><strong>Goal:</strong> Overwhelming force at decisive points</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="technique-category">
+                        <h4>🔄 Dynamic Positioning</h4>
+                        
+                        <div class="dynamic-concepts">
+                            <h5>Movement as a Weapon</h5>
+                            <div class="movement-tactics">
+                                <div class="movement-type">
+                                    <h6>🏃 Hit-and-Run</h6>
+                                    <p><strong>Pattern:</strong> Move in, attack, move out</p>
+                                    <p><strong>Best For:</strong> High-mobility characters, ranged attackers</p>
+                                    <p><strong>Advantage:</strong> Minimize retaliation while dealing damage</p>
+                                </div>
+
+                                <div class="movement-type">
+                                    <h6>🔄 Flanking Rotation</h6>
+                                    <p><strong>Pattern:</strong> Continuously reposition to maintain flanking</p>
+                                    <p><strong>Best For:</strong> Coordinated melee teams</p>
+                                    <p><strong>Advantage:</strong> Persistent flat-footed conditions</p>
+                                </div>
+
+                                <div class="movement-type">
+                                    <h6>⚡ Blitz Positioning</h6>
+                                    <p><strong>Pattern:</strong> Rapid repositioning to exploit weaknesses</p>
+                                    <p><strong>Best For:</strong> Fast characters with multiple attacks</p>
+                                    <p><strong>Advantage:</strong> Strike multiple targets in one turn</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="timing-mastery">
+            <h2>Timing and Initiative: The When of Combat</h2>
+            <p>Perfect timing in combat is like conducting an orchestra - knowing when each instrument should play, when to hold back, and when to crescendo. Initiative isn't just about going first; it's about going at the exactly right moment.</p>
+
+            <div class="initiative-control">
+                <h3>Controlling the Flow of Battle</h3>
+                
+                <div class="initiative-strategies">
+                    <div class="strategy-card">
+                        <h4>⚡ Speed Advantage</h4>
+                        
+                        <div class="speed-benefits">
+                            <h5>Why Going First Matters</h5>
+                            <ul>
+                                <li><strong>First Strike:</strong> Deal damage before enemies can respond</li>
+                                <li><strong>Positioning Control:</strong> Claim optimal positions</li>
+                                <li><strong>Spell Timing:</strong> Cast buffs before enemies act</li>
+                                <li><strong>Tactical Setup:</strong> Establish advantages early</li>
+                            </ul>
+                        </div>
+
+                        <div class="speed-tactics">
+                            <h5>Improving Initiative</h5>
+                            <ul>
+                                <li><strong>High Dexterity:</strong> Core initiative modifier</li>
+                                <li><strong>Incredible Initiative:</strong> Feat for +2 bonus</li>
+                                <li><strong>Alert feats:</strong> Various initiative improvements</li>
+                                <li><strong>Magic items:</strong> Boots of speed, haste effects</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <h4>⏱️ Delay and Ready Actions</h4>
+                        
+                        <div class="delayed-action">
+                            <h5>🔄 Delay Action</h5>
+                            <div class="delay-mechanics">
+                                <p><strong>How it Works:</strong> Choose not to act, jump back into initiative order later</p>
+                                <p><strong>New Initiative:</strong> Act on chosen initiative count, stay there</p>
+                                <p><strong>Limitation:</strong> Can't delay past the end of the round</p>
+                            </div>
+                            
+                            <h6>Strategic Uses of Delay</h6>
+                            <ul>
+                                <li><strong>Coordination:</strong> Act right after ally for combos</li>
+                                <li><strong>Reaction Timing:</strong> Wait for optimal moment to act</li>
+                                <li><strong>Information Gathering:</strong> See what enemies do first</li>
+                                <li><strong>Resource Conservation:</strong> Wait to see if action is needed</li>
+                            </ul>
+                        </div>
+
+                        <div class="ready-action">
+                            <h5>⚡ Ready Action</h5>
+                            <div class="ready-mechanics">
+                                <p><strong>How it Works:</strong> Prepare action with specific trigger</p>
+                                <p><strong>Trigger:</strong> Must be observable and specific</p>
+                                <p><strong>Response:</strong> Use reaction when trigger occurs</p>
+                            </div>
+                            
+                            <h6>Ready Action Examples</h6>
+                            <ul>
+                                <li><strong>"If enemy moves, I attack"</strong> - Punish repositioning</li>
+                                <li><strong>"If ally falls, I heal"</strong> - Emergency response</li>
+                                <li><strong>"If enemy casts, I counterspell"</strong> - Spell defense</li>
+                                <li><strong>"If door opens, I attack"</strong> - Ambush preparation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <h4>🎭 Initiative Manipulation</h4>
+                        
+                        <div class="manipulation-techniques">
+                            <h5>Changing Initiative Order</h5>
+                            <div class="change-methods">
+                                <div class="method">
+                                    <h6>🔄 Delay Tactics</h6>
+                                    <p>Use Delay to reorder your position in initiative</p>
+                                    <p><strong>Example:</strong> Delay to act right before key enemy</p>
+                                </div>
+
+                                <div class="method">
+                                    <h6>⚡ Haste Effects</h6>
+                                    <p>Some speed effects can improve initiative retroactively</p>
+                                    <p><strong>Example:</strong> Boots of Speed activation</p>
+                                </div>
+
+                                <div class="method">
+                                    <h6>🎯 Targeting Initiative</h6>
+                                    <p>Some spells and effects can change enemy initiative</p>
+                                    <p><strong>Example:</strong> Slow spell effects</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timing-combos">
+                <h3>Timing-Based Combinations</h3>
+                
+                <div class="combo-categories">
+                    <div class="combo-category">
+                        <h4>🔗 Sequential Combos</h4>
+                        <p>Actions that build on each other across multiple turns</p>
+                        
+                        <div class="sequential-examples">
+                            <div class="combo-example">
+                                <h5>🕷️ The Web-Fireball Combo</h5>
+                                <div class="combo-sequence">
+                                    <p><strong>Turn 1 (Wizard):</strong> Cast Web to restrain enemies</p>
+                                    <p><strong>Turn 2 (Sorcerer):</strong> Cast Fireball on webbed area</p>
+                                    <p><strong>Result:</strong> Enemies can't easily escape the blast area</p>
+                                </div>
+                                <div class="timing-notes">
+                                    <p><strong>Timing Key:</strong> Web must go first to position enemies</p>
+                                    <p><strong>Coordination:</strong> Requires planning between casters</p>
+                                </div>
+                            </div>
+
+                            <div class="combo-example">
+                                <h5>🛡️ The Tank-and-Flank</h5>
+                                <div class="combo-sequence">
+                                    <p><strong>Turn 1 (Fighter):</strong> Engage enemy in melee</p>
+                                    <p><strong>Turn 2 (Rogue):</strong> Move to flanking position</p>
+                                    <p><strong>Turn 3 (Rogue):</strong> Sneak attack with advantage</p>
+                                </div>
+                                <div class="timing-notes">
+                                    <p><strong>Timing Key:</strong> Fighter must engage first to set up flank</p>
+                                    <p><strong>Coordination:</strong> Rogue waits for optimal positioning</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="combo-category">
+                        <h4>⚡ Reaction Chains</h4>
+                        <p>Using reactions to create cascading effects</p>
+                        
+                        <div class="reaction-examples">
+                            <div class="reaction-combo">
+                                <h5>🔄 The Counterspell Chain</h5>
+                                <div class="chain-sequence">
+                                    <p><strong>Enemy Action:</strong> Begins casting dangerous spell</p>
+                                    <p><strong>Player Reaction:</strong> Counterspell attempt</p>
+                                    <p><strong>Enemy Reaction:</strong> Counter the counterspell</p>
+                                    <p><strong>Ally Reaction:</strong> Counter the counter-counterspell</p>
+                                </div>
+                                <p><strong>Result:</strong> Spell battles within spell battles</p>
+                            </div>
+
+                            <div class="reaction-combo">
+                                <h5>🛡️ The Protection Net</h5>
+                                <div class="chain-sequence">
+                                    <p><strong>Enemy Action:</strong> Attacks ally</p>
+                                    <p><strong>Champion Reaction:</strong> Retributive Strike</p>
+                                    <p><strong>Cleric Reaction:</strong> Heal ally if hit</p>
+                                    <p><strong>Rogue Action (next turn):</strong> Sneak attack while enemy is distracted</p>
+                                </div>
+                                <p><strong>Result:</strong> Layered protection and counter-attack</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="combo-category">
+                        <h4>🎯 Perfect Timing Windows</h4>
+                        <p>Exploiting brief opportunities for maximum effect</p>
+                        
+                        <div class="window-examples">
+                            <div class="timing-window">
+                                <h5>💥 The Alpha Strike</h5>
+                                <div class="window-description">
+                                    <p><strong>Opportunity:</strong> First round of combat before enemies act</p>
+                                    <p><strong>Execution:</strong> All party members focus fire on one target</p>
+                                    <p><strong>Goal:</strong> Eliminate key threat before it can act</p>
+                                </div>
+                                <div class="window-requirements">
+                                    <p><strong>Requirements:</strong> High initiative, coordinated targeting, burst damage</p>
+                                </div>
+                            </div>
+
+                            <div class="timing-window">
+                                <h5>🔄 The Spell Slot Economy</h5>
+                                <div class="window-description">
+                                    <p><strong>Opportunity:</strong> Enemy spellcaster low on spell slots</p>
+                                    <p><strong>Execution:</strong> Force saves they're likely to fail</p>
+                                    <p><strong>Goal:</strong> Exploit weakened magical defenses</p>
+                                </div>
+                                <div class="window-requirements">
+                                    <p><strong>Requirements:</strong> Information about enemy resources, save-or-suck spells</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-coordination">
+            <h2>Team Coordination: The Symphony of Combat</h2>
+            <p>Individual skill wins skirmishes, but team coordination wins wars. Advanced combat is about transforming four individual fighters into a unified tactical machine where each person's actions amplify everyone else's effectiveness.</p>
+
+            <div class="coordination-principles">
+                <h3>Fundamental Coordination Principles</h3>
+                
+                <div class="principle-grid">
+                    <div class="principle-card">
+                        <h4>🎯 Focus Fire</h4>
+                        
+                        <div class="focus-fire-strategy">
+                            <h5>The Mathematics of Focus Fire</h5>
+                            <div class="math-example">
+                                <p><strong>Scenario:</strong> 4 enemies with 20 HP each vs 4 party members dealing 15 damage each</p>
+                                
+                                <div class="strategy-comparison">
+                                    <div class="strategy-option">
+                                        <h6>❌ Spread Damage</h6>
+                                        <p><strong>Turn 1:</strong> Each enemy takes 15 damage (5 HP left each)</p>
+                                        <p><strong>Turn 2:</strong> All 4 enemies still attacking (4 enemy actions)</p>
+                                        <p><strong>Result:</strong> Face maximum enemy action economy</p>
+                                    </div>
+
+                                    <div class="strategy-option">
+                                        <h6>✅ Focus Fire</h6>
+                                        <p><strong>Turn 1:</strong> One enemy takes 60 damage (dead), others untouched</p>
+                                        <p><strong>Turn 2:</strong> Only 3 enemies attacking (3 enemy actions)</p>
+                                        <p><strong>Result:</strong> 25% reduction in enemy actions immediately</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>Focus Fire Tactics</h5>
+                            <ul>
+                                <li><strong>Target Prioritization:</strong> Eliminate threats in order of danger</li>
+                                <li><strong>Damage Thresholds:</strong> Know how much damage is needed to drop targets</li>
+                                <li><strong>Overkill Prevention:</strong> Switch targets when current one will die</li>
+                                <li><strong>Role Coordination:</strong> Debuffers first, then damage dealers</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="principle-card">
+                        <h4>🛡️ Mutual Protection</h4>
+                        
+                        <div class="protection-strategies">
+                            <h5>Layered Defense Systems</h5>
+                            <div class="defense-layers">
+                                <div class="defense-layer">
+                                    <h6>🏰 Physical Protection</h6>
+                                    <ul>
+                                        <li><strong>Positioning:</strong> Tanks between enemies and fragile allies</li>
+                                        <li><strong>Cover:</strong> Use shields and barriers to protect others</li>
+                                        <li><strong>Intercept:</strong> Block attacks intended for allies</li>
+                                        <li><strong>Bodyguard:</strong> Dedicated protection for key party members</li>
+                                    </ul>
+                                </div>
+
+                                <div class="defense-layer">
+                                    <h6>✨ Magical Protection</h6>
+                                    <ul>
+                                        <li><strong>Buff Spells:</strong> Enhance ally defenses proactively</li>
+                                        <li><strong>Counterspells:</strong> Prevent enemy magic from taking effect</li>
+                                        <li><strong>Dispel Magic:</strong> Remove harmful effects from allies</li>
+                                        <li><strong>Healing:</strong> Reactive restoration of lost hit points</li>
+                                    </ul>
+                                </div>
+
+                                <div class="defense-layer">
+                                    <h6>🎭 Tactical Protection</h6>
+                                    <ul>
+                                        <li><strong>Distraction:</strong> Draw enemy attention away from vulnerable allies</li>
+                                        <li><strong>Control:</strong> Prevent enemies from reaching protected targets</li>
+                                        <li><strong>Mobility:</strong> Help allies escape dangerous situations</li>
+                                        <li><strong>Information:</strong> Warn allies of incoming threats</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="principle-card">
+                        <h4>⚡ Action Economy Maximization</h4>
+                        
+                        <div class="economy-strategies">
+                            <h5>Getting More from Every Action</h5>
+                            <div class="economy-techniques">
+                                <div class="technique">
+                                    <h6>🔗 Action Linking</h6>
+                                    <p><strong>Concept:</strong> One character's action enables another's</p>
+                                    <p><strong>Example:</strong> Fighter grapples enemy, Rogue gets automatic sneak attack</p>
+                                    <p><strong>Benefit:</strong> 1 + 1 = 3 in terms of effectiveness</p>
+                                </div>
+
+                                <div class="technique">
+                                    <h6>🎯 Setup Actions</h6>
+                                    <p><strong>Concept:</strong> Sacrifice immediate effectiveness for greater future benefit</p>
+                                    <p><strong>Example:</strong> Use Aid action to help ally's crucial skill check</p>
+                                    <p><strong>Benefit:</strong> Ensure success of high-stakes actions</p>
+                                </div>
+
+                                <div class="technique">
+                                    <h6>⚡ Reaction Coordination</h6>
+                                    <p><strong>Concept:</strong> Multiple characters ready reactions for same trigger</p>
+                                    <p><strong>Example:</strong> "When enemy moves, we all attack it"</p>
+                                    <p><strong>Benefit:</strong> Burst damage outside normal action economy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="principle-card">
+                        <h4>🎭 Role Synergy</h4>
+                        
+                        <div class="synergy-combinations">
+                            <h5>Classic Role Combinations</h5>
+                            <div class="combination-examples">
+                                <div class="combo">
+                                    <h6>🛡️ Tank + 🗡️ Striker</h6>
+                                    <p><strong>Synergy:</strong> Tank controls enemy positioning, Striker exploits openings</p>
+                                    <p><strong>Example:</strong> Fighter grapples, Rogue gets flanking and sneak attack</p>
+                                </div>
+
+                                <div class="combo">
+                                    <h6>🧙 Controller + 💥 Blaster</h6>
+                                    <p><strong>Synergy:</strong> Controller groups enemies, Blaster hits multiple targets</p>
+                                    <p><strong>Example:</strong> Web spell followed by Fireball</p>
+                                </div>
+
+                                <div class="combo">
+                                    <h6>🛡️ Support + 🎯 Any Role</h6>
+                                    <p><strong>Synergy:</strong> Support amplifies effectiveness of any other role</p>
+                                    <p><strong>Example:</strong> Bard inspiration + Fighter's important attack</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="communication-systems">
+                <h3>Combat Communication</h3>
+                
+                <div class="communication-methods">
+                    <div class="method-card">
+                        <h4>🗣️ Verbal Coordination</h4>
+                        
+                        <div class="verbal-techniques">
+                            <h5>Efficient Combat Communication</h5>
+                            <ul>
+                                <li><strong>Target Calling:</strong> "Focus the spellcaster!" Clear priority setting</li>
+                                <li><strong>Position Calls:</strong> "Flank left!" Movement coordination</li>
+                                <li><strong>Threat Warnings:</strong> "Incoming fireball!" Danger alerts</li>
+                                <li><strong>Resource Updates:</strong> "Low on spells!" Status sharing</li>
+                            </ul>
+
+                            <h5>Combat Shorthand</h5>
+                            <div class="shorthand-examples">
+                                <ul>
+                                    <li><strong>"Hard target"</strong> = High AC/saves enemy</li>
+                                    <li><strong>"Soft target"</strong> = Low defenses, prioritize</li>
+                                    <li><strong>"Going nova"</strong> = Using high-level resources</li>
+                                    <li><strong>"Need extract"</strong> = Require immediate help/healing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="method-card">
+                        <h4>👁️ Visual Coordination</h4>
+                        
+                        <div class="visual-techniques">
+                            <h5>Non-Verbal Signals</h5>
+                            <ul>
+                                <li><strong>Positioning:</strong> Where you stand indicates intended actions</li>
+                                <li><strong>Equipment:</strong> Drawing specific weapons signals plans</li>
+                                <li><strong>Gestures:</strong> Quick hand signals for stealth situations</li>
+                                <li><strong>Eye Contact:</strong> Confirming coordinated actions</li>
+                            </ul>
+
+                            <h5>Battlefield Awareness</h5>
+                            <ul>
+                                <li><strong>Watch Allies:</strong> Notice when teammates need help</li>
+                                <li><strong>Track Resources:</strong> Observe spell components, ammunition</li>
+                                <li><strong>Read Intentions:</strong> Anticipate ally actions from positioning</li>
+                                <li><strong>Spot Opportunities:</strong> Notice when to capitalize on ally setups</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="method-card">
+                        <h4>🔮 Magical Communication</h4>
+                        
+                        <div class="magical-techniques">
+                            <h5>Supernatural Coordination</h5>
+                            <ul>
+                                <li><strong>Message Spells:</strong> Silent communication over distance</li>
+                                <li><strong>Telepathic Bonds:</strong> Direct mind-to-mind contact</li>
+                                <li><strong>Scrying Effects:</strong> Remote battlefield awareness</li>
+                                <li><strong>Divination:</strong> Predict enemy actions and plan counters</li>
+                            </ul>
+
+                            <h5>Information Sharing Spells</h5>
+                            <ul>
+                                <li><strong>Detect Magic:</strong> Share magical threat assessment</li>
+                                <li><strong>Know Direction:</strong> Coordinate movement and positioning</li>
+                                <li><strong>Comprehend Languages:</strong> Understand enemy communications</li>
+                                <li><strong>Zone of Truth:</strong> Verify information from captured enemies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="environmental-tactics">
+            <h2>Environmental Combat: The World as Your Weapon</h2>
+            <p>Master tacticians don't just fight in environments - they fight with environments. Every chandelier is a potential crushing trap, every cliff is a tactical advantage, and every barrel of oil is an area denial weapon waiting to happen.</p>
+
+            <div class="environmental-categories">
+                <h3>Types of Environmental Advantages</h3>
+                
+                <div class="environment-grid">
+                    <div class="environment-type">
+                        <h4>🏔️ Natural Terrain</h4>
+                        
+                        <div class="natural-features">
+                            <h5>Elevation Features</h5>
+                            <div class="elevation-tactics">
+                                <div class="feature">
+                                    <h6>⛰️ High Ground</h6>
+                                    <ul>
+                                        <li><strong>Tactical Benefits:</strong> Better sight lines, ranged advantage</li>
+                                        <li><strong>Defensive Value:</strong> Harder for enemies to reach you</li>
+                                        <li><strong>Psychological Effect:</strong> Intimidating position</li>
+                                        <li><strong>Escape Options:</strong> Multiple directions to retreat</li>
+                                    </ul>
+                                </div>
+
+                                <div class="feature">
+                                    <h6>🕳️ Low Ground Advantages</h6>
+                                    <ul>
+                                        <li><strong>Cover Benefits:</strong> Natural protection from ranged attacks</li>
+                                        <li><strong>Stealth Value:</strong> Harder to spot from above</li>
+                                        <li><strong>Ambush Potential:</strong> Surprise attacks when enemies descend</li>
+                                        <li><strong>Channeling:</strong> Force enemies into predictable paths</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h5>Water Features</h5>
+                            <div class="water-tactics">
+                                <div class="water-use">
+                                    <h6>🌊 Rivers and Streams</h6>
+                                    <ul>
+                                        <li><strong>Mobility Barrier:</strong> Slow enemy crossing</li>
+                                        <li><strong>Tactical Divide:</strong> Split enemy forces</li>
+                                        <li><strong>Escape Route:</strong> Swim to safety if needed</li>
+                                        <li><strong>Environmental Damage:</strong> Push enemies into current</li>
+                                    </ul>
+                                </div>
+
+                                <div class="water-use">
+                                    <h6>🌀 Swamps and Marshes</h6>
+                                    <ul>
+                                        <li><strong>Difficult Terrain:</strong> Natural movement restriction</li>
+                                        <li><strong>Concealment:</strong> Fog and vegetation provide cover</li>
+                                        <li><strong>Hazards:</strong> Quicksand, diseases, dangerous creatures</li>
+                                        <li><strong>Amplified Magic:</strong> Some spells work better in swamps</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h5>Forest and Vegetation</h5>
+                            <div class="forest-tactics">
+                                <ul>
+                                    <li><strong>Line of Sight Blocking:</strong> Trees break up ranged attacks</li>
+                                    <li><strong>Climbing Opportunities:</strong> Vertical movement options</li>
+                                    <li><strong>Fire Hazards:</strong> Vegetation can spread flames quickly</li>
+                                    <li><strong>Wildlife Allies:</strong> Druids and rangers gain advantages</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="environment-type">
+                        <h4>🏰 Constructed Environments</h4>
+                        
+                        <div class="constructed-features">
+                            <h5>Architectural Advantages</h5>
+                            <div class="architectural-tactics">
+                                <div class="structure">
+                                    <h6>🚪 Doorways and Passages</h6>
+                                    <ul>
+                                        <li><strong>Chokepoint Control:</strong> Force single-file movement</li>
+                                        <li><strong>Ambush Points:</strong> Attack as enemies enter</li>
+                                        <li><strong>Retreat Control:</strong> Block or allow escape as needed</li>
+                                        <li><strong>Line of Effect:</strong> Break magical targeting</li>
+                                    </ul>
+                                </div>
+
+                                <div class="structure">
+                                    <h6>🪜 Stairs and Ramps</h6>
+                                    <ul>
+                                        <li><strong>Elevation Advantage:</strong> High ground benefits</li>
+                                        <li><strong>Crowd Control:</strong> Difficult to advance in formation</li>
+                                        <li><strong>Trip Hazards:</strong> Push enemies down stairs</li>
+                                        <li><strong>Defensive Positioning:</strong> Fight from top of stairs</li>
+                                    </ul>
+                                </div>
+
+                                <div class="structure">
+                                    <h6>🏛️ Pillars and Columns</h6>
+                                    <ul>
+                                        <li><strong>Cover Sources:</strong> Protection from ranged attacks</li>
+                                        <li><strong>Line of Sight Breaks:</strong> Disrupt enemy targeting</li>
+                                        <li><strong>Structural Targets:</strong> Collapse for area damage</li>
+                                        <li><strong>Movement Obstacles:</strong> Channel enemy movement</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h5>Interactive Objects</h5>
+                            <div class="interactive-objects">
+                                <div class="object-category">
+                                    <h6>💡 Lighting Systems</h6>
+                                    <ul>
+                                        <li><strong>Visibility Control:</strong> Extinguish lights for darkness</li>
+                                        <li><strong>Fire Sources:</strong> Ignite objects or enemies</li>
+                                        <li><strong>Distraction:</strong> Flash bright lights to blind</li>
+                                        <li><strong>Signals:</strong> Communicate with distant allies</li>
+                                    </ul>
+                                </div>
+
+                                <div class="object-category">
+                                    <h6>⚙️ Mechanical Devices</h6>
+                                    <ul>
+                                        <li><strong>Traps:</strong> Activate existing dungeon defenses</li>
+                                        <li><strong>Doors/Gates:</strong> Control access and escape routes</li>
+                                        <li><strong>Bridges:</strong> Extend or retract crossing points</li>
+                                        <li><strong>Elevators:</strong> Control vertical movement</li>
+                                    </ul>
+                                </div>
+
+                                <div class="object-category">
+                                    <h6>🏺 Furnishings and Supplies</h6>
+                                    <ul>
+                                        <li><strong>Improvised Weapons:</strong> Chairs, candlesticks, tools</li>
+                                        <li><strong>Barricade Materials:</strong> Tables, bookcases, debris</li>
+                                        <li><strong>Projectiles:</strong> Anything throwable becomes ammunition</li>
+                                        <li><strong>Concealment:</strong> Hide behind or inside large objects</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="environment-type">
+                        <h4>🌪️ Dynamic Environments</h4>
+                        
+                        <div class="dynamic-features">
+                            <h5>Weather and Climate</h5>
+                            <div class="weather-tactics">
+                                <div class="weather-condition">
+                                    <h6>🌧️ Rain and Storms</h6>
+                                    <ul>
+                                        <li><strong>Visibility Reduction:</strong> Harder to see and target</li>
+                                        <li><strong>Slippery Surfaces:</strong> Increased fall risk</li>
+                                        <li><strong>Fire Suppression:</strong> Natural fire extinguisher</li>
+                                        <li><strong>Lightning Risk:</strong> Metal armor becomes dangerous</li>
+                                    </ul>
+                                </div>
+
+                                <div class="weather-condition">
+                                    <h6>💨 Wind</h6>
+                                    <ul>
+                                        <li><strong>Ranged Attack Penalties:</strong> Arrows blown off course</li>
+                                        <li><strong>Flying Difficulties:</strong> Harder to control flight</li>
+                                        <li><strong>Sound Masking:</strong> Cover noise of movement</li>
+                                        <li><strong>Fire Spreading:</strong> Accelerates flame propagation</li>
+                                    </ul>
+                                </div>
+
+                                <div class="weather-condition">
+                                    <h6>🌫️ Fog and Mist</h6>
+                                    <ul>
+                                        <li><strong>Concealment Blanket:</strong> Natural stealth enhancement</li>
+                                        <li><strong>Range Limitation:</strong> Reduces effective vision range</li>
+                                        <li><strong>Ambush Enhancement:</strong> Perfect for surprise attacks</li>
+                                        <li><strong>Disorientation:</strong> Easy to lose direction</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h5>Time-Based Changes</h5>
+                            <div class="time-tactics">
+                                <div class="time-factor">
+                                    <h6>🌅 Day/Night Cycle</h6>
+                                    <ul>
+                                        <li><strong>Visibility Changes:</strong> Darkvision becomes crucial</li>
+                                        <li><strong>Creature Activity:</strong> Different monsters active at different times</li>
+                                        <li><strong>Social Factors:</strong> Guards, patrols, civilian activity</li>
+                                        <li><strong>Magic Variations:</strong> Some spells work better at certain times</li>
+                                    </ul>
+                                </div>
+
+                                <div class="time-factor">
+                                    <h6>🌊 Tidal Changes</h6>
+                                    <ul>
+                                        <li><strong>Terrain Revelation:</strong> Low tide exposes new paths</li>
+                                        <li><strong>Access Control:</strong> High tide blocks certain routes</li>
+                                        <li><strong>Timing Pressure:</strong> Limited windows for certain actions</li>
+                                        <li><strong>Escape Mechanics:</strong> Tide changes affect retreat options</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="environmental-applications">
+                <h3>Practical Environmental Applications</h3>
+                
+                <div class="application-examples">
+                    <div class="application-scenario">
+                        <h4>🏰 Castle Assault Scenario</h4>
+                        
+                        <div class="scenario-setup">
+                            <h5>The Situation</h5>
+                            <p>Your party must infiltrate a heavily guarded castle to rescue a prisoner. The castle has high walls, multiple guard towers, a drawbridge over a moat, and patrol schedules.</p>
+                        </div>
+
+                        <div class="environmental-solutions">
+                            <h5>Environmental Tactical Options</h5>
+                            
+                            <div class="solution-category">
+                                <h6>🌙 Nighttime Infiltration</h6>
+                                <ul>
+                                    <li><strong>Timing:</strong> Wait for guard shift change confusion</li>
+                                    <li><strong>Visibility:</strong> Use darkness to mask approach</li>
+                                    <li><strong>Noise Control:</strong> Muffle sounds with weather or distractions</li>
+                                    <li><strong>Multiple Routes:</strong> Split party to confuse defenses</li>
+                                </ul>
+                            </div>
+
+                            <div class="solution-category">
+                                <h6>🌊 Water Approach</h6>
+                                <ul>
+                                    <li><strong>Underwater Entry:</strong> Swim under drawbridge</li>
+                                    <li><strong>Drainage Systems:</strong> Enter through sewers or gutters</li>
+                                    <li><strong>Boat Approach:</strong> Disguise as supply vessel</li>
+                                    <li><strong>Distraction:</strong> Create commotion on opposite side</li>
+                                </ul>
+                            </div>
+
+                            <div class="solution-category">
+                                <h6>🧗 Vertical Assault</h6>
+                                <ul>
+                                    <li><strong>Wall Climbing:</strong> Scale walls at weak points</li>
+                                    <li><strong>Flying Entry:</strong> Magical flight over defenses</li>
+                                    <li><strong>Siege Equipment:</strong> Catapult party members over walls</li>
+                                    <li><strong>Tower Assault:</strong> Clear guard towers methodically</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="application-scenario">
+                        <h4>🌋 Volcanic Cave Battle</h4>
+                        
+                        <div class="scenario-setup">
+                            <h5>The Situation</h5>
+                            <p>Fighting fire elementals in an active volcanic cave system. Lava flows create changing terrain, heat damages equipment, and unstable ceiling threatens collapse.</p>
+                        </div>
+
+                        <div class="volcanic-tactics">
+                            <h5>Environmental Tactical Adaptations</h5>
+                            
+                            <div class="adaptation-category">
+                                <h6>🔥 Heat Management</h6>
+                                <ul>
+                                    <li><strong>Protection Spells:</strong> Resist fire magic essential</li>
+                                    <li><strong>Cooling Magic:</strong> Ice spells for temporary relief</li>
+                                    <li><strong>Equipment Care:</strong> Protect metal items from heat damage</li>
+                                    <li><strong>Hydration:</strong> Extra water supplies critical</li>
+                                </ul>
+                            </div>
+
+                            <div class="adaptation-category">
+                                <h6>🌋 Lava Flow Tactics</h6>
+                                <ul>
+                                    <li><strong>Positioning:</strong> Stay on solid ground, avoid lava edges</li>
+                                    <li><strong>Forced Movement:</strong> Push enemies into lava for massive damage</li>
+                                    <li><strong>Barriers:</strong> Create stone walls to redirect lava flow</li>
+                                    <li><strong>Escape Routes:</strong> Plan multiple exit strategies</li>
+                                </ul>
+                            </div>
+
+                            <div class="adaptation-category">
+                                <h6>🪨 Structural Instability</h6>
+                                <ul>
+                                    <li><strong>Collapse Triggers:</strong> Deliberately cause cave-ins on enemies</li>
+                                    <li><strong>Safe Zones:</strong> Identify structurally sound areas</li>
+                                    <li><strong>Quick Exits:</strong> Ready teleportation or fast movement</li>
+                                    <li><strong>Ceiling Attacks:</strong> Drop stalactites on foes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="practice-activities">
+            <h2>Practice Activities</h2>
+            
+            <div class="activity-one">
+                <h3>Activity One: Condition Combination Mastery</h3>
+                <p>Practice identifying and creating powerful condition combinations:</p>
+                
+                <div class="condition-scenarios">
+                    <div class="scenario-exercise">
+                        <h4>Scenario A: The Overwhelming Mage</h4>
+                        <p><strong>Enemy:</strong> 8th-level enemy wizard with high AC (19), moderate saves, dangerous spells</p>
+                        <p><strong>Your Resources:</strong> Fighter (Athletics +12), Rogue (Stealth +11), Cleric (various spells), Wizard (control spells)</p>
+                        
+                        <div class="condition-challenge">
+                            <h5>🎯 Your Mission</h5>
+                            <p>Design a combination of conditions that will neutralize this spellcaster's effectiveness</p>
+                            
+                            <div class="combination-planning">
+                                <h6>Step 1: Choose Primary Condition</h6>
+                                <p>Main disabling condition: _______________</p>
+                                <p>How to apply it: _______________</p>
+                                <p>Why this condition: _______________</p>
+
+                                <h6>Step 2: Choose Supporting Conditions</h6>
+                                <p>Supporting condition 1: _______________</p>
+                                <p>Supporting condition 2: _______________</p>
+                                <p>How they synergize: _______________</p>
+
+                                <h6>Step 3: Execution Order</h6>
+                                <ol>
+                                    <li>First action: _______________</li>
+                                    <li>Second action: _______________</li>
+                                    <li>Third action: _______________</li>
+                                    <li>Fourth action: _______________</li>
+                                </ol>
+
+                                <h6>Expected Result</h6>
+                                <p>Final condition on enemy: _______________</p>
+                                <p>Why this combination is effective: _______________</p>
+                            </div>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Expert Solution</summary>
+                            <div class="solution">
+                                <p><strong>Primary Strategy: The Spell-Lock Combo</strong></p>
+                                
+                                <p><strong>Step 1 - Primary Condition: Grabbed/Restrained</strong></p>
+                                <ul>
+                                    <li><strong>Application:</strong> Fighter grapples (Athletics +12 vs enemy's Athletics or Acrobatics)</li>
+                                    <li><strong>Effect:</strong> -2 to attacks, flat-footed, can't move</li>
+                                    <li><strong>Why:</strong> Prevents repositioning and disrupts spellcasting with somatic components</li>
+                                </ul>
+
+                                <p><strong>Step 2 - Supporting Conditions: Frightened + Sickened</strong></p>
+                                <ul>
+                                    <li><strong>Frightened:</strong> Rogue uses Intimidation while enemy is grappled</li>
+                                    <li><strong>Sickened:</strong> Cleric casts a spell that nauseates</li>
+                                    <li><strong>Synergy:</strong> Both reduce spell attack rolls and spell DCs significantly</li>
+                                </ul>
+
+                                <p><strong>Step 3 - Execution Order:</strong></p>
+                                <ol>
+                                    <li><strong>Fighter:</strong> Grapple the wizard (restrained condition)</li>
+                                    <li><strong>Rogue:</strong> Demoralize grappled wizard (frightened condition)</li>
+                                    <li><strong>Cleric:</strong> Cast spell for sickened condition</li>
+                                    <li><strong>Wizard:</strong> Fireball or other finishing attack</li>
+                                </ol>
+
+                                <p><strong>Final Result:</strong> Enemy wizard with -2 to attacks (grappled), -2 to everything (frightened), -2 to attacks and saves (sickened), flat-footed, and unable to move. Effectively neutralized!</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="scenario-exercise">
+                        <h4>Scenario B: The Battlefield Controller</h4>
+                        <p><strong>Situation:</strong> Multiple weaker enemies (6 goblins) approaching through a narrow canyon</p>
+                        <p><strong>Challenge:</strong> Create an area denial effect using environmental conditions</p>
+                        
+                        <div class="environmental-planning">
+                            <h5>🌪️ Environmental Control Strategy</h5>
+                            
+                            <div class="control-design">
+                                <h6>Terrain Analysis</h6>
+                                <p>Canyon features you can exploit: _______________</p>
+                                <p>Natural chokepoints: _______________</p>
+                                <p>Environmental hazards available: _______________</p>
+
+                                <h6>Condition Application Plan</h6>
+                                <p>Primary area control effect: _______________</p>
+                                <p>Secondary hindering effect: _______________</p>
+                                <p>How to maintain control: _______________</p>
+
+                                <h6>Expected Outcome</h6>
+                                <p>Enemy movement restriction: _______________</p>
+                                <p>Damage over time effects: _______________</p>
+                                <p>Party advantage gained: _______________</p>
+                            </div>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Environmental Mastery</summary>
+                            <div class="solution">
+                                <p><strong>The Canyon Trap Strategy</strong></p>
+                                
+                                <p><strong>Terrain Exploitation:</strong></p>
+                                <ul>
+                                    <li><strong>Narrow passage:</strong> Forces single-file movement</li>
+                                    <li><strong>High walls:</strong> Prevent flanking, create shooting gallery</li>
+                                    <li><strong>Rocky debris:</strong> Available for improvised barriers</li>
+                                </ul>
+
+                                <p><strong>Layer 1 - Web Spell:</strong></p>
+                                <ul>
+                                    <li>Cast Web at canyon entrance</li>
+                                    <li>Creates difficult terrain and potential restraining</li>
+                                    <li>Forces goblins to cluster together</li>
+                                </ul>
+
+                                <p><strong>Layer 2 - Grease Behind Web:</strong></p>
+                                <ul>
+                                    <li>Cast Grease spell behind the Web</li>
+                                    <li>Goblins who escape Web fall prone</li>
+                                    <li>Creates compound movement problems</li>
+                                </ul>
+
+                                <p><strong>Layer 3 - Fire Damage:</strong></p>
+                                <ul>
+                                    <li>Use fire spells/arrows on the Web (flammable)</li>
+                                    <li>Burning Web deals ongoing damage</li>
+                                    <li>Forces goblins to take damage or find alternative route</li>
+                                </ul>
+
+                                <p><strong>Result:</strong> Goblins stuck in difficult terrain, taking fire damage, prone from grease, while party has ranged advantage from canyon walls!</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-two">
+                <h3>Activity Two: Tactical Positioning Puzzle</h3>
+                <p>Analyze and solve complex positioning challenges:</p>
+                
+                <div class="positioning-scenarios">
+                    <div class="positioning-exercise">
+                        <h4>The Throne Room Ambush</h4>
+                        
+                        <div class="room-layout">
+                            <h5>🏰 Room Description</h5>
+                            <p><strong>Layout:</strong> 40x60 foot throne room with:</p>
+                            <ul>
+                                <li>Throne on raised dais (10 feet high) at far end</li>
+                                <li>Two rows of pillars (4 pillars total) down center</li>
+                                <li>Side doors at midpoint on east/west walls</li>
+                                <li>Main entrance at south end</li>
+                                <li>Tapestries and furnishings throughout</li>
+                            </ul>
+                        </div>
+
+                        <div class="ambush-setup">
+                            <h5>⚔️ Tactical Situation</h5>
+                            <p><strong>Enemies:</strong></p>
+                            <ul>
+                                <li>Evil king on throne (spellcaster, high level)</li>
+                                <li>2 guard captains flanking throne</li>
+                                <li>4 archers in balcony overlooking room</li>
+                                <li>2 more guards at main entrance</li>
+                            </ul>
+
+                            <p><strong>Your Party:</strong></p>
+                            <ul>
+                                <li>Tank fighter (sword & shield)</li>
+                                <li>Damage rogue (twin daggers)</li>
+                                <li>Control wizard (area spells)</li>
+                                <li>Support cleric (healing & buffs)</li>
+                            </ul>
+                        </div>
+
+                        <div class="positioning-challenge">
+                            <h5>📋 Your Planning Session</h5>
+                            
+                            <div class="tactical-planning">
+                                <h6>Initial Positioning</h6>
+                                <p>Where does each party member start? _______________</p>
+                                <p>Why these positions? _______________</p>
+
+                                <h6>Opening Move Sequence</h6>
+                                <p>Round 1 actions:</p>
+                                <ul>
+                                    <li>Fighter: _______________</li>
+                                    <li>Rogue: _______________</li>
+                                    <li>Wizard: _______________</li>
+                                    <li>Cleric: _______________</li>
+                                </ul>
+
+                                <h6>Key Tactical Considerations</h6>
+                                <p>How to deal with archers: _______________</p>
+                                <p>How to reach the king: _______________</p>
+                                <p>How to use pillars: _______________</p>
+                                <p>Emergency escape plan: _______________</p>
+                            </div>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Master Tactician Solution</summary>
+                            <div class="solution">
+                                <p><strong>The Divide and Conquer Approach</strong></p>
+                                
+                                <p><strong>Initial Positioning:</strong></p>
+                                <ul>
+                                    <li><strong>Fighter:</strong> Center entrance, ready to advance with shield raised</li>
+                                    <li><strong>Wizard:</strong> Behind pillar near entrance (cover from archers)</li>
+                                    <li><strong>Cleric:</strong> Behind different pillar (split healing coverage)</li>
+                                    <li><strong>Rogue:</strong> By side door (flanking route to throne)</li>
+                                </ul>
+
+                                <p><strong>Round 1 Strategy:</strong></p>
+                                <ul>
+                                    <li><strong>Wizard:</strong> Wall of Fire to cut off reinforcements from side doors</li>
+                                    <li><strong>Fighter:</strong> Advance with shield raised, draw archer fire</li>
+                                    <li><strong>Cleric:</strong> Bless party, prepare for healing needs</li>
+                                    <li><strong>Rogue:</strong> Stealth movement toward throne via side route</li>
+                                </ul>
+
+                                <p><strong>Key Tactical Elements:</strong></p>
+                                <ul>
+                                    <li><strong>Archer Counter:</strong> Use pillars for cover, force them to reposition</li>
+                                    <li><strong>King Access:</strong> Rogue flanks while fighter provides distraction</li>
+                                    <li><strong>Pillar Usage:</strong> Break line of sight, create cover lanes</li>
+                                    <li><strong>Escape Plan:</strong> Side doors provide multiple exit routes if needed</li>
+                                </ul>
+
+                                <p><strong>Advanced Tactic:</strong> Wizard's Wall of Fire also blocks king's line of sight to most of the party, limiting his spell targeting options!</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-three">
+                <h3>Activity Three: Team Coordination Drill</h3>
+                <p>Practice building and executing coordinated team tactics:</p>
+                
+                <div class="coordination-scenarios">
+                    <div class="coordination-exercise">
+                        <h4>The Perfect Storm Combo</h4>
+                        
+                        <div class="combo-setup">
+                            <h5>🎯 Team Composition</h5>
+                            <ul>
+                                <li><strong>Character A:</strong> Fighter with Athletics expertise</li>
+                                <li><strong>Character B:</strong> Wizard with control spells</li>
+                                <li><strong>Character C:</strong> Rogue with high damage potential</li>
+                                <li><strong>Character D:</strong> Cleric with buff spells</li>
+                            </ul>
+
+                            <h5>🎯 Target</h5>
+                            <p><strong>Enemy:</strong> Single powerful enemy (dragon, giant, demon lord) that needs to be eliminated quickly before it can use devastating abilities</p>
+                        </div>
+
+                        <div class="combo-design">
+                            <h5>⚡ Design Your Perfect Combo</h5>
+                            
+                            <div class="combo-planning">
+                                <h6>Setup Phase (Before Combat)</h6>
+                                <p>Pre-combat preparations: _______________</p>
+                                <p>Positioning arrangements: _______________</p>
+                                <p>Buff spells to cast: _______________</p>
+
+                                <h6>Execution Phase (Round 1)</h6>
+                                <p><strong>Initiative Order Strategy:</strong> Who should go when?</p>
+                                <ol>
+                                    <li>First to act: _______ (doing: _______)</li>
+                                    <li>Second to act: _______ (doing: _______)</li>
+                                    <li>Third to act: _______ (doing: _______)</li>
+                                    <li>Fourth to act: _______ (doing: _______)</li>
+                                </ol>
+
+                                <h6>Synergy Analysis</h6>
+                                <p>How action 1 enables action 2: _______________</p>
+                                <p>How action 2 enables action 3: _______________</p>
+                                <p>How action 3 enables action 4: _______________</p>
+                                <p>Total synergy effect: _______________</p>
+
+                                <h6>Backup Plan</h6>
+                                <p>If the combo fails: _______________</p>
+                                <p>Alternative strategies: _______________</p>
+                            </div>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Devastating Combo</summary>
+                            <div class="solution">
+                                <p><strong>The "Lock and Load" Perfect Storm</strong></p>
+                                
+                                <p><strong>Setup Phase:</strong></p>
+                                <ul>
+                                    <li><strong>Pre-combat:</strong> Cleric casts Bless and other long-duration buffs</li>
+                                    <li><strong>Positioning:</strong> Fighter and Rogue plan flanking positions</li>
+                                    <li><strong>Spell Preparation:</strong> Wizard prepares high-damage spell</li>
+                                </ul>
+
+                                <p><strong>Round 1 Execution (Initiative Order):</strong></p>
+                                <ol>
+                                    <li><strong>Cleric (First):</strong> Cast True Strike on Rogue for guaranteed hit</li>
+                                    <li><strong>Fighter (Second):</strong> Grapple the enemy (flat-footed condition)</li>
+                                    <li><strong>Wizard (Third):</strong> Cast spell requiring save (enemy has penalties from grapple)</li>
+                                    <li><strong>Rogue (Fourth):</strong> Sneak attack with True Strike (auto-hit, massive damage)</li>
+                                </ol>
+
+                                <p><strong>Synergy Breakdown:</strong></p>
+                                <ul>
+                                    <li><strong>True Strike → Rogue:</strong> Guarantees the highest damage attack hits</li>
+                                    <li><strong>Grapple → Flat-footed:</strong> Rogue gets sneak attack, wizard gets save penalties</li>
+                                    <li><strong>Save Penalties → Spell Success:</strong> Control spell more likely to work</li>
+                                    <li><strong>All Together:</strong> Guaranteed damage + likely successful save-or-suck spell</li>
+                                </ul>
+
+                                <p><strong>Expected Result:</strong> Enemy takes massive sneak attack damage AND is likely affected by a powerful debuff spell, setting up easy elimination in round 2!</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-steps">
+            <h2>What's Next?</h2>
+            <p>You've now mastered the pinnacle of Pathfinder 2.0 combat - the advanced tactics that separate good players from legendary ones. You understand how to read battlefields like chess boards, manipulate conditions like a master strategist, and coordinate with your team like a military commander. These skills will transform every combat from a simple damage race into a strategic masterpiece.</p>
+            
+            <div class="upcoming-topics">
+                <h3>Upcoming Lectures</h3>
+                <ul>
+                    <li><strong><a href="/pf2_char_adv.html">Character Advancement</a>:</strong> Leveling up, feat selection, and long-term character development</li>
+                    <li><strong><a href="/pf2_campaign.html">Campaign and Adventure Design</a>:</strong> Creating memorable stories and balanced challenges</li>
+                    <li><strong>Game Master Essentials:</strong> Running engaging games with proper pacing and player agency</li>
+                    <li><strong>Party Dynamics:</strong> Team building, role optimization, and group synergy</li>
+                    <li><strong>Advanced Rules Mastery:</strong> Edge cases, complex interactions, and system mastery</li>
+                </ul>
+            </div>
+
+            <div class="tactical-mastery">
+                <h3>Advanced Combat Mastery Checklist</h3>
+                <ul>
+                    <li>✅ Understand condition interactions and stacking rules</li>
+                    <li>✅ Master battlefield control through positioning and terrain</li>
+                    <li>✅ Coordinate team actions for maximum synergy</li>
+                    <li>✅ Exploit environmental features tactically</li>
+                    <li>✅ Control combat timing and initiative flow</li>
+                    <li>✅ Apply conditions strategically for maximum impact</li>
+                    <li>🎯 Practice complex multi-character combinations</li>
+                    <li>🎯 Experiment with environmental creativity</li>
+                    <li>🎯 Develop signature tactical approaches</li>
+                </ul>
+            </div>
+
+            <div class="tactical-resources">
+                <h3>Advanced Tactics Resources</h3>
+                <ul>
+                    <li><strong>Condition Quick Reference:</strong> Printable cards with all condition effects</li>
+                    <li><strong>Tactical Battle Maps:</strong> Varied terrain for practicing positioning</li>
+                    <li><strong>Initiative Trackers:</strong> Tools for managing complex turn orders</li>
+                    <li><strong>Combo Libraries:</strong> Community-shared tactical combinations</li>
+                    <li><strong>Environmental Guides:</strong> Creative uses for different terrain types</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>The battlefield bends to your will - command it with wisdom, strike with precision, and victory shall be yours!</p>
+   
+    </footer>
+
+    <script>
+        // Condition Scale Visualization
+        const canvas = document.getElementById('conditionScale');
+        const ctx = canvas.getContext('2d');
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Define condition categories
+        const conditions = [
+            { name: 'Dying', severity: -10, color: '#000000' },
+            { name: 'Unconscious', severity: -9, color: '#424242' },
+            { name: 'Paralyzed', severity: -8, color: '#616161' },
+            { name: 'Stunned', severity: -7, color: '#757575' },
+            { name: 'Restrained', severity: -6, color: '#9e9e9e' },
+            { name: 'Prone', severity: -5, color: '#ff5722' },
+            { name: 'Frightened', severity: -4, color: '#ff9800' },
+            { name: 'Sickened', severity: -3, color: '#ffc107' },
+            { name: 'Flat-footed', severity: -2, color: '#ffeb3b' },
+            { name: 'Clumsy', severity: -1, color: '#fff59d' },
+            { name: 'Normal', severity: 0, color: '#e8f5e8' },
+            { name: 'Inspired', severity: 1, color: '#c8e6c9' },
+            { name: 'Blessed', severity: 2, color: '#a5d6a7' },
+            { name: 'Hasted', severity: 3, color: '#81c784' },
+            { name: 'Heroism', severity: 4, color: '#66bb6a' },
+            { name: 'True Strike', severity: 5, color: '#4caf50' }
+        ];
+        
+        // Chart dimensions
+        const chartWidth = 700;
+        const chartHeight = 120;
+        const startX = 50;
+        const startY = 160;
+        
+        // Draw scale
+        const barWidth = chartWidth / conditions.length;
+        
+        conditions.forEach((condition, index) => {
+            const x = startX + (index * barWidth);
+            const height = 80 + (condition.severity * 3); // Scale height based on severity
+            const y = startY - height;
+            
+            // Draw condition bar
+            ctx.fillStyle = condition.color;
+            ctx.fillRect(x, y, barWidth - 2, height);
+            
+            // Draw condition name
+            ctx.fillStyle = '#333';
+            ctx.font = '10px Arial';
+            ctx.textAlign = 'center';
+            ctx.save();
+            ctx.translate(x + barWidth/2, startY + 20);
+            ctx.rotate(-Math.PI/4);
+            ctx.fillText(condition.name, 0, 0);
+            ctx.restore();
+            
+            // Draw severity value
+            ctx.fillStyle = condition.severity >= 0 ? '#2e7d32' : '#d32f2f';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(condition.severity > 0 ? '+' + condition.severity : condition.severity.toString(), x + barWidth/2, y - 5);
+        });
+        
+        // Draw center line
+        const centerIndex = conditions.findIndex(c => c.severity === 0);
+        const centerX = startX + (centerIndex * barWidth) + barWidth/2;
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(centerX, startY - 100);
+        ctx.lineTo(centerX, startY + 50);
+        ctx.stroke();
+        
+        // Labels
+        ctx.fillStyle = '#333';
+        ctx.font = 'bold 16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Condition Severity Scale', startX + chartWidth/2, 30);
+        
+        ctx.font = '12px Arial';
+        ctx.fillText('Harmful ←', startX + 100, 50);
+        ctx.fillText('→ Beneficial', startX + chartWidth - 100, 50);
+    </script>
+</body>
+</html>

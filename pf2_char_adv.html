@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinder 2e: Character Advancement and Growth</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Pathfinder 2e: Character Advancement and Growth</h1>
+        <p><em>From Novice Adventurer to Legendary Hero</em></p>
+    </header>
+
+    <main>
+        <section>
+            <h2>The Journey of Growth: Understanding Character Advancement</h2>
+            <p>Character advancement in Pathfinder 2e is like watching a seedling grow into a mighty oak tree. Each level represents not just more power, but deeper specialization, broader capabilities, and meaningful choices that shape your character's unique identity.</p>
+
+            <p>Think of leveling up as earning a degree in "Heroics" - at each level, you're not just getting stronger, you're learning new skills, discovering hidden talents, and unlocking abilities that reflect your growing experience as an adventurer.</p>
+
+            <div class="mermaid">
+                graph TD
+                    A[Level 1: Novice Adventurer] --> B[Levels 2-4: Apprentice Hero]
+                    B --> C[Levels 5-9: Skilled Veteran]
+                    C --> D[Levels 10-14: Renowned Champion]
+                    D --> E[Levels 15-19: Epic Hero]
+                    E --> F[Level 20: Legendary Master]
+                    
+                    style A fill:#ffeb3b
+                    style B fill:#4caf50
+                    style C fill:#2196f3
+                    style D fill:#9c27b0
+                    style E fill:#ff5722
+                    style F fill:#e91e63
+            </div>
+        </section>
+
+        <section>
+            <h2>The Anatomy of a Level: What You Gain</h2>
+            <p>Every time you level up, it's like receiving a carefully curated gift box of improvements. Unlike some games where you just get bigger numbers, Pathfinder 2e gives you a variety of meaningful upgrades that work together like instruments in an orchestra.</p>
+
+            <h3>Hit Points: Your Character's Resilience</h3>
+            <p>Hit points represent more than just "how much damage you can take" - they're your character's overall vitality, determination, and ability to keep fighting. Think of them like a professional athlete's endurance - a marathon runner doesn't just have "more health," they have better conditioning, mental toughness, and recovery ability.</p>
+
+            <pre><code>Hit Point Calculation Each Level:
+Base HP = Class HP + Constitution Modifier
+
+Example - Human Fighter (CON +2):
+Level 1: 10 (Fighter base) + 2 (CON) + 8 (ancestry) = 20 HP
+Level 2: 20 + 10 (Fighter) + 2 (CON) = 32 HP
+Level 3: 32 + 10 + 2 = 44 HP
+
+Real-world analogy: Like a boxer's conditioning improving 
+with each training camp</code></pre>
+
+            <h3>Proficiency Progression: Mastering Your Craft</h3>
+            <p>Proficiency in Pathfinder 2e works like real-world skill development. You don't just randomly get better at things - you improve in areas where you focus your training, following natural progression paths.</p>
+
+            <div class="mermaid">
+                graph LR
+                    A[Untrained<br/>+0] --> B[Trained<br/>+Level+2]
+                    B --> C[Expert<br/>+Level+4]
+                    C --> D[Master<br/>+Level+6]
+                    D --> E[Legendary<br/>+Level+8]
+                    
+                    style A fill:#f44336
+                    style B fill:#ff9800
+                    style C fill:#4caf50
+                    style D fill:#2196f3
+                    style E fill:#9c27b0
+            </div>
+
+            <p>Think of this like learning to play piano:</p>
+            <ul>
+                <li><strong>Untrained:</strong> You've never touched a piano</li>
+                <li><strong>Trained:</strong> You can play "Chopsticks" and simple melodies</li>
+                <li><strong>Expert:</strong> You can perform intermediate pieces for an audience</li>
+                <li><strong>Master:</strong> You could teach piano or perform professionally</li>
+                <li><strong>Legendary:</strong> You're Carnegie Hall material</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Feats: Your Character's Unique Abilities</h2>
+            <p>Feats are like collecting specialized tools for your heroic toolkit. Every character gets multiple types of feats as they level, creating a customization system richer than a Swiss Army knife factory.</p>
+
+            <h3>The Four Types of Feats</h3>
+
+            <h4>Ancestry Feats: Your Heritage Awakening</h4>
+            <p>These represent your character learning more about their heritage - like a person of Italian descent learning to make authentic pasta from their grandmother. You gain these at 1st, 5th, 9th, 13th, and 17th level.</p>
+
+            <pre><code>Example Ancestry Feat Progression (Human):
+Level 1: Natural Ambition (bonus 1st-level class feat)
+Level 5: Adaptive Adept (bonus cantrip from any tradition)
+Level 9: Clever Improviser (become trained in untrained skills)
+Level 13: Unconventional Weaponry (gain weapon access)
+Level 17: Heroic Presence (inspire allies with leadership)</code></pre>
+
+            <h4>Class Feats: Your Professional Development</h4>
+            <p>These are like earning certifications in your chosen field. A fighter learns new combat techniques, while a wizard discovers advanced magical theories. You get these at every even level (2nd, 4th, 6th, etc.).</p>
+
+            <pre><code>Example Fighter Class Feat Progression:
+Level 2: Power Attack (devastating two-action strike)
+Level 4: Intimidating Strike (combine attack with demoralization)
+Level 6: Knockdown (trip enemies with weapon attacks)
+Level 8: Improved Knockdown (trip multiple enemies)
+Level 10: Whirlwind Strike (attack all nearby enemies)</code></pre>
+
+            <h4>Skill Feats: Your Expanding Expertise</h4>
+            <p>Like taking continuing education courses, these expand what you can do with your skills. You gain these at 2nd level and every 2 levels thereafter.</p>
+
+            <pre><code>Example Skill Feat Applications:
+Athletics: Quick Climb (climb at full speed)
+Stealth: Experienced Smuggler (hide larger objects)
+Medicine: Battle Medicine (heal during combat)
+Diplomacy: Group Impression (influence multiple people)
+Crafting: Magical Crafting (create magic items)</code></pre>
+
+            <h4>General Feats: Universal Life Skills</h4>
+            <p>These represent general life experiences and universal abilities that any adventurer might develop, like learning a new language or becoming more resilient. You get these at 3rd level and every 4 levels after.</p>
+
+            <pre><code>Popular General Feats:
+Fleet (increase your speed)
+Toughness (gain more hit points)
+Incredible Initiative (roll initiative twice, take higher)
+Fast Recovery (recover faster during rest)
+Multilingual (learn additional languages)</code></pre>
+        </section>
+
+        <section>
+            <h2>Ability Score Boosts: Growing Stronger</h2>
+            <p>Every four levels (5th, 10th, 15th, 20th), you get four ability score boosts. This is like your character having growth spurts - not just physical, but mental and spiritual growth as well.</p>
+
+            <pre><code>Ability Boost Rules:
+- Can't boost the same ability score twice in one session
+- Can't boost an ability score above 18 using boosts alone
+- Must boost different abilities (max one per ability per level)
+
+Example Boost Strategy (Fighter):
+Level 5: STR 16→18, CON 14→16, WIS 12→14, CHA 10→12
+Level 10: DEX 12→14, INT 12→14, and two others
+Level 15: Continue spreading or focus on key abilities</code></pre>
+
+            <h3>Strategic Boost Planning</h3>
+            <p>Planning your ability score boosts is like planning a workout routine. You want to strengthen your core abilities while not neglecting areas that support your overall performance.</p>
+
+            <pre><code>Boost Strategy Examples:
+
+Martial Character (Fighter/Ranger/Champion):
+Priority 1: Primary attack stat (STR or DEX)
+Priority 2: Constitution (survivability)
+Priority 3: Wisdom (Perception, saves)
+Priority 4: Support stats (depends on build)
+
+Spellcaster (Wizard/Cleric/Sorcerer):
+Priority 1: Spellcasting stat (INT/WIS/CHA)
+Priority 2: Constitution (survivability)
+Priority 3: Dexterity (AC, initiative)
+Priority 4: Support stats or secondary casting</code></pre>
+        </section>
+
+        <section>
+            <h2>The Power Curve: How Characters Evolve</h2>
+            <p>Character power in Pathfinder 2e doesn't grow linearly - it grows in waves, like a musician mastering increasingly complex pieces. Each tier of play brings qualitatively different capabilities.</p>
+
+            <h3>Levels 1-4: Learning the Basics</h3>
+            <p>Like a medical student's first year, you're learning fundamental skills and basic techniques. Characters are competent but still vulnerable to many threats.</p>
+
+            <div class="mermaid">
+                graph TD
+                    A[Level 1: Character Creation] --> B[Level 2: First Class Feat<br/>Extra Skill Feat]
+                    B --> C[Level 3: General Feat<br/>Skill Increases]
+                    C --> D[Level 4: Class Feat<br/>Skill Feat]
+                    
+                    style A fill:#ffeb3b
+                    style B fill:#4caf50
+                    style C fill:#2196f3
+                    style D fill:#9c27b0
+            </div>
+
+            <h3>Levels 5-9: Becoming Capable</h3>
+            <p>Like a resident doctor, you're developing real competence. You gain signature abilities and start to feel genuinely heroic.</p>
+
+            <pre><code>Key Level 5 Improvements:
+✓ First ability score boosts (4 total)
+✓ Ancestry feat
+✓ Skill increases (4 total)
+✓ Many classes get signature abilities:
+  - Fighters: weapon specialization
+  - Wizards: 3rd-level spells
+  - Rogues: weapon specialization</code></pre>
+
+            <h3>Levels 10-14: Veteran Competence</h3>
+            <p>Like a specialist consultant, you're now an expert in your field with some truly impressive capabilities.</p>
+
+            <h3>Levels 15-20: Legendary Heroes</h3>
+            <p>Like a world-renowned expert in your field, you can accomplish things that border on the mythical.</p>
+
+            <pre><code>High-Level Capabilities Examples:
+Level 15 Fighter: Can cleave through multiple enemies in one swing
+Level 17 Wizard: Can stop time or reshape reality
+Level 19 Rogue: Can become invisible and strike vital points unerringly
+Level 20 Champion: Can literally come back from death to protect others</code></pre>
+        </section>
+
+        <section>
+            <h2>Customization Strategies: Building Your Unique Hero</h2>
+            <p>Character advancement in PF2e is like creating a custom recipe. You start with a base (your class), add key ingredients (ancestry and background), and then season to taste with your feat choices and ability score improvements.</p>
+
+            <h3>The Specialist vs Generalist Approach</h3>
+            <p>You can build your character like a Swiss Army knife (lots of useful tools) or like a precision instrument (exceptional at one thing).</p>
+
+            <pre><code>Specialist Build Example (Damage-Focused Fighter):
+Class Feats: Power Attack → Furious Focus → Improved Critical
+Skill Feats: All combat-related (Intimidation, Athletics)
+General Feats: Toughness, Fleet, Incredible Initiative
+Result: Devastating in combat, limited outside options
+
+Generalist Build Example (Versatile Fighter):
+Class Feats: Mix combat and utility options
+Skill Feats: Diverse skills (Medicine, Diplomacy, Stealth)
+General Feats: Multilingual, Skill Training
+Result: Capable in many situations, less optimized damage</code></pre>
+
+            <h3>Multiclass Dedication: Learning New Trades</h3>
+            <p>Multiclass dedications are like getting a minor degree alongside your major. You can become a fighter who studies magic, or a wizard who learns some roguish tricks.</p>
+
+            <pre><code>Multiclass Dedication Requirements:
+1. Must have 14+ in the new class's key ability score
+2. Take the dedication feat (usually level 2+)
+3. Cannot take another dedication until you have 2+ feats
+   from your current dedication
+
+Example: Fighter with Wizard Dedication
+Level 2: Wizard Dedication (gain spellcasting)
+Level 4: Basic Wizard Spellcasting
+Level 6: Now can take another dedication or continue wizard</code></pre>
+        </section>
+
+        <section>
+            <h2>Practical Advancement Planning</h2>
+            <p>Planning your character's advancement is like planning a career path. You want to know where you're going while remaining flexible enough to adapt to opportunities.</p>
+
+            <h3>The Character Build Document</h3>
+            <p>Many successful players create an advancement plan, like a business plan for their character's growth.</p>
+
+            <pre><code>Sample Character Plan Template:
+
+CHARACTER: Lyra Brightblade (Human Fighter)
+CONCEPT: Protective warrior who inspires allies
+
+ABILITY PRIORITY: STR > CON > CHA > WIS > DEX > INT
+
+FEAT PROGRESSION PLAN:
+Level 1: Natural Ambition (Power Attack)
+Level 2: Intimidating Strike
+Level 3: Toughness
+Level 4: Quick Shield Block
+Level 5: Ancestry Feat - Inspire Heroics
+Level 6: Guardian's Deflection
+
+MULTICLASS PLAN: Champion Dedication at Level 2
+GOAL: Become the ultimate protector-warrior</code></pre>
+
+            <h3>Adaptation and Flexibility</h3>
+            <p>Like a good chef who adjusts recipes based on available ingredients, be ready to adapt your plan based on campaign needs and party composition.</p>
+
+            <pre><code>Adaptation Examples:
+Campaign has lots of undead → consider Disrupting Weapons feat
+Party lacks healer → invest in Medicine skill and Battle Medicine
+Facing many spellcasters → prioritize Will saves and counterspells
+Urban campaign → emphasize social skills over wilderness survival</code></pre>
+        </section>
+
+        <section>
+            <h2>Real-World Applications and Practice</h2>
+            
+            <h3>Character Advancement Simulation</h3>
+            <p>Practice makes perfect! Try advancing a sample character through several levels to understand the rhythm of growth.</p>
+
+            <pre><code>Exercise: Level a Fighter from 1st to 5th level
+
+Starting Stats:
+Human Fighter, STR 18, DEX 12, CON 16, INT 10, WIS 14, CHA 10
+
+Level 1:
+- HP: 10 + 6 (CON) + 8 (Human) = 24
+- Feats: Natural Ambition (Power Attack)
+- Skills: Choose 3 + INT (3 total)
+
+Level 2:
+- HP: 24 + 10 + 3 = 37
+- Class Feat: Choose one (Intimidating Strike?)
+- Skill Feat: Choose one
+
+Level 3:
+- HP: 37 + 10 + 3 = 50
+- General Feat: Choose one
+- Skill Increases: 4 skills improve by one rank
+
+Level 4:
+- HP: 50 + 10 + 3 = 63
+- Class Feat: Choose one
+- Skill Feat: Choose one
+
+Level 5:
+- HP: 63 + 10 + 3 = 76
+- Ancestry Feat: Choose one
+- Ability Boosts: 4 different abilities
+- Skill Increases: 4 skills improve
+- Weapon Specialization: +2 damage with weapons</code></pre>
+
+            <h3>Campaign Integration</h3>
+            <p>Consider how your character's growth fits into the story. Your advancement should reflect not just mechanical optimization, but character development and story progression.</p>
+
+            <pre><code>Story-Driven Advancement Examples:
+
+After defeating a master swordsman:
+→ Take Advanced Weapon Training feat
+
+After discovering ancient magical texts:
+→ Take Wizard Dedication
+
+After protecting villages from bandits:
+→ Develop Leadership-themed general feats
+
+After surviving harsh wilderness:
+→ Invest in Survival and related skill feats</code></pre>
+        </section>
+
+        <section>
+            <h2>Common Advancement Mistakes and How to Avoid Them</h2>
+            <p>Learning from others' mistakes is like getting a GPS for your character development journey - it helps you avoid common wrong turns.</p>
+
+            <h3>The "Shiny Object" Syndrome</h3>
+            <p>Don't just pick feats because they sound cool. Make sure they work together like instruments in an orchestra.</p>
+
+            <pre><code>Example of Poor Synergy:
+Fighter taking:
+- Power Attack (two-action attack)
+- Dual-Weapon Warrior (focuses on two weapons)
+- Shield Block (requires shield and hand)
+
+Problem: These don't work together effectively
+
+Better Approach:
+Choose a focus and build around it:
+Option A: Two-handed weapon + Power Attack + Furious Focus
+Option B: Sword and shield + Shield feats
+Option C: Dual weapons + Twin Parry + Double Slice</code></pre>
+
+            <h3>Neglecting Fundamentals</h3>
+            <p>Don't ignore basic improvements in favor of flashy abilities. Sometimes the most important upgrade is increasing your Constitution or taking Toughness.</p>
+
+            <h3>Planning Too Rigidly</h3>
+            <p>While planning is good, don't be so locked into a build that you can't adapt to your actual play experience.</p>
+        </section>
+
+        <section>
+            <h2>Advanced Topics for Further Exploration</h2>
+            
+            <h3>Archetype Integration</h3>
+            <p>Beyond basic multiclass dedications, explore rare archetypes that provide unique character concepts and abilities.</p>
+
+            <h3>Legendary Skill Uses</h3>
+            <p>At high levels, skills can accomplish near-magical feats. Legendary Thievery lets you steal conceptual things like memories or spells!</p>
+
+            <h3>Mythic and Epic Rules</h3>
+            <p>For campaigns that go beyond 20th level, explore mythic rules that let characters achieve truly godlike capabilities.</p>
+
+            <h3>Character Retirement and Legacy</h3>
+            <p>Sometimes characters outgrow campaigns or achieve their goals. Learn about graceful character retirement and how high-level characters can influence the world.</p>
+        </section>
+
+        <section>
+            <h2>Practice Activities</h2>
+            
+            <h3>Build Comparison Exercise</h3>
+            <p>Create two different advancement paths for the same starting character and compare how they develop different capabilities.</p>
+
+            <h3>Optimization Challenge</h3>
+            <p>Given a specific campaign premise (e.g., "undead-heavy dungeon crawl"), design an advancement plan that addresses the unique challenges.</p>
+
+            <h3>Story Integration Workshop</h3>
+            <p>Take a character concept and plan their advancement to tell a specific story through mechanical choices.</p>
+
+            <h3>Party Synergy Analysis</h3>
+            <p>Design a group of four characters whose advancement plans complement each other and create synergistic effects.</p>
+        </section>
+
+        <section>
+            <h2>Conclusion: Your Hero's Journey</h2>
+            <p>Character advancement in Pathfinder 2e is more than just gaining power - it's about growing into the hero your character was meant to become. Every choice you make, from feat selection to ability score improvements, tells a story about who your character is and what they value.</p>
+
+            <p>Remember that the best character builds aren't just mechanically optimal - they're builds that enhance your enjoyment of the game and contribute to memorable stories with your friends. Your character's advancement should feel like a natural evolution of their personality and experiences.</p>
+
+            <p>Whether you become a legendary warrior whose sword skills are spoken of in whispers, a master wizard who reshapes reality with a gesture, or a devoted champion whose mere presence inspires hope in the darkest hour, your advancement choices will determine not just what you can do, but who you become.</p>
+
+            <div class="mermaid">
+                graph TD
+                    A[Character Creation] --> B[Early Levels: Learning]
+                    B --> C[Mid Levels: Specialization]
+                    C --> D[High Levels: Mastery]
+                    D --> E[Legendary: Transcendence]
+                    E --> F[Legacy: Inspiration for Others]
+                    
+                    style F fill:#ffd700,stroke:#333,stroke-width:3px
+            </div>
+        </section>
+
+        <section>
+            <h2>Looking Ahead</h2>
+            <p>Now that you understand how characters grow and develop, you're ready to explore the tools and treasures that aid them on their journey. In our next lecture, we'll delve into the rich world of equipment, magical items, and wealth management in Pathfinder 2e.</p>
+            
+            <div class="upcoming-topics">
+                <h3>Upcoming Lectures</h3>
+                <ul>
+                    <li><strong>Equipment and Magical Items:</strong> Weapons, armor, treasures, and wealth management</li>
+                    <li><strong>Advanced Combat Tactics:</strong> Conditions, environmental hazards, and tactical depth</li>
+                    <li><strong>Campaign and Adventure Design:</strong> Creating memorable stories and challenges</li>
+                    <li><strong>Game Master Essentials:</strong> Running engaging games that balance all aspects of PF2e</li>
+                    <li><strong>Player Collaboration:</strong> Working together for memorable campaigns</li>
+                </ul>
+            </div>
+
+            <div class="advancement-mastery">
+                <h3>Character Advancement Mastery Checklist</h3>
+                <ul>
+                    <li>✅ Understand the four types of feats and when you gain them</li>
+                    <li>✅ Plan ability score boost progression strategically</li>
+                    <li>✅ Balance specialization vs versatility in build choices</li>
+                    <li>✅ Integrate multiclass dedications effectively</li>
+                    <li>✅ Adapt advancement plans based on campaign needs</li>
+                    <li>✅ Tell character stories through mechanical choices</li>
+                    <li>🎯 Practice building characters from 1st to 20th level</li>
+                    <li>🎯 Design advancement plans for different campaign styles</li>
+                    <li>🎯 Create synergistic party advancement strategies</li>
+                </ul>
+            </div>
+
+            <div class="advancement-resources">
+                <h3>Essential Character Advancement Resources</h3>
+                <ul>
+                    <li><strong>Pathbuilder 2e:</strong> Digital character building and advancement tracking</li>
+                    <li><strong>Archives of Nethys:</strong> Complete feat database with search functionality</li>
+                    <li><strong>Character Build Guides:</strong> Community-created optimization guides</li>
+                    <li><strong>PF2e Character Sheet:</strong> Official advancement tracking tools</li>
+                    <li><strong>Online Forums:</strong> r/Pathfinder2e for build advice and discussion</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Your character's journey from novice to legend awaits - may every level bring new discoveries and adventures!</p>
+
+    </footer>
+</body>
+</html>

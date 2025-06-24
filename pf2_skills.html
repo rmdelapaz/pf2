@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills and Exploration - Pathfinder 2.0</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Skills and Exploration</h1>
+        <p class="subtitle">Beyond Combat - The Art of Adventure</p>
+    </header>
+
+    <main>
+        <section class="introduction">
+            <h2>The World Beyond the Sword</h2>
+            <p>Combat gets the spotlight, but most of your adventuring time is spent exploring mysterious ruins, negotiating with suspicious nobles, tracking monsters through dark forests, and solving ancient puzzles. Think of skills as your character's toolkit for everything that happens between the dramatic sword fights.</p>
+            
+            <p>In Pathfinder 2.0, skills aren't just numbers on a sheet - they're your gateway to creative problem-solving, character expression, and world interaction. Like a master craftsperson who knows which tool to use for each job, skilled adventurers know when to use diplomacy instead of intimidation, when investigation beats perception, and when a well-placed lie accomplishes more than a dozen truth spells.</p>
+
+            <div class="adventure-breakdown">
+                <h3>The Anatomy of Adventure</h3>
+                <div class="time-distribution">
+                    <canvas id="adventureTimeChart" width="600" height="300"></canvas>
+                </div>
+                <p><em>Most RPG sessions spend only 20-30% of time in combat. Skills make the other 70-80% engaging!</em></p>
+            </div>
+        </section>
+
+        <section class="skill-system-deep-dive">
+            <h2>The Skill System Architecture</h2>
+            <p>PF2e's skill system is like a sophisticated musical instrument - simple to understand but capable of incredible nuance. Every skill check uses the same basic formula, but the context and consequences create endless variety.</p>
+
+            <div class="skill-formula">
+                <h3>The Universal Formula</h3>
+                <div class="formula-breakdown">
+                    <div class="formula-box">
+                        <h4>🎲 d20 + Ability Modifier + Proficiency Bonus + Item Bonus + Circumstance Bonus = Total</h4>
+                    </div>
+                    
+                    <div class="modifier-examples">
+                        <div class="modifier-card">
+                            <h5>📊 Ability Modifier</h5>
+                            <p><strong>What it is:</strong> Your character's natural talent</p>
+                            <p><strong>Example:</strong> Diplomacy uses Charisma - a charming person (+4 CHA) naturally persuades better</p>
+                        </div>
+                        
+                        <div class="modifier-card">
+                            <h5>🎯 Proficiency Bonus</h5>
+                            <p><strong>What it is:</strong> Your training level</p>
+                            <p><strong>Progression:</strong> Untrained (0) → Trained (+2) → Expert (+4) → Master (+6) → Legendary (+8)</p>
+                        </div>
+                        
+                        <div class="modifier-card">
+                            <h5>🛠️ Item Bonus</h5>
+                            <p><strong>What it is:</strong> Better tools make better results</p>
+                            <p><strong>Example:</strong> Thieves' tools give +1 to Thievery, a spyglass helps with distant Perception</p>
+                        </div>
+                        
+                        <div class="modifier-card">
+                            <h5>🌟 Circumstance Bonus</h5>
+                            <p><strong>What it is:</strong> Situational advantages</p>
+                            <p><strong>Example:</strong> +2 to Intimidate if you just defeated the target's ally in combat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proficiency-progression">
+                <h3>Proficiency: Your Character's Expertise Journey</h3>
+                <p>Think of proficiency like academic degrees - each level represents years of study and practice in that area.</p>
+                
+                <div class="proficiency-levels">
+                    <div class="proficiency-card untrained">
+                        <h4>🚫 Untrained (Modifier: 0)</h4>
+                        <p><strong>Real-world equivalent:</strong> Complete beginner</p>
+                        <p><strong>Example:</strong> Someone who's never seen a lock trying to pick one</p>
+                        <p><strong>Restriction:</strong> Some tasks require at least Trained</p>
+                    </div>
+                    
+                    <div class="proficiency-card trained">
+                        <h4>📚 Trained (Modifier: +2 + Level)</h4>
+                        <p><strong>Real-world equivalent:</strong> College graduate or apprentice</p>
+                        <p><strong>Example:</strong> Basic lockpicking, fundamental medical knowledge</p>
+                        <p><strong>Access:</strong> Can attempt most skill uses</p>
+                    </div>
+                    
+                    <div class="proficiency-card expert">
+                        <h4>🎓 Expert (Modifier: +4 + Level)</h4>
+                        <p><strong>Real-world equivalent:</strong> Professional practitioner</p>
+                        <p><strong>Example:</strong> Licensed doctor, professional detective</p>
+                        <p><strong>Unlocks:</strong> Advanced skill feats and techniques</p>
+                    </div>
+                    
+                    <div class="proficiency-card master">
+                        <h4>👨‍🏫 Master (Modifier: +6 + Level)</h4>
+                        <p><strong>Real-world equivalent:</strong> Recognized expert in the field</p>
+                        <p><strong>Example:</strong> Chief surgeon, master detective</p>
+                        <p><strong>Capabilities:</strong> Teach others, attempt legendary tasks</p>
+                    </div>
+                    
+                    <div class="proficiency-card legendary">
+                        <h4>🌟 Legendary (Modifier: +8 + Level)</h4>
+                        <p><strong>Real-world equivalent:</strong> Once-in-a-generation genius</p>
+                        <p><strong>Example:</strong> Sherlock Holmes, Houdini, Einstein</p>
+                        <p><strong>Power:</strong> Accomplish seemingly impossible feats</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills-by-category">
+            <h2>The Skill Categories: Your Adventuring Toolkit</h2>
+            <p>Each skill is like a specialized tool in an adventurer's kit. A hammer is great for nails but terrible for screws - similarly, each skill excels in specific situations while being less useful in others.</p>
+
+            <div class="skill-categories">
+                <div class="skill-category">
+                    <h3>🏃 Physical Skills: Your Body as a Tool</h3>
+                    <p>These skills represent what your character can accomplish through physical prowess, coordination, and bodily mastery.</p>
+                    
+                    <div class="skill-details">
+                        <div class="skill-card">
+                            <h4>🤸 Acrobatics (Dexterity)</h4>
+                            <p><strong>The gymnast's skill:</strong> Balance, tumble, squeeze through tight spaces</p>
+                            
+                            <div class="skill-uses">
+                                <h5>Common Uses:</h5>
+                                <ul>
+                                    <li><strong>Balance:</strong> Cross narrow beams, icy surfaces, tightropes</li>
+                                    <li><strong>Tumble Through:</strong> Move through enemy spaces in combat</li>
+                                    <li><strong>Squeeze:</strong> Fit through spaces half your width</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="real-world-scenarios">
+                                <h5>Adventure Applications:</h5>
+                                <ul>
+                                    <li>Escaping from a collapsing building by tumbling through debris</li>
+                                    <li>Infiltrating a fortress by balancing along castle walls</li>
+                                    <li>Squeezing through prison bars during a daring escape</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="dc-examples">
+                                <h5>Difficulty Examples:</h5>
+                                <ul>
+                                    <li><strong>DC 10:</strong> Walking across a wide, stable log</li>
+                                    <li><strong>DC 15:</strong> Balancing on a narrow ledge</li>
+                                    <li><strong>DC 20:</strong> Tightrope walking between towers</li>
+                                    <li><strong>DC 25:</strong> Performing circus-level acrobatics under pressure</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <h4>💪 Athletics (Strength)</h4>
+                            <p><strong>The athlete's skill:</strong> Climb, jump, swim, and grapple your way through obstacles</p>
+                            
+                            <div class="skill-uses">
+                                <h5>Common Uses:</h5>
+                                <ul>
+                                    <li><strong>Climb:</strong> Scale walls, cliffs, and trees</li>
+                                    <li><strong>High Jump/Long Jump:</strong> Leap over gaps and obstacles</li>
+                                    <li><strong>Swim:</strong> Navigate rivers, lakes, and underground waterways</li>
+                                    <li><strong>Grapple:</strong> Wrestle with opponents in combat</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="real-world-scenarios">
+                                <h5>Adventure Applications:</h5>
+                                <ul>
+                                    <li>Climbing castle walls for a stealth infiltration</li>
+                                    <li>Swimming across monster-infested rivers</li>
+                                    <li>Grappling a cultist to prevent them from completing a ritual</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <h4>👤 Stealth (Dexterity)</h4>
+                            <p><strong>The spy's skill:</strong> Move unseen, hide from enemies, avoid detection</p>
+                            
+                            <div class="skill-uses">
+                                <h5>Common Uses:</h5>
+                                <ul>
+                                    <li><strong>Hide:</strong> Conceal yourself from sight</li>
+                                    <li><strong>Sneak:</strong> Move without making noise</li>
+                                    <li><strong>Avoid Notice:</strong> Travel without attracting attention</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="stealth-mechanics">
+                                <h5>Stealth Mechanics:</h5>
+                                <p><strong>Hidden Condition:</strong> Enemies don't know your exact location</p>
+                                <p><strong>Observed → Hidden → Undetected:</strong> Progressive levels of concealment</p>
+                                <p><strong>Cover and Concealment:</strong> Physical obstacles help hide you</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🧠 Mental Skills: Knowledge is Power</h3>
+                    <p>These skills represent your character's education, reasoning ability, and accumulated knowledge about the world.</p>
+                    
+                    <div class="skill-details">
+                        <div class="skill-card">
+                            <h4>🔮 Arcana (Intelligence)</h4>
+                            <p><strong>The scholar's skill:</strong> Magical theory, spell identification, and arcane mysteries</p>
+                            
+                            <div class="skill-uses">
+                                <h5>Common Uses:</h5>
+                                <ul>
+                                    <li><strong>Identify Magic:</strong> Learn what spells or items do</li>
+                                    <li><strong>Recall Knowledge:</strong> Remember facts about magical creatures, planes, spells</li>
+                                    <li><strong>Decipher Writing:</strong> Read magical texts and formulas</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="knowledge-examples">
+                                <h5>What Arcana Tells You:</h5>
+                                <ul>
+                                    <li>That the dragon is using a fear aura (helps with saves)</li>
+                                    <li>The glowing rune is a ward against undead</li>
+                                    <li>This portal leads to the Plane of Fire (pack accordingly)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <h4>🔍 Investigation (Intelligence)</h4>
+                            <p><strong>The detective's skill:</strong> Find clues, analyze evidence, solve mysteries</p>
+                            
+                            <div class="skill-uses">
+                                <h5>Common Uses:</h5>
+                                <ul>
+                                    <li><strong>Search:</strong> Look for hidden objects, secret doors, clues</li>
+                                    <li><strong>Follow Tracks:</strong> Urban tracking and evidence analysis</li>
+                                    <li><strong>Gather Information:</strong> Research in libraries and archives</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="investigation-vs-perception">
+                                <h5>Investigation vs Perception:</h5>
+                                <p><strong>Perception:</strong> Noticing things with your senses ("I hear footsteps")</p>
+                                <p><strong>Investigation:</strong> Analyzing what you find ("These footprints are from boots worth 50 gold - our target is wealthy")</p>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <h4>🏛️ History (Intelligence)</h4>
+                            <p><strong>The historian's skill:</strong> Knowledge of past events, cultures, and civilizations</p>
+                            
+                            <div class="historical-knowledge">
+                                <h5>What History Reveals:</h5>
+                                <ul>
+                                    <li>This crown belonged to the tyrant king who fell 200 years ago</li>
+                                    <li>That symbol marks the tomb of ancient heroes</li>
+                                    <li>This battle site is where demons first invaded our world</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🗣️ Social Skills: The Power of Words</h3>
+                    <p>Often more powerful than any sword, these skills let you accomplish goals through conversation, manipulation, and force of personality.</p>
+                    
+                    <div class="skill-details">
+                        <div class="skill-card">
+                            <h4>🤝 Diplomacy (Charisma)</h4>
+                            <p><strong>The ambassador's skill:</strong> Negotiate, persuade, and build relationships</p>
+                            
+                            <div class="skill-uses">
+                                <h5>Common Uses:</h5>
+                                <ul>
+                                    <li><strong>Make an Impression:</strong> Improve someone's attitude toward you</li>
+                                    <li><strong>Request:</strong> Ask for favors or information</li>
+                                    <li><strong>Gather Information:</strong> Learn secrets through friendly conversation</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="attitude-system">
+                                <h5>NPC Attitude System:</h5>
+                                <div class="attitude-track">
+                                    <div class="mermaid">
+                                        graph LR
+                                            A[Hostile] --> B[Unfriendly]
+                                            B --> C[Indifferent]
+                                            C --> D[Friendly]
+                                            D --> E[Helpful]
+                                            
+                                            style A fill:#f44336,color:#fff
+                                            style B fill:#ff9800,color:#fff
+                                            style C fill:#ffc107,color:#000
+                                            style D fill:#8bc34a,color:#fff
+                                            style E fill:#4caf50,color:#fff
+                                    </div>
+                                </div>
+                                <p><em>Diplomacy can move NPCs along this track, opening new options for interaction</em></p>
+                            </div>
+                            
+                            <div class="diplomacy-examples">
+                                <h5>Diplomacy in Action:</h5>
+                                <ul>
+                                    <li>Convincing guards to let you pass without bribes or violence</li>
+                                    <li>Negotiating safe passage through enemy territory</li>
+                                    <li>Persuading a witness to testify in court</li>
+                                    <li>Brokering peace between warring factions</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <h4>😈 Deception (Charisma)</h4>
+                            <p><strong>The con artist's skill:</strong> Lie, bluff, and misdirect with style</p>
+                            
+                            <div class="skill-uses">
+                                <h5>Common Uses:</h5>
+                                <ul>
+                                    <li><strong>Lie:</strong> Tell convincing falsehoods</li>
+                                    <li><strong>Create a Diversion:</strong> Distract attention</li>
+                                    <li><strong>Impersonate:</strong> Pretend to be someone else</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="deception-strategy">
+                                <h5>The Art of the Lie:</h5>
+                                <p><strong>Small lies:</strong> Easier to believe ("I'm just a traveling merchant")</p>
+                                <p><strong>Big lies:</strong> Harder but more rewarding ("I'm the lost prince of this kingdom")</p>
+                                <p><strong>Truth mixed with lies:</strong> Most convincing ("I am indeed a merchant... who happens to be smuggling")</p>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <h4>😠 Intimidation (Charisma)</h4>
+                            <p><strong>The enforcer's skill:</strong> Coerce through threats and displays of power</p>
+                            
+                            <div class="skill-uses">
+                                <h5>Common Uses:</h5>
+                                <ul>
+                                    <li><strong>Coerce:</strong> Force compliance through fear</li>
+                                    <li><strong>Demoralize:</strong> Make enemies frightened in combat</li>
+                                    <li><strong>Gather Information:</strong> Get answers through implied threats</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="intimidation-types">
+                                <h5>Types of Intimidation:</h5>
+                                <ul>
+                                    <li><strong>Physical:</strong> "Look at the size of my sword"</li>
+                                    <li><strong>Reputation:</strong> "You know who I am"</li>
+                                    <li><strong>Magical:</strong> "You see these spell components?"</li>
+                                    <li><strong>Social:</strong> "I have friends in high places"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🔧 Practical Skills: Getting Things Done</h3>
+                    <p>These skills represent hands-on expertise - the difference between knowing about something and knowing how to do it.</p>
+                    
+                    <div class="skill-details">
+                        <div class="skill-card">
+                            <h4>🛠️ Crafting (Intelligence)</h4>
+                            <p><strong>The artisan's skill:</strong> Create, repair, and understand manufactured goods</p>
+                            
+                            <div class="crafting-uses">
+                                <h5>Crafting Applications:</h5>
+                                <ul>
+                                    <li><strong>Earn Income:</strong> Make money through your craft</li>
+                                    <li><strong>Repair:</strong> Fix damaged equipment</li>
+                                    <li><strong>Craft Items:</strong> Create new equipment (time-consuming)</li>
+                                    <li><strong>Identify Craftsmanship:</strong> Analyze quality and origin</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="crafting-specialties">
+                                <h5>Crafting Specialties:</h5>
+                                <ul>
+                                    <li><strong>Blacksmithing:</strong> Weapons, armor, metal tools</li>
+                                    <li><strong>Alchemy:</strong> Potions, bombs, magical reagents</li>
+                                    <li><strong>Jewelry:</strong> Rings, amulets, precious items</li>
+                                    <li><strong>Engineering:</strong> Siege weapons, traps, mechanisms</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <h4>🏥 Medicine (Wisdom)</h4>
+                            <p><strong>The healer's skill:</strong> Treat wounds, cure diseases, and preserve life</p>
+                            
+                            <div class="medical-uses">
+                                <h5>Medical Techniques:</h5>
+                                <ul>
+                                    <li><strong>Treat Wounds:</strong> Heal HP damage over time</li>
+                                    <li><strong>Treat Disease:</strong> Help patients fight off illness</li>
+                                    <li><strong>Treat Poison:</strong> Assist with poison recovery</li>
+                                    <li><strong>Battle Medicine:</strong> Emergency field healing</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="medicine-scenarios">
+                                <h5>When Medicine Saves the Day:</h5>
+                                <ul>
+                                    <li>Healing the party between fights when magic runs low</li>
+                                    <li>Treating a plague ravaging a town</li>
+                                    <li>Identifying the poison that killed the merchant</li>
+                                    <li>Performing emergency surgery to save an ally's life</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <h4>🔓 Thievery (Dexterity)</h4>
+                            <p><strong>The rogue's skill:</strong> Pick locks, disable traps, and lighten purses</p>
+                            
+                            <div class="thievery-uses">
+                                <h5>Roguish Techniques:</h5>
+                                <ul>
+                                    <li><strong>Pick Locks:</strong> Open doors without keys</li>
+                                    <li><strong>Disable Device:</strong> Disarm traps and mechanisms</li>
+                                    <li><strong>Palm an Object:</strong> Sleight of hand</li>
+                                    <li><strong>Steal:</strong> Pickpocket without detection</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="thievery-tools">
+                                <h5>Tools of the Trade:</h5>
+                                <ul>
+                                    <li><strong>Thieves' Tools:</strong> +1 item bonus to Thievery checks</li>
+                                    <li><strong>Replacement Tools:</strong> Can improvise but at penalty</li>
+                                    <li><strong>Quality Matters:</strong> Better tools = better results</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skill-challenges">
+            <h2>Skill Challenges: When Skills Become Adventures</h2>
+            <p>Sometimes a single skill check isn't enough - you need extended challenges that feel like mini-adventures. Think of these like puzzle games where your skills are the pieces you use to solve complex problems.</p>
+
+            <div class="challenge-types">
+                <h3>Types of Skill Challenges</h3>
+                
+                <div class="challenge-examples">
+                    <div class="challenge-card">
+                        <h4>🏛️ The Infiltration Challenge</h4>
+                        <div class="challenge-setup">
+                            <p><strong>Goal:</strong> Break into the corrupt noble's mansion and steal evidence</p>
+                            <p><strong>Complexity:</strong> Multiple approaches, multiple skills needed</p>
+                        </div>
+                        
+                        <div class="challenge-phases">
+                            <h5>Phase 1: Intelligence Gathering</h5>
+                            <ul>
+                                <li><strong>Diplomacy:</strong> Chat with servants at the market</li>
+                                <li><strong>Investigation:</strong> Study the building's layout</li>
+                                <li><strong>Society:</strong> Learn the family's routines</li>
+                            </ul>
+                            
+                            <h5>Phase 2: Getting Inside</h5>
+                            <ul>
+                                <li><strong>Stealth:</strong> Sneak over the wall at night</li>
+                                <li><strong>Deception:</strong> Pose as a delivery person</li>
+                                <li><strong>Athletics:</strong> Climb to a second-story window</li>
+                                <li><strong>Thievery:</strong> Pick the lock on the servants' entrance</li>
+                            </ul>
+                            
+                            <h5>Phase 3: Finding the Evidence</h5>
+                            <ul>
+                                <li><strong>Investigation:</strong> Search the study for hidden safes</li>
+                                <li><strong>Thievery:</strong> Pick the safe's lock</li>
+                                <li><strong>Perception:</strong> Notice guard patrols</li>
+                                <li><strong>Stealth:</strong> Avoid detection during the search</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="challenge-mechanics">
+                            <h5>Challenge Mechanics:</h5>
+                            <p><strong>Success Threshold:</strong> Need 6 successes before 3 failures</p>
+                            <p><strong>Consequences:</strong> Failures add complications (guards, alarms, time pressure)</p>
+                            <p><strong>Creative Solutions:</strong> Players can suggest new approaches using different skills</p>
+                        </div>
+                    </div>
+
+                    <div class="challenge-card">
+                        <h4>🌪️ The Natural Disaster Challenge</h4>
+                        <div class="challenge-setup">
+                            <p><strong>Goal:</strong> Guide a caravan through a dangerous mountain pass during a blizzard</p>
+                            <p><strong>Time Pressure:</strong> Each round represents an hour of travel</p>
+                        </div>
+                        
+                        <div class="disaster-skills">
+                            <h5>Relevant Skills:</h5>
+                            <ul>
+                                <li><strong>Survival:</strong> Navigate and find shelter</li>
+                                <li><strong>Medicine:</strong> Treat frostbite and exposure</li>
+                                <li><strong>Athletics:</strong> Clear obstacles and help others</li>
+                                <li><strong>Nature:</strong> Predict weather changes</li>
+                                <li><strong>Diplomacy:</strong> Keep morale up when people panic</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="escalating-danger">
+                            <h5>Escalating Consequences:</h5>
+                            <ul>
+                                <li><strong>First Failure:</strong> Someone gets minor frostbite</li>
+                                <li><strong>Second Failure:</strong> A wagon gets stuck in snow</li>
+                                <li><strong>Third Failure:</strong> The group gets lost in whiteout conditions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="challenge-card">
+                        <h4>🎭 The Social Gala Challenge</h4>
+                        <div class="challenge-setup">
+                            <p><strong>Goal:</strong> Gather intelligence at a noble's party without blowing your cover</p>
+                            <p><strong>Social Navigation:</strong> Multiple conversations, shifting alliances</p>
+                        </div>
+                        
+                        <div class="social-skills">
+                            <h5>The Social Toolkit:</h5>
+                            <ul>
+                                <li><strong>Diplomacy:</strong> Make connections and gather gossip</li>
+                                <li><strong>Deception:</strong> Maintain your cover identity</li>
+                                <li><strong>Performance:</strong> Entertain and impress</li>
+                                <li><strong>Society:</strong> Navigate etiquette and social cues</li>
+                                <li><strong>Perception:</strong> Notice who's watching you</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="social-complications">
+                            <h5>Potential Complications:</h5>
+                            <ul>
+                                <li>Someone recognizes you from your real identity</li>
+                                <li>You accidentally offend an important noble</li>
+                                <li>A rival spy is working the same party</li>
+                                <li>Your target becomes suspicious of your questions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="running-challenges">
+                <h3>Running Effective Skill Challenges</h3>
+                
+                <div class="gm-guidance">
+                    <div class="guidance-card">
+                        <h4>🎯 Setting DCs Dynamically</h4>
+                        <p>Don't just use static DCs - adjust based on approach and creativity:</p>
+                        <ul>
+                            <li><strong>Creative Approach:</strong> Lower the DC by 2-5</li>
+                            <li><strong>Perfect Tool/Circumstance:</strong> Grant advantage or automatic success</li>
+                            <li><strong>Poor Conditions:</strong> Increase DC by 2-5</li>
+                            <li><strong>Time Pressure:</strong> Add consequences for taking too long</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="guidance-card">
+                        <h4>🎲 Meaningful Failures</h4>
+                        <p>Failures should advance the story, not stop it:</p>
+                        <ul>
+                            <li><strong>Complications:</strong> "You pick the lock, but the guard heard you"</li>
+                            <li><strong>Partial Success:</strong> "You convince him, but he wants a favor in return"</li>
+                            <li><strong>Cost:</strong> "You climb the wall, but take damage from the rough stone"</li>
+                            <li><strong>Time:</strong> "You eventually find the clue, but hear footsteps approaching"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="exploration-mode">
+            <h2>Exploration Mode: The Rhythm of Adventure</h2>
+            <p>While encounter mode (combat) gives everyone specific turns, exploration mode is more like real-time adventure. It's the difference between a choreographed fight scene and the natural flow of investigation and travel.</p>
+
+            <div class="exploration-activities">
+                <h3>Exploration Activities: What You're Doing</h3>
+                <p>During exploration, each character chooses an activity that determines what they're focusing on. Like choosing your role in a group project, this affects what you notice and accomplish.</p>
+                
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h4>👁️ Investigating</h4>
+                        <p><strong>Focus:</strong> Looking for clues, examining details</p>
+                        <p><strong>Benefit:</strong> +1 to Investigation and Perception for secret doors/hazards</p>
+                        <p><strong>Speed:</strong> Half normal travel speed</p>
+                        <p><strong>Best for:</strong> Rogues, Investigators, detail-oriented characters</p>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <h4>👂 Scouting</h4>
+                        <p><strong>Focus:</strong> Staying alert for danger</p>
+                        <p><strong>Benefit:</strong> +1 to Perception for initiative and detecting creatures</p>
+                        <p><strong>Speed:</strong> Normal travel speed</p>
+                        <p><strong>Best for:</strong> Rangers, anyone with good Perception</p>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <h4>🗺️ Navigating</h4>
+                        <p><strong>Focus:</strong> Finding the right path</p>
+                        <p><strong>Benefit:</strong> +1 to Survival for avoiding getting lost</p>
+                        <p><strong>Speed:</strong> Normal travel speed</p>
+                        <p><strong>Best for:</strong> Druids, Rangers, wilderness experts</p>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <h4>🤫 Sneaking</h4>
+                        <p><strong>Focus:</strong> Avoiding detection</p>
+                        <p><strong>Benefit:</strong> Roll Stealth for the group</p>
+                        <p><strong>Speed:</strong> Half travel speed</p>
+                        <p><strong>Best for:</strong> Rogues, when stealth is critical</p>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <h4>🛡️ Defending</h4>
+                        <p><strong>Focus:</strong> Protecting other party members</p>
+                        <p><strong>Benefit:</strong> +1 AC to adjacent allies, ready to intercept attacks</p>
+                        <p><strong>Speed:</strong> Normal travel speed</p>
+                        <p><strong>Best for:</strong> Fighters, Champions, protective characters</p>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <h4>📚 Recalling Knowledge</h4>
+                        <p><strong>Focus:</strong> Remembering relevant information</p>
+                        <p><strong>Benefit:</strong> Can attempt knowledge checks about encountered things</p>
+                        <p><strong>Speed:</strong> Normal travel speed</p>
+                        <p><strong>Best for:</strong> Wizards, scholars, knowledgeable characters</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exploration-scenarios">
+                <h3>Exploration in Action</h3>
+                
+                <div class="scenario-examples">
+                    <div class="scenario-card">
+                        <h4>🏰 Exploring the Haunted Castle</h4>
+                        <p><strong>Party Setup:</strong></p>
+                        <ul>
+                            <li><strong>Fighter:</strong> Defending (protecting the fragile wizard)</li>
+                            <li><strong>Rogue:</strong> Investigating (looking for traps and secrets)</li>
+                            <li><strong>Wizard:</strong> Recalling Knowledge (identifying magical phenomena)</li>
+                            <li><strong>Cleric:</strong> Scouting (watching for undead with divine senses)</li>
+                        </ul>
+                        
+                        <div class="scenario-events">
+                            <p><strong>What Happens:</strong></p>
+                            <ul>
+                                <li>The Rogue finds a hidden passage (Investigation bonus)</li>
+                                <li>The Cleric senses undead presence before they attack (Scouting bonus)</li>
+                                <li>The Wizard identifies the ghostly apparition's weakness</li>
+                                <li>The Fighter is ready to protect allies when combat starts</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card">
+                        <h4>🌲 Wilderness Trek</h4>
+                        <p><strong>Party Setup:</strong></p>
+                        <ul>
+                            <li><strong>Ranger:</strong> Navigating (preventing the party from getting lost)</li>
+                            <li><strong>Barbarian:</strong> Scouting (watching for predators)</li>
+                            <li><strong>Druid:</strong> Recalling Knowledge (Nature checks about terrain/weather)</li>
+                            <li><strong>Bard:</strong> Defending (using magic to protect the group)</li>
+                        </ul>
+                        
+                        <div class="scenario-benefits">
+                            <p><strong>Results:</strong></p>
+                            <ul>
+                                <li>Group doesn't get lost despite confusing terrain</li>
+                                <li>Early warning when wolves start stalking them</li>
+                                <li>Knowledge about upcoming weather helps plan shelter</li>
+                                <li>Bard's defensive magic protects against environmental hazards</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skill-feats">
+            <h2>Skill Feats: Specializing Your Expertise</h2>
+            <p>Skill feats are like advanced training courses that let you do extraordinary things with your skills. They transform basic competency into signature abilities that define your character's unique approach to problems.</p>
+
+            <div class="feat-categories">
+                <h3>Categories of Skill Feats</h3>
+                
+                <div class="feat-examples">
+                    <div class="feat-card">
+                        <h4>🏃 Enhanced Basic Uses</h4>
+                        <p>Take normal skill uses and make them better</p>
+                        
+                        <div class="feat-example">
+                            <h5>Cat Fall (Acrobatics)</h5>
+                            <p><strong>Normal:</strong> Take full falling damage</p>
+                            <p><strong>With Feat:</strong> Treat falls as 10 feet shorter for damage</p>
+                            <p><strong>Legendary Version:</strong> Treat all falls as 50 feet shorter</p>
+                        </div>
+                        
+                        <div class="feat-example">
+                            <h5>Intimidating Glare (Intimidation)</h5>
+                            <p><strong>Normal:</strong> Demoralize requires speaking the same language</p>
+                            <p><strong>With Feat:</strong> A scary look works on anyone</p>
+                        </div>
+                    </div>
+
+                    <div class="feat-card">
+                        <h4>⚡ New Capabilities</h4>
+                        <p>Unlock completely new ways to use skills</p>
+                        
+                        <div class="feat-example">
+                            <h5>Battle Medicine (Medicine)</h5>
+                            <p><strong>New Ability:</strong> Heal allies quickly in combat</p>
+                            <p><strong>Benefit:</strong> Once per day per person, spend one action to heal 2d8 HP</p>
+                            <p><strong>Impact:</strong> Turns Medicine into a combat-relevant skill</p>
+                        </div>
+                        
+                        <div class="feat-example">
+                            <h5>Bon Mot (Diplomacy)</h5>
+                            <p><strong>New Ability:</strong> Demoralize using wit instead of threats</p>
+                            <p><strong>Benefit:</strong> Use Diplomacy to make enemies flat-footed with clever insults</p>
+                            <p><strong>Flavor:</strong> "Your sword technique is as poor as your fashion sense!"</p>
+                        </div>
+                    </div>
+
+                    <div class="feat-card">
+                        <h4>🔄 Skill Synergies</h4>
+                        <p>Combine skills in creative ways</p>
+                        
+                        <div class="feat-example">
+                            <h5>Lie to Me (Deception)</h5>
+                            <p><strong>Synergy:</strong> Use Deception to detect when others are lying</p>
+                            <p><strong>Logic:</strong> Takes a liar to know a liar</p>
+                            <p><strong>Benefit:</strong> Roll Deception instead of Perception vs Deception</p>
+                        </div>
+                        
+                        <div class="feat-example">
+                            <h5>Magical Crafting (Crafting)</h5>
+                            <p><strong>Synergy:</strong> Combine Crafting with Arcana</p>
+                            <p><strong>New Ability:</strong> Create magical items (with proper spells/formulas)</p>
+                            <p><strong>Requirements:</strong> Expert in Crafting, ability to cast spells</p>
+                        </div>
+                    </div>
+
+                    <div class="feat-card">
+                        <h4>🌟 Legendary Abilities</h4>
+                        <p>Feats that require legendary proficiency - truly superhuman abilities</p>
+                        
+                        <div class="feat-example">
+                            <h5>Legendary Sneak (Stealth)</h5>
+                            <p><strong>Requirement:</strong> Legendary in Stealth</p>
+                            <p><strong>Ability:</strong> Hide and Sneak without any cover or concealment</p>
+                            <p><strong>Flavor:</strong> You're so stealthy you can hide in plain sight</p>
+                        </div>
+                        
+                        <div class="feat-example">
+                            <h5>Legendary Negotiation (Diplomacy)</h5>
+                            <p><strong>Requirement:</strong> Legendary in Diplomacy</p>
+                            <p><strong>Ability:</strong> Make even hostile creatures willing to negotiate</p>
+                            <p><strong>Limitation:</strong> Doesn't work on mindless or utterly alien beings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feat-builds">
+                <h3>Skill Feat Character Builds</h3>
+                
+                <div class="build-examples">
+                    <div class="build-card">
+                        <h4>🔍 The Master Detective</h4>
+                        <p><strong>Core Skills:</strong> Investigation, Perception, Society</p>
+                        
+                        <div class="feat-progression">
+                            <h5>Feat Progression:</h5>
+                            <ul>
+                                <li><strong>Level 2:</strong> Streetwise (Society) - Gather information in urban areas</li>
+                                <li><strong>Level 4:</strong> Read Lips (Perception) - Understand conversations from afar</li>
+                                <li><strong>Level 6:</strong> Lengthy Diversion (Deception) - Create long-lasting distractions</li>
+                                <li><strong>Level 8:</strong> Quick Recognition (Various) - Instantly identify spells and creatures</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="build-concept">
+                            <p><strong>Character Concept:</strong> Like Sherlock Holmes, you solve mysteries through observation, deduction, and social manipulation. You can gather clues others miss and piece together complex plots.</p>
+                        </div>
+                    </div>
+
+                    <div class="build-card">
+                        <h4>🥷 The Shadow Infiltrator</h4>
+                        <p><strong>Core Skills:</strong> Stealth, Thievery, Acrobatics</p>
+                        
+                        <div class="feat-progression">
+                            <h5>Feat Progression:</h5>
+                            <ul>
+                                <li><strong>Level 2:</strong> Cat Fall (Acrobatics) - Safe from falling damage</li>
+                                <li><strong>Level 4:</strong> Quiet Allies (Stealth) - Help the whole party be stealthy</li>
+                                <li><strong>Level 6:</strong> Wall Jump (Athletics) - Parkour movement</li>
+                                <li><strong>Level 8:</strong> Swift Sneak (Stealth) - Move at full speed while sneaking</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="build-concept">
+                            <p><strong>Character Concept:</strong> Like a ninja or master thief, you excel at getting into places you shouldn't be. Walls and locks are suggestions, darkness is your friend.</p>
+                        </div>
+                    </div>
+
+                    <div class="build-card">
+                        <h4>🎭 The Social Manipulator</h4>
+                        <p><strong>Core Skills:</strong> Diplomacy, Deception, Intimidation</p>
+                        
+                        <div class="feat-progression">
+                            <h5>Feat Progression:</h5>
+                            <ul>
+                                <li><strong>Level 2:</strong> Bon Mot (Diplomacy) - Witty combat taunts</li>
+                                <li><strong>Level 4:</strong> Lie to Me (Deception) - Detect lies with your own experience</li>
+                                <li><strong>Level 6:</strong> Group Impression (Diplomacy) - Influence multiple people at once</li>
+                                <li><strong>Level 8:</strong> Scare to Death (Intimidation) - Literally frighten weak enemies to death</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="build-concept">
+                            <p><strong>Character Concept:</strong> Words are your weapons. You can turn enemies against each other, extract information through conversation, and solve problems without violence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="practice-activities">
+            <h2>Practice Activities</h2>
+            
+            <div class="activity-one">
+                <h3>Activity One: Skill Selection Strategy</h3>
+                <p>Practice choosing the right skills for different character concepts and party roles:</p>
+                
+                <div class="character-scenarios">
+                    <div class="scenario-exercise">
+                        <h4>Character A: The Wilderness Guide</h4>
+                        <p><strong>Concept:</strong> Dwarf Ranger who grew up in mountain communities and guides travelers through dangerous terrain</p>
+                        
+                        <div class="skill-budget">
+                            <p><strong>Available Skills:</strong> You can be Trained in 8 skills total (class + background + intelligence)</p>
+                            <p><strong>Required Skills:</strong> Nature, Survival (from Ranger class)</p>
+                            <p><strong>Background Skills:</strong> Choose a background and its associated skills</p>
+                        </div>
+                        
+                        <div class="skill-choices">
+                            <p><strong>Choose 6 more skills that fit the concept:</strong></p>
+                            <p>Available: Acrobatics, Athletics, Crafting, Deception, Diplomacy, Intimidation, Investigation, Medicine, Perception, Performance, Society, Stealth, Thievery</p>
+                            
+                            <ol>
+                                <li>Background: _____________ (gives skills: ________)</li>
+                                <li>Additional Skill Choices:</li>
+                                <li>Skill 3: _______________</li>
+                                <li>Skill 4: _______________</li>
+                                <li>Skill 5: _______________</li>
+                                <li>Skill 6: _______________</li>
+                                <li>Skill 7: _______________</li>
+                                <li>Skill 8: _______________</li>
+                            </ol>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Analysis</summary>
+                            <div class="solution">
+                                <p><strong>Strong Choices:</strong></p>
+                                <ul>
+                                    <li><strong>Background: Guide</strong> (adds Diplomacy, Survival Lore)</li>
+                                    <li><strong>Athletics:</strong> Climbing mountains, helping others</li>
+                                    <li><strong>Medicine:</strong> Treating injuries in the wilderness</li>
+                                    <li><strong>Perception:</strong> Spotting dangers</li>
+                                    <li><strong>Intimidation:</strong> Dealing with bandits/monsters</li>
+                                    <li><strong>Society:</strong> Knowledge of communities you guide between</li>
+                                    <li><strong>Crafting:</strong> Repairing equipment on long journeys</li>
+                                </ul>
+                                
+                                <p><strong>Reasoning:</strong> This build focuses on wilderness survival, leadership, and the practical skills needed to keep groups safe during travel.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="scenario-exercise">
+                        <h4>Character B: The Urban Information Broker</h4>
+                        <p><strong>Concept:</strong> Human Rogue who trades in secrets and information in the big city</p>
+                        
+                        <div class="urban-challenges">
+                            <p><strong>Your daily challenges include:</strong></p>
+                            <ul>
+                                <li>Gathering information from various social classes</li>
+                                <li>Breaking into places to find evidence</li>
+                                <li>Avoiding city guards and rival spies</li>
+                                <li>Maintaining a network of contacts</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="skill-planning">
+                            <p><strong>Plan your skill selection:</strong></p>
+                            <ol>
+                                <li>Background: _______________</li>
+                                <li>Which 3 skills are most important for this concept?</li>
+                                <li>Which skills help with gathering information?</li>
+                                <li>Which skills help with infiltration?</li>
+                                <li>What's your backup plan if talking doesn't work?</li>
+                            </ol>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Analysis</summary>
+                            <div class="solution">
+                                <p><strong>Core Skills:</strong></p>
+                                <ul>
+                                    <li><strong>Deception:</strong> Essential for maintaining cover identities</li>
+                                    <li><strong>Diplomacy:</strong> Building relationships with contacts</li>
+                                    <li><strong>Thievery:</strong> Getting into locked places</li>
+                                </ul>
+                                
+                                <p><strong>Supporting Skills:</strong></p>
+                                <ul>
+                                    <li><strong>Society:</strong> Understanding urban politics and culture</li>
+                                    <li><strong>Stealth:</strong> Avoiding detection during infiltrations</li>
+                                    <li><strong>Investigation:</strong> Finding and analyzing clues</li>
+                                    <li><strong>Intimidation:</strong> When persuasion fails</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-two">
+                <h3>Activity Two: Skill Challenge Design</h3>
+                <p>Create your own skill challenge scenarios:</p>
+                
+                <div class="challenge-design">
+                    <h4>Design Challenge: The Missing Caravan</h4>
+                    <p><strong>Scenario:</strong> A merchant caravan carrying important supplies has gone missing in the desert. The party is hired to find out what happened and recover the goods if possible.</p>
+                    
+                    <div class="design-template">
+                        <h5>Your Challenge Design:</h5>
+                        
+                        <div class="phase-planning">
+                            <p><strong>Phase 1: Investigation (In Town)</strong></p>
+                            <ul>
+                                <li>What skills could characters use to gather information?</li>
+                                <li>Skill 1: _______ (to do what: _______)</li>
+                                <li>Skill 2: _______ (to do what: _______)</li>
+                                <li>Skill 3: _______ (to do what: _______)</li>
+                            </ul>
+                            
+                            <p><strong>Phase 2: Desert Tracking</strong></p>
+                            <ul>
+                                <li>What challenges would characters face in the desert?</li>
+                                <li>Challenge 1: _______ (solved by: _______)</li>
+                                <li>Challenge 2: _______ (solved by: _______)</li>
+                                <li>Challenge 3: _______ (solved by: _______)</li>
+                            </ul>
+                            
+                            <p><strong>Phase 3: The Discovery</strong></p>
+                            <ul>
+                                <li>What might have happened to the caravan?</li>
+                                <li>Your theory: _______</li>
+                                <li>Skills needed to confirm: _______</li>
+                                <li>Skills needed to resolve: _______</li>
+                            </ul>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Sample Solution</summary>
+                            <div class="solution">
+                                <p><strong>Phase 1: Investigation</strong></p>
+                                <ul>
+                                    <li><strong>Diplomacy:</strong> Interview the merchant who hired the caravan</li>
+                                    <li><strong>Society:</strong> Learn about recent bandit activity in the region</li>
+                                    <li><strong>Investigation:</strong> Examine the caravan's planned route</li>
+                                </ul>
+                                
+                                <p><strong>Phase 2: Desert Tracking</strong></p>
+                                <ul>
+                                    <li><strong>Survival:</strong> Follow the caravan's trail through shifting sands</li>
+                                    <li><strong>Nature:</strong> Identify signs of unnatural weather (magical sandstorm?)</li>
+                                    <li><strong>Perception:</strong> Spot the hidden oasis where the caravan sought shelter</li>
+                                </ul>
+                                
+                                <p><strong>Phase 3: The Discovery</strong></p>
+                                <ul>
+                                    <li><strong>Theory:</strong> Caravan was attacked by desert spirits angered by disturbing an ancient site</li>
+                                    <li><strong>Arcana:</strong> Identify the spiritual disturbance</li>
+                                    <li><strong>Diplomacy:</strong> Negotiate with the spirits for the caravan's release</li>
+                                    <li><strong>Religion:</strong> Perform proper appeasement rituals</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-three">
+                <h3>Activity Three: Exploration Activity Optimization</h3>
+                <p>Plan effective exploration strategies for different scenarios:</p>
+                
+                <div class="exploration-scenarios">
+                    <div class="scenario-planning">
+                        <h4>Scenario: Infiltrating the Thieves' Guild</h4>
+                        <div class="party-composition">
+                            <p><strong>Your Party:</strong></p>
+                            <ul>
+                                <li>Human Fighter (high Athletics, moderate Intimidation)</li>
+                                <li>Halfling Rogue (excellent Stealth, good Thievery)</li>
+                                <li>Elf Wizard (great Arcana, good Investigation)</li>
+                                <li>Dwarf Cleric (good Medicine, moderate Perception)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="infiltration-planning">
+                            <p><strong>Plan Your Approach:</strong></p>
+                            
+                            <div class="approach-options">
+                                <h5>Option A: Stealth Infiltration</h5>
+                                <p>Sneak in through the sewers and back alleys</p>
+                                <ul>
+                                    <li>Fighter activity: _______</li>
+                                    <li>Rogue activity: _______</li>
+                                    <li>Wizard activity: _______</li>
+                                    <li>Cleric activity: _______</li>
+                                </ul>
+                                
+                                <h5>Option B: Social Infiltration</h5>
+                                <p>Pose as potential recruits and talk your way in</p>
+                                <ul>
+                                    <li>Fighter activity: _______</li>
+                                    <li>Rogue activity: _______</li>
+                                    <li>Wizard activity: _______</li>
+                                    <li>Cleric activity: _______</li>
+                                </ul>
+                                
+                                <h5>Option C: Investigation Approach</h5>
+                                <p>Gather information first, then plan the perfect approach</p>
+                                <ul>
+                                    <li>Fighter activity: _______</li>
+                                    <li>Rogue activity: _______</li>
+                                    <li>Wizard activity: _______</li>
+                                    <li>Cleric activity: _______</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <details>
+                            <summary>Click for Strategic Analysis</summary>
+                            <div class="solution">
+                                <p><strong>Option A: Stealth (Best for direct action)</strong></p>
+                                <ul>
+                                    <li><strong>Fighter:</strong> Defending (protect wizard if detected)</li>
+                                    <li><strong>Rogue:</strong> Sneaking (lead the group stealthily)</li>
+                                    <li><strong>Wizard:</strong> Investigating (looking for magical wards/traps)</li>
+                                    <li><strong>Cleric:</strong> Scouting (divine senses for danger)</li>
+                                </ul>
+                                
+                                <p><strong>Option B: Social (Best for long-term access)</strong></p>
+                                <ul>
+                                    <li><strong>Fighter:</strong> Defending (the muscle in your "criminal crew")</li>
+                                    <li><strong>Rogue:</strong> Investigating (proving your criminal credentials)</li>
+                                    <li><strong>Wizard:</strong> Recalling Knowledge (about thieves' guild structure)</li>
+                                    <li><strong>Cleric:</strong> Scouting (reading people's motivations)</li>
+                                </ul>
+                                
+                                <p><strong>Option C: Investigation (Safest, most thorough)</strong></p>
+                                <ul>
+                                    <li><strong>Fighter:</strong> Scouting (watching for guild members)</li>
+                                    <li><strong>Rogue:</strong> Investigating (casing the building)</li>
+                                    <li><strong>Wizard:</strong> Recalling Knowledge (researching guild history)</li>
+                                    <li><strong>Cleric:</strong> Investigating (talking to people affected by guild)</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-steps">
+            <h2>What's Next?</h2>
+            <p>You've now mastered the art of skills and exploration - the foundation of everything that happens between dramatic combat encounters. With these tools, your character can investigate mysteries, navigate social challenges, overcome environmental obstacles, and truly interact with the rich world of Pathfinder.</p>
+            
+            <div class="upcoming-topics">
+                <h3>Upcoming Lectures</h3>
+                <ul>
+                    <li><strong>Magic Systems Deep Dive:</strong> Spell preparation, magical traditions, and the art of spellcasting</li>
+                    <li><strong>Equipment and Treasure:</strong> Weapons, armor, magical items, and managing character wealth</li>
+                    <li><strong>Advanced Combat Tactics:</strong> Conditions, special attacks, environmental hazards, and tactical depth</li>
+                    <li><strong>Character Advancement:</strong> Leveling up, feat selection, and long-term character development</li>
+                    <li><strong>Game Master Essentials:</strong> Running games that balance combat, exploration, and social encounters</li>
+                </ul>
+            </div>
+
+            <div class="skills-mastery">
+                <h3>Skills and Exploration Mastery Checklist</h3>
+                <ul>
+                    <li>✅ Understand how proficiency progression works</li>
+                    <li>✅ Know when to use different skills</li>
+                    <li>✅ Design and run skill challenges</li>
+                    <li>✅ Choose effective exploration activities</li>
+                    <li>✅ Plan skill feat progressions</li>
+                    <li>🎯 Practice creative problem-solving with skills</li>
+                    <li>🎯 Experiment with different exploration strategies</li>
+                    <li>🎯 Develop your character's skill-based identity</li>
+                </ul>
+            </div>
+
+            <div class="skill-resources">
+                <h3>Additional Skill Resources</h3>
+                <ul>
+                    <li><strong>Archives of Nethys:</strong> Complete skill descriptions and feat lists</li>
+                    <li><strong>Skill Challenge Examples:</strong> Community-created scenarios for practice</li>
+                    <li><strong>Exploration Activity Reference:</strong> Quick guide for choosing activities</li>
+                    <li><strong>Skill Feat Optimizer:</strong> Tools for planning character progression</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>The world awaits your expertise - every locked door, ancient mystery, and social challenge is an opportunity!</p>
+    
+    </footer>
+
+   <script>
+    // Adventure Time Distribution Chart
+    const canvas = document.getElementById('adventureTimeChart');
+    const ctx = canvas.getContext('2d');
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Pie chart data
+    const data = [
+        { label: 'Combat', value: 25, color: '#f44336' },
+        { label: 'Exploration', value: 35, color: '#4caf50' },
+        { label: 'Social Interaction', value: 20, color: '#2196f3' },
+        { label: 'Puzzle/Investigation', value: 15, color: '#ff9800' },
+        { label: 'Downtime/Rest', value: 5, color: '#9c27b0' }
+    ];
+    
+    // Calculate angles
+    const total = data.reduce((sum, item) => sum + item.value, 0);
+    let currentAngle = -Math.PI / 2; // Start at top
+    
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 100;
+    
+    // Draw pie slices
+    data.forEach((item, index) => {
+        const sliceAngle = (item.value / total) * 2 * Math.PI;
+        
+        // Draw slice
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+        ctx.closePath();
+        ctx.fillStyle = item.color;
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw label
+        const labelAngle = currentAngle + sliceAngle / 2;
+        const labelX = centerX + Math.cos(labelAngle) * (radius + 30);
+        const labelY = centerY + Math.sin(labelAngle) * (radius + 30);
+        
+        ctx.fillStyle = '#333';
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(item.label, labelX, labelY);
+        ctx.fillText(item.value + '%', labelX, labelY + 15);
+        
+        currentAngle += sliceAngle;
+    });
+    
+    // Draw title
+    ctx.fillStyle = '#333';
+    ctx.font = 'bold 16px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('How Adventure Time is Actually Spent', centerX, 30);
+    ctx.font = '12px Arial';
+    ctx.fillText('(Skills make 75% of the game engaging!)', centerX, 280);
+</script>
+</body>
+</html>
+</html>

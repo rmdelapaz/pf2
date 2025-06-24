@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Pathfinder 2.0 RPG</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Pathfinder 2.0 RPG</h1>
+        <p class="subtitle">Your Gateway to Epic Adventures</p>
+    </header>
+
+    <main>
+        <section class="introduction">
+            <h2>What is Pathfinder 2.0?</h2>
+            <p>Imagine you're the director of your own fantasy movie, but instead of actors, you have friends around a table, and instead of a script, you have dice and imagination. That's Pathfinder 2.0 in essence!</p>
+            
+            <p>Pathfinder Second Edition (PF2e) is a tabletop role-playing game where players create heroic characters and embark on adventures guided by a Game Master (GM). Think of it as interactive storytelling meets strategic board game, with a dash of improv theater thrown in.</p>
+
+            <div class="analogy-box">
+                <h3>The Orchestra Analogy</h3>
+                <p>If D&D is like a rock band - loud, popular, and straightforward - then Pathfinder 2.0 is like a symphony orchestra. It has more instruments (character options), more complex harmonies (tactical combat), and requires a bit more skill to master, but the resulting music is incredibly rich and rewarding.</p>
+            </div>
+        </section>
+
+        <section class="history">
+            <h2>From Dungeons &amp; Dragons to Pathfinder</h2>
+            <p>Picture this: It's 2008, and Dungeons &amp; Dragons releases its 4th edition. Many players felt like their favorite restaurant completely changed the menu. Paizo Publishing, like a chef who knew what the customers really wanted, created Pathfinder as a "spiritual successor" to D&D 3.5 edition.</p>
+
+            <div class="mermaid">
+                graph LR
+                    A[D&D 3.5 Edition<br/>2003-2008] --> B[D&D 4th Edition<br/>2008]
+                    A --> C[Pathfinder 1st Edition<br/>2009]
+                    C --> D[Pathfinder 2nd Edition<br/>2019]
+                    B --> E[D&D 5th Edition<br/>2014]
+                    
+                    style C fill:#f9f,stroke:#333,stroke-width:2px
+                    style D fill:#f96,stroke:#333,stroke-width:2px
+            </div>
+
+            <p>Pathfinder 1st edition became incredibly popular, earning the nickname "D&D 3.75" because it refined and improved upon D&D 3.5's foundation. However, by 2019, Paizo realized they needed a fresh start - enter Pathfinder Second Edition.</p>
+        </section>
+
+        <section class="why-pf2e">
+            <h2>Why Choose Pathfinder 2.0?</h2>
+            
+            <h3>The Three-Action Economy</h3>
+            <p>Imagine if every turn in combat was like having exactly three dollars to spend at an arcade. You could:</p>
+            <ul>
+                <li>Spend all three dollars on one expensive game (like a powerful spell)</li>
+                <li>Play three different cheap games (three basic attacks)</li>
+                <li>Mix and match (move, attack, and defend)</li>
+            </ul>
+            <p>This is Pathfinder 2.0's revolutionary three-action system. Every turn, you get exactly three actions - no more complex action types to memorize!</p>
+
+            <div class="code-example">
+                <h4>Action Economy Example</h4>
+                <pre><code>Turn Example - Fighter vs Goblin:
+Action 1⚡: ⚔️ Strike (attack with sword)
+Action 2⚡: 🛡️ Raise Shield (increase AC)
+Action 3⚡: 🏃 Stride (move to new position)
+
+Each ⚡ represents one action spent</code></pre>
+            </div>
+
+            <h3>Meaningful Character Choices</h3>
+            <p>Character creation in PF2e is like building a custom car. You don't just pick a model (class) - you choose the engine (ancestry), the paint job (background), upgrade packages (feats), and custom modifications (skills). Every choice matters and creates a unique character.</p>
+
+            <div class="character-building-visual">
+                <svg width="100%" height="200" viewBox="0 0 800 200">
+                    <rect x="50" y="50" width="120" height="80" fill="#ffeb3b" stroke="#333" stroke-width="2"/>
+                    <text x="110" y="95" text-anchor="middle" font-family="Arial" font-size="12">Ancestry</text>
+                    <text x="110" y="110" text-anchor="middle" font-family="Arial" font-size="10">(Human, Elf, etc.)</text>
+                    
+                    <rect x="200" y="50" width="120" height="80" fill="#4caf50" stroke="#333" stroke-width="2"/>
+                    <text x="260" y="95" text-anchor="middle" font-family="Arial" font-size="12">Background</text>
+                    <text x="260" y="110" text-anchor="middle" font-family="Arial" font-size="10">(Scholar, Farmer, etc.)</text>
+                    
+                    <rect x="350" y="50" width="120" height="80" fill="#2196f3" stroke="#333" stroke-width="2"/>
+                    <text x="410" y="95" text-anchor="middle" font-family="Arial" font-size="12">Class</text>
+                    <text x="410" y="110" text-anchor="middle" font-family="Arial" font-size="10">(Fighter, Wizard, etc.)</text>
+                    
+                    <rect x="500" y="50" width="120" height="80" fill="#ff5722" stroke="#333" stroke-width="2"/>
+                    <text x="560" y="95" text-anchor="middle" font-family="Arial" font-size="12">Feats</text>
+                    <text x="560" y="110" text-anchor="middle" font-family="Arial" font-size="10">(Special abilities)</text>
+                    
+                    <path d="M 170 90 L 200 90" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 320 90 L 350 90" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 470 90 L 500 90" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                         refX="0" refY="3.5" orient="auto">
+                          <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+                        </marker>
+                    </defs>
+                    
+                    <text x="400" y="170" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">Your Unique Character</text>
+                </svg>
+            </div>
+
+            <h3>Tactical Combat That Flows</h3>
+            <p>Combat in PF2e is like a chess match crossed with an action movie. Every position matters, every choice has consequences, but it never bogs down into analysis paralysis. The game rewards creative thinking and tactical positioning.</p>
+        </section>
+
+        <section class="core-concepts">
+            <h2>Essential Concepts</h2>
+            
+            <h3>The d20 System</h3>
+            <p>At its heart, Pathfinder 2.0 uses a twenty-sided die (d20) as its core mechanic. Think of it as the engine of the game - almost everything revolves around rolling this die and adding modifiers.</p>
+
+            <div class="dice-mechanic">
+                <h4>Basic Roll Structure</h4>
+                <pre><code>d20 + Ability Modifier + Proficiency + Item Bonus = Total Result
+
+Example: Attacking with a sword
+d20 (rolled: 12) + Strength (+3) + Proficiency (+2) + Magic Sword (+1) = 18 total</code></pre>
+            </div>
+
+            <h3>Degrees of Success</h3>
+            <p>Unlike many games where you either succeed or fail, PF2e has four outcomes - like a grading system where you can get an A+, A, F, or even F-!</p>
+
+            <div class="success-chart">
+                <div class="mermaid">
+                    graph TD
+                        A[Roll d20 + Modifiers] --> B{Compare to DC}
+                        B -->|Beat DC by 10+| C[Critical Success 🌟]
+                        B -->|Beat DC by 1-9| D[Success ✅]
+                        B -->|Miss DC by 1-9| E[Failure ❌]
+                        B -->|Miss DC by 10+| F[Critical Failure 💥]
+                        
+                        style C fill:#4caf50,color:#fff
+                        style D fill:#8bc34a,color:#fff
+                        style E fill:#ff9800,color:#fff
+                        style F fill:#f44336,color:#fff
+                </div>
+            </div>
+
+            <h3>Proficiency System</h3>
+            <p>Imagine your character's skills like a video game skill tree, but more organic. Instead of arbitrary levels, you have five degrees of training:</p>
+            
+            <ul>
+                <li><strong>Untrained (0):</strong> Like trying to perform surgery having never seen an operating room</li>
+                <li><strong>Trained (+2):</strong> You've had basic training - like a first-year medical student</li>
+                <li><strong>Expert (+4):</strong> Solid competence - a general practitioner</li>
+                <li><strong>Master (+6):</strong> Exceptional skill - a specialist surgeon</li>
+                <li><strong>Legendary (+8):</strong> World-renowned expertise - the surgeon other surgeons call</li>
+            </ul>
+        </section>
+
+        <section class="real-world-applications">
+            <h2>Real-World Applications</h2>
+            
+            <h3>When to Play Pathfinder 2.0</h3>
+            <ul>
+                <li><strong>Game Night with Strategy Lovers:</strong> Perfect for groups who enjoy games like Gloomhaven or complex board games</li>
+                <li><strong>Long-Term Campaigns:</strong> The character progression system shines over months or years of play</li>
+                <li><strong>Players Who Love Options:</strong> With hundreds of feats and abilities, customization enthusiasts will thrive</li>
+                <li><strong>Groups That Enjoy Tactical Combat:</strong> If your group likes positioning, terrain, and strategic thinking</li>
+            </ul>
+
+            <h3>Getting Started in the Real World</h3>
+            <p>Starting a Pathfinder 2.0 group is like starting a book club, but with more dice and dragons:</p>
+            
+            <div class="getting-started">
+                <h4>Your First Session Checklist</h4>
+                <pre><code>Before Session Zero:
+□ Download free Basic Rules from Paizo
+□ Gather 3-5 friends interested in fantasy adventures
+□ Designate one person as GM (Game Master)
+□ Set up regular meeting time/place
+
+Session Zero (Character Creation):
+□ Discuss campaign themes and expectations
+□ Create characters together (2-3 hours)
+□ Establish party dynamics and relationships
+□ Plan first adventure session</code></pre>
+            </div>
+        </section>
+
+        <section class="comparison">
+            <h2>How PF2e Compares to Other RPGs</h2>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>D&amp;D 5e</th>
+                            <th>Pathfinder 2e</th>
+                            <th>Pathfinder 1e</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Learning Curve</td>
+                            <td>Gentle slope</td>
+                            <td>Moderate climb</td>
+                            <td>Mountain expedition</td>
+                        </tr>
+                        <tr>
+                            <td>Character Options</td>
+                            <td>Good selection</td>
+                            <td>Vast customization</td>
+                            <td>Overwhelming choices</td>
+                        </tr>
+                        <tr>
+                            <td>Combat Flow</td>
+                            <td>Simple & fast</td>
+                            <td>Tactical & engaging</td>
+                            <td>Complex & slow</td>
+                        </tr>
+                        <tr>
+                            <td>Math Complexity</td>
+                            <td>Streamlined</td>
+                            <td>Consistent but detailed</td>
+                            <td>Stacking bonuses nightmare</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="practice-activities">
+            <h2>Practice Activities</h2>
+            
+            <h3>Activity One: Understanding Degrees of Success</h3>
+            <p>Practice calculating outcomes with these scenarios:</p>
+            <div class="activity-box">
+                <h4>Scenario: Climbing a Cliff (DC 15)</h4>
+                <p>Calculate the degree of success for these rolls:</p>
+                <ul>
+                    <li>Roll: 8 + 5 (modifier) = 13 total → <em>What's the result?</em></li>
+                    <li>Roll: 15 + 3 (modifier) = 18 total → <em>What's the result?</em></li>
+                    <li>Roll: 20 + 2 (modifier) = 22 total → <em>What's the result?</em></li>
+                    <li>Roll: 3 + 1 (modifier) = 4 total → <em>What's the result?</em></li>
+                </ul>
+                <details>
+                    <summary>Click for Answers</summary>
+                    <ul>
+                        <li>13 vs DC 15: Failure (missed by 2)</li>
+                        <li>18 vs DC 15: Success (beat by 3)</li>
+                        <li>22 vs DC 15: Critical Success (beat by 7, not quite 10)</li>
+                        <li>4 vs DC 15: Critical Failure (missed by 11)</li>
+                    </ul>
+                </details>
+            </div>
+
+            <h3>Activity Two: Action Economy Planning</h3>
+            <p>Plan a combat turn using three actions:</p>
+            <div class="activity-box">
+                <h4>Situation: You're a Fighter facing two goblins</h4>
+                <p>One goblin is next to you, another is 20 feet away. You have a sword and shield. Plan your three actions:</p>
+                <ul>
+                    <li>Action 1: _______________</li>
+                    <li>Action 2: _______________</li>
+                    <li>Action 3: _______________</li>
+                </ul>
+                <p><em>Consider: Attack, Move (Stride), Raise Shield, or other creative options!</em></p>
+            </div>
+
+            <h3>Activity Three: Character Concept Brainstorming</h3>
+            <p>Create three different character concepts by mixing these elements:</p>
+            <div class="brainstorm-grid">
+                <div class="column">
+                    <h4>Ancestries</h4>
+                    <ul>
+                        <li>Human</li>
+                        <li>Elf</li>
+                        <li>Dwarf</li>
+                        <li>Halfling</li>
+                        <li>Goblin</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Classes</h4>
+                    <ul>
+                        <li>Fighter</li>
+                        <li>Wizard</li>
+                        <li>Rogue</li>
+                        <li>Cleric</li>
+                        <li>Ranger</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Backgrounds</h4>
+                    <ul>
+                        <li>Scholar</li>
+                        <li>Criminal</li>
+                        <li>Merchant</li>
+                        <li>Farmer</li>
+                        <li>Noble</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-steps">
+            <h2>What's Next?</h2>
+            <p>Now that you understand the foundation of Pathfinder 2.0, you're ready to dive deeper! In our next lecture, we'll explore <a href="/pf2_char.html">character creation</a> in detail, walking through each step of building your first hero.</p>
+            
+            <div class="upcoming-topics">
+                <h3>Upcoming Lectures</h3>
+                <ul>
+                    <li><strong> <a href="/pf2_char.html">Character Creation Deep Dive</a></strong> Ancestries, backgrounds, classes, and ability scores</li>
+                    <li><strong><a href="/pf2_actions.html">The Action Economy</a>:</strong> Mastering combat tactics and strategy</li>
+                    <li><strong><a href="/pf2_skills.html">Skills and Exploration</a>:</strong> Beyond combat adventures</li>
+                    <li><strong><a href="/pf2_magic.html">Magic Systems</a>:</strong> Spellcasting for wizards, clerics, and more</li>
+                    <li><strong><a href="/pf2_items.html">Equipment and Items</a>:</strong> Gear up for adventure</li>
+                    <li><strong><a href="/pf2_gm.html">Game Master Essentials</a>:</strong> Running your first game</li>
+                       <li><strong><a href="/pf2_horror.html">Horror and Atmospheric Gaming </a>:</strong> Running a horro game</li>
+                          <li><strong><a href="/pf2_worldbuilding.html">Wordldbuildin Essentials</a>:</strong> Running your first game</li>
+                </ul>
+            </div>
+
+            <div class="resources">
+                <h3>Recommended Resources</h3>
+                <ul>
+                    <li><strong>Paizo's Free Basic Rules:</strong> Download the essentials at paizo.com</li>
+                    <li><strong>Archives of Nethys:</strong> Complete free online rules reference</li>
+                    <li><strong>Pathbuilder App:</strong> Digital character creation tool</li>
+                    <li><strong>YouTube Channels:</strong> "How It's Played" and "Knights of Last Call"</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Ready for your first adventure? The dice are calling, and legends await!</p>
+  
+    </footer>
+</body>
+</html>
