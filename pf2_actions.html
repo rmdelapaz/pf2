@@ -8,10 +8,39 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.mermaid').forEach(el => {
+          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
+        });
+      });
+      new MutationObserver(async () => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
+        document.querySelectorAll('.mermaid').forEach(el => {
+          const src = el.getAttribute('data-mermaid-src');
+          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
+        });
+        await mermaid.run();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    </script>
+    <script>
+        (function() {
+            const saved = localStorage.getItem('pf2-theme');
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
     </script>
 </head>
 <body>
+    <nav class="site-nav">
+        <div class="nav-left">
+            <a href="/index.html">🏠 Home</a>
+            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+            <a href="https://rays-home.netlify.app/contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
     <header>
         <h1>The Action Economy Mastery</h1>
         <p class="subtitle">Tactical Combat Through Three-Action Thinking</p>
@@ -363,7 +392,7 @@
                     <div class="concept-card">
                         <h4>🛡️ The Tank Position</h4>
                         <div class="battlefield-diagram">
-                            <svg width="200" height="150" viewBox="0 0 200 150">
+                            <svg class="inline-svg" width="200" height="150" viewBox="0 0 200 150">
                                 <!-- Grid -->
                                 <defs>
                                     <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
@@ -400,7 +429,7 @@
                     <div class="concept-card">
                         <h4>🏹 The Archer's Perch</h4>
                         <div class="battlefield-diagram">
-                            <svg width="200" height="150" viewBox="0 0 200 150">
+                            <svg class="inline-svg" width="200" height="150" viewBox="0 0 200 150">
                                 <rect width="200" height="150" fill="url(#grid)" />
                                 
                                 <!-- Archer on high ground -->
@@ -426,7 +455,7 @@
                     <div class="concept-card">
                         <h4>🗡️ The Flanking Rogue</h4>
                         <div class="battlefield-diagram">
-                            <svg width="200" height="150" viewBox="0 0 200 150">
+                            <svg class="inline-svg" width="200" height="150" viewBox="0 0 200 150">
                                 <rect width="200" height="150" fill="url(#grid)" />
                                 
                                 <!-- Enemy in center -->
@@ -453,7 +482,7 @@
                     <div class="concept-card">
                         <h4>🧙 The Battlefield Controller</h4>
                         <div class="battlefield-diagram">
-                            <svg width="200" height="150" viewBox="0 0 200 150">
+                            <svg class="inline-svg" width="200" height="150" viewBox="0 0 200 150">
                                 <rect width="200" height="150" fill="url(#grid)" />
                                 
                                 <!-- Wizard in back -->
@@ -802,7 +831,7 @@
                 <div class="positioning-puzzle">
                     <h4>The Corridor Ambush</h4>
                     <div class="battlefield-setup">
-                        <svg width="400" height="300" viewBox="0 0 400 300">
+                        <svg class="inline-svg" width="400" height="300" viewBox="0 0 400 300">
                             <!-- Corridor walls -->
                             <rect x="50" y="100" width="300" height="20" fill="#666"/>
                             <rect x="50" y="180" width="300" height="20" fill="#666"/>
@@ -1007,6 +1036,25 @@
             ctx.lineTo(canvas.width - 50, y);
             ctx.stroke();
         }
+    </script>
+    <nav class="prev-next-nav">
+        <a href="/pf2_groups.html" class="nav-prev">← Group Dynamics</a>
+        <a href="/index.html" class="nav-home">📋 Contents</a>
+        <a href="/pf2_dice_roller.html" class="nav-next">Dice Roller →</a>
+    </nav>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        function applyTheme(dark) {
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
+            toggle.textContent = dark ? '☀️' : '🌙';
+        }
+        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
+        applyTheme(savedDark);
+        toggle.addEventListener('click', () => {
+            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+            applyTheme(nowDark);
+        });
     </script>
 </body>
 </html>

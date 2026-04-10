@@ -8,10 +8,40 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
+      // Store original definitions for re-render on theme change
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.mermaid').forEach(el => {
+          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
+        });
+      });
+      new MutationObserver(async () => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
+        document.querySelectorAll('.mermaid').forEach(el => {
+          const src = el.getAttribute('data-mermaid-src');
+          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
+        });
+        await mermaid.run();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    </script>
+    <script>
+        (function() {
+            const saved = localStorage.getItem('pf2-theme');
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
     </script>
 </head>
 <body>
+    <nav class="site-nav">
+        <div class="nav-left">
+            <a href="/index.html">🏠 Home</a>
+            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+            <a href="https://rays-home.netlify.app/contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
     <header>
         <h1>Welcome to Pathfinder 2.0 RPG</h1>
         <p class="subtitle">Your Gateway to Epic Adventures</p>
@@ -74,7 +104,7 @@ Each ⚡ represents one action spent</code></pre>
             <p>Character creation in PF2e is like building a custom car. You don't just pick a model (class) - you choose the engine (ancestry), the paint job (background), upgrade packages (feats), and custom modifications (skills). Every choice matters and creates a unique character.</p>
 
             <div class="character-building-visual">
-                <svg width="100%" height="200" viewBox="0 0 800 200">
+                <svg class="inline-svg" width="100%" height="200" viewBox="0 0 800 200">
                     <rect x="50" y="50" width="120" height="80" fill="#ffeb3b" stroke="#333" stroke-width="2"/>
                     <text x="110" y="95" text-anchor="middle" font-family="Arial" font-size="12">Ancestry</text>
                     <text x="110" y="110" text-anchor="middle" font-family="Arial" font-size="10">(Human, Elf, etc.)</text>
@@ -336,5 +366,24 @@ Session Zero (Character Creation):
         <p>Ready for your first adventure? The dice are calling, and legends await!</p>
   
     </footer>
+    <nav class="prev-next-nav">
+        <span></span>
+        <a href="/index.html" class="nav-home">📋 Contents</a>
+        <a href="/pf2_char.html" class="nav-next">Character Creation →</a>
+    </nav>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        function applyTheme(dark) {
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
+            toggle.textContent = dark ? '☀️' : '🌙';
+        }
+        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
+        applyTheme(savedDark);
+        toggle.addEventListener('click', () => {
+            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+            applyTheme(nowDark);
+        });
+    </script>
 </body>
 </html>

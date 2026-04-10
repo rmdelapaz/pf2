@@ -8,7 +8,22 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.mermaid').forEach(el => {
+          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
+        });
+      });
+      new MutationObserver(async () => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
+        document.querySelectorAll('.mermaid').forEach(el => {
+          const src = el.getAttribute('data-mermaid-src');
+          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
+        });
+        await mermaid.run();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     </script>
     <style>
         body {
@@ -135,9 +150,67 @@
             border: 1px solid #CD853F;
             text-align: center;
         }
+
+        /* Dark mode overrides */
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #1a0f08 0%, #2c1a0e 25%, #3d2516 50%, #2c1a0e 75%, #1a0f08 100%);
+            color: #d4c5b0;
+        }
+        [data-theme="dark"] .container {
+            background: rgba(30, 25, 20, 0.95);
+            border-color: #6d4c2a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+        [data-theme="dark"] h1 { color: #d4a56a; }
+        [data-theme="dark"] h2 { color: #c4875a; border-bottom-color: #6d4c2a; }
+        [data-theme="dark"] .name-card {
+            background: linear-gradient(145deg, #2a2018, #33261a);
+            border-color: #5a3d24;
+            border-left-color: #6d4c2a;
+        }
+        [data-theme="dark"] .name-card:hover { border-left-color: #d4a56a; }
+        [data-theme="dark"] .name { color: #d4a56a; }
+        [data-theme="dark"] .origin { color: #b88a5e; }
+        [data-theme="dark"] .race-suggestion { color: #a08060; }
+        [data-theme="dark"] .location-tag { background: #6d4c2a; }
+        [data-theme="dark"] .tips-section {
+            background: #2a2018;
+            border-color: #5a3d24;
+        }
+        [data-theme="dark"] .example-box {
+            background: #2a1a1a;
+            border-color: #6d3a3a;
+        }
+        [data-theme="dark"] .analogy-box {
+            background: #1a2a1a;
+            border-color: #3a6d3a;
+        }
+        [data-theme="dark"] .pathfinder-box {
+            background: #1f1a2a;
+            border-color: #4a3a6d;
+        }
+        [data-theme="dark"] canvas { border-color: #6d4c2a; }
+        [data-theme="dark"] .region-item {
+            background: #33261a;
+            border-color: #5a3d24;
+        }
     </style>
+    <script>
+        (function() {
+            const saved = localStorage.getItem('pf2-theme');
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+    </script>
 </head>
 <body>
+    <nav class="site-nav">
+        <div class="nav-left">
+            <a href="/index.html">🏠 Home</a>
+            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+            <a href="https://rays-home.netlify.app/contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
     <div class="container">
         <h1>⚔️ 150 Pathfinder 2E Character Names ⚔️</h1>
         
@@ -568,6 +641,25 @@
 
         canvas.addEventListener('click', spinPathfinderWheel);
         drawPathfinderWheel();
+    </script>
+    <nav class="prev-next-nav">
+        <a href="/pf2_100.html" class="nav-prev">← 100 Characters</a>
+        <a href="/index.html" class="nav-home">📋 Contents</a>
+        <a href="/pf2_groups.html" class="nav-next">Group Dynamics →</a>
+    </nav>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        function applyTheme(dark) {
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
+            toggle.textContent = dark ? '☀️' : '🌙';
+        }
+        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
+        applyTheme(savedDark);
+        toggle.addEventListener('click', () => {
+            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+            applyTheme(nowDark);
+        });
     </script>
 </body>
 </html>

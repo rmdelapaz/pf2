@@ -8,10 +8,39 @@
     <link rel="icon" href="/favicon.png">
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.mermaid').forEach(el => {
+          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
+        });
+      });
+      new MutationObserver(async () => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
+        document.querySelectorAll('.mermaid').forEach(el => {
+          const src = el.getAttribute('data-mermaid-src');
+          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
+        });
+        await mermaid.run();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    </script>
+    <script>
+        (function() {
+            const saved = localStorage.getItem('pf2-theme');
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
     </script>
 </head>
 <body>
+    <nav class="site-nav">
+        <div class="nav-left">
+            <a href="/index.html">🏠 Home</a>
+            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+            <a href="https://rays-home.netlify.app/contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
     <header>
         <h1>Pathfinder 2e: Digital Tools and Technology Deep Dive</h1>
         <p><em>Leveraging Technology to Enhance Your Gaming Experience</em></p>
@@ -1802,5 +1831,24 @@ CHANGE MANAGEMENT:
         <p>May your technology serve your creativity, and your digital tools enhance the magic you create together!</p>
  
     </footer>
+    <nav class="prev-next-nav">
+        <a href="/pf2_worldbuilding.html" class="nav-prev">← Worldbuilding</a>
+        <a href="/index.html" class="nav-home">📋 Contents</a>
+        <a href="/pf2_community.html" class="nav-next">Community →</a>
+    </nav>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        function applyTheme(dark) {
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
+            toggle.textContent = dark ? '☀️' : '🌙';
+        }
+        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
+        applyTheme(savedDark);
+        toggle.addEventListener('click', () => {
+            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+            applyTheme(nowDark);
+        });
+    </script>
 </body>
 </html>

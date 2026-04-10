@@ -8,10 +8,39 @@
     <link rel="icon" href="/favicon.png">
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.mermaid').forEach(el => {
+          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
+        });
+      });
+      new MutationObserver(async () => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
+        document.querySelectorAll('.mermaid').forEach(el => {
+          const src = el.getAttribute('data-mermaid-src');
+          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
+        });
+        await mermaid.run();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    </script>
+    <script>
+        (function() {
+            const saved = localStorage.getItem('pf2-theme');
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
     </script>
 </head>
 <body>
+    <nav class="site-nav">
+        <div class="nav-left">
+            <a href="/index.html">🏠 Home</a>
+            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+            <a href="https://rays-home.netlify.app/contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
     <header>
         <h1>Pathfinder 2e: Campaign and Adventure Design</h1>
         <p><em>Crafting Memorable Stories and Engaging Adventures</em></p>
@@ -798,5 +827,24 @@ at high levels.</code></pre>
         <p>Your stories await their heroes - may your campaigns inspire legends and create memories that last forever!</p>
   
     </footer>
+    <nav class="prev-next-nav">
+        <a href="/pf2_horror.html" class="nav-prev">← Horror</a>
+        <a href="/index.html" class="nav-home">📋 Contents</a>
+        <a href="/pf2_gm.html" class="nav-next">Game Mastery →</a>
+    </nav>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        function applyTheme(dark) {
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
+            toggle.textContent = dark ? '☀️' : '🌙';
+        }
+        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
+        applyTheme(savedDark);
+        toggle.addEventListener('click', () => {
+            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+            applyTheme(nowDark);
+        });
+    </script>
 </body>
 </html>

@@ -8,10 +8,39 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.mermaid').forEach(el => {
+          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
+        });
+      });
+      new MutationObserver(async () => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
+        document.querySelectorAll('.mermaid').forEach(el => {
+          const src = el.getAttribute('data-mermaid-src');
+          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
+        });
+        await mermaid.run();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    </script>
+    <script>
+        (function() {
+            const saved = localStorage.getItem('pf2-theme');
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
     </script>
 </head>
 <body>
+    <nav class="site-nav">
+        <div class="nav-left">
+            <a href="/index.html">🏠 Home</a>
+            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+            <a href="https://rays-home.netlify.app/contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
     <div class="container">
         <header>
             <h1>Pathfinder 2nd Edition Character Examples and Adventure Groups</h1>
@@ -60,7 +89,7 @@
                     </div>
                     <p><strong>Role in Party:</strong> The unbreakable aegis—like a mountain standing against the storm, she absorbs punishment while her shield becomes an extension of her divine will. Her Champion's Reaction turns enemy attacks into opportunities to protect allies.</p>
                     
-                    <svg width="350" height="180" viewBox="0 0 350 180">
+                    <svg class="inline-svg" width="350" height="180" viewBox="0 0 350 180">
                         <rect x="50" y="35" width="65" height="85" fill="#8B4513" stroke="#654321" stroke-width="2"/>
                         <circle cx="83" cy="55" r="16" fill="#DDBEA9"/>
                         <rect x="68" y="75" width="30" height="35" fill="#C0C0C0"/>
@@ -574,6 +603,25 @@
             growthCtx.fillStyle = '#654321';
             growthCtx.textAlign = 'left';
             growthCtx.fillText(progression.name, 370, y + 8);
+        });
+    </script>
+    <nav class="prev-next-nav">
+        <a href="/pf2_adv_char_creation.html" class="nav-prev">← Advanced Character Creation</a>
+        <a href="/index.html" class="nav-home">📋 Contents</a>
+        <a href="/pf2_100.html" class="nav-next">100 Characters →</a>
+    </nav>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        function applyTheme(dark) {
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
+            toggle.textContent = dark ? '☀️' : '🌙';
+        }
+        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
+        applyTheme(savedDark);
+        toggle.addEventListener('click', () => {
+            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+            applyTheme(nowDark);
         });
     </script>
 </body>

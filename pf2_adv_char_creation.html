@@ -8,10 +8,39 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.mermaid').forEach(el => {
+          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
+        });
+      });
+      new MutationObserver(async () => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
+        document.querySelectorAll('.mermaid').forEach(el => {
+          const src = el.getAttribute('data-mermaid-src');
+          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
+        });
+        await mermaid.run();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    </script>
+    <script>
+        (function() {
+            const saved = localStorage.getItem('pf2-theme');
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
     </script>
 </head>
 <body>
+    <nav class="site-nav">
+        <div class="nav-left">
+            <a href="/index.html">🏠 Home</a>
+            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+            <a href="https://rays-home.netlify.app/contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
     <header>
         <h1>Advanced Character Creation</h1>
         <p class="subtitle">Mastering the Art of Character Optimization and Synergy</p>
@@ -382,7 +411,7 @@
                         <div class="web-example">
                             <h5>Example: The Social Manipulator</h5>
                             <div class="web-visualization">
-                                <svg width="400" height="300" viewBox="0 0 400 300">
+                                <svg class="inline-svg" width="400" height="300" viewBox="0 0 400 300">
                                     <!-- Central concept -->
                                     <circle cx="200" cy="150" r="40" fill="#ff9800" stroke="#333" stroke-width="2"/>
                                     <text x="200" y="155" text-anchor="middle" font-size="12" font-weight="bold">Social Control</text>
@@ -1086,24 +1115,153 @@
     </footer>
 
     <script>
-        // Weapon scaling comparison chart
+    (function() {
         const canvas = document.getElementById('weaponScalingChart');
+        if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Data for weapon effectiveness over levels
-        const levels = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
-        
-        // Different weapon approaches (normalized effectiveness scores)
-        const basicWeapon = [5, 7, 10, 12, 15, 17, 20, 22, 25, 27];
-        const specializedWeapon = [4, 6, 12, 16, 20, 25, 32, 38, 45, 52];
-        const magicalWeapon = [3, 5, 8, 15, 22, 30, 38, 47, 56, 65];
-        
-        const chartWidth = 500;
-        const chartHeight = 200;
-        const startX = 50;
-        const startY = 250;
-        
-        //
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = 600 * dpr;
+        canvas.height = 300 * dpr;
+        canvas.style.width = '600px';
+        canvas.style.height = '300px';
+        canvas.style.maxWidth = '100%';
+        ctx.scale(dpr, dpr);
+
+        const checkDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+
+        // Avg damage per strike at each level (simplified model)
+        // Greatsword (2d12 base, brutal), Longsword (1d8, versatile), Dagger (1d4, agile)
+        const levels = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+        const greatsword = [13,14,15,16,18,22,24,26,28,30,34,36,40,42,46,48,52,54,58,62];
+        const longsword  = [8,9,10,11,13,16,18,20,22,24,28,30,34,36,40,42,46,48,52,56];
+        const dagger     = [5,6,7,8,10,12,14,16,18,20,23,25,28,30,33,35,38,40,43,46];
+
+        function draw() {
+            const W = 600, H = 300;
+            const pad = {t:30, r:20, b:45, l:50};
+            const gW = W - pad.l - pad.r;
+            const gH = H - pad.t - pad.b;
+            const dark = checkDark();
+
+            ctx.clearRect(0, 0, W, H);
+
+            // Background
+            ctx.fillStyle = dark ? '#1e293b' : '#f8fafc';
+            ctx.fillRect(0, 0, W, H);
+
+            // Grid
+            ctx.strokeStyle = dark ? '#334155' : '#e2e8f0';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i <= 6; i++) {
+                const y = pad.t + (gH / 6) * i;
+                ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+            }
+
+            // Axes
+            ctx.strokeStyle = dark ? '#94a3b8' : '#64748b';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, H - pad.b); ctx.lineTo(W - pad.r, H - pad.b); ctx.stroke();
+
+            // Labels
+            ctx.fillStyle = dark ? '#cbd5e1' : '#334155';
+            ctx.font = 'bold 12px Trebuchet MS, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Average Damage by Level — Weapon Type Comparison', W / 2, 18);
+
+            ctx.font = '10px Trebuchet MS, sans-serif';
+            // X labels
+            levels.forEach((lv, i) => {
+                const x = pad.l + (gW / (levels.length - 1)) * i;
+                if (lv % 2 === 1 || lv === 20) ctx.fillText(lv, x, H - pad.b + 16);
+            });
+            ctx.fillText('Character Level', W / 2, H - 5);
+
+            // Y labels
+            ctx.textAlign = 'right';
+            const maxD = 70;
+            for (let i = 0; i <= 6; i++) {
+                const val = Math.round((maxD / 6) * (6 - i));
+                const y = pad.t + (gH / 6) * i;
+                ctx.fillText(val, pad.l - 6, y + 4);
+            }
+
+            // Draw lines
+            function line(data, color) {
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                data.forEach((d, i) => {
+                    const x = pad.l + (gW / (levels.length - 1)) * i;
+                    const y = pad.t + gH - (d / maxD) * gH;
+                    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                });
+                ctx.stroke();
+                // dots
+                data.forEach((d, i) => {
+                    if (i % 4 === 0 || i === data.length - 1) {
+                        const x = pad.l + (gW / (levels.length - 1)) * i;
+                        const y = pad.t + gH - (d / maxD) * gH;
+                        ctx.fillStyle = color;
+                        ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI * 2); ctx.fill();
+                    }
+                });
+            }
+
+            line(greatsword, '#ef4444');
+            line(longsword, '#3b82f6');
+            line(dagger, '#22c55e');
+
+            // Legend
+            const ly = H - pad.b + 32;
+            const items = [['Greatsword (2-hand)','#ef4444'],['Longsword (versatile)','#3b82f6'],['Dagger (agile)','#22c55e']];
+            ctx.font = '10px Trebuchet MS, sans-serif';
+            ctx.textAlign = 'left';
+            let lx = pad.l + 40;
+            items.forEach(([label, c]) => {
+                ctx.fillStyle = c;
+                ctx.fillRect(lx, ly - 6, 14, 3);
+                ctx.fillStyle = dark ? '#cbd5e1' : '#334155';
+                ctx.fillText(label, lx + 18, ly);
+                lx += 150;
+            });
+
+            // Phase annotations
+            ctx.fillStyle = dark ? 'rgba(148,163,184,0.3)' : 'rgba(100,116,139,0.12)';
+            const x5 = pad.l + (gW / 19) * 4;
+            const x12 = pad.l + (gW / 19) * 11;
+            ctx.fillRect(pad.l, pad.t, x5 - pad.l, gH);
+            ctx.fillRect(x12, pad.t, W - pad.r - x12, gH);
+            ctx.fillStyle = dark ? '#94a3b8' : '#64748b';
+            ctx.font = '9px Trebuchet MS, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Early', (pad.l + x5) / 2, pad.t + 14);
+            ctx.fillText('Mid Game', (x5 + x12) / 2, pad.t + 14);
+            ctx.fillText('Late Game', (x12 + W - pad.r) / 2, pad.t + 14);
+        }
+
+        draw();
+        // Redraw on theme change
+        new MutationObserver(draw).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
+    })();
+    </script>
+    <nav class="prev-next-nav">
+        <a href="/pf2_char.html" class="nav-prev">← Character Creation</a>
+        <a href="/index.html" class="nav-home">📋 Contents</a>
+        <a href="/pf2_character_examples.html" class="nav-next">Character Examples →</a>
+    </nav>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        function applyTheme(dark) {
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
+            toggle.textContent = dark ? '☀️' : '🌙';
+        }
+        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
+        applyTheme(savedDark);
+        toggle.addEventListener('click', () => {
+            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+            applyTheme(nowDark);
+        });
+    </script>
+</body>
+</html>

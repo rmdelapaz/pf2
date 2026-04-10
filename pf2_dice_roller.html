@@ -532,9 +532,84 @@
             background: rgba(218, 165, 32, 0.3);
             color: #daa520;
         }
+
+        /* Prevent main.css dark mode from overriding dice roller's custom theme */
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #1a0e2e 0%, #3d1a00 25%, #2e1a0e 50%, #1a3d00 75%, #0e2e1a 100%);
+            color: #ffffff;
+        }
+        [data-theme="dark"] h1 {
+            background-color: transparent;
+            color: #daa520;
+        }
+        [data-theme="dark"] h2 {
+            background-color: transparent;
+            color: #daa520;
+        }
+        [data-theme="dark"] h3, [data-theme="dark"] h4 {
+            background-color: transparent;
+            color: #daa520;
+        }
+        [data-theme="dark"] a {
+            color: #e0e7ff;
+        }
+        [data-theme="dark"] strong {
+            color: #ffffff;
+        }
+        [data-theme="dark"] code, [data-theme="dark"] pre {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #4ade80;
+        }
+        [data-theme="dark"] table, [data-theme="dark"] td,
+        [data-theme="dark"] tr, [data-theme="dark"] th {
+            border-color: rgba(218, 165, 32, 0.3);
+            color: #ffffff;
+        }
+        [data-theme="dark"] .site-nav {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        [data-theme="dark"] .prev-next-nav {
+            border-top-color: rgba(218, 165, 32, 0.3);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.2em; }
+            .container { padding: 15px; }
+            .dice-section { padding: 15px; }
+            .preset-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+            .dice-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; }
+            .roll-btn { padding: 15px 30px; font-size: 1.5em; }
+            .results { padding: 15px; }
+            .result-total { font-size: 2.8em; padding: 15px; }
+            .result-label { font-size: 1.4em; padding: 10px; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6em; }
+            .preset-grid { grid-template-columns: 1fr 1fr; }
+            .dice-grid { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); }
+            .result-total { font-size: 2.2em; }
+            .roll-btn { padding: 12px 24px; font-size: 1.3em; }
+        }
     </style>
+    <script>
+        (function() {
+            const saved = localStorage.getItem('pf2-theme');
+            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+    </script>
 </head>
 <body>
+    <nav class="site-nav">
+        <div class="nav-left">
+            <a href="/index.html">🏠 Home</a>
+            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+            <a href="https://rays-home.netlify.app/contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
     <div class="container">
         <h1>Pathfinder</h1>
         <div class="subtitle">2nd Edition Dice Roller</div>
@@ -964,6 +1039,25 @@
             } else if (e.key === 'h' || e.key === 'H') {
                 setHeroPoint(currentHeroPoint === 'use' ? 'none' : 'use');
             }
+        });
+    </script>
+    <nav class="prev-next-nav">
+        <a href="/pf2_actions.html" class="nav-prev">← Core Mechanics</a>
+        <a href="/index.html" class="nav-home">📋 Contents</a>
+        <a href="/pf2_skills.html" class="nav-next">Skills →</a>
+    </nav>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        function applyTheme(dark) {
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
+            toggle.textContent = dark ? '☀️' : '🌙';
+        }
+        const isDark = localStorage.getItem('pf2-theme') === 'dark';
+        applyTheme(isDark);
+        toggle.addEventListener('click', () => {
+            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+            applyTheme(nowDark);
         });
     </script>
 </body>
