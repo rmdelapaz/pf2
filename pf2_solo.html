@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Pathfinder 2e Solo - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <style>
+        /* Solo tools: themed via the tokens in /styles/main.css */
+        main .tip-box { border-left: 5px solid var(--gold) !important; }
+        main .example-box { border-left: 5px solid var(--accent) !important; }
+        .oracle-tool { border-top: 4px solid var(--accent) !important; }
+        .oracle-tool h3 { margin-top: 0; }
+        .tool-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin: 10px 0; }
+        .tool-row label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; color: var(--heading); font-size: 0.95rem; }
+        .tool-row .grow { flex: 1 1 260px; }
+        .tool-row .grow input { width: 100%; }
+        main .tool-row button { margin: 0; width: auto; }
+        main .tool-row select { width: auto; }
+        .oracle-out {
+            margin: 12px 0; padding: 14px 16px; border-radius: 12px; min-height: 96px;
+            background: var(--surface-2); border: 2px solid var(--border-strong);
+            display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; align-items: center;
+        }
+        .oracle-out .face { grid-row: span 2; }
+        .oracle-out .die {
+            width: 58px; height: 58px; display: grid; place-items: center; font: 700 1.5rem/1 "Source Sans 3", sans-serif;
+            background: #fff; color: #1c1417; border: 0; box-shadow: inset 0 0 0 3px #c9b8bd;
+            clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+        }
+        .oracle-out .die.hi { background: #e3f4e8; }
+        .oracle-out .die.lo { background: #fbe4e1; }
+        .oracle-out .answer { font-family: "Alegreya", Georgia, serif; font-weight: 700; font-size: 1.4rem; color: var(--heading); }
+        .oracle-out .detail { color: var(--muted); font-size: 0.95rem; }
+        .oracle-out.yes { border-color: var(--success); }
+        .oracle-out.yes .answer { color: var(--success); }
+        .oracle-out.no { border-color: var(--danger); }
+        .oracle-out.no .answer { color: var(--danger); }
+        .oracle-out.mixed { border-color: var(--gold); }
+        .oracle-out .spark { grid-column: 1 / -1; color: var(--text); }
+        .oracle-out .spark:empty { display: none; }
+        .oracle-out .spark ul { margin: 4px 0 0; }
+        @media (max-width: 520px) { .oracle-out { grid-template-columns: 1fr; } .oracle-out .face { grid-row: auto; } }
+        .oracle-log { list-style: none; padding: 0; margin: 10px 0 0; max-height: 260px; overflow-y: auto; }
+        .oracle-log li { padding: 6px 10px; border-bottom: 1px solid var(--border); font-size: 0.95rem; margin: 0; }
+        .oracle-log li:last-child { border-bottom: 0; }
+        .odds td, .odds th { text-align: center; font-variant-numeric: tabular-nums; }
+        .odds td:first-child, .odds th:first-child { text-align: left; }
+        .spark-tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 12px; }
+        .spark-tables ol { margin: 0; padding-left: 1.4rem; }
+        .spark-tables h4 { margin-top: 0; }
+    </style>
+</head>
+<body>
+<nav class="site-nav">
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+    <header>
+        <span class="lesson-kicker">Part 18</span>
+        <h1>Playing Pathfinder 2e Solo</h1>
+        <p>A degrees-of-success oracle, encounter math for small parties, and how to be your own GM</p>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>Why Pathfinder 2e Works Alone</h2>
+            <p>Pathfinder Second Edition is written for a GM and a group of players, and its core books have no solo chapter. Two things make it a surprisingly good solo game anyway. First, <strong>degrees of success</strong>: every roll already tells you not just "yes or no" but "how well", which is exactly what a solo player needs from an oracle. Second, the rules for building encounters are <strong>pure math</strong>. GM Core gives you an XP budget, so you can build a fair fight for your own heroes without knowing in advance how it will go.</p>
+            <p>The real challenge is that the game is balanced around <strong>four</strong> heroes who cover each other's weaknesses. This part shows you how to handle that, then gives you an oracle, scene checks and sparks for everything a GM would normally decide.</p>
+
+            <div class="example-box">
+                <h3>The Dice Are Your GM</h3>
+                <p>At a table, the GM knows what's behind the door. Solo, you decide what you <em>expect</em>, then let the dice confirm it, twist it or overturn it. You make the same checks you always would, and the oracle answers everything else.</p>
+            </div>
+
+            <div class="objectives">
+                <h3>What You'll Find in This Part</h3>
+                <ul>
+                    <li>How many heroes to play, with the exact encounter budgets for one to four characters</li>
+                    <li>A yes/no oracle that reads a d20 with Pathfinder's own degrees of success, with exact odds</li>
+                    <li>Scene checks, sparks and NPC attitudes for running the world yourself</li>
+                    <li>Survival advice for when no one else can stabilize you, a routine and a worked example</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="solo-kit">
+            <h2>Your Solo Kit</h2>
+            <ul>
+                <li><strong>Your dice</strong>, or the guide's <a href="/pf2_dice_roller.html">dice roller</a>, which shows degrees of success and exact odds.</li>
+                <li><strong>One or more heroes</strong>, built with <a href="/pf2_char.html">character creation</a> or picked from the <a href="/pf2_100.html">sample characters</a>. Pathbuilder 2e keeps the math straight.</li>
+                <li><strong>The rules.</strong> Player Core and GM Core, or Archives of Nethys, the official free online rules reference. Monster Core (or a pre-Remaster Bestiary) for foes.</li>
+                <li><strong>A journal</strong> for threads, NPCs and what your heroes know.</li>
+            </ul>
+            <div class="tip-box">
+                <p>💡 <strong>Tip:</strong> General-purpose GM emulators such as <em>Mythic Game Master Emulator</em> (Word Mill Games) work with Pathfinder too. This part sticks to dice and tables built from Pathfinder's own rules. For solo play in general, see Ray's <a href="https://rays-solorpg.netlify.app/" target="_blank" rel="noopener noreferrer">Solo RPG Mastery guide</a>.</p>
+            </div>
+        </section>
+
+        <section class="solo-party">
+            <h2>One Hero or a Party?</h2>
+            <p>The encounter budget in GM Core is set for four characters, with an adjustment for every character more or fewer. Working it out for small parties shows why a lone hero has it hard:</p>
+            <table class="odds">
+                <thead>
+                    <tr><th>Heroes</th><th>Moderate</th><th>Severe</th><th>Extreme</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>4 (the default)</td><td>80 XP</td><td>120 XP</td><td>160 XP</td></tr>
+                    <tr><td>3</td><td>60 XP</td><td>90 XP</td><td>120 XP</td></tr>
+                    <tr><td>2</td><td>40 XP</td><td>60 XP</td><td>80 XP</td></tr>
+                    <tr><td>1</td><td>20 XP</td><td>30 XP</td><td>40 XP</td></tr>
+                </tbody>
+            </table>
+            <p>A creature of your level is worth 40 XP, one level lower 30 XP, and two levels lower 20 XP. So for a single hero, a <strong>moderate</strong> fight is one foe two levels below you, and one foe of your own level is already <strong>extreme</strong>. The low and trivial budgets shrink to almost nothing at one hero, which is a sign the math is stretched.</p>
+            <ul>
+                <li><strong>Two to four heroes is the sweet spot.</strong> You make all their choices, but the encounter math works as designed and the party covers healing, skills and damage between them. Four heroes is the most work but plays exactly like the book.</li>
+                <li><strong>One hero plus a companion</strong> (an animal companion, a familiar, or a hired guard you run as a simple NPC) gives you someone to flank with and someone to talk to.</li>
+                <li><strong>One hero alone</strong> works best with the <strong>Free Archetype</strong> variant rule in GM Core, which hands out an extra archetype feat at every even level so one character can cover more roles. Keep fights to single foes or small groups, and lean on Hero Points.</li>
+            </ul>
+        </section>
+
+        <section class="d20-oracle">
+            <h2>The Degrees-of-Success Oracle</h2>
+            <p>Ask a yes/no question you genuinely don't know the answer to, decide how likely "yes" is, and roll a d20 against an oracle DC, exactly like a flat check. Each step of likelihood moves the DC by 3:</p>
+            <ul>
+                <li><strong>Very likely:</strong> DC 5</li>
+                <li><strong>Likely:</strong> DC 8</li>
+                <li><strong>Toss-up:</strong> DC 11</li>
+                <li><strong>Unlikely:</strong> DC 14</li>
+                <li><strong>Very unlikely:</strong> DC 17</li>
+            </ul>
+            <p>Roll a d20 with no modifier and work out the degree of success the normal way: beat the DC by 10 or more for a critical success, miss it by 10 or more for a critical failure, and a natural 20 or natural 1 moves the result one step. Then read it:</p>
+            <div class="oracle-outcomes">
+                <ul>
+                    <li><strong>Critical success</strong> → <strong>Yes, and…</strong> Yes, plus something extra in your favor.</li>
+                    <li><strong>Success</strong> by 2 or more → <strong>Yes.</strong></li>
+                    <li><strong>Success</strong> exactly on the DC or 1 over → <strong>Yes, but…</strong> Yes, with a complication or cost.</li>
+                    <li><strong>Failure</strong> by 1 or 2 → <strong>No, but…</strong> No, with a consolation or an opening.</li>
+                    <li><strong>Failure</strong> by more → <strong>No.</strong></li>
+                    <li><strong>Critical failure</strong> → <strong>No, and…</strong> No, and things get worse.</li>
+                </ul>
+            </div>
+            <p>The degrees are Pathfinder's own rules; the "but" answers near the DC are this guide's addition, so close calls bring a twist instead of a flat answer.</p>
+
+            <h3>The Odds</h3>
+            <p>Every face of a d20 is equally likely (5%), so these odds are exact:</p>
+            <table class="odds">
+                <thead>
+                    <tr><th>Likelihood (DC)</th><th>No, and…</th><th>No</th><th>No, but…</th><th>Yes, but…</th><th>Yes</th><th>Yes, and…</th><th>Any yes</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Very likely (5)</td><td>5%</td><td>5%</td><td>10%</td><td>10%</td><td>40%</td><td>30%</td><td>80%</td></tr>
+                    <tr><td>Likely (8)</td><td>5%</td><td>20%</td><td>10%</td><td>10%</td><td>40%</td><td>15%</td><td>65%</td></tr>
+                    <tr><td>Toss-up (11)</td><td>5%</td><td>35%</td><td>10%</td><td>10%</td><td>35%</td><td>5%</td><td>50%</td></tr>
+                    <tr><td>Unlikely (14)</td><td>20%</td><td>35%</td><td>10%</td><td>10%</td><td>20%</td><td>5%</td><td>35%</td></tr>
+                    <tr><td>Very unlikely (17)</td><td>35%</td><td>35%</td><td>10%</td><td>10%</td><td>5%</td><td>5%</td><td>20%</td></tr>
+                </tbody>
+            </table>
+            <p>Two things to notice. Like a real check, an easy question often comes back as a critical success and a hard one as a critical failure, so lopsided questions bring big answers. And "Likely" says yes exactly as often as "Unlikely" says no, but the extremes aren't perfect mirrors: success includes the DC itself, so a critical success needs DC + 10 while a critical failure needs DC − 10 or lower. That's one face of difference, and it's the same in every Pathfinder check.</p>
+        </section>
+
+        <section class="solo-scenes">
+            <h2>Running Scenes Solo</h2>
+            <div class="mermaid">
+graph TD
+    A[Picture the scene you expect] --> B{Scene check d20}
+    B -->|11-20 As expected| C[Play the scene]
+    B -->|5-10 Altered| D[Change one detail]
+    B -->|1-4 Interrupted| E[Something else happens&lt;br/&gt;roll a spark]
+    D --> C
+    E --> C
+    C --> F[Encounter, exploration&lt;br/&gt;or downtime]
+    F --> G[Checks, oracle, NPC attitudes]
+    G --> H[Note threads and XP]
+    H --> A
+            </div>
+
+            <h3>The Scene Check</h3>
+            <p>Before each scene, decide what you expect to happen, then roll a d20 like a DC 11 flat check. This is a house rule, not a Pathfinder rule:</p>
+            <ul>
+                <li><strong>11–20 (50%): As expected.</strong> Play the scene as you imagined it.</li>
+                <li><strong>5–10 (30%): Altered.</strong> It's mostly what you expected, but one detail is different.</li>
+                <li><strong>1–4 (20%): Interrupted.</strong> Something else happens. Roll a spark and build the scene around it.</li>
+            </ul>
+
+            <h3>Sparks</h3>
+            <p>When you need ideas, roll a d6 on each of these tables. They're this guide's tables, not official ones; swap in your own as your campaign grows.</p>
+            <div class="spark-tables">
+                <div class="tip-box"><h4>Threat (d6)</h4><ol><li>Creatures defending their lair</li><li>A rival adventuring party</li><li>A hazard: a trap, collapse or magical ward</li><li>Agents of the villain you're hunting</li><li>Hungry wildlife or something worse</li><li>The weather or the land itself</li></ol></div>
+                <div class="tip-box"><h4>Complication (d6)</h4><ol><li>An innocent is in the way</li><li>The clock is running: act within 3 rounds</li><li>Your way out is blocked</li><li>Someone lied to you</li><li>Your gear is damaged or lost</li><li>Two enemies are about to clash</li></ol></div>
+                <div class="tip-box"><h4>Discovery (d6)</h4><ol><li>A clue to your main goal</li><li>Treasure, though someone will miss it</li><li>A potential ally in trouble</li><li>An old map or journal</li><li>A shrine to a forgotten god</li><li>A secret door or hidden path</li></ol></div>
+            </div>
+        </section>
+
+        <section class="solo-npcs">
+            <h2>NPCs and Attitudes</h2>
+            <p>Pathfinder tracks how non-player characters feel about you with five <strong>attitudes</strong>: hostile, unfriendly, indifferent, friendly and helpful. When you meet someone and their attitude isn't obvious from the story, roll a d20 (this guide's table):</p>
+            <ul>
+                <li><strong>1–2:</strong> Hostile</li>
+                <li><strong>3–7:</strong> Unfriendly</li>
+                <li><strong>8–14:</strong> Indifferent</li>
+                <li><strong>15–19:</strong> Friendly</li>
+                <li><strong>20:</strong> Helpful</li>
+            </ul>
+            <p>From there, use the real rules. To change someone's mind, <strong>Make an Impression</strong>: spend at least a minute talking, then roll Diplomacy against their Will DC. A critical success improves their attitude by two steps, a success by one, and a critical failure makes it one step worse. Once they're friendly or helpful, you can <strong>Request</strong> something. For everything else ("Does she know where the relic went?"), ask the oracle, setting the likelihood from what the NPC wants and knows.</p>
+        </section>
+
+        <section class="oracle-section">
+            <div class="oracle-tool" id="oracle">
+                <h3>🎲 Try the Solo Tools</h3>
+                <div class="tool-row">
+                    <label class="grow">Your question
+                        <input type="text" id="oracle-question" placeholder="Is the cultist leader in the crypt?" maxlength="160">
+                    </label>
+                    <label>Likelihood
+                        <select id="oracle-odds">
+                            <option value="5">Very likely (DC 5)</option>
+                            <option value="8">Likely (DC 8)</option>
+                            <option value="11" selected>Toss-up (DC 11)</option>
+                            <option value="14">Unlikely (DC 14)</option>
+                            <option value="17">Very unlikely (DC 17)</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="tool-row">
+                    <button type="button" id="oracle-ask">Ask the Oracle</button>
+                    <button type="button" id="scene-check">Scene Check</button>
+                    <button type="button" id="spark-btn">Spark</button>
+                    <button type="button" id="attitude-btn">NPC Attitude</button>
+                </div>
+                <div class="oracle-out" id="oracle-out" aria-live="polite">
+                    <div class="face" id="oracle-face" aria-hidden="true"></div>
+                    <div class="answer" id="oracle-answer">Ask a question to begin</div>
+                    <div class="detail" id="oracle-detail">Pick a likelihood, then press Ask the Oracle.</div>
+                    <div class="spark" id="oracle-spark"></div>
+                </div>
+                <h4>Session Log</h4>
+                <ul class="oracle-log" id="oracle-log"><li>Your rolls will appear here.</li></ul>
+                <div class="tool-row">
+                    <button type="button" id="log-copy">Copy Log</button>
+                    <button type="button" id="log-clear">Clear Log</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="solo-opposition">
+            <h2>Running Foes</h2>
+            <h3>Monsters Follow the Same Rules</h3>
+            <p>Creatures get three actions and a reaction, roll initiative (usually Perception or Stealth), and take the multiple attack penalty just like you. Roll their attacks and saves in the open, and track their Hit Points as a GM would.</p>
+            <h3>Let the Oracle Pick Tactics</h3>
+            <p>Decide what the creature would most likely do, then check anything you're unsure about: "Does the ogre go for the wounded hero?" (likely), "Does the bandit flee at half HP?" (toss-up). Cunning foes target weak defenses; animals flee when badly hurt; mindless undead just keep coming.</p>
+            <h3>Rewards Still Matter</h3>
+            <p>Award XP for encounters and accomplishments as GM Core describes (1,000 XP per level), and hand out treasure by level so your heroes keep up with the foes. The <a href="/pf2_items.html">Equipment &amp; Treasure</a> part covers the fundamental runes your heroes will rely on.</p>
+        </section>
+
+        <section class="solo-survival">
+            <h2>Staying Alive Without a Party</h2>
+            <ul>
+                <li><strong>Use your Hero Points.</strong> You start each session with 1 and can hold up to 3. Spend one to reroll a check, or spend all of them when you're dying to avoid death. Award yourself more for heroic moments, the way a GM would.</li>
+                <li><strong>Remember how dying works.</strong> At 0 HP you're dying 1 (dying 2 from a critical hit), plus your wounded value, and you die at dying 4. Each turn you roll a recovery check, a flat check against DC 10 + your dying value. Alone, nobody can stabilize you, so retreat early.</li>
+                <li><strong>Treat Wounds between fights.</strong> Ten minutes and a DC 15 Medicine check heal 2d8 HP (4d8 on a critical success), and then that hero can't be treated again for an hour. A trained Medicine user is the single best addition to a solo party.</li>
+                <li><strong>Raise a Shield and use cover.</strong> With no one to draw attacks, spending one action on defense each turn is often worth more than a third Strike at −10.</li>
+            </ul>
+        </section>
+
+        <section class="solo-howto">
+            <h2>🛠️ How To: Your First Solo Session</h2>
+            <ol>
+                <li><strong>Choose your heroes:</strong> one plus a companion, or a small party.</li>
+                <li><strong>Write a one-line goal.</strong> "Recover the stolen reliquary from the smugglers under the docks." That's the session's question.</li>
+                <li><strong>Picture the first scene</strong> and make a scene check.</li>
+                <li><strong>Build encounters with the budget</strong> for your party size before you roll anything, and write them down.</li>
+                <li><strong>Play.</strong> Make checks, roll for foes, roll NPC attitudes, and ask the oracle about everything you don't know.</li>
+                <li><strong>Note XP, treasure and new threads</strong>, then move to the next scene.</li>
+                <li><strong>Stop</strong> when the goal is met or at a good cliffhanger, and write a short journal entry.</li>
+            </ol>
+        </section>
+
+        <section class="solo-example">
+            <h2>Example of Play</h2>
+            <p>Kaida Ironblossom, the dwarf champion from <a href="/pf2_character_examples.html">Character Examples</a>, plays alone at 1st level. Her numbers, built with the Remaster rules: Strength +4, Dexterity +1, Constitution +2, Charisma +2; 22 HP; AC 18 in scale mail (20 with her steel shield raised); longsword +7 (1d8+4); Diplomacy +5; Perception +3.</p>
+            <div class="example-box">
+                <p><strong>Scene check:</strong> Kaida expects an empty storeroom under the docks. She rolls a 7 on the d20: <em>Altered</em>. A smuggler is here, counting coins by lantern light.</p>
+                <p><strong>Attitude:</strong> She rolls a 6: <em>unfriendly</em>. Kaida tries to Make an Impression: Diplomacy +5, rolling 12 for a total of 17 against his Will DC of 15. Success: he's now indifferent.</p>
+                <p><strong>Question:</strong> "Does he know where the reliquary went?" He works here, so it's likely (DC 8). She rolls 9: success, just 1 over the DC. <strong>Yes, but…</strong> He knows, but he wants her to deal with the giant rats in the lower cellar first.</p>
+                <p><strong>Encounter:</strong> For one 1st-level hero, a moderate fight is 20 XP: one creature two levels lower, such as a single giant rat (level −1). Say its AC is 15. Kaida's turn: Strike at +7, rolling 14 for 21. That's a success (a critical hit would need 25), for 1d8+4 damage. Second Strike with the multiple attack penalty, at +2: she rolls 13 for 15, exactly the AC, another hit. Third action: Raise a Shield, AC 20 until her next turn.</p>
+                <p><strong>Afterward:</strong> Kaida took a bite, so she spends 10 minutes treating the wound before going back upstairs. She notes the smuggler's price and the 20 XP, and asks her next question.</p>
+            </div>
+        </section>
+
+        <section class="solo-faq">
+            <h2>Common Questions</h2>
+            <h4>Isn't it boring to know everything already?</h4>
+            <p>You won't. Scene checks, sparks, NPC attitudes and the oracle answer the questions you'd normally leave to a GM, so you discover the story as you play.</p>
+            <h4>Should I use a published adventure?</h4>
+            <p>You can. Read only one encounter or area ahead, and use the oracle and scene checks for anything the adventure doesn't cover. Expect to scale fights down with the budget table if you're playing fewer than four heroes.</p>
+            <h4>What if the oracle gives an answer that makes no sense?</h4>
+            <p>Reinterpret it before you roll again. A "yes" that seems impossible often hides a twist. If it truly breaks the story, treat it as a "but" answer or ask a smaller question.</p>
+            <h4>How do I avoid fudging for my heroes?</h4>
+            <p>Build encounters with the budget before you roll, write DCs down before you check, roll foes' attacks in the open, and ask the oracle rather than choosing when you're tempted.</p>
+        </section>
+
+        <section class="conclusion">
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>The encounter budget scales down to any party size, but one hero stretches it: two to four heroes, or one plus a companion, plays best.</li>
+                <li>The oracle reads a flat d20 against DC 5 to 17 with Pathfinder's degrees of success, plus "but" answers right around the DC.</li>
+                <li>Scene checks, sparks and attitude rolls run the world; Make an Impression and the oracle handle NPCs.</li>
+                <li>Hero Points, Treat Wounds and a raised shield keep a small party alive.</li>
+            </ul>
+
+            <div class="journal">
+                <h3>📓 Journal Prompts</h3>
+                <p>After your first solo session, jot down:</p>
+                <ul>
+                    <li>Which scene surprised you most, and what made it?</li>
+                    <li>Were your encounters too easy or too hard for your party size?</li>
+                    <li>Which NPC changed attitude, and why?</li>
+                    <li>What threads will you follow next time?</li>
+                </ul>
+            </div>
+
+            <div class="next-steps">
+                <h3>Where to Go Next</h3>
+                <p>That's the last numbered part. The guide continues with its tools: the <a href="/pf2_dice_roller.html">Dice Roller</a>, the <a href="/pf2_100.html">Sample Characters</a>, <a href="/pf2_names.html">150 Character Names</a> and <a href="/pf2_digital_tools.html">Digital Tools</a>.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_community.html">Community Building</a>
+    <a class="next" href="/pf2_dice_roller.html">Dice Roller</a>
+</div>
+    </footer>
+
+    <script>
+        (function () {
+            'use strict';
+            const $ = (id) => document.getElementById(id);
+            const roll = (s) => Math.floor(Math.random() * s) + 1;
+            const NAMES = { 5: 'Very likely', 8: 'Likely', 11: 'Toss-up', 14: 'Unlikely', 17: 'Very unlikely' };
+            const THREAT = ['Creatures defending their lair', 'A rival adventuring party', 'A hazard: a trap, collapse or magical ward', "Agents of the villain you're hunting", 'Hungry wildlife or something worse', 'The weather or the land itself'];
+            const COMPLICATION = ['An innocent is in the way', 'The clock is running: act within 3 rounds', 'Your way out is blocked', 'Someone lied to you', 'Your gear is damaged or lost', 'Two enemies are about to clash'];
+            const DISCOVERY = ['A clue to your main goal', 'Treasure, though someone will miss it', 'A potential ally in trouble', 'An old map or journal', 'A shrine to a forgotten god', 'A secret door or hidden path'];
+
+            // Pathfinder degree of success for a flat d20 against a DC.
+            function degree(face, dc) {
+                let g = face >= dc + 10 ? 3 : face >= dc ? 2 : face <= dc - 10 ? 0 : 1;
+                if (face === 20) g = Math.min(3, g + 1);
+                if (face === 1) g = Math.max(0, g - 1);
+                return g;
+            }
+            // The oracle (see the rules above): degrees, plus "but" answers near the DC.
+            function oracle(face, dc) {
+                const g = degree(face, dc);
+                if (g === 3) return ['yes', 'Yes, and…', 'critical success'];
+                if (g === 0) return ['no', 'No, and…', 'critical failure'];
+                if (g === 2) return face <= dc + 1 ? ['mixed', 'Yes, but…', 'success'] : ['yes', 'Yes', 'success'];
+                return face >= dc - 2 ? ['mixed', 'No, but…', 'failure'] : ['no', 'No', 'failure'];
+            }
+            function spark() {
+                const t = roll(6), c = roll(6), d = roll(6);
+                return ['Threat (' + t + '): ' + THREAT[t - 1], 'Complication (' + c + '): ' + COMPLICATION[c - 1], 'Discovery (' + d + '): ' + DISCOVERY[d - 1]];
+            }
+            function attitude(r) {
+                return r <= 2 ? 'Hostile' : r <= 7 ? 'Unfriendly' : r <= 14 ? 'Indifferent' : r <= 19 ? 'Friendly' : 'Helpful';
+            }
+
+            function showDie(v, cls) {
+                const box = $('oracle-face'); box.textContent = '';
+                const d = document.createElement('span'); d.className = 'die' + (cls ? ' ' + cls : ''); d.textContent = v; box.appendChild(d);
+            }
+            function setResult(kind, ans, detail, lines) {
+                $('oracle-out').className = 'oracle-out ' + kind;
+                $('oracle-answer').textContent = ans;
+                $('oracle-detail').textContent = detail;
+                const sp = $('oracle-spark'); sp.textContent = '';
+                if (lines && lines.length) {
+                    const ul = document.createElement('ul');
+                    lines.forEach((t) => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+                    sp.appendChild(ul);
+                }
+            }
+            function log(text) {
+                const list = $('oracle-log');
+                if (list.dataset.started !== '1') { list.textContent = ''; list.dataset.started = '1'; }
+                const li = document.createElement('li');
+                li.textContent = text;   // user text is never parsed as HTML
+                list.prepend(li);
+                while (list.children.length > 200) list.lastElementChild.remove();
+            }
+
+            $('oracle-ask').addEventListener('click', () => {
+                const q = $('oracle-question').value.trim();
+                const dc = parseInt($('oracle-odds').value, 10);
+                const r = roll(20), [kind, ans, deg] = oracle(r, dc);
+                showDie(r, r >= dc ? 'hi' : 'lo');
+                setResult(kind, ans, 'Rolled ' + r + ' vs DC ' + dc + ' (' + NAMES[dc] + '): ' + deg + (r === 20 ? ', natural 20' : r === 1 ? ', natural 1' : '') + '.', null);
+                log((q ? '“' + q + '” ' : '') + NAMES[dc] + ': ' + ans + ' (' + r + ')');
+            });
+
+            $('scene-check').addEventListener('click', () => {
+                const r = roll(20);
+                let kind, ans, detail, lines = null;
+                if (r <= 4) { kind = 'no'; ans = 'Interrupted'; detail = 'Something else happens. Build the scene around this spark:'; lines = spark(); }
+                else if (r <= 10) { kind = 'mixed'; ans = 'Altered'; detail = "It's mostly what you expected, but one detail is different."; }
+                else { kind = 'yes'; ans = 'As expected'; detail = 'Play the scene as you imagined it.'; }
+                showDie(r, kind === 'yes' ? 'hi' : 'lo');
+                setResult(kind, ans, 'Scene check: d20 = ' + r + '. ' + detail, lines);
+                log('Scene check: ' + ans + ' (' + r + ')' + (lines ? ' — ' + lines.join('; ') : ''));
+            });
+
+            $('spark-btn').addEventListener('click', () => {
+                const s = spark();
+                $('oracle-face').textContent = '';
+                setResult('mixed', 'Spark', 'Use these to build the scene:', s);
+                log('Spark: ' + s.join('; '));
+            });
+
+            $('attitude-btn').addEventListener('click', () => {
+                const r = roll(20), a = attitude(r);
+                const kind = r <= 7 ? 'no' : r <= 14 ? 'mixed' : 'yes';
+                showDie(r, r >= 8 ? 'hi' : 'lo');
+                setResult(kind, a, 'Starting attitude: d20 = ' + r + '. Make an Impression (Diplomacy vs Will DC) to change it.', null);
+                log('NPC attitude: ' + a + ' (' + r + ')');
+            });
+
+            $('oracle-question').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('oracle-ask').click(); });
+
+            $('log-copy').addEventListener('click', async () => {
+                const list = $('oracle-log');
+                const text = list.dataset.started === '1' ? [...list.querySelectorAll('li')].reverse().map((li) => li.textContent).join('\n') : '';
+                const btn = $('log-copy');
+                try { await navigator.clipboard.writeText(text); btn.textContent = text ? 'Copied!' : 'Nothing to copy'; }
+                catch (e) { btn.textContent = 'Copy failed'; }
+                setTimeout(() => { btn.textContent = 'Copy Log'; }, 1500);
+            });
+            $('log-clear').addEventListener('click', () => {
+                const list = $('oracle-log');
+                list.textContent = '';
+                const li = document.createElement('li'); li.textContent = 'Your rolls will appear here.'; list.appendChild(li);
+                list.dataset.started = '0';
+            });
+
+            window.pf2Oracle = oracle; // exposed for testing
+        })();
+    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
+</body>
+</html>
