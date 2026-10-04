@@ -3,60 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction to Pathfinder 2.0 RPG</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Welcome to Pathfinder 2e - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      // Store original definitions for re-render on theme change
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
-        <h1>Welcome to Pathfinder 2.0 RPG</h1>
+        <span class="lesson-kicker">Part 1</span>
+        <h1>Welcome to Pathfinder Second Edition</h1>
         <p class="subtitle">Your Gateway to Epic Adventures</p>
     </header>
 
     <main>
         <section class="introduction">
-            <h2>What is Pathfinder 2.0?</h2>
-            <p>Imagine you're the director of your own fantasy movie, but instead of actors, you have friends around a table, and instead of a script, you have dice and imagination. That's Pathfinder 2.0 in essence!</p>
+            <h2>What is Pathfinder 2e?</h2>
+            <p>Imagine you're the director of your own fantasy movie, but instead of actors, you have friends around a table, and instead of a script, you have dice and imagination. That's Pathfinder 2e in essence!</p>
             
             <p>Pathfinder Second Edition (PF2e) is a tabletop role-playing game where players create heroic characters and embark on adventures guided by a Game Master (GM). Think of it as interactive storytelling meets strategic board game, with a dash of improv theater thrown in.</p>
 
             <div class="analogy-box">
                 <h3>The Orchestra Analogy</h3>
-                <p>If D&D is like a rock band - loud, popular, and straightforward - then Pathfinder 2.0 is like a symphony orchestra. It has more instruments (character options), more complex harmonies (tactical combat), and requires a bit more skill to master, but the resulting music is incredibly rich and rewarding.</p>
+                <p>If D&D is like a rock band - loud, popular, and straightforward - then Pathfinder 2e is like a symphony orchestra. It has more instruments (character options), more complex harmonies (tactical combat), and requires a bit more skill to master, but the resulting music is incredibly rich and rewarding.</p>
             </div>
         </section>
 
@@ -69,17 +47,18 @@
                     A[D&D 3.5 Edition<br/>2003-2008] --> B[D&D 4th Edition<br/>2008]
                     A --> C[Pathfinder 1st Edition<br/>2009]
                     C --> D[Pathfinder 2nd Edition<br/>2019]
+                    D --> R[Pathfinder 2e Remaster<br/>Player Core, 2023]
                     B --> E[D&D 5th Edition<br/>2014]
                     
                     style C fill:#f9f,stroke:#333,stroke-width:2px
                     style D fill:#f96,stroke:#333,stroke-width:2px
             </div>
 
-            <p>Pathfinder 1st edition became incredibly popular, earning the nickname "D&D 3.75" because it refined and improved upon D&D 3.5's foundation. However, by 2019, Paizo realized they needed a fresh start - enter Pathfinder Second Edition.</p>
+            <p>Pathfinder 1st edition became incredibly popular, earning the nickname "D&D 3.75" because it refined and improved upon D&D 3.5's foundation. However, by 2019, Paizo realized they needed a fresh start - enter Pathfinder Second Edition. In 2023 the game was refreshed again as the Remaster (Player Core, GM Core, Monster Core and Player Core 2), which this guide follows; when a rule was renamed, we note the old name the first time it comes up.</p>
         </section>
 
         <section class="why-pf2e">
-            <h2>Why Choose Pathfinder 2.0?</h2>
+            <h2>Why Choose Pathfinder 2e?</h2>
             
             <h3>The Three-Action Economy</h3>
             <p>Imagine if every turn in combat was like having exactly three dollars to spend at an arcade. You could:</p>
@@ -88,13 +67,13 @@
                 <li>Play three different cheap games (three basic attacks)</li>
                 <li>Mix and match (move, attack, and defend)</li>
             </ul>
-            <p>This is Pathfinder 2.0's revolutionary three-action system. Every turn, you get exactly three actions - no more complex action types to memorize!</p>
+            <p>This is Pathfinder 2e's revolutionary three-action system. Every turn, you get exactly three actions plus one reaction - no more juggling separate action types to memorize!</p>
 
             <div class="code-example">
                 <h4>Action Economy Example</h4>
                 <pre><code>Turn Example - Fighter vs Goblin:
 Action 1⚡: ⚔️ Strike (attack with sword)
-Action 2⚡: 🛡️ Raise Shield (increase AC)
+Action 2⚡: 🛡️ Raise a Shield (+2 AC until your next turn)
 Action 3⚡: 🏃 Stride (move to new position)
 
 Each ⚡ represents one action spent</code></pre>
@@ -104,35 +83,28 @@ Each ⚡ represents one action spent</code></pre>
             <p>Character creation in PF2e is like building a custom car. You don't just pick a model (class) - you choose the engine (ancestry), the paint job (background), upgrade packages (feats), and custom modifications (skills). Every choice matters and creates a unique character.</p>
 
             <div class="character-building-visual">
-                <svg class="inline-svg" width="100%" height="200" viewBox="0 0 800 200">
-                    <rect x="50" y="50" width="120" height="80" fill="#ffeb3b" stroke="#333" stroke-width="2"/>
-                    <text x="110" y="95" text-anchor="middle" font-family="Arial" font-size="12">Ancestry</text>
-                    <text x="110" y="110" text-anchor="middle" font-family="Arial" font-size="10">(Human, Elf, etc.)</text>
-                    
-                    <rect x="200" y="50" width="120" height="80" fill="#4caf50" stroke="#333" stroke-width="2"/>
-                    <text x="260" y="95" text-anchor="middle" font-family="Arial" font-size="12">Background</text>
-                    <text x="260" y="110" text-anchor="middle" font-family="Arial" font-size="10">(Scholar, Farmer, etc.)</text>
-                    
-                    <rect x="350" y="50" width="120" height="80" fill="#2196f3" stroke="#333" stroke-width="2"/>
-                    <text x="410" y="95" text-anchor="middle" font-family="Arial" font-size="12">Class</text>
-                    <text x="410" y="110" text-anchor="middle" font-family="Arial" font-size="10">(Fighter, Wizard, etc.)</text>
-                    
-                    <rect x="500" y="50" width="120" height="80" fill="#ff5722" stroke="#333" stroke-width="2"/>
-                    <text x="560" y="95" text-anchor="middle" font-family="Arial" font-size="12">Feats</text>
-                    <text x="560" y="110" text-anchor="middle" font-family="Arial" font-size="10">(Special abilities)</text>
-                    
-                    <path d="M 170 90 L 200 90" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
-                    <path d="M 320 90 L 350 90" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
-                    <path d="M 470 90 L 500 90" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
-                    
+                <svg class="inline-svg" width="100%" height="200" viewBox="0 0 800 200" role="img" aria-label="Ancestry, background, class and feats combine into your unique character">
                     <defs>
-                        <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                         refX="0" refY="3.5" orient="auto">
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
                           <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
                         </marker>
                     </defs>
-                    
-                    <text x="400" y="170" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">Your Unique Character</text>
+                    <rect x="60" y="40" width="140" height="80" rx="6" fill="#ffeb3b" stroke="#333" stroke-width="2"/>
+                    <text x="130" y="78" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#1c1417">Ancestry</text>
+                    <text x="130" y="99" text-anchor="middle" font-family="Arial" font-size="11" fill="#1c1417">(Human, Elf, etc.)</text>
+                    <rect x="240" y="40" width="140" height="80" rx="6" fill="#81c784" stroke="#333" stroke-width="2"/>
+                    <text x="310" y="78" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#1c1417">Background</text>
+                    <text x="310" y="99" text-anchor="middle" font-family="Arial" font-size="11" fill="#1c1417">(Scholar, Farmer, etc.)</text>
+                    <rect x="420" y="40" width="140" height="80" rx="6" fill="#90caf9" stroke="#333" stroke-width="2"/>
+                    <text x="490" y="78" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#1c1417">Class</text>
+                    <text x="490" y="99" text-anchor="middle" font-family="Arial" font-size="11" fill="#1c1417">(Fighter, Wizard, etc.)</text>
+                    <rect x="600" y="40" width="140" height="80" rx="6" fill="#ffab91" stroke="#333" stroke-width="2"/>
+                    <text x="670" y="78" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#1c1417">Feats</text>
+                    <text x="670" y="99" text-anchor="middle" font-family="Arial" font-size="11" fill="#1c1417">(Special abilities)</text>
+                    <path d="M 200 80 L 220 80" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 380 80 L 400 80" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 560 80 L 580 80" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <text x="400" y="170" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#1c1417">Your Unique Character</text>
                 </svg>
             </div>
 
@@ -144,25 +116,25 @@ Each ⚡ represents one action spent</code></pre>
             <h2>Essential Concepts</h2>
             
             <h3>The d20 System</h3>
-            <p>At its heart, Pathfinder 2.0 uses a twenty-sided die (d20) as its core mechanic. Think of it as the engine of the game - almost everything revolves around rolling this die and adding modifiers.</p>
+            <p>At its heart, Pathfinder 2e uses a twenty-sided die (d20) as its core mechanic. Think of it as the engine of the game - almost everything revolves around rolling this die and adding modifiers.</p>
 
             <div class="dice-mechanic">
                 <h4>Basic Roll Structure</h4>
-                <pre><code>d20 + Ability Modifier + Proficiency + Item Bonus = Total Result
+                <pre><code>d20 + Attribute Modifier + Proficiency + Item Bonus = Total Result
 
-Example: Attacking with a sword
-d20 (rolled: 12) + Strength (+3) + Proficiency (+2) + Magic Sword (+1) = 18 total</code></pre>
+Example: A 1st-level fighter attacking with a sword
+d20 (rolled: 12) + Strength (+3) + Proficiency (+3: trained 2 + level 1) + Magic Sword (+1) = 19 total</code></pre>
             </div>
 
             <h3>Degrees of Success</h3>
-            <p>Unlike many games where you either succeed or fail, PF2e has four outcomes - like a grading system where you can get an A+, A, F, or even F-!</p>
+            <p>Unlike many games where you either succeed or fail, PF2e has four outcomes - like a grading system where you can get an A+, A, F, or even F-! A natural 20 on the die bumps the result one step better, and a natural 1 bumps it one step worse.</p>
 
             <div class="success-chart">
                 <div class="mermaid">
                     graph TD
                         A[Roll d20 + Modifiers] --> B{Compare to DC}
-                        B -->|Beat DC by 10+| C[Critical Success 🌟]
-                        B -->|Beat DC by 1-9| D[Success ✅]
+                        B -->|Meet DC +10 or more| C[Critical Success 🌟]
+                        B -->|Meet DC, up to +9| D[Success ✅]
                         B -->|Miss DC by 1-9| E[Failure ❌]
                         B -->|Miss DC by 10+| F[Critical Failure 💥]
                         
@@ -174,21 +146,21 @@ d20 (rolled: 12) + Strength (+3) + Proficiency (+2) + Magic Sword (+1) = 18 tota
             </div>
 
             <h3>Proficiency System</h3>
-            <p>Imagine your character's skills like a video game skill tree, but more organic. Instead of arbitrary levels, you have five degrees of training:</p>
+            <p>Imagine your character's skills like a video game skill tree, but more organic. Instead of arbitrary levels, you have five ranks of proficiency. Every rank above untrained also adds your character level:</p>
             
             <ul>
-                <li><strong>Untrained (0):</strong> Like trying to perform surgery having never seen an operating room</li>
-                <li><strong>Trained (+2):</strong> You've had basic training - like a first-year medical student</li>
-                <li><strong>Expert (+4):</strong> Solid competence - a general practitioner</li>
-                <li><strong>Master (+6):</strong> Exceptional skill - a specialist surgeon</li>
-                <li><strong>Legendary (+8):</strong> World-renowned expertise - the surgeon other surgeons call</li>
+                <li><strong>Untrained (+0):</strong> Like trying to perform surgery having never seen an operating room</li>
+                <li><strong>Trained (+2 + level):</strong> You've had basic training - like a first-year medical trainee</li>
+                <li><strong>Expert (+4 + level):</strong> Solid competence - a general practitioner</li>
+                <li><strong>Master (+6 + level):</strong> Exceptional skill - a specialist surgeon</li>
+                <li><strong>Legendary (+8 + level):</strong> World-renowned expertise - the surgeon other surgeons call</li>
             </ul>
         </section>
 
         <section class="real-world-applications">
             <h2>Real-World Applications</h2>
             
-            <h3>When to Play Pathfinder 2.0</h3>
+            <h3>When to Play Pathfinder 2e</h3>
             <ul>
                 <li><strong>Game Night with Strategy Lovers:</strong> Perfect for groups who enjoy games like Gloomhaven or complex board games</li>
                 <li><strong>Long-Term Campaigns:</strong> The character progression system shines over months or years of play</li>
@@ -197,12 +169,12 @@ d20 (rolled: 12) + Strength (+3) + Proficiency (+2) + Magic Sword (+1) = 18 tota
             </ul>
 
             <h3>Getting Started in the Real World</h3>
-            <p>Starting a Pathfinder 2.0 group is like starting a book club, but with more dice and dragons:</p>
+            <p>Starting a Pathfinder 2e group is like starting a book club, but with more dice and dragons:</p>
             
             <div class="getting-started">
                 <h4>Your First Session Checklist</h4>
                 <pre><code>Before Session Zero:
-□ Download free Basic Rules from Paizo
+□ Browse the free official rules on Archives of Nethys
 □ Gather 3-5 friends interested in fantasy adventures
 □ Designate one person as GM (Game Master)
 □ Set up regular meeting time/place
@@ -277,7 +249,7 @@ Session Zero (Character Creation):
                     <ul>
                         <li>13 vs DC 15: Failure (missed by 2)</li>
                         <li>18 vs DC 15: Success (beat by 3)</li>
-                        <li>22 vs DC 15: Critical Success (beat by 7, not quite 10)</li>
+                        <li>22 vs DC 15: Critical Success (beat by 7 is only a success, but the natural 20 bumps it up one step)</li>
                         <li>4 vs DC 15: Critical Failure (missed by 11)</li>
                     </ul>
                 </details>
@@ -334,56 +306,42 @@ Session Zero (Character Creation):
 
         <section class="next-steps">
             <h2>What's Next?</h2>
-            <p>Now that you understand the foundation of Pathfinder 2.0, you're ready to dive deeper! In our next lecture, we'll explore <a href="/pf2_char.html">character creation</a> in detail, walking through each step of building your first hero.</p>
+            <p>Now that you understand the foundation of Pathfinder 2e, you're ready to dive deeper! In the next part, we'll explore <a href="/pf2_char.html">character creation</a> in detail, walking through each step of building your first hero.</p>
             
             <div class="upcoming-topics">
-                <h3>Upcoming Lectures</h3>
+                <h3>Coming Up in This Guide</h3>
                 <ul>
-                    <li><strong> <a href="/pf2_char.html">Character Creation Deep Dive</a></strong> Ancestries, backgrounds, classes, and ability scores</li>
+                    <li><strong><a href="/pf2_char.html">Character Creation Deep Dive</a>:</strong> Ancestries, backgrounds, classes, and attributes</li>
                     <li><strong><a href="/pf2_actions.html">The Action Economy</a>:</strong> Mastering combat tactics and strategy</li>
                     <li><strong><a href="/pf2_skills.html">Skills and Exploration</a>:</strong> Beyond combat adventures</li>
                     <li><strong><a href="/pf2_magic.html">Magic Systems</a>:</strong> Spellcasting for wizards, clerics, and more</li>
                     <li><strong><a href="/pf2_items.html">Equipment and Items</a>:</strong> Gear up for adventure</li>
                     <li><strong><a href="/pf2_gm.html">Game Master Essentials</a>:</strong> Running your first game</li>
-                       <li><strong><a href="/pf2_horror.html">Horror and Atmospheric Gaming </a>:</strong> Running a horro game</li>
-                          <li><strong><a href="/pf2_worldbuilding.html">Wordldbuildin Essentials</a>:</strong> Running your first game</li>
+                       <li><strong><a href="/pf2_horror.html">Horror and Atmospheric Gaming</a>:</strong> Running a horror game</li>
+                          <li><strong><a href="/pf2_worldbuilding.html">Worldbuilding Essentials</a>:</strong> Building your own corner of the world</li>
                 </ul>
             </div>
 
             <div class="resources">
                 <h3>Recommended Resources</h3>
                 <ul>
-                    <li><strong>Paizo's Free Basic Rules:</strong> Download the essentials at paizo.com</li>
-                    <li><strong>Archives of Nethys:</strong> Complete free online rules reference</li>
-                    <li><strong>Pathbuilder App:</strong> Digital character creation tool</li>
-                    <li><strong>YouTube Channels:</strong> "How It's Played" and "Knights of Last Call"</li>
+                    <li><strong>Pathfinder Beginner Box:</strong> Paizo's boxed starter set for brand-new groups</li>
+                    <li><strong>Archives of Nethys (2e.aonprd.com):</strong> The official free online rules reference</li>
+                    <li><strong>Pathbuilder 2e:</strong> Digital character creation tool</li>
+                    <li><strong>YouTube:</strong> Plenty of rules explainers and actual-play shows for seeing the game in motion</li>
                 </ul>
             </div>
         </section>
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/index.html">Guide Home</a>
+    <a class="next" href="/pf2_char.html">Character Creation</a>
+</div>
         <p>Ready for your first adventure? The dice are calling, and legends await!</p>
   
     </footer>
-    <nav class="prev-next-nav">
-        <span></span>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_char.html" class="nav-next">Character Creation →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

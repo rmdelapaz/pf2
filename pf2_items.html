@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipment and Treasure - Pathfinder 2.0</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Equipment &amp; Treasure - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 9</span>
         <h1>Equipment and Treasure</h1>
         <p class="subtitle">The Tools That Make Heroes Legendary</p>
     </header>
@@ -49,7 +28,7 @@
     <main>
         <section class="introduction">
             <h2>More Than Just Gear: Equipment as Character Expression</h2>
-            <p>Equipment in Pathfinder 2.0 isn't just about numbers on a sheet - it's about telling your character's story through the tools they choose. A wizard's crystalline staff speaks to their scholarly precision, while a barbarian's massive two-handed sword tells of raw, uncompromising power. Think of equipment like a craftsperson's workshop: the right tools don't just make the job easier, they enable entirely new possibilities.</p>
+            <p>Equipment in Pathfinder Second Edition isn't just about numbers on a sheet - it's about telling your character's story through the tools they choose. A wizard's crystalline staff speaks to their scholarly precision, while a barbarian's massive two-handed sword tells of raw, uncompromising power. Think of equipment like a craftsperson's workshop: the right tools don't just make the job easier, they enable entirely new possibilities.</p>
             
             <p>Unlike systems where equipment is purely mechanical, PF2e treats gear as an extension of your character's identity and capabilities. Your weapon isn't just a damage dealer - it's a signature tool that shapes how you approach problems. Your armor isn't just protection - it's a statement about your fighting philosophy and lifestyle.</p>
 
@@ -103,7 +82,7 @@
                                     <p><strong>Philosophy:</strong> The classic adventurer's weapon - reliable, adaptable, respectable</p>
                                 </div>
                                 <div class="weapon-tactics">
-                                    <p><strong>Tactical Use:</strong> Can be used one-handed with shield or two-handed for extra damage. Versatile trait lets you switch to piercing damage when facing slashing resistance.</p>
+                                    <p><strong>Tactical Use:</strong> One-handed, so it pairs naturally with a shield. Versatile trait lets you switch to piercing damage when facing slashing resistance.</p>
                                     <p><strong>Character Types:</strong> Knights, guards, traditional fighters, balanced combatants</p>
                                 </div>
                             </div>
@@ -115,7 +94,7 @@
                                     <p><strong>Philosophy:</strong> Precision over power - the thinking fighter's blade</p>
                                 </div>
                                 <div class="weapon-tactics">
-                                    <p><strong>Tactical Use:</strong> Uses Dexterity instead of Strength (Finesse). Higher critical damage (Deadly). Can disarm opponents tactically.</p>
+                                    <p><strong>Tactical Use:</strong> Uses Dexterity instead of Strength for attack rolls (Finesse). Higher critical damage (Deadly). Can disarm opponents tactically.</p>
                                     <p><strong>Character Types:</strong> Duelists, rogues, swashbucklers, agile fighters</p>
                                 </div>
                             </div>
@@ -127,7 +106,7 @@
                                     <p><strong>Philosophy:</strong> Practical brutality - built to break things and push through</p>
                                 </div>
                                 <div class="weapon-tactics">
-                                    <p><strong>Tactical Use:</strong> Bludgeoning damage bypasses many resistances. Shove trait lets you reposition enemies or knock them prone.</p>
+                                    <p><strong>Tactical Use:</strong> Bludgeoning damage is great against skeletons and other creatures weak to it. Shove trait lets you use the hammer itself to Shove enemies out of position.</p>
                                     <p><strong>Character Types:</strong> Dwarven warriors, clerics of forge gods, practical soldiers</p>
                                 </div>
                             </div>
@@ -146,7 +125,7 @@
                                     <p><strong>Philosophy:</strong> Raw, uncompromising power - when subtlety is not an option</p>
                                 </div>
                                 <div class="weapon-tactics">
-                                    <p><strong>Tactical Use:</strong> Highest single-hit damage die. Sweep trait gives +1 to hit subsequent targets after your first attack hits.</p>
+                                    <p><strong>Tactical Use:</strong> Biggest damage die there is (d12). Sweep trait gives +1 to hit when you've already attacked a different target this turn.</p>
                                     <p><strong>Character Types:</strong> Barbarians, executioners, anyone who believes bigger is better</p>
                                 </div>
                             </div>
@@ -154,11 +133,11 @@
                             <div class="weapon-card">
                                 <h5>⚔️ Greatsword</h5>
                                 <div class="weapon-stats">
-                                    <p><strong>Damage:</strong> 2d6 slashing | <strong>Traits:</strong> Versatile (P)</p>
+                                    <p><strong>Damage:</strong> 1d12 slashing | <strong>Traits:</strong> Versatile (P)</p>
                                     <p><strong>Philosophy:</strong> Consistent excellence - reliable damage with adaptability</p>
                                 </div>
                                 <div class="weapon-tactics">
-                                    <p><strong>Tactical Use:</strong> More consistent damage than greataxe (2d6 vs 1d12). Can switch to piercing when needed.</p>
+                                    <p><strong>Tactical Use:</strong> Same d12 damage die as the greataxe, trading sweep for the option to switch to piercing when needed.</p>
                                     <p><strong>Character Types:</strong> Professional soldiers, knights, disciplined warriors</p>
                                 </div>
                             </div>
@@ -170,7 +149,7 @@
                                     <p><strong>Philosophy:</strong> Controlled space - keeping enemies at the perfect distance</p>
                                 </div>
                                 <div class="weapon-tactics">
-                                    <p><strong>Tactical Use:</strong> 10-foot reach controls larger area. Forceful increases damage on successful subsequent attacks. Deadly boosts critical hits.</p>
+                                    <p><strong>Tactical Use:</strong> 10-foot reach controls larger area. Forceful adds damage to your second and later attacks each turn. Deadly boosts critical hits.</p>
                                     <p><strong>Character Types:</strong> Guards, formation fighters, tactical combatants</p>
                                 </div>
                             </div>
@@ -185,11 +164,11 @@
                             <div class="weapon-card">
                                 <h5>🏹 Longbow</h5>
                                 <div class="weapon-stats">
-                                    <p><strong>Damage:</strong> 1d8 piercing | <strong>Range:</strong> 150 feet | <strong>Traits:</strong> Deadly d10, Volley 30 feet</p>
+                                    <p><strong>Damage:</strong> 1d8 piercing | <strong>Range:</strong> 100 feet | <strong>Traits:</strong> Deadly d10, Volley 30 feet</p>
                                     <p><strong>Philosophy:</strong> Precision from afar - the sniper's choice</p>
                                 </div>
                                 <div class="weapon-tactics">
-                                    <p><strong>Tactical Use:</strong> Excellent range and critical damage. Volley means penalty when attacking within 30 feet - stay back!</p>
+                                    <p><strong>Tactical Use:</strong> Excellent range and critical damage. Volley means a −2 penalty when attacking within 30 feet - stay back!</p>
                                     <p><strong>Character Types:</strong> Rangers, elven warriors, hunters, scouts</p>
                                 </div>
                             </div>
@@ -201,15 +180,15 @@
                                     <p><strong>Philosophy:</strong> Mechanical precision - technology over training</p>
                                 </div>
                                 <div class="weapon-tactics">
-                                    <p><strong>Tactical Use:</strong> No Strength requirement. Must spend 1 action to reload between shots. Good for characters without archery training.</p>
+                                    <p><strong>Tactical Use:</strong> A simple weapon, so almost every class is trained in it. Must spend 1 action to reload between shots. Good for characters without martial weapon training.</p>
                                     <p><strong>Character Types:</strong> Rogues, inventors, city guards, anyone preferring reliability over rate of fire</p>
                                 </div>
                             </div>
 
                             <div class="weapon-card">
-                                <h5>🔪 Throwing Knife</h5>
+                                <h5>🔪 Dagger</h5>
                                 <div class="weapon-stats">
-                                    <p><strong>Damage:</strong> 1d4 piercing | <strong>Range:</strong> 20 feet | <strong>Traits:</strong> Agile, Finesse, Thrown</p>
+                                    <p><strong>Damage:</strong> 1d4 piercing | <strong>Range:</strong> 10 feet (thrown) | <strong>Traits:</strong> Agile, Finesse, Thrown, Versatile (S)</p>
                                     <p><strong>Philosophy:</strong> Versatility and speed - close combat or ranged as needed</p>
                                 </div>
                                 <div class="weapon-tactics">
@@ -234,7 +213,7 @@
                                 <h5>🎯 Agile</h5>
                                 <p><strong>Effect:</strong> Multiple Attack Penalty is -4/-8 instead of -5/-10</p>
                                 <p><strong>Strategy:</strong> Better for characters planning multiple attacks per turn</p>
-                                <p><strong>Examples:</strong> Daggers, rapiers, shortswords, fists</p>
+                                <p><strong>Examples:</strong> Daggers, shortswords, fists</p>
                             </div>
 
                             <div class="trait-card">
@@ -246,9 +225,9 @@
 
                             <div class="trait-card">
                                 <h5>💪 Forceful</h5>
-                                <p><strong>Effect:</strong> Damage increases on subsequent hits in the same turn</p>
-                                <p><strong>Strategy:</strong> Rewards multiple successful attacks</p>
-                                <p><strong>Examples:</strong> Glaives, longswords (two-handed), mauls</p>
+                                <p><strong>Effect:</strong> Extra damage per weapon die on your second attack in a turn, and more on the third and later</p>
+                                <p><strong>Strategy:</strong> Rewards making multiple attacks</p>
+                                <p><strong>Examples:</strong> Glaives, falchions, elven curve blades</p>
                             </div>
                         </div>
                     </div>
@@ -267,14 +246,14 @@
                                 <h5>🔄 Versatile</h5>
                                 <p><strong>Effect:</strong> Can deal different damage types</p>
                                 <p><strong>Strategy:</strong> Adapt to enemy resistances</p>
-                                <p><strong>Examples:</strong> Longsword (versatile P), battleaxe (versatile P)</p>
+                                <p><strong>Examples:</strong> Longsword (versatile P), shortsword (versatile S)</p>
                             </div>
 
                             <div class="trait-card">
                                 <h5>🌊 Sweep</h5>
-                                <p><strong>Effect:</strong> +1 to hit against subsequent targets</p>
+                                <p><strong>Effect:</strong> +1 to hit if you've already attacked a different target this turn</p>
                                 <p><strong>Strategy:</strong> Better against multiple enemies</p>
-                                <p><strong>Examples:</strong> Greataxes, falchions, scythes</p>
+                                <p><strong>Examples:</strong> Greataxes, battle axes, falchions</p>
                             </div>
                         </div>
                     </div>
@@ -284,23 +263,23 @@
                         <div class="trait-grid">
                             <div class="trait-card">
                                 <h5>👐 Disarm</h5>
-                                <p><strong>Effect:</strong> Improved Athletics checks to disarm opponents</p>
+                                <p><strong>Effect:</strong> Use the weapon to Disarm opponents with Athletics, adding its item bonus</p>
                                 <p><strong>Strategy:</strong> Remove enemy weapons tactically</p>
-                                <p><strong>Examples:</strong> Rapiers, whips, some polearms</p>
+                                <p><strong>Examples:</strong> Rapiers, whips, ranseurs</p>
                             </div>
 
                             <div class="trait-card">
                                 <h5>🔄 Trip</h5>
-                                <p><strong>Effect:</strong> Better at knocking enemies prone</p>
+                                <p><strong>Effect:</strong> Use the weapon to Trip enemies, knocking them prone</p>
                                 <p><strong>Strategy:</strong> Control enemy positioning</p>
-                                <p><strong>Examples:</strong> Whips, flails, some polearms</p>
+                                <p><strong>Examples:</strong> Whips, flails, guisarmes</p>
                             </div>
 
                             <div class="trait-card">
                                 <h5>📏 Reach</h5>
                                 <p><strong>Effect:</strong> Attack enemies 10 feet away</p>
                                 <p><strong>Strategy:</strong> Control space, avoid retaliation</p>
-                                <p><strong>Examples:</strong> Glaives, pikes, whips</p>
+                                <p><strong>Examples:</strong> Glaives, guisarmes, whips</p>
                             </div>
                         </div>
                     </div>
@@ -313,13 +292,13 @@
                 
                 <div class="selection-framework">
                     <div class="framework-card">
-                        <h4>🎯 Ability Score Alignment</h4>
+                        <h4>🎯 Matching Your Attributes</h4>
                         <div class="ability-matching">
-                            <h5>High Strength Builds</h5>
+                            <h5>High Strength Builds (your attribute modifiers, formerly ability scores)</h5>
                             <ul>
                                 <li><strong>Two-handed weapons:</strong> Maximize strength bonus with higher damage dice</li>
                                 <li><strong>One-handed + shield:</strong> Balance offense with defense</li>
-                                <li><strong>Thrown weapons:</strong> Ranged option using same ability</li>
+                                <li><strong>Thrown weapons:</strong> Add Strength to damage, though the attack roll uses Dexterity</li>
                             </ul>
 
                             <h5>High Dexterity Builds</h5>
@@ -351,7 +330,7 @@
                             <h5>🎯 Ranged Specialist</h5>
                             <ul>
                                 <li><strong>Longbow:</strong> Maximum range and critical damage</li>
-                                <li><strong>Crossbow:</strong> Reliable damage without training</li>
+                                <li><strong>Crossbow:</strong> Reliable damage without martial training</li>
                                 <li><strong>Thrown weapons:</strong> Flexibility for close combat</li>
                             </ul>
                         </div>
@@ -370,7 +349,7 @@
                             <h5>Professional Background</h5>
                             <ul>
                                 <li><strong>Military:</strong> Standard-issue weapons (longswords, crossbows)</li>
-                                <li><strong>Criminal:</strong> Concealable weapons (daggers, garrotes)</li>
+                                <li><strong>Criminal:</strong> Concealable weapons (daggers, shortswords)</li>
                                 <li><strong>Noble:</strong> Status weapons (rapiers, ornate swords)</li>
                             </ul>
                         </div>
@@ -445,7 +424,7 @@
                             <div class="armor-piece">
                                 <h5>⛓️ Chain Shirt</h5>
                                 <div class="piece-stats">
-                                    <p><strong>AC:</strong> +3 | <strong>Dex Cap:</strong> +3 | <strong>Check Penalty:</strong> -1</p>
+                                    <p><strong>AC:</strong> +2 | <strong>Dex Cap:</strong> +3 | <strong>Check Penalty:</strong> -1 (flexible, noisy)</p>
                                     <p><strong>Philosophy:</strong> Professional protection - serious but not heavy</p>
                                 </div>
                                 <p><strong>Use Case:</strong> Guards, professional fighters, balanced combatants</p>
@@ -493,19 +472,19 @@
                         
                         <div class="armor-examples">
                             <div class="armor-piece">
-                                <h5>🛡️ Splint Armor</h5>
+                                <h5>🛡️ Splint Mail</h5>
                                 <div class="piece-stats">
                                     <p><strong>AC:</strong> +5 | <strong>Dex Cap:</strong> +1 | <strong>Check Penalty:</strong> -3</p>
-                                    <p><strong>Strength Req:</strong> 14 | <strong>Speed Penalty:</strong> -5 feet</p>
+                                    <p><strong>Strength:</strong> +3 (16 in pre-Remaster scores) | <strong>Speed Penalty:</strong> -10 feet</p>
                                 </div>
                                 <p><strong>Use Case:</strong> Heavy infantry, defensive specialists</p>
                             </div>
 
                             <div class="armor-piece">
-                                <h5>⚔️ Plate Armor</h5>
+                                <h5>⚔️ Full Plate</h5>
                                 <div class="piece-stats">
                                     <p><strong>AC:</strong> +6 | <strong>Dex Cap:</strong> +0 | <strong>Check Penalty:</strong> -3</p>
-                                    <p><strong>Strength Req:</strong> 16 | <strong>Speed Penalty:</strong> -10 feet</p>
+                                    <p><strong>Strength:</strong> +4 (18 in pre-Remaster scores) | <strong>Speed Penalty:</strong> -10 feet</p>
                                 </div>
                                 <p><strong>Use Case:</strong> Knights, champions, ultimate defenders</p>
                             </div>
@@ -528,15 +507,15 @@
                                 <li><strong>Unarmored:</strong> AC = 10 + 4 (Dex) = 14</li>
                                 <li><strong>Leather (+1, Dex cap +4):</strong> AC = 11 + 4 (Dex) = 15</li>
                                 <li><strong>Chain Mail (+4, Dex cap +1):</strong> AC = 14 + 1 (Dex) = 15</li>
-                                <li><strong>Plate (+6, Dex cap +0):</strong> AC = 16 + 0 (Dex) = 16</li>
+                                <li><strong>Full Plate (+6, Dex cap +0):</strong> AC = 16 + 0 (Dex) = 16</li>
                             </ul>
-                            <p><em>High Dex characters benefit more from light armor, while low Dex characters prefer heavy armor.</em></p>
+                            <p><em>Before adding your proficiency bonus, which is the same for every armor category you're trained in. High Dex characters benefit more from light armor, while low Dex characters prefer heavy armor.</em></p>
                         </div>
                     </div>
 
                     <div class="mechanic-card">
                         <h4>⚖️ Armor Check Penalty</h4>
-                        <p><strong>Affects:</strong> Athletic skills (Athletics, Acrobatics) and Stealth</p>
+                        <p><strong>Affects:</strong> Strength- and Dexterity-based skill checks (Acrobatics, Athletics, Stealth, Thievery)</p>
                         <p><strong>Strategy:</strong> Consider whether the AC gain is worth the skill penalties</p>
                         
                         <div class="penalty-impact">
@@ -552,7 +531,7 @@
 
                     <div class="mechanic-card">
                         <h4>💪 Strength Requirements</h4>
-                        <p><strong>Consequence:</strong> If you don't meet the requirement, take additional penalties to Speed and skills</p>
+                        <p><strong>Consequence:</strong> Meet the armor's Strength value and you ignore its check penalty and reduce its Speed penalty by 5 feet; fall short and you take both in full</p>
                         
                         <div class="strength-planning">
                             <h5>Planning Around Strength</h5>
@@ -580,13 +559,13 @@
                                 <ul>
                                     <li><strong>Early:</strong> Leather or Studded Leather</li>
                                     <li><strong>Mid:</strong> Chain Shirt or better Light Armor</li>
-                                    <li><strong>Late:</strong> Magical Light Armor with enhancement bonuses</li>
+                                    <li><strong>Late:</strong> Light armor with potency and resilient runes</li>
                                 </ul>
 
                                 <h5>Supporting Elements</h5>
                                 <ul>
                                     <li><strong>Shield Use:</strong> +2 AC when raised, stacks with light armor</li>
-                                    <li><strong>Defensive Spells:</strong> Mage Armor, Shield, Mirror Image</li>
+                                    <li><strong>Defensive Spells:</strong> Mystic Armor (formerly mage armor), Shield, Blur</li>
                                     <li><strong>Positioning:</strong> Use mobility to avoid attacks</li>
                                 </ul>
                             </div>
@@ -600,14 +579,14 @@
                                 <h5>Optimal Progression</h5>
                                 <ul>
                                     <li><strong>Early:</strong> Scale Mail or Chain Mail</li>
-                                    <li><strong>Mid:</strong> Splint Armor</li>
-                                    <li><strong>Late:</strong> Plate Armor with magical enhancements</li>
+                                    <li><strong>Mid:</strong> Splint Mail</li>
+                                    <li><strong>Late:</strong> Full Plate with potency and resilient runes</li>
                                 </ul>
 
                                 <h5>Supporting Elements</h5>
                                 <ul>
-                                    <li><strong>Shield Master:</strong> Heavy shield use with shield boss attacks</li>
-                                    <li><strong>Defensive Feats:</strong> Shield Block, Armor Expertise</li>
+                                    <li><strong>Shield Master:</strong> Raise a Shield every turn, and bash with a shield boss when you have a spare action</li>
+                                    <li><strong>Defensive Feats:</strong> Shield Block (fighters and champions get it free); armor proficiency rises with your class</li>
                                     <li><strong>Positioning:</strong> Stand between enemies and allies</li>
                                 </ul>
                             </div>
@@ -622,7 +601,7 @@
                                 <ul>
                                     <li><strong>Early:</strong> Chain Shirt</li>
                                     <li><strong>Mid:</strong> Breastplate or Scale Mail</li>
-                                    <li><strong>Late:</strong> Magical Medium Armor with special properties</li>
+                                    <li><strong>Late:</strong> Medium armor with potency, resilient and property runes</li>
                                 </ul>
 
                                 <h5>Supporting Elements</h5>
@@ -643,7 +622,7 @@
             <p>Fundamental runes are like the operating system upgrades for your equipment - they provide the core improvements that keep your gear relevant as you face increasingly dangerous challenges. Think of them as the essential infrastructure that everything else builds upon.</p>
 
             <div class="rune-overview">
-                <h3>The Three Fundamental Rune Types</h3>
+                <h3>The Four Fundamental Runes</h3>
                 
                 <div class="rune-categories">
                     <div class="rune-category">
@@ -658,19 +637,19 @@
                             <div class="potency-effects">
                                 <h5>What Weapon Potency Does</h5>
                                 <ul>
-                                    <li><strong>Attack Bonus:</strong> +1/+2/+3 to hit as you progress</li>
-                                    <li><strong>Damage Bonus:</strong> Same bonus applies to damage rolls</li>
-                                    <li><strong>Magic Weapon:</strong> Overcomes resistance to non-magical attacks</li>
-                                    <li><strong>Critical Effects:</strong> Higher potency enables better critical specialization</li>
+                                    <li><strong>Attack Bonus:</strong> +1/+2/+3 item bonus to attack rolls (rune item levels 2, 10 and 16, as the chart shows)</li>
+                                    <li><strong>No Damage Bonus:</strong> Potency affects accuracy only; striking runes handle damage</li>
+                                    <li><strong>Magic Weapon:</strong> Makes the weapon magical, which some effects care about</li>
+                                    <li><strong>Property Rune Slots:</strong> Each point of potency lets the weapon hold one property rune</li>
                                 </ul>
                                 
                                 <h5>Mathematical Impact</h5>
                                 <div class="math-example">
-                                    <p><strong>Example:</strong> 5th level fighter attacking AC 17 enemy</p>
+                                    <p><strong>Example:</strong> A character with a +9 attack bonus against an AC 17 enemy</p>
                                     <ul>
-                                        <li><strong>No Potency:</strong> +9 to hit, need 8+ on d20 (65% chance)</li>
-                                        <li><strong>+1 Potency:</strong> +10 to hit, need 7+ on d20 (70% chance)</li>
-                                        <li><strong>Impact:</strong> 5% better hit chance = ~8% more damage over time</li>
+                                        <li><strong>No Potency:</strong> +9 to hit, need 8+ on d20 (65% chance to hit, 15% of it critical hits on 18+)</li>
+                                        <li><strong>+1 Potency:</strong> +10 to hit, need 7+ on d20 (70% chance to hit, 20% critical hits on 17+)</li>
+                                        <li><strong>Impact:</strong> One more hitting face and one more critical face = about 12% more damage over time</li>
                                     </ul>
                                 </div>
                             </div>
@@ -686,16 +665,16 @@
                                 <h5>Striking Rune Progression</h5>
                                 <ul>
                                     <li><strong>No Striking:</strong> Normal weapon damage (1d8 for longsword)</li>
-                                    <li><strong>Striking:</strong> +1 damage die (2d8 for longsword)</li>
-                                    <li><strong>Greater Striking:</strong> +2 damage dice (3d8 for longsword)</li>
-                                    <li><strong>Major Striking:</strong> +3 damage dice (4d8 for longsword)</li>
+                                    <li><strong>Striking (item level 4):</strong> 2 damage dice (2d8 for longsword)</li>
+                                    <li><strong>Greater Striking (item level 12):</strong> 3 damage dice (3d8 for longsword)</li>
+                                    <li><strong>Major Striking (item level 19):</strong> 4 damage dice (4d8 for longsword)</li>
                                 </ul>
                                 
                                 <h5>When Striking Shines</h5>
                                 <ul>
-                                    <li><strong>Critical Hits:</strong> All damage dice are doubled</li>
-                                    <li><strong>Weapon Traits:</strong> Deadly and other traits apply to all dice</li>
-                                    <li><strong>Class Features:</strong> Sneak Attack, Rage, etc. benefit from base damage increase</li>
+                                    <li><strong>Critical Hits:</strong> All the damage is doubled, extra dice included</li>
+                                    <li><strong>Deadly:</strong> Adds one deadly die on a crit, two with greater striking and three with major striking</li>
+                                    <li><strong>Fatal:</strong> The bigger critical-hit die applies to every striking die</li>
                                 </ul>
                             </div>
                             
@@ -704,10 +683,10 @@
                                 <div class="damage-comparison">
                                     <p><strong>Longsword Critical Hit Comparison:</strong></p>
                                     <ul>
-                                        <li><strong>Normal:</strong> 2d8 + Str modifier</li>
-                                        <li><strong>Striking:</strong> 4d8 + Str modifier</li>
-                                        <li><strong>Greater Striking:</strong> 6d8 + Str modifier</li>
-                                        <li><strong>Major Striking:</strong> 8d8 + Str modifier</li>
+                                        <li><strong>Normal:</strong> double (1d8 + Str) - dice average 9</li>
+                                        <li><strong>Striking:</strong> double (2d8 + Str) - dice average 18</li>
+                                        <li><strong>Greater Striking:</strong> double (3d8 + Str) - dice average 27</li>
+                                        <li><strong>Major Striking:</strong> double (4d8 + Str) - dice average 36</li>
                                     </ul>
                                     <p><em>Critical hits become absolutely devastating with higher striking runes!</em></p>
                                 </div>
@@ -717,25 +696,25 @@
 
                     <div class="rune-category">
                         <h4>🛡️ Armor Potency Runes</h4>
-                        <p><strong>The Protection Upgrade:</strong> Better defense and magical resistance</p>
+                        <p><strong>The Protection Upgrade:</strong> A harder target to hit</p>
                         
                         <div class="armor-potency">
                             <div class="armor-effects">
                                 <h5>Armor Potency Benefits</h5>
                                 <ul>
-                                    <li><strong>AC Bonus:</strong> +1/+2/+3 to Armor Class</li>
-                                    <li><strong>Save Bonus:</strong> Same bonus to all saving throws</li>
-                                    <li><strong>Magic Resistance:</strong> Better defense against spells</li>
-                                    <li><strong>Durability:</strong> Harder to damage or destroy the armor</li>
+                                    <li><strong>AC Bonus:</strong> +1/+2/+3 item bonus to Armor Class (rune item levels 5, 11 and 18)</li>
+                                    <li><strong>Property Rune Slots:</strong> Each point of potency lets the armor hold one property rune</li>
+                                    <li><strong>Saves:</strong> Not from potency - that's the resilient rune's job</li>
+                                    <li><strong>Works on Clothing:</strong> Explorer's clothing can take armor runes, so unarmored characters benefit too</li>
                                 </ul>
                                 
                                 <h5>Survivability Math</h5>
                                 <div class="survival-example">
-                                    <p><strong>Example:</strong> +1 AC and +1 to saves</p>
+                                    <p><strong>Example:</strong> +1 armor potency plus a +1 resilient rune</p>
                                     <ul>
-                                        <li><strong>Physical Attacks:</strong> 5% fewer hits landed</li>
-                                        <li><strong>Spell Saves:</strong> 5% more successful saves</li>
-                                        <li><strong>Combined Effect:</strong> Roughly 10-15% increase in effective hit points</li>
+                                        <li><strong>Physical Attacks:</strong> Each enemy attack needs one higher on the d20, so 5 percentage points fewer hits and fewer critical hits</li>
+                                        <li><strong>Spell Saves:</strong> One more d20 face succeeds on every save, and one more critically succeeds</li>
+                                        <li><strong>Combined Effect:</strong> A small edge on every roll that adds up over a long fight</li>
                                     </ul>
                                 </div>
                             </div>
@@ -744,23 +723,23 @@
 
                     <div class="rune-category">
                         <h4>🛡️ Armor Resilient Runes</h4>
-                        <p><strong>The Resistance Upgrade:</strong> Specialized protection against damage types</p>
+                        <p><strong>The Resistance Upgrade:</strong> Better saving throws</p>
                         
                         <div class="resilient-types">
                             <div class="resilient-effects">
                                 <h5>Resilient Rune Types</h5>
                                 <ul>
-                                    <li><strong>Resilient:</strong> Resistance to one damage type (fire, cold, etc.)</li>
-                                    <li><strong>Greater Resilient:</strong> Resistance to two damage types</li>
-                                    <li><strong>Major Resilient:</strong> Resistance to three damage types</li>
+                                    <li><strong>Resilient (item level 8):</strong> +1 item bonus to all saving throws</li>
+                                    <li><strong>Greater Resilient (item level 14):</strong> +2 item bonus to all saving throws</li>
+                                    <li><strong>Major Resilient (item level 20):</strong> +3 item bonus to all saving throws</li>
                                 </ul>
                                 
                                 <h5>Strategic Considerations</h5>
                                 <ul>
-                                    <li><strong>Campaign-Specific:</strong> Choose based on common enemy types</li>
-                                    <li><strong>Fire/Cold:</strong> Most universally useful resistances</li>
-                                    <li><strong>Acid/Lightning:</strong> Less common but still valuable</li>
-                                    <li><strong>Physical Types:</strong> Situational but powerful when relevant</li>
+                                    <li><strong>Everyone Needs It:</strong> Fortitude, Reflex and Will all improve at once</li>
+                                    <li><strong>Damage Types:</strong> Resistance to fire, cold and so on comes from property runes such as energy-resistant, not from resilient</li>
+                                    <li><strong>Acid/Electricity:</strong> Less common threats, but worth a property rune if your campaign features them</li>
+                                    <li><strong>Campaign-Specific:</strong> Choose property runes based on common enemy types</li>
                                 </ul>
                             </div>
                         </div>
@@ -783,19 +762,19 @@
                                 <li><strong>Armor Potency +1:</strong> Survivability is crucial</li>
                                 <li><strong>Weapon Striking:</strong> Damage scaling keeps up with enemy HP</li>
                                 <li><strong>Higher Potency Runes:</strong> Continue accuracy/defense scaling</li>
-                                <li><strong>Resilient Runes:</strong> Specialized protection as needed</li>
+                                <li><strong>Resilient Runes:</strong> Better saving throws</li>
                                 <li><strong>Greater/Major Upgrades:</strong> High-level power scaling</li>
                             </ol>
                         </div>
                         
                         <div class="timing-guide">
-                            <h5>Upgrade Timing Guidelines</h5>
+                            <h5>Upgrade Timing Guidelines (by rune item level)</h5>
                             <ul>
-                                <li><strong>Level 3-4:</strong> First +1 potency runes</li>
-                                <li><strong>Level 5-6:</strong> Striking runes appear</li>
-                                <li><strong>Level 8-10:</strong> +2 potency becomes important</li>
-                                <li><strong>Level 11-14:</strong> Greater striking and resilient runes</li>
-                                <li><strong>Level 15+:</strong> +3 potency and major runes</li>
+                                <li><strong>Levels 2-5:</strong> +1 weapon potency (2), striking (4), +1 armor potency (5)</li>
+                                <li><strong>Levels 8-11:</strong> Resilient (8), +2 weapon potency (10), +2 armor potency (11)</li>
+                                <li><strong>Levels 12-14:</strong> Greater striking (12), greater resilient (14)</li>
+                                <li><strong>Levels 16-18:</strong> +3 weapon potency (16), +3 armor potency (18)</li>
+                                <li><strong>Levels 19-20:</strong> Major striking (19), major resilient (20)</li>
                             </ul>
                         </div>
                     </div>
@@ -806,7 +785,7 @@
                         <div class="transfer-mechanics">
                             <h5>How Rune Transfer Works</h5>
                             <ul>
-                                <li><strong>Transfer Cost:</strong> 10% of rune's value to move it</li>
+                                <li><strong>Transfer Cost:</strong> A small fraction of the rune's value, plus a Crafting check and downtime</li>
                                 <li><strong>No Loss:</strong> Runes aren't destroyed when moved</li>
                                 <li><strong>Upgrade Path:</strong> Can upgrade runes in-place or transfer first</li>
                                 <li><strong>Planning Ahead:</strong> Consider final weapon when buying runes</li>
@@ -831,11 +810,11 @@
 
         <section class="wealth-management">
             <h2>Wealth and Economic Strategy</h2>
-            <p>Managing wealth in Pathfinder 2.0 is like running a medieval venture capital fund - you need to balance immediate needs with long-term investments, consider opportunity costs, and make strategic decisions about where to allocate limited resources for maximum adventure effectiveness.</p>
+            <p>Managing wealth in Pathfinder 2e is like running a medieval venture capital fund - you need to balance immediate needs with long-term investments, consider opportunity costs, and make strategic decisions about where to allocate limited resources for maximum adventure effectiveness.</p>
 
             <div class="wealth-by-level">
                 <h3>Wealth Progression Guidelines</h3>
-                <p>PF2e provides clear guidelines for how much wealth characters should have at each level, helping GMs balance treasure and players plan purchases.</p>
+                <p>GM Core provides clear guidelines for treasure at each level, helping GMs balance rewards and players plan purchases. The chart shows the lump-sum option from its Character Wealth table: the gold a new character gets when starting at a given level (the table's other option is a set of permanent items plus less coin).</p>
                 
                 <div class="wealth-chart">
                     <canvas id="wealthChart" width="800" height="400"></canvas>
@@ -856,14 +835,14 @@
 
                         <div class="point-card">
                             <h5>🎯 Spending Targets</h5>
-                            <p>At each level, characters should spend roughly 50-70% of their wealth on gear, keeping 30-50% for consumables and future purchases.</p>
+                            <p>A rule of thumb (not an official rule): spend roughly 50-70% of your wealth on lasting gear, keeping 30-50% for consumables and future purchases.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="budget-allocation">
-                <h3>Smart Budget Allocation</h3>
+                <h3>Smart Budget Allocation (a rule of thumb)</h3>
                 
                 <div class="allocation-strategy">
                     <div class="budget-categories">
@@ -890,10 +869,10 @@
                                 <h5>Essential Tools</h5>
                                 <ul>
                                     <li><strong>Rope and Grappling Hook:</strong> Basic adventure kit</li>
-                                    <li><strong>Thieves' Tools:</strong> For locks and traps</li>
+                                    <li><strong>Thieves' Toolkit:</strong> For locks and traps</li>
                                     <li><strong>Healing Potions:</strong> Emergency medical supplies</li>
                                     <li><strong>Light Sources:</strong> Torches, lanterns, or magical alternatives</li>
-                                    <li><strong>Spell Component Pouch:</strong> For spellcasters</li>
+                                    <li><strong>Healer's Toolkit:</strong> Needed for Treat Wounds and other Medicine actions</li>
                                 </ul>
                             </div>
                         </div>
@@ -908,7 +887,7 @@
                                     <li><strong>Healing Potions:</strong> When magical healing runs out</li>
                                     <li><strong>Antidotes:</strong> Neutralize poisons quickly</li>
                                     <li><strong>Scrolls:</strong> Access to spells you don't know</li>
-                                    <li><strong>Alchemical Items:</strong> Tanglefoot bags, smokesticks</li>
+                                    <li><strong>Alchemical Items:</strong> Glue bombs (formerly tanglefoot bags), smoke balls (formerly smokesticks)</li>
                                     <li><strong>Holy Water:</strong> Cheap undead deterrent</li>
                                 </ul>
                             </div>
@@ -936,16 +915,16 @@
 
         <section class="next-steps">
             <h2>What's Next?</h2>
-            <p>You've now mastered the art of equipment and treasure management in Pathfinder 2.0! From understanding weapon traits and armor mechanics to optimizing rune upgrades and managing wealth strategically, you have the knowledge to make every gold piece count and every piece of gear contribute to your character's legend.</p>
+            <p>You've now mastered the art of equipment and treasure management in Pathfinder 2e! From understanding weapon traits and armor mechanics to optimizing rune upgrades and managing wealth strategically, you have the knowledge to make every gold piece count and every piece of gear contribute to your character's legend.</p>
             
             <div class="upcoming-topics">
-                <h3>Upcoming Lectures</h3>
+                <h3>Coming Up in This Guide</h3>
                 <ul>
                     <li><strong>Advanced Combat Tactics:</strong> Conditions, environmental hazards, and battlefield mastery</li>
                     <li><strong>Character Advancement:</strong> Leveling up, feat selection, and long-term character development</li>
                     <li><strong>Campaign and Adventure Design:</strong> Creating memorable stories and balanced challenges</li>
                     <li><strong>Game Master Essentials:</strong> Running engaging games with proper pacing and player agency</li>
-                    <li><strong>Party Dynamics:</strong> Team building, role optimization, and group synergy</li>
+                    <li><strong>Party Dynamics (back in Part 5):</strong> Team building, role optimization, and group synergy</li>
                 </ul>
             </div>
 
@@ -953,7 +932,7 @@
                 <h3>Equipment and Treasure Mastery Checklist</h3>
                 <ul>
                     <li>✅ Understand weapon traits and their tactical applications</li>
-                    <li>✅ Choose armor based on build philosophy and ability scores</li>
+                    <li>✅ Choose armor based on build philosophy and attribute modifiers</li>
                     <li>✅ Plan efficient fundamental rune upgrade paths</li>
                     <li>✅ Select property runes that enhance your character concept</li>
                     <li>✅ Manage wealth strategically across multiple categories</li>
@@ -968,16 +947,20 @@
                 <h3>Essential Equipment Resources</h3>
                 <ul>
                     <li><strong>Archives of Nethys:</strong> Complete equipment database with search and filtering</li>
-                    <li><strong>Rune Calculators:</strong> Tools for planning upgrade costs and paths</li>
+                    <li><strong>Rune Planners:</strong> Tools for planning upgrade paths</li>
                     <li><strong>Wealth Tracking Sheets:</strong> Manage party treasure and individual budgets</li>
                     <li><strong>Equipment Optimizers:</strong> Community tools for build planning</li>
-                    <li><strong>Price Comparison Charts:</strong> Cost-benefit analysis for different purchases</li>
+                    <li><strong>Comparison Charts:</strong> Weigh one purchase against another</li>
                 </ul>
             </div>
         </section>
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_magic.html">Magic</a>
+    <a class="next" href="/pf2_adv_combat.html">Advanced Combat</a>
+</div>
         <p>May your blade stay sharp, your armor strong, and your purse full - the perfect adventurer's arsenal awaits!</p>
        
     </footer>
@@ -990,7 +973,8 @@
         // Clear canvas
         potencyCtx.clearRect(0, 0, potencyCanvas.width, potencyCanvas.height);
         
-        // Potency progression data
+        // Potency progression data: the bonus available at each item level
+        // (weapon potency +1 = item level 2, +2 = 10, +3 = 16; GM Core)
         const levels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
         const potencyBonus = levels.map(level => {
             if (level >= 16) return 3;
@@ -1038,11 +1022,20 @@
         });
         potencyCtx.stroke();
         
+        // X-axis tick labels (every level)
+        potencyCtx.fillStyle = '#333';
+        potencyCtx.font = '11px Arial';
+        potencyCtx.textAlign = 'center';
+        levels.forEach((level, index) => {
+            const x = startX + (index * (chartWidth / (levels.length - 1)));
+            potencyCtx.fillText(String(level), x, startY + 15);
+        });
+
         // Labels
         potencyCtx.fillStyle = '#333';
         potencyCtx.font = '12px Arial';
         potencyCtx.textAlign = 'center';
-        potencyCtx.fillText('Character Level', startX + chartWidth/2, startY + 30);
+        potencyCtx.fillText('Item Level (when the rune becomes available)', startX + chartWidth/2, startY + 35);
         
         potencyCtx.save();
         potencyCtx.translate(20, startY - chartHeight/2);
@@ -1051,6 +1044,8 @@
         potencyCtx.restore();
         
         // Y-axis labels
+        potencyCtx.fillStyle = '#333';
+        potencyCtx.font = '12px Arial';
         potencyCtx.textAlign = 'right';
         for (let i = 0; i <= 3; i++) {
             const y = startY - (i * (chartHeight / 3));
@@ -1058,6 +1053,7 @@
         }
         
         // Title
+        potencyCtx.fillStyle = '#333';
         potencyCtx.font = 'bold 16px Arial';
         potencyCtx.textAlign = 'center';
         potencyCtx.fillText('Weapon Potency Rune Progression', startX + chartWidth/2, 30);
@@ -1069,15 +1065,16 @@
         // Clear canvas
         wealthCtx.clearRect(0, 0, wealthCanvas.width, wealthCanvas.height);
         
-        // Wealth progression data (simplified)
+        // Lump-sum wealth for a new character starting at each level
+        // (GM Core, Table 10-10: Character Wealth)
         const wealthByLevel = [
-            15, 30, 75, 140, 270, 450, 720, 1080, 1350, 2000,
-            2800, 4000, 5200, 7500, 10000, 15000, 21000, 30000, 45000, 65000
+            15, 30, 75, 140, 270, 450, 720, 1100, 1600, 2300,
+            3200, 4500, 6400, 9300, 13500, 20000, 30000, 45000, 69000, 112000
         ];
         
         // Chart dimensions for wealth chart
         const wealthChartWidth = 700;
-        const wealthChartHeight = 300;
+        const wealthChartHeight = 260;
         const wealthStartX = 80;
         const wealthStartY = 350;
         
@@ -1108,22 +1105,33 @@
                 wealthCtx.lineTo(x, y);
             }
             
-            // Draw points every 5 levels
-            if (index % 5 === 0 || index === 0) {
-                wealthCtx.fillStyle = '#4caf50';
-                wealthCtx.beginPath();
-                wealthCtx.arc(x, y, 5, 0, 2 * Math.PI);
-                wealthCtx.fill();
-                
-                // Label major points
-                wealthCtx.fillStyle = '#333';
-                wealthCtx.font = '10px Arial';
-                wealthCtx.textAlign = 'center';
-                wealthCtx.fillText((index + 1).toString(), x, wealthStartY + 15);
-                wealthCtx.fillText(wealth + ' gp', x, y - 10);
-            }
         });
         wealthCtx.stroke();
+
+        // Level numbers along the x-axis
+        wealthCtx.fillStyle = '#333';
+        wealthCtx.font = '11px Arial';
+        wealthCtx.textAlign = 'center';
+        wealthByLevel.forEach((wealth, index) => {
+            const x = wealthStartX + (index * (wealthChartWidth / (wealthByLevel.length - 1)));
+            wealthCtx.fillText((index + 1).toString(), x, wealthStartY + 15);
+        });
+
+        // Mark and label levels 1, 5, 10, 15 and 20
+        [0, 4, 9, 14, 19].forEach(index => {
+            const wealth = wealthByLevel[index];
+            const x = wealthStartX + (index * (wealthChartWidth / (wealthByLevel.length - 1)));
+            const y = wealthStartY - ((wealth / maxWealth) * wealthChartHeight);
+            wealthCtx.fillStyle = '#4caf50';
+            wealthCtx.beginPath();
+            wealthCtx.arc(x, y, 5, 0, 2 * Math.PI);
+            wealthCtx.fill();
+            wealthCtx.fillStyle = '#333';
+            wealthCtx.font = '11px Arial';
+            const align = index === 19 ? 'right' : (index === 0 ? 'left' : 'center');
+            wealthCtx.textAlign = align;
+            wealthCtx.fillText(wealth.toLocaleString('en-US') + ' gp', align === 'right' ? x - 8 : (align === 'left' ? x + 8 : x), y - 10);
+        });
         
         // Labels
         wealthCtx.fillStyle = '#333';
@@ -1134,36 +1142,20 @@
         wealthCtx.save();
         wealthCtx.translate(30, wealthStartY - wealthChartHeight/2);
         wealthCtx.rotate(-Math.PI/2);
-        wealthCtx.fillText('Expected Wealth (gp)', 0, 0);
+        wealthCtx.fillText('Lump-Sum Wealth (gp)', 0, 0);
         wealthCtx.restore();
         
         // Title
+        wealthCtx.fillStyle = '#333';
         wealthCtx.font = 'bold 18px Arial';
         wealthCtx.textAlign = 'center';
         wealthCtx.fillText('Character Wealth by Level', wealthStartX + wealthChartWidth/2, 30);
         
         // Subtitle
         wealthCtx.font = '12px Arial';
-        wealthCtx.fillText('Exponential growth reflects increasing adventure stakes', wealthStartX + wealthChartWidth/2, 50);
+        wealthCtx.textAlign = 'center';
+        wealthCtx.fillText('GM Core Character Wealth table: lump sum for a new character at each level', wealthStartX + wealthChartWidth/2, 50);
     </script>
-    <nav class="prev-next-nav">
-        <a href="/pf2_magic.html" class="nav-prev">← Magic</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_adv_combat.html" class="nav-next">Advanced Combat →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

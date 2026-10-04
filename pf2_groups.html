@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2e Character Groups - Introduction to Party Dynamics</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Party Dynamics - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 5</span>
         <h1>Pathfinder 2nd Edition Character Groups</h1>
         <h2>Mastering Party Composition and Adventure Dynamics</h2>
     </header>
@@ -60,7 +39,7 @@
 
             <div class="mermaid">
                 graph TD
-                    A[Inner Sea Region] --> B[Absalom - City of Truth]
+                    A[Inner Sea Region] --> B[Absalom - City at the Center of the World]
                     A --> C[Varisia - Land of Mystery]
                     A --> D[Cheliax - Devil's Empire]
                     A --> E[Andoran - Eagle's Democracy]
@@ -68,9 +47,9 @@
                     F --> H[Hellknights]
                     F --> I[Eagle Knights]
                     F --> J[Aspis Consortium]
-                    K[Mystical Forces] --> L[Arcanamirium]
+                    K[Magic Academies] --> L[Arcanamirium]
                     K --> M[Magaambya]
-                    K --> N[Red Mantis]
+                    O --> N[Red Mantis Assassins]
                     O[Religious Orders] --> P[Church of Iomedae]
                     O --> Q[Pharasma's Clergy]
                     O --> R[Cult of Razmir]
@@ -79,7 +58,7 @@
 
         <section class="party-roles">
             <h3>The Four Pillars of Adventure</h3>
-            <p>Pathfinder 2e is built around four fundamental party roles, like the cardinal directions on a compass. Each direction provides essential navigation, and a party needs coverage in all areas to successfully traverse the challenges ahead.</p>
+            <p>Pathfinder 2e doesn't hard-code party roles, but most groups think in terms of four broad functions, like the cardinal directions on a compass. Each direction provides essential navigation, and a party needs coverage in all areas to successfully traverse the challenges ahead.</p>
 
             <h4>Essential Party Functions</h4>
             <div class="role-grid">
@@ -124,11 +103,11 @@
                 <h4>Synergy Categories</h4>
                 <div class="synergy-detail">
                     <h5>Mechanical Synergy</h5>
-                    <p>Classes that directly enhance each other's abilities through shared actions, reactions, or bonuses. A Bard's inspire courage boosts a Fighter's attack rolls, while a Cleric's healing keeps everyone in the fight.</p>
+                    <p>Classes that directly enhance each other's abilities through shared actions, reactions, or bonuses. A Bard's courageous anthem (formerly inspire courage) boosts a Fighter's attack rolls, while a Cleric's healing keeps everyone in the fight.</p>
                 </div>
                 <div class="synergy-detail">
                     <h5>Tactical Synergy</h5>
-                    <p>Combinations that create powerful battlefield strategies. A Wizard's wall spells funnel enemies into a Barbarian's reach, while a Rogue benefits from flanking opportunities created by multiple melee allies.</p>
+                    <p>Combinations that create powerful battlefield strategies. A Wizard's wall spells funnel enemies into a Barbarian's reach, while a Rogue benefits from flanking with melee allies: a flanked foe is off-guard (formerly flat-footed), which turns on sneak attack.</p>
                 </div>
                 <div class="synergy-detail">
                     <h5>Narrative Synergy</h5>
@@ -147,7 +126,7 @@
                 <div class="character-list">
                     <div class="character">
                         <strong>Sir Marcus Dawnbringer</strong> (Human Champion of Iomedae)
-                        <p>A paladin-like defender who combines heavy armor with divine magic. Uses Shield Block and reactions to protect allies while smiting evil with righteous fury.</p>
+                        <p>A Justice-cause champion (the Remaster successor to the paladin) who combines heavy armor with divine magic. Uses Shield Block and his champion's reaction to protect allies while punishing the foes who strike them.</p>
                         <div class="build-focus">Focus: Tanking, Healing, Undead Destruction</div>
                     </div>
                     <div class="character">
@@ -156,7 +135,7 @@
                         <div class="build-focus">Focus: Ranged Damage, Tracking, Survival</div>
                     </div>
                     <div class="character">
-                        <strong>Zara the Learned</strong> (Human Wizard - Universalist)
+                        <strong>Zara the Learned</strong> (Human Wizard - Unified Magical Theory, formerly universalist)
                         <p>Scholar of the Arcanamirium who controls the battlefield through strategic spell placement. Prepared casting allows perfect tool selection.</p>
                         <div class="build-focus">Focus: Area Control, Utility Magic, Knowledge</div>
                     </div>
@@ -184,7 +163,7 @@
                         <div class="build-focus">Focus: Investigation, Recall Knowledge, Consistent Damage</div>
                     </div>
                     <div class="character">
-                        <strong>Sera Moonweaver</strong> (Elf Witch - Fervor Patron)
+                        <strong>Sera Moonweaver</strong> (Elf Witch - Starless Shadow Patron)
                         <p>Subtle spellcaster who provides magical support without flashy displays. Hexes and familiar provide unique utility options.</p>
                         <div class="build-focus">Focus: Subtle Magic, Debuffs, Reconnaissance</div>
                     </div>
@@ -198,17 +177,17 @@
 
             <div class="party-example magical">
                 <h4>The Mage's Conclave (Magical Powerhouse)</h4>
-                <p>A party emphasizing magical might and versatility, like a gathering of Magaambya's finest students exploring the deepest mysteries of the Inner Sea.</p>
+                <p>A party emphasizing magical might and versatility, like a gathering of the Magaambya's finest scholars exploring the deepest mysteries of the Inner Sea.</p>
                 
                 <div class="character-list">
                     <div class="character">
                         <strong>Aldric Stormcaller</strong> (Human Sorcerer - Elemental Bloodline)
-                        <p>Raw magical power channeled through draconic heritage. Spontaneous casting and bloodline spells provide explosive damage potential.</p>
+                        <p>Raw magical power channeled through elemental heritage. Spontaneous casting and bloodline spells provide explosive damage potential.</p>
                         <div class="build-focus">Focus: Elemental Damage, Spontaneous Casting, Raw Power</div>
                     </div>
                     <div class="character">
-                        <strong>Willow Greenthumb</strong> (Halfling Druid - Wild Order)
-                        <p>Nature's champion who balances offensive spells with healing and utility. Wild Shape provides tactical flexibility and scouting options.</p>
+                        <strong>Willow Greenthumb</strong> (Halfling Druid - Untamed Order, formerly wild order)
+                        <p>Nature's champion who balances offensive spells with healing and utility. Untamed Form (formerly Wild Shape) provides tactical flexibility and scouting options.</p>
                         <div class="build-focus">Focus: Healing, Utility, Shape-changing</div>
                     </div>
                     <div class="character">
@@ -218,7 +197,7 @@
                     </div>
                     <div class="character">
                         <strong>Elena Brightblade</strong> (Elf Magus - Sparkling Targe)
-                        <p>Spell-sword who combines martial prowess with arcane might. Spellstrike allows delivery of touch spells through weapon attacks.</p>
+                        <p>Spell-sword who combines martial prowess with arcane might. Spellstrike delivers a spell that uses a spell attack roll through a weapon Strike.</p>
                         <div class="build-focus">Focus: Spell-Combat, Versatility, Magical Defense</div>
                     </div>
                 </div>
@@ -256,7 +235,7 @@
 
                 <div class="step">
                     <h5>Ancestry Synergy</h5>
-                    <p>Consider how ancestries complement classes and each other. Dwarven resistance pairs well with frontline roles, while Elven longevity creates interesting mentor-student dynamics. Ancestry feats can shore up party weaknesses.</p>
+                    <p>Consider how ancestries complement classes and each other. Dwarven resistance pairs well with frontline roles, while Elven longevity creates interesting mentor-apprentice dynamics. Ancestry feats can shore up party weaknesses.</p>
                 </div>
 
                 <div class="step">
@@ -295,7 +274,7 @@
             <p>Master party builders understand that true excellence comes from understanding the subtle interactions between mechanics, narrative, and player psychology.</p>
 
             <h4>Action Economy Optimization</h4>
-            <p>Pathfinder 2e's three-action system rewards coordination. Plan how characters can set up each other's actions - a Bard's inspire courage before the Fighter's attack, or a Wizard's grease spell before the Barbarian charges.</p>
+            <p>Pathfinder 2e's three-action system rewards coordination. Plan how characters can set up each other's actions - a Bard's courageous anthem before the Fighter's attack, or a Wizard's grease spell before the Barbarian charges.</p>
 
             <h4>Scaling Synergies</h4>
             <p>Design combinations that improve over time. Early-level teamwork feats evolve into higher-level tactical maneuvers. A party's effectiveness should grow exponentially, not just linearly.</p>
@@ -339,6 +318,10 @@
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_character_examples.html">Character Examples</a>
+    <a class="next" href="/pf2_actions.html">Core Mechanics</a>
+</div>
         <p>Remember: In the world of Golarion, heroes are forged not just by individual strength, but by the bonds they share and the trials they overcome together. May your adventures be legendary!</p>
     </footer>
 
@@ -347,21 +330,14 @@
         const canvas = document.getElementById('synergyChart');
         const ctx = canvas.getContext('2d');
         
-        // Set up the chart background
-        ctx.fillStyle = '#1a1a2e';
+        // Light chart background (the figure panel is light in both themes)
+        ctx.fillStyle = '#fbf7ef';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Add magical sparkles background
-        for(let i = 0; i < 150; i++) {
-            ctx.fillStyle = `rgba(255, 215, 0, ${Math.random() * 0.8})`;
-            const size = Math.random() * 2 + 1;
-            ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, size, size);
-        }
         
         // Define class positions in a circle
         const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
-        const radius = 180;
+        const centerY = canvas.height / 2 - 8;
+        const radius = 165;
         const classes = [
             { name: 'Fighter', color: '#DC143C', angle: 0 },
             { name: 'Ranger', color: '#228B22', angle: Math.PI/6 },
@@ -387,10 +363,11 @@
         const connections = [
             ['Fighter', 'Cleric'], ['Bard', 'Fighter'], ['Wizard', 'Fighter'],
             ['Rogue', 'Ranger'], ['Druid', 'Ranger'], ['Bard', 'Rogue'],
-            ['Cleric', 'Oracle'], ['Wizard', 'Sorcerer'], ['Barbarian', 'Druid']
+            ['Champion', 'Wizard'], ['Champion', 'Rogue'], ['Barbarian', 'Druid'],
+            ['Monk', 'Rogue'], ['Oracle', 'Barbarian'], ['Sorcerer', 'Fighter']
         ];
         
-        ctx.strokeStyle = 'rgba(255, 215, 0, 0.3)';
+        ctx.strokeStyle = 'rgba(120, 90, 30, 0.55)';
         ctx.lineWidth = 2;
         
         connections.forEach(conn => {
@@ -413,216 +390,53 @@
             ctx.fill();
             
             // Draw border
-            ctx.strokeStyle = '#FFD700';
+            ctx.strokeStyle = '#3b2a1a';
             ctx.lineWidth = 2;
             ctx.stroke();
             
             // Add class name
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 12px Arial';
+            ctx.fillStyle = '#2a1d10';
+            ctx.font = 'bold 13px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText(cls.name, cls.x, cls.y + 40);
+            ctx.fillText(cls.name, cls.x, cls.y + 42);
         });
         
         // Add title
-        ctx.fillStyle = '#FFD700';
-        ctx.font = 'bold 24px Arial';
+        ctx.fillStyle = '#2a1d10';
+        ctx.font = 'bold 22px Arial';
         ctx.textAlign = 'center';
         ctx.fillText('Pathfinder 2e Class Synergy Web', centerX, 30);
         
         // Add legend
-        ctx.fillStyle = '#FFFFFF';
+        ctx.fillStyle = '#2a1d10';
         ctx.font = '14px Arial';
-        ctx.fillText('Golden lines represent strong mechanical synergies', centerX, canvas.height - 20);
+        ctx.textAlign = 'center';
+        ctx.fillText('Lines show example pairings that support each other well (not an exhaustive list)', centerX, canvas.height - 12);
         
         // Reset text alignment
         ctx.textAlign = 'start';
     </script>
 
-    <!-- <style>
-        .role-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 25px 0;
+    <style>
+        /* Colour-coded roles and parties keep their hue as an accent edge */
+        main .role-card, main .party-example, main .pitfall, main .step, main .exercise, main .preview {
+            border-left: 5px solid var(--c, var(--accent)) !important;
         }
-        
-        .role-card {
-            padding: 25px;
-            border-radius: 12px;
-            border: 3px solid #8B4513;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        main .role-card, main .party-example {
+            background: var(--surface-2) !important; border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 14px 16px !important; margin: 0.8rem 0 !important;
         }
-        
-        .role-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-        
-        .role-card.striker {
-            background: linear-gradient(135deg, #DC143C, #8B0000);
-            color: white;
-        }
-        
-        .role-card.defender {
-            background: linear-gradient(135deg, #4169E1, #191970);
-            color: white;
-        }
-        
-        .role-card.support {
-            background: linear-gradient(135deg, #FFD700, #DAA520);
-            color: #333;
-        }
-        
-        .role-card.controller {
-            background: linear-gradient(135deg, #9370DB, #4B0082);
-            color: white;
-        }
-        
-        .class-examples {
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 6px;
-            font-size: 14px;
-        }
-        
-        .party-example {
-            padding: 30px;
-            margin: 30px 0;
-            border-radius: 15px;
-            border: 3px solid #8B4513;
-            position: relative;
-        }
-        
-        .party-example.classic {
-            background: linear-gradient(135deg, #2E8B57, #228B22);
-            color: white;
-        }
-        
-        .party-example.specialized {
-            background: linear-gradient(135deg, #4B0082, #2F1B69);
-            color: white;
-        }
-        
-        .party-example.magical {
-            background: linear-gradient(135deg, #8B4513, #A0522D);
-            color: white;
-        }
-        
-        .character-list {
-            display: grid;
-            gap: 20px;
-            margin-top: 25px;
-        }
-        
-        .character {
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #8B4513;
-        }
-        
-        .build-focus {
-            margin-top: 10px;
-            padding: 8px;
-            background: #f0f8ff;
-            border-radius: 5px;
-            font-style: italic;
-            font-size: 14px;
-            border-left: 3px solid #4169E1;
-        }
-        
-        .synergy-detail {
-            margin: 25px 0;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 5px solid #8B4513;
-        }
-        
-        .step {
-            margin: 25px 0;
-            padding: 25px;
-            background: #e3f2fd;
-            border-radius: 10px;
-            border-left: 5px solid #2196f3;
-        }
-        
-        .exercise {
-            background: linear-gradient(135deg, #FFF8DC, #F5DEB3);
-            padding: 25px;
-            margin: 25px 0;
-            border-radius: 12px;
-            border: 3px solid #DAA520;
-        }
-        
-        .pitfall {
-            background: #ffebee;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            border-left: 5px solid #f44336;
-        }
-        
-        .preview {
-            background: linear-gradient(135deg, #E8F5E8, #C8E6C9);
-            padding: 25px;
-            border-radius: 12px;
-            border: 3px solid #4CAF50;
-        }
-        
-        canvas {
-            border: 4px solid #8B4513;
-            border-radius: 15px;
-            margin: 25px 0;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-        
-        .framework-details {
-            margin-top: 30px;
-        }
-        
-        /* Add some fantasy-themed styling */
-        .role-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700, #FFA500);
-            border-radius: 12px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .role-card:hover::before {
-            opacity: 1;
-        }
-    </style> -->
-    <nav class="prev-next-nav">
-        <a href="/pf2_names.html" class="nav-prev">← Character Names</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_actions.html" class="nav-next">Core Mechanics →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+        main .role-card.striker { --c: #c0392b; }
+        main .role-card.defender { --c: #2f5fb8; }
+        main .role-card.support { --c: #a07800; }
+        main .role-card.controller { --c: #7b3fb0; }
+        main .party-example.classic { --c: #2e8b3e; }
+        main .party-example.specialized { --c: #5a3cc0; }
+        main .party-example.magical { --c: #a0522d; }
+        main .pitfall { --c: #c0392b; }
+        main .exercise { --c: #a07800; }
+        main .preview { --c: #2e8b3e; }
+    </style>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

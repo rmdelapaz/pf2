@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2e: Game Master Essentials</title>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="icon" href="/favicon.png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
+    <title>Game Master Essentials - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 13</span>
         <h1>Pathfinder 2e: Game Master Essentials</h1>
         <p><em>Mastering the Art of Running Memorable Game Sessions</em></p>
     </header>
@@ -84,8 +63,8 @@
             <pre><code>Physical Tools Checklist:
 
 📚 CORE REFERENCES
-□ Pathfinder 2e Core Rulebook (or quick reference sheets)
-□ Bestiary (or monster stat cards for planned encounters)
+□ Player Core and GM Core (or the pre-Remaster Core Rulebook, 2019)
+□ Monster Core or a Bestiary (or monster stat cards for planned encounters)
 □ GM Screen with frequently used tables
 □ Campaign notes and NPC reference sheets
 
@@ -181,9 +160,9 @@ COMBAT FLOW TECHNIQUES:
 Example Initiative Tracker Layout:
 Turn | Character/Monster | AC | HP | Conditions | Notes
   1  | Valeria (Fighter) | 18 | 45 | None      | Has 3 actions
-  2  | Goblin Chief      | 16 | 28 | -2 AC     | Flanked by Zara  
+  2  | Goblin Chief      | 16 | 28 | Off-guard | Flanked: -2 AC (off-guard, formerly flat-footed)
   3  | Zara (Rogue)      | 16 | 32 | None      | Sneak attack ready
-  4  | Orc Warrior       | 15 | 35 | Frightened| -1 to all rolls</code></pre>
+  4  | Orc Warrior       | 15 | 35 | Frightened 1 | -1 to checks and DCs</code></pre>
 
             <h3>Describing Combat Dynamically</h3>
             <p>Combat description is like sports commentary - you want to make even routine actions feel exciting and consequential while keeping the pace moving.</p>
@@ -203,8 +182,8 @@ Basic: "Critical hit, double damage"
 Dynamic: "Time seems to slow as you find the perfect opening - your strike lands with devastating precision!"
 
 CRITICAL FAILURES:
-Basic: "Critical miss, bad things happen"
-Dynamic: "Your swing goes wide, and you stumble slightly, leaving yourself momentarily vulnerable"
+Basic: "Critical miss" (most Strikes have no extra effect on a critical failure)
+Dynamic: "Your swing goes wide and bites deep into the floorboards - a clean miss!"
 
 SPELLS AND MAGIC:
 Basic: "The fireball does 15 damage"
@@ -220,7 +199,7 @@ Dynamic: "Your intimidating roar causes the goblin's eyes to widen in terror - i
             <pre><code>Multi-Element Encounter Management:
 
 ENVIRONMENTAL HAZARDS:
-□ Roll for hazard effects at consistent times (start/end of round)
+□ Run complex hazards on their own initiative turn, following their routine
 □ Describe environmental changes clearly
 □ Give players opportunities to interact creatively with terrain
 □ Use hazards to create tactical decisions, not just damage
@@ -232,7 +211,7 @@ MULTIPLE ENEMY TYPES:
 □ Have enemies react intelligently to player tactics
 
 LARGE BATTLES:
-□ Use minion rules for numerous weak enemies
+□ Use fewer, lower-level creatures rather than dozens of individual foes
 □ Focus spotlight on player actions, summarize mass combat
 □ Create clear objectives beyond "kill everything"
 □ Use battlefield control effects to manage complexity
@@ -242,7 +221,7 @@ SETUP: Cultists performing ritual in burning temple
 ELEMENTS: 
 - 4 cultists (grouped initiative)
 - 1 cult leader (separate initiative)  
-- Spreading fire (acts on initiative 10)
+- Spreading fire (a complex hazard with its own initiative)
 - Ritual progress (advances each round)
 - Collapsing ceiling (trigger after 5 rounds)
 
@@ -343,7 +322,7 @@ BEHAVIOR: Offers fair prices but always negotiates, asks about their adventures 
             <pre><code>Rule Decision Priority:
 
 1. CORE RULES (Highest Priority)
-   - Check Core Rulebook for explicit rules
+   - Check Player Core / GM Core (or Archives of Nethys) for explicit rules
    - Look for specific before general rules
    - "Specific overrides general" is a key principle
 
@@ -380,9 +359,9 @@ QUICK DECISION PROCESS:
             <pre><code>Frequent Ruling Scenarios:
 
 CREATIVE SPELL USE:
-Player: "Can I use Mage Hand to trigger that trap?"
-Approach: Consider spell description, range, weight limits
-Ruling: "Mage Hand can manipulate objects up to 1 pound. The trigger looks light enough - roll a Spellcasting check."
+Player: "Can I use Telekinetic Hand (formerly Mage Hand) to trigger that trap?"
+Approach: Consider spell description, range, Bulk limits
+Ruling: "Telekinetic Hand moves an unattended object of light Bulk or less. That trigger plate qualifies - it goes off, hopefully from a safe distance."
 
 ENVIRONMENTAL INTERACTION:
 Player: "Can I swing on that chandelier to reach the balcony?"
@@ -392,12 +371,12 @@ Ruling: "That's an Athletics check, DC 15. Failure means you fall but might stil
 SKILL CHECK INTERPRETATION:
 Player: "I want to intimidate the door into opening."
 Approach: Guide toward reasonable application of skills
-Ruling: "Intimidation works on creatures with intelligence. You could try to break it down with Athletics, or pick the lock with Thievery."
+Ruling: "Intimidation works on creatures, not doors. You could try to break it down with Athletics, or pick the lock with Thievery."
 
 UNCLEAR ABILITY INTERACTIONS:
 Player: "Does my barbarian rage work with this spell?"
 Approach: Check specific restrictions, apply general principles
-Ruling: "Rage prevents spellcasting, but this is a magic item activation, not casting. I'll allow it this time and double-check the rule after the session."
+Ruling: "While raging you can't use concentrate actions (unless they have the rage trait). If this item's activation doesn't have the concentrate trait, it works - I'll double-check the item after the session."
 
 BENEFIT OF THE DOUBT:
 When uncertain between interpretations:
@@ -735,7 +714,7 @@ RULES REFERENCES:
 □ Spell and monster databases with search functionality
 
 ENCOUNTER MANAGEMENT:
-□ Initiative tracking apps (Improved Initiative, Roll20)
+□ Initiative tracking (built into Foundry VTT and Roll20, or a standalone tracker app)
 □ Digital dice rollers for quick monster rolls
 □ HP and condition tracking tools
 □ Combat timer apps for maintaining pace
@@ -811,13 +790,12 @@ BOOKS AND GUIDES:
 □ "Return of the Lazy Dungeon Master" by Mike Shea
 □ "The Angry GM" blog for advanced techniques
 □ "So You Want to Be a Game Master" by Justin Alexander
-□ Paizo's "Gamemastery Guide" for PF2e-specific advice
+□ Paizo's GM Core (Remaster) or Gamemastery Guide for PF2e-specific advice
 
 PODCASTS AND VIDEOS:
-□ "How to Be a Great GM" YouTube channel
-□ "Matt Colville's Running the Game" series
+□ Matt Colville's "Running the Game" video series
 □ "Glass Cannon Podcast" for PF2e gameplay examples
-□ "The GM's Guide" podcast for practical advice
+□ GM-advice podcasts and YouTube channels for practical tips
 
 COMMUNITY ENGAGEMENT:
 □ Join local gaming groups or clubs
@@ -826,8 +804,8 @@ COMMUNITY ENGAGEMENT:
 □ Observe other GMs to learn different styles
 
 SKILL-SPECIFIC IMPROVEMENT:
-Voice Acting: Practice character voices, watch voice acting tutorials
-Improvisation: Take improv classes or practice exercises
+Voice Acting: Practice character voices, watch voice-acting videos
+Improvisation: Join an improv workshop or try practice exercises
 Rules Mastery: Study specific rules sections, create quick reference sheets
 Storytelling: Read fiction in your campaign's genre, watch masterful TV/movies</code></pre>
         </section>
@@ -901,27 +879,13 @@ Storytelling: Read fiction in your campaign's genre, watch masterful TV/movies</
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_player_collab.html">Player Collaboration</a>
+    <a class="next" href="/pf2_campaign.html">Campaign &amp; Adventure Design</a>
+</div>
         <p>Your table awaits, and epic stories are ready to unfold - may your sessions be filled with laughter, adventure, and unforgettable moments!</p>
   
     </footer>
-    <nav class="prev-next-nav">
-        <a href="/pf2_campaign.html" class="nav-prev">← Campaign</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_worldbuilding.html" class="nav-next">Worldbuilding →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

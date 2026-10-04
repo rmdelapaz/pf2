@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skills and Exploration - Pathfinder 2.0</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Skills &amp; Exploration - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 7</span>
         <h1>Skills and Exploration</h1>
         <p class="subtitle">Beyond Combat - The Art of Adventure</p>
     </header>
@@ -51,14 +30,14 @@
             <h2>The World Beyond the Sword</h2>
             <p>Combat gets the spotlight, but most of your adventuring time is spent exploring mysterious ruins, negotiating with suspicious nobles, tracking monsters through dark forests, and solving ancient puzzles. Think of skills as your character's toolkit for everything that happens between the dramatic sword fights.</p>
             
-            <p>In Pathfinder 2.0, skills aren't just numbers on a sheet - they're your gateway to creative problem-solving, character expression, and world interaction. Like a master craftsperson who knows which tool to use for each job, skilled adventurers know when to use diplomacy instead of intimidation, when investigation beats perception, and when a well-placed lie accomplishes more than a dozen truth spells.</p>
+            <p>In Pathfinder 2e, skills aren't just numbers on a sheet - they're your gateway to creative problem-solving, character expression, and world interaction. Like a master craftsperson who knows which tool to use for each job, skilled adventurers know when to use diplomacy instead of intimidation, when careful study beats a quick look, and when a well-placed lie accomplishes more than a dozen truth spells.</p>
 
             <div class="adventure-breakdown">
                 <h3>The Anatomy of Adventure</h3>
                 <div class="time-distribution">
                     <canvas id="adventureTimeChart" width="600" height="300"></canvas>
                 </div>
-                <p><em>Most RPG sessions spend only 20-30% of time in combat. Skills make the other 70-80% engaging!</em></p>
+                <p><em>Combat is only one part of a typical session. Exploration, conversation and investigation fill much of the rest, and skills drive all of them. (The chart is an illustrative split; every table is different.)</em></p>
             </div>
         </section>
 
@@ -70,12 +49,12 @@
                 <h3>The Universal Formula</h3>
                 <div class="formula-breakdown">
                     <div class="formula-box">
-                        <h4>🎲 d20 + Ability Modifier + Proficiency Bonus + Item Bonus + Circumstance Bonus = Total</h4>
+                        <h4>🎲 d20 + Attribute Modifier + Proficiency Bonus + Item Bonus + Circumstance Bonus (minus any penalties) = Total</h4>
                     </div>
                     
                     <div class="modifier-examples">
                         <div class="modifier-card">
-                            <h5>📊 Ability Modifier</h5>
+                            <h5>📊 Attribute Modifier (formerly ability modifier)</h5>
                             <p><strong>What it is:</strong> Your character's natural talent</p>
                             <p><strong>Example:</strong> Diplomacy uses Charisma - a charming person (+4 CHA) naturally persuades better</p>
                         </div>
@@ -83,19 +62,19 @@
                         <div class="modifier-card">
                             <h5>🎯 Proficiency Bonus</h5>
                             <p><strong>What it is:</strong> Your training level</p>
-                            <p><strong>Progression:</strong> Untrained (0) → Trained (+2) → Expert (+4) → Master (+6) → Legendary (+8)</p>
+                            <p><strong>Progression:</strong> Untrained (+0) → Trained (2 + level) → Expert (4 + level) → Master (6 + level) → Legendary (8 + level)</p>
                         </div>
                         
                         <div class="modifier-card">
                             <h5>🛠️ Item Bonus</h5>
                             <p><strong>What it is:</strong> Better tools make better results</p>
-                            <p><strong>Example:</strong> Thieves' tools give +1 to Thievery, a spyglass helps with distant Perception</p>
+                            <p><strong>Example:</strong> An infiltrator thieves' toolkit gives a +1 item bonus to Thievery; a spyglass helps you see distant details</p>
                         </div>
                         
                         <div class="modifier-card">
                             <h5>🌟 Circumstance Bonus</h5>
                             <p><strong>What it is:</strong> Situational advantages</p>
-                            <p><strong>Example:</strong> +2 to Intimidate if you just defeated the target's ally in combat</p>
+                            <p><strong>Example:</strong> The GM might grant +2 to Intimidation if you just defeated the target's ally in combat</p>
                         </div>
                     </div>
                 </div>
@@ -163,7 +142,7 @@
                                 <ul>
                                     <li><strong>Balance:</strong> Cross narrow beams, icy surfaces, tightropes</li>
                                     <li><strong>Tumble Through:</strong> Move through enemy spaces in combat</li>
-                                    <li><strong>Squeeze:</strong> Fit through spaces half your width</li>
+                                    <li><strong>Squeeze:</strong> Wriggle through spaces too tight to move through normally (slowly)</li>
                                 </ul>
                             </div>
                             
@@ -219,16 +198,16 @@
                                 <h5>Common Uses:</h5>
                                 <ul>
                                     <li><strong>Hide:</strong> Conceal yourself from sight</li>
-                                    <li><strong>Sneak:</strong> Move without making noise</li>
-                                    <li><strong>Avoid Notice:</strong> Travel without attracting attention</li>
+                                    <li><strong>Sneak:</strong> Move (at half Speed) while staying hidden</li>
+                                    <li><strong>Avoid Notice:</strong> Travel without attracting attention (an exploration activity)</li>
                                 </ul>
                             </div>
                             
                             <div class="stealth-mechanics">
                                 <h5>Stealth Mechanics:</h5>
                                 <p><strong>Hidden Condition:</strong> Enemies don't know your exact location</p>
-                                <p><strong>Observed → Hidden → Undetected:</strong> Progressive levels of concealment</p>
-                                <p><strong>Cover and Concealment:</strong> Physical obstacles help hide you</p>
+                                <p><strong>Observed → Hidden → Undetected → Unnoticed:</strong> Progressive levels of how little enemies know about you</p>
+                                <p><strong>Cover and Concealment:</strong> You need one or the other to Hide or Sneak</p>
                             </div>
                         </div>
                     </div>
@@ -263,31 +242,31 @@
                         </div>
 
                         <div class="skill-card">
-                            <h4>🔍 Investigation (Intelligence)</h4>
-                            <p><strong>The detective's skill:</strong> Find clues, analyze evidence, solve mysteries</p>
+                            <h4>🔍 Perception (Wisdom)</h4>
+                            <p><strong>The detective's eye:</strong> Not one of the 17 skills (and Pathfinder 2e has no Investigation skill), but you roll it just like one to find clues and spot trouble. It's also your usual initiative roll.</p>
                             
                             <div class="skill-uses">
                                 <h5>Common Uses:</h5>
                                 <ul>
-                                    <li><strong>Search:</strong> Look for hidden objects, secret doors, clues</li>
-                                    <li><strong>Follow Tracks:</strong> Urban tracking and evidence analysis</li>
-                                    <li><strong>Gather Information:</strong> Research in libraries and archives</li>
+                                    <li><strong>Seek:</strong> Look for hidden objects, secret doors, clues</li>
+                                    <li><strong>Sense Motive:</strong> Tell when someone is hiding something</li>
+                                    <li><strong>Search (exploration):</strong> Seek carefully while traveling at half speed</li>
                                 </ul>
                             </div>
                             
                             <div class="investigation-vs-perception">
-                                <h5>Investigation vs Perception:</h5>
+                                <h5>Perception vs Recall Knowledge:</h5>
                                 <p><strong>Perception:</strong> Noticing things with your senses ("I hear footsteps")</p>
-                                <p><strong>Investigation:</strong> Analyzing what you find ("These footprints are from boots worth 50 gold - our target is wealthy")</p>
+                                <p><strong>Recall Knowledge (Society, Lore and others):</strong> Analyzing what you find ("These footprints are from expensive boots - our target is wealthy")</p>
                             </div>
                         </div>
 
                         <div class="skill-card">
-                            <h4>🏛️ History (Intelligence)</h4>
-                            <p><strong>The historian's skill:</strong> Knowledge of past events, cultures, and civilizations</p>
+                            <h4>🏛️ Society (Intelligence)</h4>
+                            <p><strong>The historian's skill:</strong> Knowledge of past events, cultures, and civilizations (Pathfinder 2e has no separate History skill; a Lore such as Absalom Lore goes deeper)</p>
                             
                             <div class="historical-knowledge">
-                                <h5>What History Reveals:</h5>
+                                <h5>What Society Reveals:</h5>
                                 <ul>
                                     <li>This crown belonged to the tyrant king who fell 200 years ago</li>
                                     <li>That symbol marks the tomb of ancient heroes</li>
@@ -376,8 +355,8 @@
                                 <h5>Common Uses:</h5>
                                 <ul>
                                     <li><strong>Coerce:</strong> Force compliance through fear</li>
-                                    <li><strong>Demoralize:</strong> Make enemies frightened in combat</li>
-                                    <li><strong>Gather Information:</strong> Get answers through implied threats</li>
+                                    <li><strong>Demoralize:</strong> 1 action to make an enemy frightened 1 (frightened 2 on a critical success)</li>
+                                    <li><strong>Coerce for answers:</strong> Threats can pry loose information too, but the target turns against you afterward</li>
                                 </ul>
                             </div>
                             
@@ -386,7 +365,7 @@
                                 <ul>
                                     <li><strong>Physical:</strong> "Look at the size of my sword"</li>
                                     <li><strong>Reputation:</strong> "You know who I am"</li>
-                                    <li><strong>Magical:</strong> "You see these spell components?"</li>
+                                    <li><strong>Magical:</strong> "You've seen what my magic can do?"</li>
                                     <li><strong>Social:</strong> "I have friends in high places"</li>
                                 </ul>
                             </div>
@@ -409,17 +388,17 @@
                                     <li><strong>Earn Income:</strong> Make money through your craft</li>
                                     <li><strong>Repair:</strong> Fix damaged equipment</li>
                                     <li><strong>Craft Items:</strong> Create new equipment (time-consuming)</li>
-                                    <li><strong>Identify Craftsmanship:</strong> Analyze quality and origin</li>
+                                    <li><strong>Identify Alchemy:</strong> Work out what an alchemical item does</li>
                                 </ul>
                             </div>
                             
                             <div class="crafting-specialties">
-                                <h5>Crafting Specialties:</h5>
+                                <h5>Crafting Specialties (some need a skill feat):</h5>
                                 <ul>
                                     <li><strong>Blacksmithing:</strong> Weapons, armor, metal tools</li>
-                                    <li><strong>Alchemy:</strong> Potions, bombs, magical reagents</li>
-                                    <li><strong>Jewelry:</strong> Rings, amulets, precious items</li>
-                                    <li><strong>Engineering:</strong> Siege weapons, traps, mechanisms</li>
+                                    <li><strong>Alchemy:</strong> Elixirs, bombs, alchemical tools (needs the Alchemical Crafting feat)</li>
+                                    <li><strong>Woodworking:</strong> Bows, shields, carved goods</li>
+                                    <li><strong>Snares:</strong> Quick traps for the field (needs the Snare Crafting feat)</li>
                                 </ul>
                             </div>
                         </div>
@@ -431,10 +410,10 @@
                             <div class="medical-uses">
                                 <h5>Medical Techniques:</h5>
                                 <ul>
-                                    <li><strong>Treat Wounds:</strong> Heal HP damage over time</li>
+                                    <li><strong>Treat Wounds:</strong> 10 minutes of care; DC 15 heals 2d8 HP (4d8 on a critical success), then the patient is immune for 1 hour</li>
                                     <li><strong>Treat Disease:</strong> Help patients fight off illness</li>
                                     <li><strong>Treat Poison:</strong> Assist with poison recovery</li>
-                                    <li><strong>Battle Medicine:</strong> Emergency field healing</li>
+                                    <li><strong>Battle Medicine (skill feat):</strong> Emergency field healing</li>
                                 </ul>
                             </div>
                             
@@ -456,8 +435,8 @@
                             <div class="thievery-uses">
                                 <h5>Roguish Techniques:</h5>
                                 <ul>
-                                    <li><strong>Pick Locks:</strong> Open doors without keys</li>
-                                    <li><strong>Disable Device:</strong> Disarm traps and mechanisms</li>
+                                    <li><strong>Pick a Lock:</strong> Open doors without keys</li>
+                                    <li><strong>Disable a Device:</strong> Disarm traps and mechanisms</li>
                                     <li><strong>Palm an Object:</strong> Sleight of hand</li>
                                     <li><strong>Steal:</strong> Pickpocket without detection</li>
                                 </ul>
@@ -466,8 +445,8 @@
                             <div class="thievery-tools">
                                 <h5>Tools of the Trade:</h5>
                                 <ul>
-                                    <li><strong>Thieves' Tools:</strong> +1 item bonus to Thievery checks</li>
-                                    <li><strong>Replacement Tools:</strong> Can improvise but at penalty</li>
+                                    <li><strong>Thieves' Toolkit:</strong> Needed to Pick a Lock; an infiltrator toolkit adds a +1 item bonus</li>
+                                    <li><strong>Replacement Picks:</strong> Fix a toolkit after a critical failure breaks it</li>
                                     <li><strong>Quality Matters:</strong> Better tools = better results</li>
                                 </ul>
                             </div>
@@ -496,8 +475,8 @@
                             <h5>Phase 1: Intelligence Gathering</h5>
                             <ul>
                                 <li><strong>Diplomacy:</strong> Chat with servants at the market</li>
-                                <li><strong>Investigation:</strong> Study the building's layout</li>
-                                <li><strong>Society:</strong> Learn the family's routines</li>
+                                <li><strong>Society:</strong> Dig up the building's plans in the city records</li>
+                                <li><strong>Perception:</strong> Watch the house to learn the family's routines</li>
                             </ul>
                             
                             <h5>Phase 2: Getting Inside</h5>
@@ -510,7 +489,7 @@
                             
                             <h5>Phase 3: Finding the Evidence</h5>
                             <ul>
-                                <li><strong>Investigation:</strong> Search the study for hidden safes</li>
+                                <li><strong>Perception (Seek):</strong> Search the study for hidden safes</li>
                                 <li><strong>Thievery:</strong> Pick the safe's lock</li>
                                 <li><strong>Perception:</strong> Notice guard patrols</li>
                                 <li><strong>Stealth:</strong> Avoid detection during the search</li>
@@ -519,7 +498,7 @@
                         
                         <div class="challenge-mechanics">
                             <h5>Challenge Mechanics:</h5>
-                            <p><strong>Success Threshold:</strong> Need 6 successes before 3 failures</p>
+                            <p><strong>Success Threshold:</strong> Need 6 successes before 3 failures (a simple victory-point track; GM Core's subsystems, such as infiltration, offer fuller versions)</p>
                             <p><strong>Consequences:</strong> Failures add complications (guards, alarms, time pressure)</p>
                             <p><strong>Creative Solutions:</strong> Players can suggest new approaches using different skills</p>
                         </div>
@@ -593,7 +572,7 @@
                         <p>Don't just use static DCs - adjust based on approach and creativity:</p>
                         <ul>
                             <li><strong>Creative Approach:</strong> Lower the DC by 2-5</li>
-                            <li><strong>Perfect Tool/Circumstance:</strong> Grant advantage or automatic success</li>
+                            <li><strong>Perfect Tool/Circumstance:</strong> Grant a circumstance bonus or an automatic success (Pathfinder 2e has no advantage mechanic)</li>
                             <li><strong>Poor Conditions:</strong> Increase DC by 2-5</li>
                             <li><strong>Time Pressure:</strong> Add consequences for taking too long</li>
                         </ul>
@@ -623,33 +602,33 @@
                 
                 <div class="activity-grid">
                     <div class="activity-card">
-                        <h4>👁️ Investigating</h4>
-                        <p><strong>Focus:</strong> Looking for clues, examining details</p>
-                        <p><strong>Benefit:</strong> +1 to Investigation and Perception for secret doors/hazards</p>
-                        <p><strong>Speed:</strong> Half normal travel speed</p>
+                        <h4>👁️ Searching</h4>
+                        <p><strong>Focus:</strong> Looking for hidden doors, concealed hazards and clues</p>
+                        <p><strong>Benefit:</strong> You Seek as you go; the GM rolls secret Perception checks to find hidden things</p>
+                        <p><strong>Speed:</strong> Half travel speed (or slower, for a more thorough search)</p>
                         <p><strong>Best for:</strong> Rogues, Investigators, detail-oriented characters</p>
                     </div>
                     
                     <div class="activity-card">
                         <h4>👂 Scouting</h4>
                         <p><strong>Focus:</strong> Staying alert for danger</p>
-                        <p><strong>Benefit:</strong> +1 to Perception for initiative and detecting creatures</p>
-                        <p><strong>Speed:</strong> Normal travel speed</p>
+                        <p><strong>Benefit:</strong> Everyone in the party gets a +1 circumstance bonus to initiative in the next encounter</p>
+                        <p><strong>Speed:</strong> Half travel speed</p>
                         <p><strong>Best for:</strong> Rangers, anyone with good Perception</p>
                     </div>
                     
                     <div class="activity-card">
-                        <h4>🗺️ Navigating</h4>
+                        <h4>🗺️ Navigating (Sense Direction)</h4>
                         <p><strong>Focus:</strong> Finding the right path</p>
-                        <p><strong>Benefit:</strong> +1 to Survival for avoiding getting lost</p>
-                        <p><strong>Speed:</strong> Normal travel speed</p>
+                        <p><strong>Benefit:</strong> Survival checks keep the party from getting lost</p>
+                        <p><strong>Speed:</strong> Normal travel speed; the GM calls for checks along the way</p>
                         <p><strong>Best for:</strong> Druids, Rangers, wilderness experts</p>
                     </div>
                     
                     <div class="activity-card">
-                        <h4>🤫 Sneaking</h4>
+                        <h4>🤫 Avoiding Notice</h4>
                         <p><strong>Focus:</strong> Avoiding detection</p>
-                        <p><strong>Benefit:</strong> Roll Stealth for the group</p>
+                        <p><strong>Benefit:</strong> Roll Stealth for your initiative, so you may start the fight unseen (each character rolls for themselves; allies can Follow the Expert)</p>
                         <p><strong>Speed:</strong> Half travel speed</p>
                         <p><strong>Best for:</strong> Rogues, when stealth is critical</p>
                     </div>
@@ -657,16 +636,16 @@
                     <div class="activity-card">
                         <h4>🛡️ Defending</h4>
                         <p><strong>Focus:</strong> Protecting other party members</p>
-                        <p><strong>Benefit:</strong> +1 AC to adjacent allies, ready to intercept attacks</p>
-                        <p><strong>Speed:</strong> Normal travel speed</p>
+                        <p><strong>Benefit:</strong> You travel with your shield raised, so if a fight breaks out you start with Raise a Shield's +2 AC already in place</p>
+                        <p><strong>Speed:</strong> Half travel speed</p>
                         <p><strong>Best for:</strong> Fighters, Champions, protective characters</p>
                     </div>
                     
                     <div class="activity-card">
-                        <h4>📚 Recalling Knowledge</h4>
+                        <h4>📚 Investigating</h4>
                         <p><strong>Focus:</strong> Remembering relevant information</p>
-                        <p><strong>Benefit:</strong> Can attempt knowledge checks about encountered things</p>
-                        <p><strong>Speed:</strong> Normal travel speed</p>
+                        <p><strong>Benefit:</strong> The GM rolls secret Recall Knowledge checks about what you encounter</p>
+                        <p><strong>Speed:</strong> Half travel speed</p>
                         <p><strong>Best for:</strong> Wizards, scholars, knowledgeable characters</p>
                     </div>
                 </div>
@@ -681,18 +660,18 @@
                         <p><strong>Party Setup:</strong></p>
                         <ul>
                             <li><strong>Fighter:</strong> Defending (protecting the fragile wizard)</li>
-                            <li><strong>Rogue:</strong> Investigating (looking for traps and secrets)</li>
-                            <li><strong>Wizard:</strong> Recalling Knowledge (identifying magical phenomena)</li>
-                            <li><strong>Cleric:</strong> Scouting (watching for undead with divine senses)</li>
+                            <li><strong>Rogue:</strong> Searching (looking for traps and secrets)</li>
+                            <li><strong>Wizard:</strong> Investigating (identifying magical phenomena)</li>
+                            <li><strong>Cleric:</strong> Scouting (watching for undead)</li>
                         </ul>
                         
                         <div class="scenario-events">
                             <p><strong>What Happens:</strong></p>
                             <ul>
-                                <li>The Rogue finds a hidden passage (Investigation bonus)</li>
-                                <li>The Cleric senses undead presence before they attack (Scouting bonus)</li>
+                                <li>The Rogue finds a hidden passage (Search)</li>
+                                <li>The Cleric spots the undead before they attack, and the whole party gets +1 to initiative (Scout)</li>
                                 <li>The Wizard identifies the ghostly apparition's weakness</li>
-                                <li>The Fighter is ready to protect allies when combat starts</li>
+                                <li>The Fighter starts the fight with a shield already raised (Defend)</li>
                             </ul>
                         </div>
                     </div>
@@ -701,19 +680,19 @@
                         <h4>🌲 Wilderness Trek</h4>
                         <p><strong>Party Setup:</strong></p>
                         <ul>
-                            <li><strong>Ranger:</strong> Navigating (preventing the party from getting lost)</li>
+                            <li><strong>Ranger:</strong> Navigating with Sense Direction (preventing the party from getting lost)</li>
                             <li><strong>Barbarian:</strong> Scouting (watching for predators)</li>
-                            <li><strong>Druid:</strong> Recalling Knowledge (Nature checks about terrain/weather)</li>
-                            <li><strong>Bard:</strong> Defending (using magic to protect the group)</li>
+                            <li><strong>Druid:</strong> Investigating (secret Nature checks about terrain/weather)</li>
+                            <li><strong>Bard:</strong> Detect Magic (watching for magical hazards)</li>
                         </ul>
                         
                         <div class="scenario-benefits">
                             <p><strong>Results:</strong></p>
                             <ul>
                                 <li>Group doesn't get lost despite confusing terrain</li>
-                                <li>Early warning when wolves start stalking them</li>
+                                <li>Early warning when wolves start stalking them (+1 to initiative)</li>
                                 <li>Knowledge about upcoming weather helps plan shelter</li>
-                                <li>Bard's defensive magic protects against environmental hazards</li>
+                                <li>The Bard notices the magical aura of a fey ring before anyone steps in it</li>
                             </ul>
                         </div>
                     </div>
@@ -723,7 +702,7 @@
 
         <section class="skill-feats">
             <h2>Skill Feats: Specializing Your Expertise</h2>
-            <p>Skill feats are like advanced training courses that let you do extraordinary things with your skills. They transform basic competency into signature abilities that define your character's unique approach to problems.</p>
+            <p>Skill feats are like advanced training that lets you do extraordinary things with your skills. They transform basic competency into signature abilities that define your character's unique approach to problems.</p>
 
             <div class="feat-categories">
                 <h3>Categories of Skill Feats</h3>
@@ -737,13 +716,13 @@
                             <h5>Cat Fall (Acrobatics)</h5>
                             <p><strong>Normal:</strong> Take full falling damage</p>
                             <p><strong>With Feat:</strong> Treat falls as 10 feet shorter for damage</p>
-                            <p><strong>Legendary Version:</strong> Treat all falls as 50 feet shorter</p>
+                            <p><strong>Higher Proficiency:</strong> 25 feet at expert, 50 feet at master, and at legendary you land on your feet and take no falling damage at all</p>
                         </div>
                         
                         <div class="feat-example">
                             <h5>Intimidating Glare (Intimidation)</h5>
-                            <p><strong>Normal:</strong> Demoralize requires speaking the same language</p>
-                            <p><strong>With Feat:</strong> A scary look works on anyone</p>
+                            <p><strong>Normal:</strong> Demoralize takes a −4 penalty if the target doesn't understand your language</p>
+                            <p><strong>With Feat:</strong> A scary look works on anyone who can see you, with no language penalty</p>
                         </div>
                     </div>
 
@@ -754,14 +733,14 @@
                         <div class="feat-example">
                             <h5>Battle Medicine (Medicine)</h5>
                             <p><strong>New Ability:</strong> Heal allies quickly in combat</p>
-                            <p><strong>Benefit:</strong> Once per day per person, spend one action to heal 2d8 HP</p>
+                            <p><strong>Benefit:</strong> Spend one action to heal like Treat Wounds (2d8 HP at DC 15); each patient is then immune to your Battle Medicine for 1 day</p>
                             <p><strong>Impact:</strong> Turns Medicine into a combat-relevant skill</p>
                         </div>
                         
                         <div class="feat-example">
                             <h5>Bon Mot (Diplomacy)</h5>
-                            <p><strong>New Ability:</strong> Demoralize using wit instead of threats</p>
-                            <p><strong>Benefit:</strong> Use Diplomacy to make enemies flat-footed with clever insults</p>
+                            <p><strong>New Ability:</strong> Rattle enemies with wit instead of threats</p>
+                            <p><strong>Benefit:</strong> A Diplomacy check against the target's Will DC; on a success it takes a −2 status penalty to Perception and Will saves (−3 on a critical success)</p>
                             <p><strong>Flavor:</strong> "Your sword technique is as poor as your fashion sense!"</p>
                         </div>
                     </div>
@@ -774,14 +753,14 @@
                             <h5>Lie to Me (Deception)</h5>
                             <p><strong>Synergy:</strong> Use Deception to detect when others are lying</p>
                             <p><strong>Logic:</strong> Takes a liar to know a liar</p>
-                            <p><strong>Benefit:</strong> Roll Deception instead of Perception vs Deception</p>
+                            <p><strong>Benefit:</strong> When someone Lies to you in a conversation, they roll against your Deception DC instead of your Perception DC</p>
                         </div>
                         
                         <div class="feat-example">
                             <h5>Magical Crafting (Crafting)</h5>
-                            <p><strong>Synergy:</strong> Combine Crafting with Arcana</p>
+                            <p><strong>Synergy:</strong> Combine Crafting with magic formulas</p>
                             <p><strong>New Ability:</strong> Create magical items (with proper spells/formulas)</p>
-                            <p><strong>Requirements:</strong> Expert in Crafting, ability to cast spells</p>
+                            <p><strong>Requirements:</strong> Expert in Crafting (you don't need to cast spells yourself)</p>
                         </div>
                     </div>
 
@@ -792,7 +771,7 @@
                         <div class="feat-example">
                             <h5>Legendary Sneak (Stealth)</h5>
                             <p><strong>Requirement:</strong> Legendary in Stealth</p>
-                            <p><strong>Ability:</strong> Hide and Sneak without any cover or concealment</p>
+                            <p><strong>Ability:</strong> Hide and Sneak without any cover or concealment, and you count as Avoiding Notice even while doing another exploration activity</p>
                             <p><strong>Flavor:</strong> You're so stealthy you can hide in plain sight</p>
                         </div>
                         
@@ -800,7 +779,7 @@
                             <h5>Legendary Negotiation (Diplomacy)</h5>
                             <p><strong>Requirement:</strong> Legendary in Diplomacy</p>
                             <p><strong>Ability:</strong> Make even hostile creatures willing to negotiate</p>
-                            <p><strong>Limitation:</strong> Doesn't work on mindless or utterly alien beings</p>
+                            <p><strong>Limitation:</strong> The check is much harder mid-fight, and the GM decides whether a foe can be talked down at all</p>
                         </div>
                     </div>
                 </div>
@@ -812,15 +791,15 @@
                 <div class="build-examples">
                     <div class="build-card">
                         <h4>🔍 The Master Detective</h4>
-                        <p><strong>Core Skills:</strong> Investigation, Perception, Society</p>
+                        <p><strong>Core Skills:</strong> Perception, Society, Deception</p>
                         
                         <div class="feat-progression">
                             <h5>Feat Progression:</h5>
                             <ul>
                                 <li><strong>Level 2:</strong> Streetwise (Society) - Gather information in urban areas</li>
-                                <li><strong>Level 4:</strong> Read Lips (Perception) - Understand conversations from afar</li>
+                                <li><strong>Level 4:</strong> Read Lips (Society) - Understand conversations from afar</li>
                                 <li><strong>Level 6:</strong> Lengthy Diversion (Deception) - Create long-lasting distractions</li>
-                                <li><strong>Level 8:</strong> Quick Recognition (Various) - Instantly identify spells and creatures</li>
+                                <li><strong>Level 8:</strong> Quick Recognition (Arcana, Nature, Occultism or Religion; needs master) - Identify spells as they're cast</li>
                             </ul>
                         </div>
                         
@@ -836,10 +815,10 @@
                         <div class="feat-progression">
                             <h5>Feat Progression:</h5>
                             <ul>
-                                <li><strong>Level 2:</strong> Cat Fall (Acrobatics) - Safe from falling damage</li>
+                                <li><strong>Level 2:</strong> Cat Fall (Acrobatics) - Take less falling damage</li>
                                 <li><strong>Level 4:</strong> Quiet Allies (Stealth) - Help the whole party be stealthy</li>
-                                <li><strong>Level 6:</strong> Wall Jump (Athletics) - Parkour movement</li>
-                                <li><strong>Level 8:</strong> Swift Sneak (Stealth) - Move at full speed while sneaking</li>
+                                <li><strong>Level 6:</strong> Wary Disarmament (Thievery) - Stay safer while disabling traps</li>
+                                <li><strong>Level 8:</strong> Swift Sneak (Stealth; needs master) - Move at full Speed while Sneaking</li>
                             </ul>
                         </div>
                         
@@ -858,7 +837,7 @@
                                 <li><strong>Level 2:</strong> Bon Mot (Diplomacy) - Witty combat taunts</li>
                                 <li><strong>Level 4:</strong> Lie to Me (Deception) - Detect lies with your own experience</li>
                                 <li><strong>Level 6:</strong> Group Impression (Diplomacy) - Influence multiple people at once</li>
-                                <li><strong>Level 8:</strong> Scare to Death (Intimidation) - Literally frighten weak enemies to death</li>
+                                <li><strong>Level 8:</strong> Battle Cry (Intimidation; needs master) - Demoralize a foe as you roll initiative (Scare to Death, which can literally frighten foes to death, waits until legendary at 15th level)</li>
                             </ul>
                         </div>
                         
@@ -883,14 +862,14 @@
                         <p><strong>Concept:</strong> Dwarf Ranger who grew up in mountain communities and guides travelers through dangerous terrain</p>
                         
                         <div class="skill-budget">
-                            <p><strong>Available Skills:</strong> You can be Trained in 8 skills total (class + background + intelligence)</p>
+                            <p><strong>Available Skills:</strong> Ranger gives Nature, Survival and 4 more skills plus your Intelligence modifier; your background adds one skill and one Lore. With Intelligence +1, that's 8 trained skills plus a Lore</p>
                             <p><strong>Required Skills:</strong> Nature, Survival (from Ranger class)</p>
                             <p><strong>Background Skills:</strong> Choose a background and its associated skills</p>
                         </div>
                         
                         <div class="skill-choices">
-                            <p><strong>Choose 6 more skills that fit the concept:</strong></p>
-                            <p>Available: Acrobatics, Athletics, Crafting, Deception, Diplomacy, Intimidation, Investigation, Medicine, Perception, Performance, Society, Stealth, Thievery</p>
+                            <p><strong>Choose 6 more skills that fit the concept (Perception isn't a skill; rangers are already experts in it):</strong></p>
+                            <p>Available: Acrobatics, Arcana, Athletics, Crafting, Deception, Diplomacy, Intimidation, Medicine, Occultism, Performance, Religion, Society, Stealth, Thievery (plus Lore skills)</p>
                             
                             <ol>
                                 <li>Background: _____________ (gives skills: ________)</li>
@@ -909,10 +888,10 @@
                             <div class="solution">
                                 <p><strong>Strong Choices:</strong></p>
                                 <ul>
-                                    <li><strong>Background: Guide</strong> (adds Diplomacy, Survival Lore)</li>
+                                    <li><strong>Background: Scout</strong> (Survival plus a terrain Lore such as Mountain Lore; you're already trained in Survival, so pick another skill instead)</li>
                                     <li><strong>Athletics:</strong> Climbing mountains, helping others</li>
                                     <li><strong>Medicine:</strong> Treating injuries in the wilderness</li>
-                                    <li><strong>Perception:</strong> Spotting dangers</li>
+                                    <li><strong>Diplomacy:</strong> Reassuring nervous travelers</li>
                                     <li><strong>Intimidation:</strong> Dealing with bandits/monsters</li>
                                     <li><strong>Society:</strong> Knowledge of communities you guide between</li>
                                     <li><strong>Crafting:</strong> Repairing equipment on long journeys</li>
@@ -962,7 +941,7 @@
                                 <ul>
                                     <li><strong>Society:</strong> Understanding urban politics and culture</li>
                                     <li><strong>Stealth:</strong> Avoiding detection during infiltrations</li>
-                                    <li><strong>Investigation:</strong> Finding and analyzing clues</li>
+                                    <li><strong>Underworld Lore:</strong> Knowing the city's criminal scene</li>
                                     <li><strong>Intimidation:</strong> When persuasion fails</li>
                                 </ul>
                             </div>
@@ -1015,7 +994,7 @@
                                 <ul>
                                     <li><strong>Diplomacy:</strong> Interview the merchant who hired the caravan</li>
                                     <li><strong>Society:</strong> Learn about recent bandit activity in the region</li>
-                                    <li><strong>Investigation:</strong> Examine the caravan's planned route</li>
+                                    <li><strong>Survival:</strong> Examine the caravan's planned route on a map</li>
                                 </ul>
                                 
                                 <p><strong>Phase 2: Desert Tracking</strong></p>
@@ -1028,7 +1007,7 @@
                                 <p><strong>Phase 3: The Discovery</strong></p>
                                 <ul>
                                     <li><strong>Theory:</strong> Caravan was attacked by desert spirits angered by disturbing an ancient site</li>
-                                    <li><strong>Arcana:</strong> Identify the spiritual disturbance</li>
+                                    <li><strong>Occultism:</strong> Identify the spiritual disturbance</li>
                                     <li><strong>Diplomacy:</strong> Negotiate with the spirits for the caravan's release</li>
                                     <li><strong>Religion:</strong> Perform proper appeasement rituals</li>
                                 </ul>
@@ -1050,7 +1029,7 @@
                             <ul>
                                 <li>Human Fighter (high Athletics, moderate Intimidation)</li>
                                 <li>Halfling Rogue (excellent Stealth, good Thievery)</li>
-                                <li>Elf Wizard (great Arcana, good Investigation)</li>
+                                <li>Elf Wizard (great Arcana, good Society)</li>
                                 <li>Dwarf Cleric (good Medicine, moderate Perception)</li>
                             </ul>
                         </div>
@@ -1094,25 +1073,25 @@
                                 <p><strong>Option A: Stealth (Best for direct action)</strong></p>
                                 <ul>
                                     <li><strong>Fighter:</strong> Defending (protect wizard if detected)</li>
-                                    <li><strong>Rogue:</strong> Sneaking (lead the group stealthily)</li>
-                                    <li><strong>Wizard:</strong> Investigating (looking for magical wards/traps)</li>
-                                    <li><strong>Cleric:</strong> Scouting (divine senses for danger)</li>
+                                    <li><strong>Rogue:</strong> Avoiding Notice (lead the way; others Follow the Expert)</li>
+                                    <li><strong>Wizard:</strong> Detect Magic (looking for magical wards/traps)</li>
+                                    <li><strong>Cleric:</strong> Scouting (watching for danger)</li>
                                 </ul>
                                 
                                 <p><strong>Option B: Social (Best for long-term access)</strong></p>
                                 <ul>
                                     <li><strong>Fighter:</strong> Defending (the muscle in your "criminal crew")</li>
-                                    <li><strong>Rogue:</strong> Investigating (proving your criminal credentials)</li>
-                                    <li><strong>Wizard:</strong> Recalling Knowledge (about thieves' guild structure)</li>
-                                    <li><strong>Cleric:</strong> Scouting (reading people's motivations)</li>
+                                    <li><strong>Rogue:</strong> Investigating (sizing up guild members; the cover story itself is Deception)</li>
+                                    <li><strong>Wizard:</strong> Investigating (secret Recall Knowledge about the guild's structure)</li>
+                                    <li><strong>Cleric:</strong> Scouting (watching for trouble; Sense Motive reads people)</li>
                                 </ul>
                                 
                                 <p><strong>Option C: Investigation (Safest, most thorough)</strong></p>
                                 <ul>
                                     <li><strong>Fighter:</strong> Scouting (watching for guild members)</li>
-                                    <li><strong>Rogue:</strong> Investigating (casing the building)</li>
-                                    <li><strong>Wizard:</strong> Recalling Knowledge (researching guild history)</li>
-                                    <li><strong>Cleric:</strong> Investigating (talking to people affected by guild)</li>
+                                    <li><strong>Rogue:</strong> Searching (casing the building)</li>
+                                    <li><strong>Wizard:</strong> Investigating (researching guild history)</li>
+                                    <li><strong>Cleric:</strong> Gather Information (Diplomacy: talking to people affected by the guild)</li>
                                 </ul>
                             </div>
                         </details>
@@ -1126,7 +1105,7 @@
             <p>You've now mastered the art of skills and exploration - the foundation of everything that happens between dramatic combat encounters. With these tools, your character can investigate mysteries, navigate social challenges, overcome environmental obstacles, and truly interact with the rich world of Pathfinder.</p>
             
             <div class="upcoming-topics">
-                <h3>Upcoming Lectures</h3>
+                <h3>Coming Up in This Guide</h3>
                 <ul>
                     <li><strong>Magic Systems Deep Dive:</strong> Spell preparation, magical traditions, and the art of spellcasting</li>
                     <li><strong>Equipment and Treasure:</strong> Weapons, armor, magical items, and managing character wealth</li>
@@ -1155,48 +1134,48 @@
                 <ul>
                     <li><strong>Archives of Nethys:</strong> Complete skill descriptions and feat lists</li>
                     <li><strong>Skill Challenge Examples:</strong> Community-created scenarios for practice</li>
-                    <li><strong>Exploration Activity Reference:</strong> Quick guide for choosing activities</li>
-                    <li><strong>Skill Feat Optimizer:</strong> Tools for planning character progression</li>
+                    <li><strong>Player Core and GM Core:</strong> The full exploration activities, plus subsystems like victory points</li>
+                    <li><strong>Pathbuilder 2e:</strong> Plan skill increases and skill feats level by level</li>
                 </ul>
             </div>
         </section>
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_actions.html">Core Mechanics</a>
+    <a class="next" href="/pf2_magic.html">Magic</a>
+</div>
         <p>The world awaits your expertise - every locked door, ancient mystery, and social challenge is an opportunity!</p>
     
     </footer>
 
    <script>
-    // Adventure Time Distribution Chart
+    // Adventure Time Distribution Chart (an illustrative example, not survey data)
     const canvas = document.getElementById('adventureTimeChart');
     const ctx = canvas.getContext('2d');
-    
-    // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Pie chart data
+
     const data = [
-        { label: 'Combat', value: 25, color: '#f44336' },
-        { label: 'Exploration', value: 35, color: '#4caf50' },
-        { label: 'Social Interaction', value: 20, color: '#2196f3' },
-        { label: 'Puzzle/Investigation', value: 15, color: '#ff9800' },
-        { label: 'Downtime/Rest', value: 5, color: '#9c27b0' }
+        { label: 'Combat', value: 25, color: '#c62828' },
+        { label: 'Exploration', value: 35, color: '#2e7d32' },
+        { label: 'Social Interaction', value: 20, color: '#1565c0' },
+        { label: 'Puzzles / Investigation', value: 15, color: '#ef6c00' },
+        { label: 'Downtime / Rest', value: 5, color: '#6a1b9a' }
     ];
-    
-    // Calculate angles
     const total = data.reduce((sum, item) => sum + item.value, 0);
-    let currentAngle = -Math.PI / 2; // Start at top
-    
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = 100;
-    
-    // Draw pie slices
-    data.forEach((item, index) => {
+
+    // Title
+    ctx.fillStyle = '#222';
+    ctx.font = 'bold 16px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('How One Example Session Might Be Spent', canvas.width / 2, 26);
+
+    // Pie on the left
+    const centerX = 170, centerY = 158, radius = 105;
+    let currentAngle = -Math.PI / 2;
+    data.forEach((item) => {
         const sliceAngle = (item.value / total) * 2 * Math.PI;
-        
-        // Draw slice
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
         ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
@@ -1206,47 +1185,27 @@
         ctx.strokeStyle = '#fff';
         ctx.lineWidth = 2;
         ctx.stroke();
-        
-        // Draw label
-        const labelAngle = currentAngle + sliceAngle / 2;
-        const labelX = centerX + Math.cos(labelAngle) * (radius + 30);
-        const labelY = centerY + Math.sin(labelAngle) * (radius + 30);
-        
-        ctx.fillStyle = '#333';
-        ctx.font = '12px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(item.label, labelX, labelY);
-        ctx.fillText(item.value + '%', labelX, labelY + 15);
-        
         currentAngle += sliceAngle;
     });
-    
-    // Draw title
-    ctx.fillStyle = '#333';
-    ctx.font = 'bold 16px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('How Adventure Time is Actually Spent', centerX, 30);
+
+    // Legend on the right
+    const legendX = 320;
+    data.forEach((item, i) => {
+        const y = 80 + i * 32;
+        ctx.fillStyle = item.color;
+        ctx.fillRect(legendX, y - 12, 16, 16);
+        ctx.fillStyle = '#222';
+        ctx.font = '13px Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText(item.label + ' - ' + Math.round(item.value / total * 100) + '%', legendX + 24, y + 1);
+    });
+
+    // Footnote
+    ctx.fillStyle = '#444';
     ctx.font = '12px Arial';
-    ctx.fillText('(Skills make 75% of the game engaging!)', centerX, 280);
+    ctx.textAlign = 'center';
+    ctx.fillText('Illustrative split - every table is different', canvas.width / 2, 288);
 </script>
-    <nav class="prev-next-nav">
-        <a href="/pf2_dice_roller.html" class="nav-prev">← Dice Roller</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_magic.html" class="nav-next">Magic →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

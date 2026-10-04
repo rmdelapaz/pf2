@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2e: Horror and Atmospheric Gaming</title>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="icon" href="/favicon.png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
+    <title>Horror &amp; Atmosphere - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 16</span>
         <h1>Pathfinder 2e: Horror and Atmospheric Gaming</h1>
         <p><em>Creating Tension, Dread, and Memorable Atmospheric Experiences</em></p>
     </header>
@@ -167,6 +146,7 @@ Implementation:
 🧛 GOTHIC HORROR
 Characteristics: Atmosphere, decay, ancient evils, family curses
 Pathfinder Applications:
+□ Ustalav, Golarion's land of gothic horror: mist-shrouded counties, haunted nobility, and the lingering shadow of the Whispering Tyrant
 □ Haunted noble estates with dark family histories
 □ Ancient magic gone wrong creating persistent corruption
 □ Undead that retain memories and motivations from life
@@ -190,7 +170,7 @@ Pathfinder Applications:
 □ Magic that costs more than it gives
 
 Mechanical Considerations:
-- Sanity mechanics for exposure to impossible truths
+- No sanity track in the core rules: use frightened, stupefied and confused, or a house-ruled sanity track, for exposure to impossible truths
 - Spells and abilities that cost mental stability
 - Investigation that reveals disturbing universal truths
 - Enemies that can't be fully understood or defeated conventionally
@@ -221,7 +201,8 @@ Pathfinder Applications:
 □ Memory manipulation and identity uncertainty
 
 Mechanical Integration:
-- Confusion and mental condition effects
+- Mental effects and conditions: frightened (a status penalty equal to its value on all your checks and DCs, dropping by 1 at the end of each of your turns), confused, stupefied
+- Will saves to resist fear and other mental effects
 - False vision and sensory distortion spells
 - NPCs with altered memories who believe false histories
 - Environmental effects that make players question what's real
@@ -294,7 +275,7 @@ Example Corrupted Space:
 
 INSTITUTIONAL HORROR:
 □ Hospitals where the healing has gone wrong
-□ Schools where lessons teach terrible truths
+□ Schools whose teachers instill terrible truths
 □ Churches where the prayers call to dark powers
 □ Governments where bureaucracy serves malevolent purposes
 
@@ -361,7 +342,7 @@ AMBIENT SOUNDSCAPES:
 Recommended Audio Sources:
 - MyNoise.net for customizable ambient soundscapes
 - Syrinscape for professional gaming audio with horror sets
-- YouTube playlists: "3 hours of creepy forest sounds"
+- YouTube ambience videos (search for long "creepy forest ambience" tracks)
 - Spotify horror ambient playlists
 
 SILENCE AS A TOOL:
@@ -413,7 +394,8 @@ DARKNESS AND VISION:
 Game Mechanical Integration:
 - Darkness effects that mechanically impact gameplay
 - Light sources that attract unwanted attention
-- Vision-based saving throws and perception checks
+- Perception checks to notice what lurks at the edge of the light
+- Will saves against fear effects (a failure usually means the frightened condition)
 - Environmental lighting that changes encounter difficulty</code></pre>
         </section>
 
@@ -680,7 +662,7 @@ MEMORY MANIPULATORS:
 □ Beings that feed on nostalgia, trauma, or specific types of memories
 
 Mechanical Implementation:
-- Save vs forgetting important information
+- Will save vs forgetting important information
 - Conflicting memories that make players question reality
 - Skills or abilities that temporarily become inaccessible
 - False memories that provide incorrect information
@@ -831,7 +813,7 @@ Familiar Places Made Wrong:
 
 CORRUPTED SAFE SPACES:
 □ Hospitals where the healing has become horrible
-□ Schools where lessons teach terrible truths
+□ Schools whose teachers instill terrible truths
 □ Churches where prayers call to dark powers
 □ Homes where family life has become nightmare
 
@@ -1059,7 +1041,7 @@ Implementation:
 □ NPCs who chose different paths facing similar corruption
 
 Character Arc Integration:
-- Paladin who must choose between honor and effectiveness
+- Champion of the paladin cause who must choose between honor and effectiveness
 - Wizard whose research into evil magic threatens their sanity
 - Cleric whose deity demands increasingly disturbing acts
 - Rogue whose criminal skills become necessary for heroic goals
@@ -1176,7 +1158,7 @@ Mechanical Representation:
 - Bonus to saves vs fear effects based on experience
 - Special knowledge about specific types of supernatural threats
 - Leadership abilities gained through protecting others
-- Insight bonuses from understanding horror psychology
+- Circumstance bonuses earned by researching a specific threat
 
 COMMUNITY BUILDING:
 □ Characters create networks of allies and resources
@@ -1270,7 +1252,7 @@ Advanced Techniques:
 MECHANICAL HORROR:
 - Dice that consistently roll poorly in specific locations
 - Character abilities that work differently in corrupted areas
-- Save-or-die effects that target player comfort zones
+- Effects that strip away a character's usual strengths
 - Rules that change without explanation
 
 INFORMATION CONTROL:
@@ -1428,27 +1410,13 @@ Example Reality Distortions:
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_worldbuilding.html">Worldbuilding</a>
+    <a class="next" href="/pf2_community.html">Community Building</a>
+</div>
         <p>May your horror games be frightening yet safe, intense yet empowering, and memorable for all the right reasons!</p>
   
     </footer>
-    <nav class="prev-next-nav">
-        <a href="/pf2_player_collab.html" class="nav-prev">← Player Collaboration</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_campaign.html" class="nav-next">Campaign →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

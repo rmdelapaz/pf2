@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2e: Campaign and Adventure Design</title>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="icon" href="/favicon.png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
+    <title>Campaign &amp; Adventure Design - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 14</span>
         <h1>Pathfinder 2e: Campaign and Adventure Design</h1>
         <p><em>Crafting Memorable Stories and Engaging Adventures</em></p>
     </header>
@@ -61,7 +40,7 @@
                     B --> E[Key Locations]
                     C --> F[Story Beats]
                     D --> G[Personal Stakes]
-                    E --> H[Adventure Modules]
+                    E --> H[Adventures]
                     F --> H
                     G --> H
                     H --> I[Session Planning]
@@ -76,28 +55,30 @@
             <h2>Campaign Foundations: Building Your World</h2>
             <p>Every great campaign starts with a strong foundation, like building a house. You need to establish the basic structure before you can add the decorative elements that make it memorable.</p>
 
-            <h3>The Three Pillars of Pathfinder 2e</h3>
-            <p>Pathfinder 2e is designed around three core activities, like a three-legged stool. Each leg supports the others, and removing one makes the whole thing unstable.</p>
+            <h3>The Three Modes of Play in Pathfinder 2e</h3>
+            <p>Pathfinder 2e organizes play into three modes - encounter, exploration, and downtime - like a three-legged stool. Each leg supports the others, and removing one makes the whole thing unstable.</p>
 
-            <pre><code>The Three Pillars:
+            <pre><code>The Three Modes of Play:
 
 🗡️ COMBAT (Encounter Mode)
 - Tactical battles with meaningful choices
 - Varied enemy types and environments
 - Clear stakes and consequences
-- Roughly 6-8 encounters per adventuring day
+- No fixed "encounters per day" - Treat Wounds and Refocus let
+  parties recover between fights, so pace by story, not attrition
 
 🔍 EXPLORATION (Exploration Mode)
 - Discovery and investigation
 - Environmental challenges
-- Resource management
+- Travel and exploration activities (Scout, Search, Investigate)
 - Player agency in choosing paths
 
-🎭 SOCIAL (Downtime/Social Encounters)
+🎭 DOWNTIME (Downtime Mode)
+- Crafting, Earn Income, retraining
 - Roleplay and character development
-- Political intrigue and negotiations
 - Building relationships with NPCs
-- Advancing personal character goals</code></pre>
+- Advancing personal character goals
+(Social scenes - negotiations, intrigue - can happen in any mode)</code></pre>
 
             <h3>Campaign Themes and Tones</h3>
             <p>Your campaign theme is like the genre of a movie - it sets expectations and helps guide your creative decisions. Are you making a lighthearted adventure comedy or a dark political thriller?</p>
@@ -179,7 +160,7 @@ Key Elements:
 - Big twist or revelation about the true nature of conflict
 - Characters face significant losses or setbacks
 - Stakes become personal for the heroes
-- Power level allows for planar travel, major magic
+- Power level opens up far-reaching magic such as teleportation
 Example: Heroes discover the cult serves an ancient evil 
 that has infiltrated the highest levels of government
 
@@ -216,7 +197,7 @@ stronghold, saving the world and closing character stories</code></pre>
 🎣 THE HOOK
 Purpose: Get players interested and invested
 Examples:
-- "A merchant offers 500 gold to recover stolen goods"
+- "A merchant offers a generous reward to recover stolen goods"
 - "Strange lights appear nightly at the abandoned manor"
 - "The king's advisor requests a secret meeting"
 - "A friend from the character's background needs help"
@@ -253,26 +234,32 @@ Types:
 
             <pre><code>Encounter Difficulty Guidelines:
 
-Encounter Budget per Character Level:
-- Trivial: 10-15 XP (speed bumps, minor obstacles)
-- Low: 15-20 XP (warm-up encounters)  
-- Moderate: 20-30 XP (standard encounters)
-- Severe: 30-40 XP (major challenges)
-- Extreme: 40+ XP (boss fights, climactic moments)
+Encounter XP Budget (party of 4; GM Core):
+- Trivial: 40 XP or less (speed bumps, minor obstacles)
+- Low: 60 XP (warm-up encounters)
+- Moderate: 80 XP (standard encounters)
+- Severe: 120 XP (major challenges)
+- Extreme: 160 XP (boss fights, climactic moments)
+Each PC beyond 4 adds 10/20/20/30/40 XP (trivial/low/moderate/
+severe/extreme); each PC fewer than 4 removes the same amount.
 
-Daily Encounter Budget:
-- 80-120 XP total per character per day
-- Mix difficulties: 1-2 severe, 3-4 moderate, 2-3 low
-- Include non-combat encounters in budget
-- Adjust for party size and player experience
+Creature XP (creature level relative to party level):
+Party -4: 10   -3: 15   -2: 20   -1: 30   Same: 40
+      +1: 60   +2: 80   +3: 120  +4: 160
 
-Example Daily Breakdown:
-Morning: Low encounter (bandits on road) - 15 XP
-Midday: Skill challenge (river crossing) - 20 XP  
-Afternoon: Moderate encounter (owlbear) - 25 XP
-Evening: Social encounter (suspicious innkeeper) - 15 XP
-Night: Severe encounter (cultist ambush) - 35 XP
-Total: 110 XP (perfect range for Level 3 party)</code></pre>
+Pacing the Day:
+- There is no fixed daily XP budget - watch HP, spells and Focus Points
+- Mix difficulties; a severe fight hits harder after a moderate one
+- Non-combat challenges can earn accomplishment XP instead
+- Each level takes 1,000 XP
+
+Example Day (four level 3 PCs):
+Morning: Low - three level 1 bandits (3 x 20) = 60 XP
+Midday: Skill challenge (river crossing) - accomplishment XP
+Afternoon: Moderate - owlbear (level 4, 60) + level 1 wolf (20) = 80 XP
+Evening: Social encounter (suspicious innkeeper) - accomplishment XP
+Night: Severe - level 5 cult leader (80) + two level 1 cultists (2 x 20) = 120 XP
+Total: 260 encounter XP - a full, tough day, about a quarter of a level</code></pre>
         </section>
 
         <section>
@@ -315,7 +302,7 @@ Role: Mentor figure, magical advisor
 Appearance: Ancient halfling, countless pouches and trinkets
 Personality: Wise but mischievous, offers cryptic advice
 Motivation: Guide young heroes while protecting ancient knowledge
-Secret: She's actually a disguised green dragon in human form
+Secret: She's actually a disguised green dragon in halfling form
 Voice: Cackles frequently, speaks in metaphors and folk wisdom</code></pre>
 
             <h3>NPC Relationship Networks</h3>
@@ -657,13 +644,13 @@ TOOLS: Have guard stats, cult member stats, investigation clues, and social enco
 - Players feel like they have no real choices
 - Story continues regardless of player actions
 - Single "correct" solution to every problem
-- DM gets frustrated when players go "off-script"
+- GM gets frustrated when players go "off-script"
 
 SANDBOX PROBLEMS:  
 - Players feel overwhelmed by too many options
 - Lack of clear direction or motivation
 - Story threads never resolve satisfyingly
-- DM struggles to tie loose elements together
+- GM struggles to tie loose elements together
 
 BALANCED APPROACH:
 - Provide 2-3 clear options at decision points
@@ -782,29 +769,29 @@ at high levels.</code></pre>
 
         <section>
             <h2>Looking Ahead</h2>
-            <p>With solid adventure design skills under your belt, you're ready to explore the practical aspects of running engaging game sessions. Our next lecture will cover Game Master essentials - the tools, techniques, and table management skills that bring your carefully designed adventures to life.</p>
+            <p>With solid adventure design skills under your belt, you're ready to explore the practical aspects of running engaging game sessions. The next part, Worldbuilding, goes deeper into the setting itself - cultures, geography, history, and magic - and the previous part, Game Master Essentials, covers the table skills that bring your adventures to life.</p>
             
             <div class="upcoming-topics">
-                <h3>Upcoming Lectures</h3>
+                <h3>Related Parts of This Guide</h3>
                 <ul>
                     <li><strong>Game Master Essentials:</strong> Running engaging sessions and managing the table</li>
                     <li><strong>Equipment and Magical Items:</strong> Weapons, armor, treasures, and wealth management</li>
                     <li><strong>Advanced Combat Tactics:</strong> Conditions, environmental hazards, and tactical depth</li>
                     <li><strong>Player Collaboration:</strong> Working together for memorable campaigns</li>
-                    <li><strong>Digital Tools and Resources:</strong> Technology to enhance your game</li>
+                    <li><strong>Worldbuilding:</strong> Cultures, geography, history, and magic for your setting</li>
                 </ul>
             </div>
 
             <div class="design-mastery">
                 <h3>Campaign Design Mastery Checklist</h3>
                 <ul>
-                    <li>✅ Understand the three pillars of Pathfinder 2e gameplay</li>
+                    <li>✅ Understand the three modes of play in Pathfinder 2e</li>
                     <li>✅ Design campaigns with clear themes and compelling arcs</li>
                     <li>✅ Create memorable NPCs with distinct personalities and motivations</li>
                     <li>✅ Balance player agency with engaging storytelling</li>
                     <li>✅ Prepare flexible frameworks that adapt to player choices</li>
                     <li>✅ Manage session pacing and energy levels effectively</li>
-                    <li>🎯 Practice creating complete adventure modules</li>
+                    <li>🎯 Practice creating complete adventures</li>
                     <li>🎯 Develop improvisational skills for unexpected moments</li>
                     <li>🎯 Build ongoing campaigns that evolve organically</li>
                 </ul>
@@ -813,7 +800,7 @@ at high levels.</code></pre>
             <div class="design-resources">
                 <h3>Essential Design Resources</h3>
                 <ul>
-                    <li><strong>Pathfinder Adventure Path modules:</strong> Examples of professional adventure design</li>
+                    <li><strong>Pathfinder Adventure Paths</strong> (e.g. Abomination Vaults, Age of Ashes)<strong>:</strong> Examples of professional adventure design</li>
                     <li><strong>GM Screen and reference sheets:</strong> Quick access to rules and tables</li>
                     <li><strong>Random generation tools:</strong> Names, settlements, dungeons, and encounters</li>
                     <li><strong>Campaign tracking software:</strong> World Anvil, Obsidian, or simple documents</li>
@@ -824,27 +811,13 @@ at high levels.</code></pre>
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_gm.html">Game Master Essentials</a>
+    <a class="next" href="/pf2_worldbuilding.html">Worldbuilding</a>
+</div>
         <p>Your stories await their heroes - may your campaigns inspire legends and create memories that last forever!</p>
   
     </footer>
-    <nav class="prev-next-nav">
-        <a href="/pf2_horror.html" class="nav-prev">← Horror</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_gm.html" class="nav-next">Game Mastery →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

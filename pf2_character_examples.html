@@ -3,47 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2nd Edition Character Examples and Adventure Groups</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Character Examples &amp; Adventuring Parties - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
-    <div class="container">
-        <header>
-            <h1>Pathfinder 2nd Edition Character Examples and Adventure Groups</h1>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+    <header>
+        <span class="lesson-kicker">Part 4</span>
+        <h1>Pathfinder 2nd Edition Character Examples and Adventure Groups</h1>
             <p>A comprehensive guide to creating heroic characters and balanced adventuring parties in Golarion and beyond</p>
         </header>
 
@@ -60,12 +38,12 @@
                         B --> E[Heritage & Ancestry Feats]
                         C --> F[Skill Training & Feat]
                         D --> G[Class Features & Feats]
-                        E --> H[Ability Scores]
+                        E --> H[Attribute Boosts]
                         F --> H
                         G --> H
                         H --> I[Skills & General Feats]
                         I --> J[Equipment & Spells]
-                        J --> K[Complete Pathfinder]
+                        J --> K[Complete Character]
                         
                         style A fill:#8B4513
                         style K fill:#228B22
@@ -78,16 +56,16 @@
                 <h2>Individual Character Examples</h2>
                 
                 <div class="character-example">
-                    <h3>Kaida Ironblossom - Dwarf Champion (Paladin)</h3>
+                    <h3>Kaida Ironblossom - Dwarf Champion (Justice Cause)</h3>
                     <div class="character-stats">
                         <p><strong>Background:</strong> Guard</p>
                         <p><strong>Heritage:</strong> Forge Dwarf</p>
                         <p><strong>Deity:</strong> Torag (God of the Forge)</p>
-                        <p><strong>Key Feats:</strong> Shield Block, Reactive Shield, Divine Grace</p>
+                        <p><strong>Key Feats:</strong> Shield Block, Divine Grace, Shield Warden</p>
                         <p><strong>Personality:</strong> Steadfast protector who believes in redemption through righteous action</p>
                         <p><strong>Backstory:</strong> Former city watch captain who received divine calling after witnessing corruption in the ranks</p>
                     </div>
-                    <p><strong>Role in Party:</strong> The unbreakable aegis—like a mountain standing against the storm, she absorbs punishment while her shield becomes an extension of her divine will. Her Champion's Reaction turns enemy attacks into opportunities to protect allies.</p>
+                    <p><strong>Role in Party:</strong> The unbreakable aegis—like a mountain standing against the storm, she absorbs punishment while her shield becomes an extension of her divine will. Her champion's reaction turns enemy attacks into opportunities to protect allies. (The Remaster's Justice cause is the successor to the pre-Remaster paladin; champion causes are in Player Core 2.)</p>
                     
                     <svg class="inline-svg" width="350" height="180" viewBox="0 0 350 180">
                         <rect x="50" y="35" width="65" height="85" fill="#8B4513" stroke="#654321" stroke-width="2"/>
@@ -110,7 +88,7 @@
                     <div class="character-stats">
                         <p><strong>Background:</strong> Street Urchin</p>
                         <p><strong>Heritage:</strong> Whisper Elf</p>
-                        <p><strong>Key Feats:</strong> Nimble Dodge, Mobility, Distracting Feint</p>
+                        <p><strong>Key Feats:</strong> Nimble Dodge, Twin Feint, Mobility</p>
                         <p><strong>Personality:</strong> Quick-witted survivor with a hidden compassionate streak</p>
                         <p><strong>Backstory:</strong> Orphaned by war, learned thievery to survive but now uses skills to help other street children</p>
                     </div>
@@ -123,7 +101,7 @@
                         <p><strong>Background:</strong> Hermit</p>
                         <p><strong>Heritage:</strong> Versatile (General Training)</p>
                         <p><strong>Deity:</strong> Sarenrae (The Dawnflower)</p>
-                        <p><strong>Key Feats:</strong> Selective Energy, Communal Healing, Emblazon Armament</p>
+                        <p><strong>Key Feats:</strong> Healing Hands, Communal Healing, Emblazon Armament</p>
                         <p><strong>Personality:</strong> Peaceful healer who seeks to redeem rather than destroy</p>
                         <p><strong>Backstory:</strong> Former soldier who found faith after being saved by a Sarenrite priestess</p>
                     </div>
@@ -131,10 +109,10 @@
                 </div>
 
                 <div class="character-example">
-                    <h3>Zephyra Stormcaller - Human Wizard (Universalist)</h3>
+                    <h3>Zephyra Stormcaller - Human Wizard (Unified Magical Theory, formerly universalist)</h3>
                     <div class="character-stats">
                         <p><strong>Background:</strong> Scholar</p>
-                        <p><strong>Heritage:</strong> Half-Elf (Elf Atavism)</p>
+                        <p><strong>Heritage:</strong> Aiuvarin (formerly half-elf)</p>
                         <p><strong>Key Feats:</strong> Reach Spell, Widen Spell, Counterspell</p>
                         <p><strong>Personality:</strong> Brilliant researcher obsessed with understanding magical theory</p>
                         <p><strong>Backstory:</strong> Academy prodigy investigating ancient magical disasters to prevent future calamities</p>
@@ -159,7 +137,7 @@
                     <div class="character-stats">
                         <p><strong>Background:</strong> Entertainer</p>
                         <p><strong>Heritage:</strong> Hillock Halfling</p>
-                        <p><strong>Key Feats:</strong> Lingering Composition, Inspire Heroics, Versatile Performance</p>
+                        <p><strong>Key Feats:</strong> Lingering Composition, Fortissimo Composition (formerly Inspire Heroics), Versatile Performance</p>
                         <p><strong>Personality:</strong> Eternally optimistic storyteller who finds magic in everyday moments</p>
                         <p><strong>Backstory:</strong> Traveling performer collecting epic tales to preserve heroic deeds for future generations</p>
                     </div>
@@ -167,11 +145,11 @@
                 </div>
 
                 <div class="character-example">
-                    <h3>Shadowpaw - Catfolk Monk (Monastic Weaponry)</h3>
+                    <h3>Shadowpaw - Catfolk Monk (Tiger Stance)</h3>
                     <div class="character-stats">
                         <p><strong>Background:</strong> Martial Disciple</p>
                         <p><strong>Heritage:</strong> Flexible Catfolk</p>
-                        <p><strong>Key Feats:</strong> Flurry of Blows, Stunning Fist, Tiger Stance</p>
+                        <p><strong>Key Feats:</strong> Tiger Stance, Monastic Weaponry, Stunning Fist (Flurry of Blows is a class feature every monk gets)</p>
                         <p><strong>Personality:</strong> Contemplative warrior seeking balance between civilization and wild nature</p>
                         <p><strong>Backstory:</strong> Monastery-trained guardian learning to protect both urban and wilderness communities</p>
                     </div>
@@ -191,12 +169,12 @@
                     <h3>The Risen Crusaders</h3>
                     <p><em>Champions of justice united by shared divine purpose</em></p>
                     <ul>
-                        <li><strong>Sir Valerian Goldshield</strong> - Human Champion (Paladin of Iomedae)</li>
-                        <li><strong>Sister Celeste Moontear</strong> - Elf Cleric (Battle Oracle of Desna)</li>
+                        <li><strong>Sir Valerian Goldshield</strong> - Human Champion (Justice cause, follower of Iomedae)</li>
+                        <li><strong>Sister Celeste Moontear</strong> - Elf Cleric (Warpriest of Desna)</li>
                         <li><strong>Finn Lightfinger</strong> - Halfling Rogue (Mastermind with Robin Hood complex)</li>
-                        <li><strong>Magister Arcturus</strong> - Human Wizard (Evoker specializing in protective magic)</li>
+                        <li><strong>Magister Arcturus</strong> - Human Wizard (School of Battle Magic, with a taste for protective spells)</li>
                     </ul>
-                    <p>This righteous band moves through the world like dawn breaking over mountains—bringing light to dark places and hope to the downtrodden. Their divine synergy creates tactical combinations that punish evil while protecting innocence.</p>
+                    <p>This righteous band moves through the world like dawn breaking over mountains—bringing light to dark places and hope to the downtrodden. Their divine synergy creates tactical combinations that punish wrongdoers while protecting the innocent.</p>
                 </div>
 
                 <div class="party-group">
@@ -205,9 +183,9 @@
                     <ul>
                         <li><strong>Captain Marcus Ironwall</strong> - Human Fighter (Veteran with Shield specialization)</li>
                         <li><strong>Grimjaw Skullcrusher</strong> - Orc Barbarian (Fury instinct, former demon hunter)</li>
-                        <li><strong>Whisper</strong> - Tiefling Rogue (Assassin seeking redemption from demonic heritage)</li>
-                        <li><strong>Seraphina Voidbane</strong> - Aasimar Oracle (Life mystery, battlefield medic)</li>
-                        <li><strong>Kael Stormwright</strong> - Half-Elf Ranger (Demon hunter with favored enemy: fiends)</li>
+                        <li><strong>Whisper</strong> - Human Rogue, nephilim heritage (formerly tiefling; ex-assassin seeking redemption from a fiendish bloodline)</li>
+                        <li><strong>Seraphina Voidbane</strong> - Human Oracle, nephilim heritage (formerly aasimar; Life mystery, battlefield medic)</li>
+                        <li><strong>Kael Stormwright</strong> - Human Ranger, aiuvarin heritage (formerly half-elf; demon hunter who uses Hunt Prey on fiends)</li>
                     </ul>
                     <p>Forged in supernatural fire, they function like a perfectly oiled war machine—each member covering others' weaknesses while their combined experience makes them nearly unstoppable against extraplanar threats.</p>
                 </div>
@@ -230,10 +208,10 @@
                     <h3>The Elemental Wardens</h3>
                     <p><em>Guardians of natural balance wielding primal forces</em></p>
                     <ul>
-                        <li><strong>Ember Flameheart</strong> - Ifrit Kineticist (Fire and Earth elements)</li>
-                        <li><strong>Torrent Mist-Walker</strong> - Undine Druid (Storm order, water specialist)</li>
-                        <li><strong>Zephyr Cloudstep</strong> - Sylph Monk (Wind stance, aerial combat)</li>
-                        <li><strong>Granite Earthshaker</strong> - Oread Fighter (Defender with earth magic)</li>
+                        <li><strong>Ember Flameheart</strong> - Human Kineticist, naari heritage (formerly ifrit; dual gate: fire and earth)</li>
+                        <li><strong>Torrent Mist-Walker</strong> - Elf Druid, undine heritage (Storm order, water specialist)</li>
+                        <li><strong>Zephyr Cloudstep</strong> - Human Monk, sylph heritage (Crane Stance, aerial combat)</li>
+                        <li><strong>Granite Earthshaker</strong> - Dwarf Fighter, oread heritage (shield-bearing defender)</li>
                         <li><strong>Aurora Starweaver</strong> - Human Oracle (Cosmos mystery, balance keeper)</li>
                     </ul>
                     <p>Each member embodies a fundamental force of creation, their combined presence creating spectacular displays of elemental synergy like watching the raw forces that shaped the world dance in perfect harmony.</p>
@@ -243,8 +221,8 @@
                     <h3>The Stolen Lands Company</h3>
                     <p><em>Kingdom builders and frontier explorers taming wild lands</em></p>
                     <ul>
-                        <li><strong>Lord Commander Garrett Stronghold</strong> - Human Cavalier (Order of the Shield)</li>
-                        <li><strong>Thornwick the Green</strong> - Leshy Druid (Wild order, land guardian)</li>
+                        <li><strong>Lord Commander Garrett Stronghold</strong> - Human Champion (Cavalier archetype, mounted lancer)</li>
+                        <li><strong>Thornwick the Green</strong> - Leshy Druid (Untamed order, formerly wild order; land guardian)</li>
                         <li><strong>Master Builder Cogsworth</strong> - Gnome Inventor (Infrastructure specialist)</li>
                         <li><strong>Lady Evangeline Silvermoon</strong> - Elf Bard (Polymath, diplomatic envoy)</li>
                         <li><strong>Ranger Blackwood</strong> - Human Ranger (Monster hunter and scout)</li>
@@ -287,16 +265,16 @@
                     <div class="action-combo">
                         <h4>Fighter's Devastating Rush</h4>
                         <p><strong>Action 1:</strong> Stride (Move into flanking position)</p>
-                        <p><strong>Action 2:</strong> Strike (Primary attack with bonus damage)</p>
-                        <p><strong>Action 3:</strong> Strike (Follow-up attack, higher MAP)</p>
+                        <p><strong>Action 2:</strong> Strike (first attack, no multiple attack penalty, against an off-guard target)</p>
+                        <p><strong>Action 3:</strong> Strike (follow-up attack at a −5 multiple attack penalty, or −4 with an agile weapon)</p>
                         <p><strong>Result:</strong> Mobile devastation that repositions and delivers maximum damage</p>
                     </div>
                     
                     <div class="action-combo">
                         <h4>Wizard's Tactical Control</h4>
                         <p><strong>Action 1:</strong> Stride (Position for optimal spell placement)</p>
-                        <p><strong>Action 2:</strong> Cast Spell (Area control or damage)</p>
-                        <p><strong>Action 3:</strong> Raise Shield (Defensive preparation)</p>
+                        <p><strong>Actions 2–3:</strong> Cast a Spell (most spells take two actions: area control or damage)</p>
+                        <p><strong>Next turn:</strong> Cast the one-action <em>shield</em> cantrip (+1 circumstance bonus to AC) if enemies close in</p>
                         <p><strong>Result:</strong> Battlefield control while maintaining survivability</p>
                     </div>
                 </div>
@@ -312,17 +290,17 @@
                     <h3>Heritage Variations and Their Impact</h3>
                     <div class="heritage-example">
                         <h4>Dwarf Variations</h4>
-                        <p><strong>Forge Dwarf:</strong> Master craftsman with fire resistance and tool expertise</p>
-                        <p><strong>Rock Dwarf:</strong> Mountain-born with stone cunning and geological knowledge</p>
-                        <p><strong>Strong-Blooded:</strong> Hardy survivor with poison resistance and constitution bonus</p>
-                        <p><strong>Oathkeeper:</strong> Honor-bound with mental fortitude and word-binding magic</p>
+                        <p><strong>Forge Dwarf:</strong> Fire resistance and a tolerance for extreme heat, perfect for smiths</p>
+                        <p><strong>Rock Dwarf:</strong> Mountain-born and hard to move: resists being Shoved, Tripped or knocked prone</p>
+                        <p><strong>Strong-Blooded:</strong> Hardy survivor with poison resistance who shakes off poisons faster</p>
+                        <p><strong>Oathkeeper:</strong> Honor-bound truth-teller, better at spotting lies and persuading honestly but worse at lying</p>
                     </div>
                     
                     <div class="heritage-example">
                         <h4>Human Versatility</h4>
                         <p><strong>Versatile Heritage:</strong> Extra general feat representing human adaptability</p>
-                        <p><strong>Half-Elf:</strong> Dual heritage providing elvish grace with human ambition</p>
-                        <p><strong>Half-Orc:</strong> Orcish strength tempered by human civilization</p>
+                        <p><strong>Aiuvarin (formerly half-elf):</strong> A versatile heritage blending elvish grace with another ancestry</p>
+                        <p><strong>Dromaar (formerly half-orc):</strong> A versatile heritage carrying orcish strength into another ancestry</p>
                         <p><strong>Skilled:</strong> Extra skill training showing human learning capacity</p>
                     </div>
                 </div>
@@ -339,18 +317,18 @@
                     <div class="progression-example">
                         <h4>Fighter Weapon Master Build</h4>
                         <p><strong>Level 1:</strong> Power Attack, Shield Block</p>
-                        <p><strong>Level 2:</strong> Intimidating Glare (General), Dueling Parry (Class)</p>
+                        <p><strong>Level 2:</strong> Intimidating Glare (Skill), Dueling Parry (Class)</p>
                         <p><strong>Level 4:</strong> Dual-Handed Assault (Class), Quick Repair (Skill)</p>
-                        <p><strong>Level 6:</strong> Weapon Mastery (Class), Battle Medicine (General)</p>
+                        <p><strong>Level 6:</strong> Furious Focus (Class), Battle Medicine (Skill)</p>
                         <p><strong>Progression:</strong> From basic warrior to tactical weapon master</p>
                     </div>
                     
                     <div class="progression-example">
                         <h4>Rogue Social Infiltrator Build</h4>
                         <p><strong>Level 1:</strong> Nimble Dodge, Lengthy Diversion</p>
-                        <p><strong>Level 2:</strong> Charming Liar (General), Distracting Feint (Class)</p>
+                        <p><strong>Level 2:</strong> Charming Liar (Skill), Distracting Feint (Class, scoundrel racket)</p>
                         <p><strong>Level 4:</strong> Reactive Pursuit (Class), Group Impression (Skill)</p>
-                        <p><strong>Level 6:</strong> Twist the Knife (Class), Multilingual (General)</p>
+                        <p><strong>Level 6:</strong> Twist the Knife (Class), Multilingual (Skill)</p>
                         <p><strong>Progression:</strong> From street thief to master manipulator</p>
                     </div>
                 </div>
@@ -365,7 +343,7 @@
                     
                     <div class="region-connection">
                         <h4>Chelish Nobles and Hellknights</h4>
-                        <p>Characters from devil-ruled Cheliax navigate between lawful order and infernal corruption, perfect for exploring themes of redemption, duty versus morality, and the price of civilization.</p>
+                        <p>Characters from devil-ruled Cheliax navigate between rigid order and infernal corruption, perfect for exploring themes of redemption, duty versus morality, and the price of civilization.</p>
                     </div>
                     
                     <div class="region-connection">
@@ -393,7 +371,7 @@
                     <h3>Coordination Tactics</h3>
                     <div class="tactic">
                         <h4>The Flanking Formation</h4>
-                        <p>Melee fighters position to grant flanking bonuses while ranged characters maintain optimal distance and spell casters control battlefield positioning through area effects.</p>
+                        <p>Melee fighters flank so the foe is off-guard (formerly flat-footed: a −2 circumstance penalty to AC) to both of them, while ranged characters maintain optimal distance and spell casters control battlefield positioning through area effects.</p>
                     </div>
                     
                     <div class="tactic">
@@ -436,193 +414,212 @@
                     <p>The setting provides endless inspiration for character backgrounds and motivations. Research the region your character calls home and weave those details into your backstory.</p>
                 </div>
             </section>
+        </main>
+
 
             <footer>
-                <p>Remember: In Pathfinder 2e, every character is a hero in their own right, but the greatest legends are written by those who learn to weave their individual stories into epic tales of cooperation, courage, and triumph against impossible odds.</p>
+<div class="page-nav">
+    <a class="prev" href="/pf2_adv_char_creation.html">Advanced Character Creation</a>
+    <a class="next" href="/pf2_groups.html">Party Dynamics</a>
+</div>
+        <p>Remember: In Pathfinder 2e, every character is a hero in their own right, but the greatest legends are written by those who learn to weave their individual stories into epic tales of cooperation, courage, and triumph against impossible odds.</p>
             </footer>
-        </main>
-    </div>
 
     <script>
-        // Party Roles Distribution Chart
+        // Party Roles chart (illustrative mix, not survey data)
         const partyCanvas = document.getElementById('partyRolesChart');
         const partyCtx = partyCanvas.getContext('2d');
-        
-        // Draw pie chart for party roles
+
         const roles = [
             { name: 'Frontline', value: 30, color: '#8B4513' },
             { name: 'Support', value: 25, color: '#228B22' },
-            { name: 'Damage', value: 25, color: '#DC143C' },
+            { name: 'Damage', value: 25, color: '#B22222' },
             { name: 'Utility', value: 20, color: '#4169E1' }
         ];
-        
-        let startAngle = 0;
+
+        let startAngle = -Math.PI / 2;
         const centerX = partyCanvas.width / 2;
-        const centerY = partyCanvas.height / 2;
-        const radius = 100;
-        
+        const centerY = partyCanvas.height / 2 + 12;
+        const radius = 92;
+
+        partyCtx.fillStyle = '#3b2a1a';
+        partyCtx.font = 'bold 14px Arial';
+        partyCtx.textAlign = 'center';
+        partyCtx.fillText('An illustrative party role mix', centerX, 20);
+
         roles.forEach(role => {
             const sliceAngle = (role.value / 100) * 2 * Math.PI;
-            
+
             partyCtx.beginPath();
             partyCtx.moveTo(centerX, centerY);
             partyCtx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
             partyCtx.closePath();
             partyCtx.fillStyle = role.color;
             partyCtx.fill();
-            
-            // Add labels
+            partyCtx.strokeStyle = '#ffffff';
+            partyCtx.lineWidth = 2;
+            partyCtx.stroke();
+
             const labelAngle = startAngle + sliceAngle / 2;
-            const labelX = centerX + Math.cos(labelAngle) * (radius + 30);
-            const labelY = centerY + Math.sin(labelAngle) * (radius + 30);
-            
-            partyCtx.fillStyle = '#654321';
+            const labelX = centerX + Math.cos(labelAngle) * (radius + 42);
+            const labelY = centerY + Math.sin(labelAngle) * (radius + 26);
+
+            partyCtx.fillStyle = '#3b2a1a';
             partyCtx.font = '14px Arial';
             partyCtx.textAlign = 'center';
             partyCtx.fillText(role.name, labelX, labelY);
             partyCtx.fillText(role.value + '%', labelX, labelY + 15);
-            
+
             startAngle += sliceAngle;
         });
-        
-        // Ancestry Distribution Chart
+
+        // Ancestry hit points and Speed (Player Core values)
         const ancestryCanvas = document.getElementById('ancestryChart');
         const ancestryCtx = ancestryCanvas.getContext('2d');
-        
-        // Popular ancestries data
+
         const ancestries = [
-            { name: 'Human', popularity: 25, versatility: 90 },
-            { name: 'Elf', popularity: 20, versatility: 70 },
-            { name: 'Dwarf', popularity: 18, versatility: 65 },
-            { name: 'Halfling', popularity: 15, versatility: 75 },
-            { name: 'Gnome', popularity: 12, versatility: 80 },
-            { name: 'Goblin', popularity: 10, versatility: 85 }
+            { name: 'Dwarf', hp: 10, speed: 20 },
+            { name: 'Elf', hp: 6, speed: 30 },
+            { name: 'Gnome', hp: 8, speed: 25 },
+            { name: 'Goblin', hp: 6, speed: 25 },
+            { name: 'Halfling', hp: 6, speed: 25 },
+            { name: 'Human', hp: 8, speed: 25 },
+            { name: 'Leshy', hp: 8, speed: 25 },
+            { name: 'Orc', hp: 10, speed: 25 }
         ];
-        
-        // Draw axes
+        const aLeft = 50, aRight = 480, aBase = 240, aTop = 50, aMax = 12;
+        const colors = ['#8B4513', '#228B22', '#B8860B', '#B22222', '#4169E1', '#6A5ACD', '#2E8B57', '#696969'];
+
+        ancestryCtx.fillStyle = '#3b2a1a';
+        ancestryCtx.font = 'bold 14px Arial';
+        ancestryCtx.textAlign = 'center';
+        ancestryCtx.fillText('Ancestry Hit Points at 1st Level (Player Core)', 265, 22);
+
+        // Gridlines and y-axis ticks
+        ancestryCtx.strokeStyle = '#d8ccb8';
+        ancestryCtx.lineWidth = 1;
+        ancestryCtx.fillStyle = '#3b2a1a';
+        ancestryCtx.font = '12px Arial';
+        ancestryCtx.textAlign = 'right';
+        for (let v = 0; v <= aMax; v += 2) {
+            const y = aBase - (v / aMax) * (aBase - aTop);
+            ancestryCtx.beginPath();
+            ancestryCtx.moveTo(aLeft, y);
+            ancestryCtx.lineTo(aRight, y);
+            ancestryCtx.stroke();
+            ancestryCtx.fillText(String(v), aLeft - 6, y + 4);
+        }
+
         ancestryCtx.strokeStyle = '#654321';
         ancestryCtx.lineWidth = 2;
         ancestryCtx.beginPath();
-        ancestryCtx.moveTo(50, 250);
-        ancestryCtx.lineTo(450, 250);
-        ancestryCtx.moveTo(50, 50);
-        ancestryCtx.lineTo(50, 250);
+        ancestryCtx.moveTo(aLeft, aTop - 5);
+        ancestryCtx.lineTo(aLeft, aBase);
+        ancestryCtx.lineTo(aRight, aBase);
         ancestryCtx.stroke();
-        
-        // Add axis labels
-        ancestryCtx.fillStyle = '#654321';
-        ancestryCtx.font = '14px Arial';
-        ancestryCtx.textAlign = 'center';
-        ancestryCtx.fillText('Popularity in Games (%)', 250, 280);
-        ancestryCtx.save();
-        ancestryCtx.translate(20, 150);
-        ancestryCtx.rotate(-Math.PI/2);
-        ancestryCtx.fillText('Versatility Rating', 0, 0);
-        ancestryCtx.restore();
-        
-        // Plot ancestries
-        ancestries.forEach((ancestry, index) => {
-            const x = 50 + (ancestry.popularity / 30) * 400;
-            const y = 250 - (ancestry.versatility / 100) * 200;
-            
-            // Draw point
-            const colors = ['#8B4513', '#228B22', '#DC143C', '#4169E1', '#DAA520', '#8A2BE2'];
-            ancestryCtx.fillStyle = colors[index];
-            ancestryCtx.beginPath();
-            ancestryCtx.arc(x, y, 8, 0, 2 * Math.PI);
-            ancestryCtx.fill();
-            
-            // Add label
-            ancestryCtx.fillStyle = '#654321';
-            ancestryCtx.font = '12px Arial';
+
+        const slot = (aRight - aLeft) / ancestries.length;
+        ancestries.forEach((a, i) => {
+            const barW = slot * 0.6;
+            const x = aLeft + i * slot + (slot - barW) / 2;
+            const h = (a.hp / aMax) * (aBase - aTop);
+            ancestryCtx.fillStyle = colors[i];
+            ancestryCtx.fillRect(x, aBase - h, barW, h);
+
+            ancestryCtx.fillStyle = '#3b2a1a';
+            ancestryCtx.font = 'bold 12px Arial';
             ancestryCtx.textAlign = 'center';
-            ancestryCtx.fillText(ancestry.name, x, y - 12);
+            ancestryCtx.fillText(String(a.hp), x + barW / 2, aBase - h - 5);
+
+            ancestryCtx.font = '12px Arial';
+            ancestryCtx.fillText(a.name, x + barW / 2, aBase + 16);
+            ancestryCtx.fillText(a.speed + ' ft', x + barW / 2, aBase + 31);
         });
-        
-        // Character Growth Chart
+
+        ancestryCtx.fillStyle = '#3b2a1a';
+        ancestryCtx.font = '12px Arial';
+        ancestryCtx.textAlign = 'center';
+        ancestryCtx.fillText('Bar = ancestry HP (added to class HP); second line = Speed', 265, 292);
+
+        // Proficiency bonus growth chart
         const growthCanvas = document.getElementById('characterGrowthChart');
         const growthCtx = growthCanvas.getContext('2d');
-        
-        // Character capability growth
-        const levels = ['Level 1', 'Level 5', 'Level 10', 'Level 15', 'Level 20'];
-        const combat = [20, 45, 70, 85, 95];
-        const skills = [15, 35, 60, 80, 90];
-        const feats = [10, 30, 55, 75, 95];
-        const spells = [5, 25, 50, 75, 100];
-        
-        // Draw axes
+
+        const levelNums = [1, 5, 10, 15, 20];
+        const gLeft = 60, gRight = 470, gBase = 250, gTop = 45, gMax = 30;
+        const xFor = i => gLeft + i * ((gRight - gLeft) / (levelNums.length - 1));
+        const yFor = v => gBase - (v / gMax) * (gBase - gTop);
+
+        const progressionData = [
+            { name: 'Trained (2 + level)', add: 2, color: '#228B22' },
+            { name: 'Expert (4 + level)', add: 4, color: '#4169E1' },
+            { name: 'Master (6 + level)', add: 6, color: '#B8860B' },
+            { name: 'Legendary (8 + level)', add: 8, color: '#B22222' }
+        ];
+
+        growthCtx.fillStyle = '#3b2a1a';
+        growthCtx.font = 'bold 14px Arial';
+        growthCtx.textAlign = 'center';
+        growthCtx.fillText('Proficiency Bonus by Level', 265, 22);
+
+        growthCtx.strokeStyle = '#d8ccb8';
+        growthCtx.lineWidth = 1;
+        growthCtx.fillStyle = '#3b2a1a';
+        growthCtx.font = '12px Arial';
+        growthCtx.textAlign = 'right';
+        for (let v = 0; v <= gMax; v += 5) {
+            const y = yFor(v);
+            growthCtx.beginPath();
+            growthCtx.moveTo(gLeft, y);
+            growthCtx.lineTo(gRight, y);
+            growthCtx.stroke();
+            growthCtx.fillText('+' + v, gLeft - 6, y + 4);
+        }
+
         growthCtx.strokeStyle = '#654321';
         growthCtx.lineWidth = 2;
         growthCtx.beginPath();
-        growthCtx.moveTo(50, 250);
-        growthCtx.lineTo(450, 250);
-        growthCtx.moveTo(50, 50);
-        growthCtx.lineTo(50, 250);
+        growthCtx.moveTo(gLeft, gTop - 5);
+        growthCtx.lineTo(gLeft, gBase);
+        growthCtx.lineTo(gRight, gBase);
         growthCtx.stroke();
-        
-        // Draw progression lines
-        const progressionData = [
-            { name: 'Combat Prowess', data: combat, color: '#8B4513' },
-            { name: 'Skill Mastery', data: skills, color: '#228B22' },
-            { name: 'Feat Abilities', data: feats, color: '#DC143C' },
-            { name: 'Magical Power', data: spells, color: '#4169E1' }
-        ];
-        
-        progressionData.forEach(progression => {
-            growthCtx.strokeStyle = progression.color;
+
+        progressionData.forEach(p => {
+            growthCtx.strokeStyle = p.color;
             growthCtx.lineWidth = 3;
             growthCtx.beginPath();
-            
-            progression.data.forEach((value, index) => {
-                const x = 50 + (index * 100);
-                const y = 250 - (value * 2);
-                
-                if (index === 0) {
-                    growthCtx.moveTo(x, y);
-                } else {
-                    growthCtx.lineTo(x, y);
-                }
+            levelNums.forEach((lvl, i) => {
+                const x = xFor(i), y = yFor(lvl + p.add);
+                if (i === 0) growthCtx.moveTo(x, y); else growthCtx.lineTo(x, y);
             });
             growthCtx.stroke();
+            growthCtx.fillStyle = p.color;
+            levelNums.forEach((lvl, i) => {
+                growthCtx.beginPath();
+                growthCtx.arc(xFor(i), yFor(lvl + p.add), 3.5, 0, 2 * Math.PI);
+                growthCtx.fill();
+            });
         });
-        
-        // Add level labels
-        growthCtx.fillStyle = '#654321';
+
+        growthCtx.fillStyle = '#3b2a1a';
         growthCtx.font = '12px Arial';
         growthCtx.textAlign = 'center';
-        levels.forEach((level, index) => {
-            const x = 50 + (index * 100);
-            growthCtx.fillText(level, x, 270);
+        levelNums.forEach((lvl, i) => {
+            growthCtx.fillText('Level ' + lvl, xFor(i), gBase + 18);
         });
-        
-        // Add legend
-        progressionData.forEach((progression, index) => {
-            const y = 70 + (index * 20);
-            growthCtx.fillStyle = progression.color;
-            growthCtx.fillRect(350, y, 15, 10);
-            growthCtx.fillStyle = '#654321';
+        growthCtx.fillText('Untrained stays +0 at every level', 265, gBase + 40);
+
+        // Legend in the empty upper-left area
+        progressionData.forEach((p, i) => {
+            const y = gTop + 4 + i * 18;
+            growthCtx.fillStyle = p.color;
+            growthCtx.fillRect(gLeft + 12, y, 15, 10);
+            growthCtx.fillStyle = '#3b2a1a';
+            growthCtx.font = '12px Arial';
             growthCtx.textAlign = 'left';
-            growthCtx.fillText(progression.name, 370, y + 8);
+            growthCtx.fillText(p.name, gLeft + 32, y + 9);
         });
     </script>
-    <nav class="prev-next-nav">
-        <a href="/pf2_adv_char_creation.html" class="nav-prev">← Advanced Character Creation</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_100.html" class="nav-next">100 Characters →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

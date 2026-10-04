@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2e: Community Building and Outreach</title>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="icon" href="/favicon.png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
+    <title>Community Building - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 17</span>
         <h1>Pathfinder 2e: Community Building and Outreach</h1>
         <p><em>Growing Gaming Communities and Sharing the Hobby We Love</em></p>
     </header>
@@ -182,6 +161,7 @@ Approach:
 - Create "Learn to Play PF2e" monthly events
 - Use pre-generated characters for easy entry
 - Focus on one-shots before committing to campaigns
+- The Pathfinder Beginner Box is built for exactly this kind of first table
 
 TOO INTIMIDATING FOR NEWCOMERS:
 Opportunity: Create explicitly welcoming spaces
@@ -243,7 +223,7 @@ Hour 4: Wrap-up and Next Steps
 
 📋 ESSENTIAL PREPARATION MATERIALS
 Pre-Generated Characters:
-□ 8-10 diverse characters covering all core classes
+□ 8-10 diverse characters covering the eight Player Core classes
 □ Simplified character sheets with essential information highlighted
 □ Brief character backgrounds that suggest roleplay hooks
 □ Visual character portraits for easier identification
@@ -252,7 +232,7 @@ Teaching Materials:
 □ Quick reference cards for common actions
 □ Visual aids for combat mechanics (action economy, movement)
 □ Simplified condition cards with clear explanations
-□ Example dice pools for common situations
+□ Example rolls for common situations (d20 + modifier vs DC)
 
 Adventure Design:
 □ Clear, achievable objectives with multiple solution paths
@@ -381,7 +361,7 @@ Progressive Skill Building:
 STAGE 1: FOUNDATION (First Session)
 Core Concepts:
 □ What is roleplaying? (Being a character in a story)
-□ Basic dice mechanics (d20 + modifier vs target number)
+□ Basic dice mechanics (d20 + modifier vs a Difficulty Class, or DC)
 □ Action economy (you get to do things on your turn)
 □ Collaborative storytelling (we create the story together)
 
@@ -394,7 +374,7 @@ Teaching Methods:
 Example Teaching Sequence:
 1. "Imagine you're an actor playing a character in an improvised play"
 2. "When you want to do something uncertain, roll this d20 and add this number"
-3. "On your turn, you can do up to three things - what interests your character?"
+3. "On your turn, you get three actions - what does your character want to do?"
 4. "There's no single right answer - what would your character do?"
 
 STAGE 2: BUILDING SKILLS (Sessions 2-4)
@@ -530,7 +510,7 @@ Solutions:
 □ Emphasize that the core experience only requires basic dice
 
 Cost-Effective Starter Resources:
-- Free Basic Rules from Paizo website
+- Free official rules on Archives of Nethys (2e.aonprd.com)
 - Dice apps for smartphones as backup
 - Shared physical books during learning phase
 - Library partnerships for book access
@@ -839,7 +819,7 @@ GM Advice Series:
 □ Player management and table dynamics
 □ Campaign planning and story development
 
-New Player Tutorials:
+New Player Walkthroughs:
 □ Basic rules explanation with visual aids
 □ Common mistake prevention and correction
 □ Confidence building and anxiety reduction
@@ -1234,7 +1214,7 @@ EXTERNAL RECOGNITION:
 
             <p>Community building isn't about having perfect events or solving every problem immediately. It's about consistent, thoughtful effort to create spaces where people feel welcome, supported, and excited to explore their creativity. Every person you introduce to gaming might go on to introduce others, creating an expanding network of friendship, imagination, and shared adventure.</p>
 
-            <p>The future of gaming depends on communities that are welcoming, diverse, and sustainable. By applying the principles and practices in this lecture, you're not just building a local gaming group - you're contributing to a global community that spans cultures, generations, and backgrounds, united by our love of stories, strategy, and the magic that emerges when people come together to imagine new worlds.</p>
+            <p>The future of gaming depends on communities that are welcoming, diverse, and sustainable. By applying the principles and practices in this part, you're not just building a local gaming group - you're contributing to a global community that spans cultures, generations, and backgrounds, united by our love of stories, strategy, and the magic that emerges when people come together to imagine new worlds.</p>
 
             <div class="mermaid">
                 graph TD
@@ -1306,33 +1286,19 @@ EXTERNAL RECOGNITION:
 
             <div class="final-inspiration">
                 <h3>Remember</h3>
-                <p><em>"A society grows great when old men plant trees whose shade they know they shall never sit in."</em> Every effort you make to build gaming communities creates opportunities and friendships that will enrich people's lives for years to come. Your work matters, your community needs you, and the future of gaming is brighter because you're willing to take action.</p>
+                <p>As the old proverb goes, <em>"A society grows great when old men plant trees whose shade they know they shall never sit in."</em> Every effort you make to build gaming communities creates opportunities and friendships that will enrich people's lives for years to come. Your work matters, your community needs you, and the future of gaming is brighter because you're willing to take action.</p>
             </div>
         </section>
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_horror.html">Horror &amp; Atmosphere</a>
+    <a class="next" href="/pf2_dice_roller.html">Dice Roller</a>
+</div>
         <p>The adventure of community building awaits - may your efforts create lasting friendships and open doors to countless magical stories!</p>
    
     </footer>
-    <nav class="prev-next-nav">
-        <a href="/pf2_digital_tools.html" class="nav-prev">← Digital Tools</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <span></span>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2e: Character Advancement and Growth</title>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="icon" href="/favicon.png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
+    <title>Character Advancement - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 11</span>
         <h1>Pathfinder 2e: Character Advancement and Growth</h1>
         <p><em>From Novice Adventurer to Legendary Hero</em></p>
     </header>
@@ -78,7 +57,8 @@
             <p>Hit points represent more than just "how much damage you can take" - they're your character's overall vitality, determination, and ability to keep fighting. Think of them like a professional athlete's endurance - a marathon runner doesn't just have "more health," they have better conditioning, mental toughness, and recovery ability.</p>
 
             <pre><code>Hit Point Calculation Each Level:
-Base HP = Class HP + Constitution Modifier
+HP gained each level = Class HP + Constitution modifier
+(1st level also adds your ancestry's HP)
 
 Example - Human Fighter (CON +2):
 Level 1: 10 (Fighter base) + 2 (CON) + 8 (ancestry) = 20 HP
@@ -126,27 +106,28 @@ with each training camp</code></pre>
 
             <pre><code>Example Ancestry Feat Progression (Human):
 Level 1: Natural Ambition (bonus 1st-level class feat)
-Level 5: Adaptive Adept (bonus cantrip from any tradition)
-Level 9: Clever Improviser (become trained in untrained skills)
-Level 13: Unconventional Weaponry (gain weapon access)
+Level 5: Clever Improviser (attempt trained-only skill actions untrained)
+Level 9: Multitalented (pick up a second class's dedication)
+Level 13: Bounce Back (shrug off a brush with death)
 Level 17: Heroic Presence (inspire allies with leadership)</code></pre>
 
             <h4>Class Feats: Your Professional Development</h4>
             <p>These are like earning certifications in your chosen field. A fighter learns new combat techniques, while a wizard discovers advanced magical theories. You get these at every even level (2nd, 4th, 6th, etc.).</p>
 
             <pre><code>Example Fighter Class Feat Progression:
-Level 2: Power Attack (devastating two-action strike)
+Level 2: Vicious Swing, formerly Power Attack (devastating two-action strike)
 Level 4: Intimidating Strike (combine attack with demoralization)
-Level 6: Knockdown (trip enemies with weapon attacks)
-Level 8: Improved Knockdown (trip multiple enemies)
-Level 10: Whirlwind Strike (attack all nearby enemies)</code></pre>
+Level 6: Furious Focus (a two-handed Vicious Swing counts as one attack for your multiple attack penalty)
+Level 8: Sudden Leap (leap and Strike in mid-air)
+Level 10: Certain Strike (a glancing blow even on a miss)
+(Whirlwind Strike, which hits every nearby enemy, waits until 14th)</code></pre>
 
             <h4>Skill Feats: Your Expanding Expertise</h4>
-            <p>Like taking continuing education courses, these expand what you can do with your skills. You gain these at 2nd level and every 2 levels thereafter.</p>
+            <p>Like continuing education, these expand what you can do with your skills. You gain these at 2nd level and every 2 levels thereafter.</p>
 
             <pre><code>Example Skill Feat Applications:
-Athletics: Quick Climb (climb at full speed)
-Stealth: Experienced Smuggler (hide larger objects)
+Athletics: Quick Climb (climb faster; needs master)
+Stealth: Experienced Smuggler (better at concealing small items)
 Medicine: Battle Medicine (heal during combat)
 Diplomacy: Group Impression (influence multiple people)
 Crafting: Magical Crafting (create magic items)</code></pre>
@@ -157,27 +138,28 @@ Crafting: Magical Crafting (create magic items)</code></pre>
             <pre><code>Popular General Feats:
 Fleet (increase your speed)
 Toughness (gain more hit points)
-Incredible Initiative (roll initiative twice, take higher)
+Incredible Initiative (+2 circumstance bonus to initiative)
 Fast Recovery (recover faster during rest)
 Multilingual (learn additional languages)</code></pre>
         </section>
 
         <section>
-            <h2>Ability Score Boosts: Growing Stronger</h2>
-            <p>Every four levels (5th, 10th, 15th, 20th), you get four ability score boosts. This is like your character having growth spurts - not just physical, but mental and spiritual growth as well.</p>
+            <h2>Attribute Boosts: Growing Stronger</h2>
+            <p>At 5th, 10th, 15th and 20th level, you get four attribute boosts (formerly ability boosts; the Remaster tracks attribute modifiers instead of ability scores). This is like your character having growth spurts - not just physical, but mental and spiritual growth as well.</p>
 
-            <pre><code>Ability Boost Rules:
-- Can't boost the same ability score twice in one session
-- Can't boost an ability score above 18 using boosts alone
-- Must boost different abilities (max one per ability per level)
+            <pre><code>Attribute Boost Rules:
+- Each boost raises one attribute modifier by +1
+- The four boosts must go to four different attributes
+- A boost to a modifier that's already +4 or higher is a
+  "partial boost": it takes two partial boosts to gain +1
 
-Example Boost Strategy (Fighter):
-Level 5: STR 16→18, CON 14→16, WIS 12→14, CHA 10→12
-Level 10: DEX 12→14, INT 12→14, and two others
-Level 15: Continue spreading or focus on key abilities</code></pre>
+Example Boost Strategy (Fighter starting at STR +4):
+Level 5: STR +4 (partial boost), CON +2→+3, WIS +1→+2, DEX +1→+2
+Level 10: STR +4→+5 (second partial), CON +3→+4, WIS +2→+3, and one other
+Level 15: Continue spreading or focus on key attributes</code></pre>
 
             <h3>Strategic Boost Planning</h3>
-            <p>Planning your ability score boosts is like planning a workout routine. You want to strengthen your core abilities while not neglecting areas that support your overall performance.</p>
+            <p>Planning your attribute boosts is like planning a workout routine. You want to strengthen your core abilities while not neglecting areas that support your overall performance.</p>
 
             <pre><code>Boost Strategy Examples:
 
@@ -199,12 +181,12 @@ Priority 4: Support stats or secondary casting</code></pre>
             <p>Character power in Pathfinder 2e doesn't grow linearly - it grows in waves, like a musician mastering increasingly complex pieces. Each tier of play brings qualitatively different capabilities.</p>
 
             <h3>Levels 1-4: Learning the Basics</h3>
-            <p>Like a medical student's first year, you're learning fundamental skills and basic techniques. Characters are competent but still vulnerable to many threats.</p>
+            <p>Like a first-year medical trainee, you're learning fundamental skills and basic techniques. Characters are competent but still vulnerable to many threats.</p>
 
             <div class="mermaid">
                 graph TD
-                    A[Level 1: Character Creation] --> B[Level 2: First Class Feat<br/>Extra Skill Feat]
-                    B --> C[Level 3: General Feat<br/>Skill Increases]
+                    A[Level 1: Character Creation] --> B[Level 2: Class Feat<br/>Skill Feat]
+                    B --> C[Level 3: General Feat<br/>Skill Increase]
                     C --> D[Level 4: Class Feat<br/>Skill Feat]
                     
                     style A fill:#ffeb3b
@@ -217,13 +199,14 @@ Priority 4: Support stats or secondary casting</code></pre>
             <p>Like a resident doctor, you're developing real competence. You gain signature abilities and start to feel genuinely heroic.</p>
 
             <pre><code>Key Level 5 Improvements:
-✓ First ability score boosts (4 total)
+✓ First attribute boosts since 1st level (4 total)
 ✓ Ancestry feat
-✓ Skill increases (4 total)
+✓ A skill increase
 ✓ Many classes get signature abilities:
-  - Fighters: weapon specialization
-  - Wizards: 3rd-level spells
-  - Rogues: weapon specialization</code></pre>
+  - Fighters: weapon mastery (master in one weapon group)
+  - Wizards: 3rd-rank spells (spell rank, formerly spell level)
+  - Rogues: sneak attack grows to 2d6
+  (Weapon specialization's extra damage arrives at 7th)</code></pre>
 
             <h3>Levels 10-14: Veteran Competence</h3>
             <p>Like a specialist consultant, you're now an expert in your field with some truly impressive capabilities.</p>
@@ -232,21 +215,21 @@ Priority 4: Support stats or secondary casting</code></pre>
             <p>Like a world-renowned expert in your field, you can accomplish things that border on the mythical.</p>
 
             <pre><code>High-Level Capabilities Examples:
-Level 15 Fighter: Can cleave through multiple enemies in one swing
-Level 17 Wizard: Can stop time or reshape reality
-Level 19 Rogue: Can become invisible and strike vital points unerringly
-Level 20 Champion: Can literally come back from death to protect others</code></pre>
+Level 15 Fighter: Can cleave through multiple enemies at once
+Level 17 Wizard: Casts 9th-rank spells, with 10th-rank magic close behind
+Level 19 Rogue: Strikes vital points with devastating precision
+Level 20 Champion: Shields allies with near-divine power</code></pre>
         </section>
 
         <section>
             <h2>Customization Strategies: Building Your Unique Hero</h2>
-            <p>Character advancement in PF2e is like creating a custom recipe. You start with a base (your class), add key ingredients (ancestry and background), and then season to taste with your feat choices and ability score improvements.</p>
+            <p>Character advancement in PF2e is like creating a custom recipe. You start with a base (your class), add key ingredients (ancestry and background), and then season to taste with your feat choices and attribute boosts.</p>
 
             <h3>The Specialist vs Generalist Approach</h3>
             <p>You can build your character like a Swiss Army knife (lots of useful tools) or like a precision instrument (exceptional at one thing).</p>
 
             <pre><code>Specialist Build Example (Damage-Focused Fighter):
-Class Feats: Power Attack → Furious Focus → Improved Critical
+Class Feats: Vicious Swing → Furious Focus → Brutal Finish
 Skill Feats: All combat-related (Intimidation, Athletics)
 General Feats: Toughness, Fleet, Incredible Initiative
 Result: Devastating in combat, limited outside options
@@ -261,15 +244,17 @@ Result: Capable in many situations, less optimized damage</code></pre>
             <p>Multiclass dedications are like getting a minor degree alongside your major. You can become a fighter who studies magic, or a wizard who learns some roguish tricks.</p>
 
             <pre><code>Multiclass Dedication Requirements:
-1. Must have 14+ in the new class's key ability score
+1. Usually need +2 or higher in the new class's key attribute
+   (pre-Remaster: a score of 14)
 2. Take the dedication feat (usually level 2+)
-3. Cannot take another dedication until you have 2+ feats
-   from your current dedication
+3. Cannot take another dedication until you have 2 more feats
+   from your current archetype
 
 Example: Fighter with Wizard Dedication
-Level 2: Wizard Dedication (gain spellcasting)
-Level 4: Basic Wizard Spellcasting
-Level 6: Now can take another dedication or continue wizard</code></pre>
+Level 2: Wizard Dedication (spellbook and arcane cantrips)
+Level 4: Basic Wizard Spellcasting (your first spell slot)
+Level 6: Another wizard archetype feat
+Level 8: Now can take another dedication or continue wizard</code></pre>
         </section>
 
         <section>
@@ -284,24 +269,24 @@ Level 6: Now can take another dedication or continue wizard</code></pre>
 CHARACTER: Lyra Brightblade (Human Fighter)
 CONCEPT: Protective warrior who inspires allies
 
-ABILITY PRIORITY: STR > CON > CHA > WIS > DEX > INT
+ATTRIBUTE PRIORITY: STR > CON > CHA > WIS > DEX > INT
 
 FEAT PROGRESSION PLAN:
-Level 1: Natural Ambition (Power Attack)
-Level 2: Intimidating Strike
+Level 1: Natural Ambition (Reactive Shield)
+Level 2: Champion Dedication
 Level 3: Toughness
-Level 4: Quick Shield Block
-Level 5: Ancestry Feat - Inspire Heroics
-Level 6: Guardian's Deflection
+Level 4: Intimidating Strike
+Level 5: Ancestry Feat - Clever Improviser
+Level 6: Shield Warden
 
-MULTICLASS PLAN: Champion Dedication at Level 2
+MULTICLASS PLAN: Champion Dedication at Level 2 (needs STR +2, CHA +2)
 GOAL: Become the ultimate protector-warrior</code></pre>
 
             <h3>Adaptation and Flexibility</h3>
             <p>Like a good chef who adjusts recipes based on available ingredients, be ready to adapt your plan based on campaign needs and party composition.</p>
 
             <pre><code>Adaptation Examples:
-Campaign has lots of undead → consider Disrupting Weapons feat
+Campaign has lots of undead → bring vitality damage and a ghost touch rune
 Party lacks healer → invest in Medicine skill and Battle Medicine
 Facing many spellcasters → prioritize Will saves and counterspells
 Urban campaign → emphasize social skills over wilderness survival</code></pre>
@@ -316,34 +301,36 @@ Urban campaign → emphasize social skills over wilderness survival</code></pre>
             <pre><code>Exercise: Level a Fighter from 1st to 5th level
 
 Starting Stats:
-Human Fighter, STR 18, DEX 12, CON 16, INT 10, WIS 14, CHA 10
+Human Fighter, STR +4, DEX +1, CON +3, INT +0, WIS +1, CHA +0
 
 Level 1:
-- HP: 10 + 6 (CON) + 8 (Human) = 24
-- Feats: Natural Ambition (Power Attack)
-- Skills: Choose 3 + INT (3 total)
+- HP: 10 (Fighter) + 3 (CON) + 8 (Human) = 21
+- Feats: Class feat (Vicious Swing) + Natural Ambition (a second 1st-level class feat)
+- Skills: Acrobatics or Athletics, plus 3 + INT (3 more), plus background skills
 
 Level 2:
-- HP: 24 + 10 + 3 = 37
+- HP: 21 + 10 + 3 = 34
 - Class Feat: Choose one (Intimidating Strike?)
 - Skill Feat: Choose one
 
 Level 3:
-- HP: 37 + 10 + 3 = 50
+- HP: 34 + 10 + 3 = 47
 - General Feat: Choose one
-- Skill Increases: 4 skills improve by one rank
+- Skill Increase: 1 skill improves by one rank (e.g., trained → expert)
 
 Level 4:
-- HP: 50 + 10 + 3 = 63
+- HP: 47 + 10 + 3 = 60
 - Class Feat: Choose one
 - Skill Feat: Choose one
 
 Level 5:
-- HP: 63 + 10 + 3 = 76
+- HP: 60 + 10 + 3 = 73, then +5 more = 78 because the CON boost
+  below raises CON to +4, which counts for every level
 - Ancestry Feat: Choose one
-- Ability Boosts: 4 different abilities
-- Skill Increases: 4 skills improve
-- Weapon Specialization: +2 damage with weapons</code></pre>
+- Attribute Boosts: 4 different attributes (e.g., CON +3→+4)
+- Skill Increase: 1 more skill improves
+- Fighter Weapon Mastery: master proficiency with one weapon group
+  (weapon specialization's extra damage comes at 7th)</code></pre>
 
             <h3>Campaign Integration</h3>
             <p>Consider how your character's growth fits into the story. Your advancement should reflect not just mechanical optimization, but character development and story progression.</p>
@@ -372,15 +359,15 @@ After surviving harsh wilderness:
 
             <pre><code>Example of Poor Synergy:
 Fighter taking:
-- Power Attack (two-action attack)
-- Dual-Weapon Warrior (focuses on two weapons)
+- Vicious Swing (two-action attack, best with a big two-handed weapon)
+- Dual-Weapon Warrior archetype (focuses on two weapons)
 - Shield Block (requires shield and hand)
 
 Problem: These don't work together effectively
 
 Better Approach:
 Choose a focus and build around it:
-Option A: Two-handed weapon + Power Attack + Furious Focus
+Option A: Two-handed weapon + Vicious Swing + Furious Focus
 Option B: Sword and shield + Shield feats
 Option C: Dual weapons + Twin Parry + Double Slice</code></pre>
 
@@ -398,10 +385,10 @@ Option C: Dual weapons + Twin Parry + Double Slice</code></pre>
             <p>Beyond basic multiclass dedications, explore rare archetypes that provide unique character concepts and abilities.</p>
 
             <h3>Legendary Skill Uses</h3>
-            <p>At high levels, skills can accomplish near-magical feats. Legendary Thievery lets you steal conceptual things like memories or spells!</p>
+            <p>At high levels, skills can accomplish near-magical feats. The Legendary Thief skill feat lets you Steal things that should be impossible, like an item someone is actively holding!</p>
 
             <h3>Mythic and Epic Rules</h3>
-            <p>For campaigns that go beyond 20th level, explore mythic rules that let characters achieve truly godlike capabilities.</p>
+            <p>Pathfinder 2e's core rules stop at 20th level, which is already near-godlike. Anything beyond that comes from optional or variant rules your GM chooses to add.</p>
 
             <h3>Character Retirement and Legacy</h3>
             <p>Sometimes characters outgrow campaigns or achieve their goals. Learn about graceful character retirement and how high-level characters can influence the world.</p>
@@ -425,7 +412,7 @@ Option C: Dual weapons + Twin Parry + Double Slice</code></pre>
 
         <section>
             <h2>Conclusion: Your Hero's Journey</h2>
-            <p>Character advancement in Pathfinder 2e is more than just gaining power - it's about growing into the hero your character was meant to become. Every choice you make, from feat selection to ability score improvements, tells a story about who your character is and what they value.</p>
+            <p>Character advancement in Pathfinder 2e is more than just gaining power - it's about growing into the hero your character was meant to become. Every choice you make, from feat selection to attribute boosts, tells a story about who your character is and what they value.</p>
 
             <p>Remember that the best character builds aren't just mechanically optimal - they're builds that enhance your enjoyment of the game and contribute to memorable stories with your friends. Your character's advancement should feel like a natural evolution of their personality and experiences.</p>
 
@@ -445,10 +432,10 @@ Option C: Dual weapons + Twin Parry + Double Slice</code></pre>
 
         <section>
             <h2>Looking Ahead</h2>
-            <p>Now that you understand how characters grow and develop, you're ready to explore the tools and treasures that aid them on their journey. In our next lecture, we'll delve into the rich world of equipment, magical items, and wealth management in Pathfinder 2e.</p>
+            <p>Now that you understand how characters grow and develop, you're ready to explore the tools and treasures that aid them on their journey. Later parts of this guide delve into the rich world of equipment, magical items, and wealth management in Pathfinder 2e.</p>
             
             <div class="upcoming-topics">
-                <h3>Upcoming Lectures</h3>
+                <h3>Coming Up in This Guide</h3>
                 <ul>
                     <li><strong>Equipment and Magical Items:</strong> Weapons, armor, treasures, and wealth management</li>
                     <li><strong>Advanced Combat Tactics:</strong> Conditions, environmental hazards, and tactical depth</li>
@@ -462,7 +449,7 @@ Option C: Dual weapons + Twin Parry + Double Slice</code></pre>
                 <h3>Character Advancement Mastery Checklist</h3>
                 <ul>
                     <li>✅ Understand the four types of feats and when you gain them</li>
-                    <li>✅ Plan ability score boost progression strategically</li>
+                    <li>✅ Plan attribute boost progression strategically</li>
                     <li>✅ Balance specialization vs versatility in build choices</li>
                     <li>✅ Integrate multiclass dedications effectively</li>
                     <li>✅ Adapt advancement plans based on campaign needs</li>
@@ -479,7 +466,7 @@ Option C: Dual weapons + Twin Parry + Double Slice</code></pre>
                     <li><strong>Pathbuilder 2e:</strong> Digital character building and advancement tracking</li>
                     <li><strong>Archives of Nethys:</strong> Complete feat database with search functionality</li>
                     <li><strong>Character Build Guides:</strong> Community-created optimization guides</li>
-                    <li><strong>PF2e Character Sheet:</strong> Official advancement tracking tools</li>
+                    <li><strong>Official character sheet:</strong> Track feats and boosts level by level</li>
                     <li><strong>Online Forums:</strong> r/Pathfinder2e for build advice and discussion</li>
                 </ul>
             </div>
@@ -487,27 +474,13 @@ Option C: Dual weapons + Twin Parry + Double Slice</code></pre>
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_adv_combat.html">Advanced Combat</a>
+    <a class="next" href="/pf2_player_collab.html">Player Collaboration</a>
+</div>
         <p>Your character's journey from novice to legend awaits - may every level bring new discoveries and adventures!</p>
 
     </footer>
-    <nav class="prev-next-nav">
-        <a href="/pf2_adv_combat.html" class="nav-prev">← Advanced Combat</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_player_collab.html" class="nav-next">Player Collaboration →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

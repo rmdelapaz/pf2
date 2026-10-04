@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Character Creation Deep Dive - Pathfinder 2.0</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Character Creation - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 2</span>
         <h1>Character Creation Deep Dive</h1>
         <p class="subtitle">Building Your Hero from Concept to Stats</p>
     </header>
@@ -49,7 +28,7 @@
     <main>
         <section class="introduction">
             <h2>The Art of Character Creation</h2>
-            <p>Creating a Pathfinder 2.0 character is like being an architect, chef, and storyteller all at once. You're designing the blueprint (stats), mixing the perfect recipe (abilities), and crafting a compelling narrative (backstory) that will grow and evolve over countless adventures.</p>
+            <p>Creating a Pathfinder 2e character is like being an architect, chef, and storyteller all at once. You're designing the blueprint (stats), mixing the perfect recipe (abilities), and crafting a compelling narrative (backstory) that will grow and evolve over countless adventures.</p>
             
             <p>Unlike video games where you might pick a class and jump in, tabletop RPG character creation is a deliberate, creative process. Think of it as sculpting a hero from clay - every choice shapes not just what they can do, but who they are.</p>
 
@@ -59,7 +38,7 @@
                         A[💡 Concept] --> B[🧬 Ancestry]
                         B --> C[📚 Background]
                         C --> D[⚔️ Class]
-                        D --> E[📊 Ability Scores]
+                        D --> E[📊 Attributes]
                         E --> F[🎯 Skills]
                         F --> G[🌟 Feats]
                         G --> H[⚡ Final Details]
@@ -120,16 +99,16 @@
             <p>Ancestry in PF2e is like choosing your character's genetic foundation, but it's much more than just "race." It determines physical capabilities, cultural perspectives, and innate magical abilities. Think of it as your character's biological and cultural inheritance.</p>
 
             <div class="ancestry-comparison">
-                <h3>Core Ancestries Overview</h3>
+                <h3>Five Player Core Ancestries</h3>
                 <div class="ancestry-grid">
                     <div class="ancestry-card">
                         <h4>🧑 Human</h4>
                         <div class="stats">
                             <p><strong>HP:</strong> 8 | <strong>Size:</strong> Medium | <strong>Speed:</strong> 25 feet</p>
-                            <p><strong>Boost:</strong> Any two different ability scores</p>
+                            <p><strong>Boosts:</strong> Two free attribute boosts</p>
                             <p><strong>Flaw:</strong> None</p>
                         </div>
-                        <p><strong>The Swiss Army Knife:</strong> Versatile and adaptable, humans get extra feats and can excel in any role. Perfect for new players or complex concepts.</p>
+                        <p><strong>The Swiss Army Knife:</strong> Versatile and adaptable, humans have ancestry feats that grant extra class or general feats, and can excel in any role. Perfect for new players or complex concepts.</p>
                         <p><strong>Cultural Flavor:</strong> Ambitious, diverse, quick to adapt and learn</p>
                     </div>
 
@@ -137,10 +116,10 @@
                         <h4>🧝 Elf</h4>
                         <div class="stats">
                             <p><strong>HP:</strong> 6 | <strong>Size:</strong> Medium | <strong>Speed:</strong> 30 feet</p>
-                            <p><strong>Boost:</strong> Dexterity, Intelligence</p>
+                            <p><strong>Boosts:</strong> Dexterity, Intelligence, one free</p>
                             <p><strong>Flaw:</strong> Constitution</p>
                         </div>
-                        <p><strong>The Graceful Scholar:</strong> Quick and intelligent but fragile. Natural magic resistance and keen senses make them excellent spellcasters and archers.</p>
+                        <p><strong>The Graceful Scholar:</strong> Quick and intelligent but fragile. A 30-foot Speed and low-light vision make them excellent spellcasters and archers.</p>
                         <p><strong>Cultural Flavor:</strong> Patient, artistic, connected to nature and magic</p>
                     </div>
 
@@ -148,10 +127,10 @@
                         <h4>🧙 Dwarf</h4>
                         <div class="stats">
                             <p><strong>HP:</strong> 10 | <strong>Size:</strong> Medium | <strong>Speed:</strong> 20 feet</p>
-                            <p><strong>Boost:</strong> Constitution, Wisdom</p>
+                            <p><strong>Boosts:</strong> Constitution, Wisdom, one free</p>
                             <p><strong>Flaw:</strong> Charisma</p>
                         </div>
-                        <p><strong>The Stalwart Defender:</strong> Tough and wise but not great with people. Poison resistance and darkvision make them natural tanks and crafters.</p>
+                        <p><strong>The Stalwart Defender:</strong> Tough and wise but not great with people. Darkvision and a sturdy build (some dwarf heritages even resist poison) make them natural tanks and crafters.</p>
                         <p><strong>Cultural Flavor:</strong> Traditional, honor-bound, master craftspeople</p>
                     </div>
 
@@ -159,10 +138,10 @@
                         <h4>🍀 Halfling</h4>
                         <div class="stats">
                             <p><strong>HP:</strong> 6 | <strong>Size:</strong> Small | <strong>Speed:</strong> 25 feet</p>
-                            <p><strong>Boost:</strong> Dexterity, Wisdom</p>
+                            <p><strong>Boosts:</strong> Dexterity, Wisdom, one free</p>
                             <p><strong>Flaw:</strong> Strength</p>
                         </div>
-                        <p><strong>The Lucky Wanderer:</strong> Small but incredibly lucky and perceptive. Natural resistance to fear and improved luck with rolls.</p>
+                        <p><strong>The Lucky Wanderer:</strong> Small but famously lucky and perceptive. Keen eyes, plus heritages and ancestry feats built around luck and courage.</p>
                         <p><strong>Cultural Flavor:</strong> Optimistic, curious, community-focused</p>
                     </div>
 
@@ -170,10 +149,10 @@
                         <h4>👹 Goblin</h4>
                         <div class="stats">
                             <p><strong>HP:</strong> 6 | <strong>Size:</strong> Small | <strong>Speed:</strong> 25 feet</p>
-                            <p><strong>Boost:</strong> Dexterity, Charisma</p>
+                            <p><strong>Boosts:</strong> Dexterity, Charisma, one free</p>
                             <p><strong>Flaw:</strong> Wisdom</p>
                         </div>
-                        <p><strong>The Chaotic Trickster:</strong> Fast and charming but impulsive. Natural darkvision and can squeeze through tight spaces.</p>
+                        <p><strong>The Scrappy Trickster:</strong> Quick and charming but impulsive. Natural darkvision and a knack for scrappy ingenuity.</p>
                         <p><strong>Cultural Flavor:</strong> Impulsive, innovative, surprisingly social</p>
                     </div>
                 </div>
@@ -181,14 +160,14 @@
 
             <div class="ancestry-features">
                 <h3>Understanding Ancestry Features</h3>
-                <p>Every ancestry comes with a package of traits that define their capabilities:</p>
+                <p>Player Core also includes gnomes, leshies and orcs, plus versatile heritages such as aiuvarin (formerly half-elf), dromaar (formerly half-orc) and nephilim (formerly aasimar and tiefling). Every ancestry comes with a package of traits that define their capabilities:</p>
                 
                 <div class="feature-breakdown">
                     <h4>Hit Points (HP)</h4>
                     <p>Think of this as your character's baseline toughness. A dwarf (10 HP) can take more punishment than an elf (6 HP) before falling unconscious.</p>
 
-                    <h4>Ability Score Boosts and Flaws</h4>
-                    <p>These represent genetic tendencies. Elves are naturally quick (Dex boost) and smart (Int boost), but their lithe frames make them less hardy (Con flaw).</p>
+                    <h4>Attribute Boosts and Flaws</h4>
+                    <p>These represent genetic tendencies. Elves are naturally quick (Dex boost) and smart (Int boost), but their lithe frames make them less hardy (Con flaw). The chart below compares three sample 1st-level builds using Remaster attribute modifiers (the Remaster's replacement for the old 8–18 ability scores).</p>
 
                     <div class="ability-score-visual">
                         <canvas id="abilityScoreChart" width="600" height="300"></canvas>
@@ -214,14 +193,14 @@
                 <div class="category-grid">
                     <div class="category-box">
                         <h4>📚 Academic</h4>
-                        <p><strong>Examples:</strong> Scholar, Student, Librarian</p>
-                        <p><strong>Skills:</strong> Knowledge-based (Arcana, History, Nature)</p>
+                        <p><strong>Examples:</strong> Scholar, Acolyte</p>
+                        <p><strong>Skills:</strong> Knowledge-based (Arcana, Society, a Lore)</p>
                         <p><strong>Perfect for:</strong> Wizards, Investigators, support characters</p>
                     </div>
 
                     <div class="category-box">
                         <h4>🗡️ Martial</h4>
-                        <p><strong>Examples:</strong> Guard, Soldier, Gladiator</p>
+                        <p><strong>Examples:</strong> Guard, Warrior, Gladiator</p>
                         <p><strong>Skills:</strong> Combat-focused (Athletics, Intimidation)</p>
                         <p><strong>Perfect for:</strong> Fighters, Rangers, front-line characters</p>
                     </div>
@@ -242,14 +221,14 @@
 
                     <div class="category-box">
                         <h4>🔧 Technical</h4>
-                        <p><strong>Examples:</strong> Artisan, Engineer, Alchemist</p>
+                        <p><strong>Examples:</strong> Artisan, Tinker, Field Medic</p>
                         <p><strong>Skills:</strong> Craft-focused (Crafting, Medicine)</p>
-                        <p><strong>Perfect for:</strong> Artificers, support characters</p>
+                        <p><strong>Perfect for:</strong> Alchemists, Inventors, support characters</p>
                     </div>
 
                     <div class="category-box">
                         <h4>🌙 Underworld</h4>
-                        <p><strong>Examples:</strong> Criminal, Spy, Street Urchin</p>
+                        <p><strong>Examples:</strong> Criminal, Charlatan, Street Urchin</p>
                         <p><strong>Skills:</strong> Stealth-based (Stealth, Thievery)</p>
                         <p><strong>Perfect for:</strong> Rogues, sneaky characters</p>
                     </div>
@@ -262,9 +241,9 @@
                 <div class="background-example">
                     <h4>🎓 Scholar Background</h4>
                     <div class="background-stats">
-                        <p><strong>Ability Boosts:</strong> Intelligence, plus one other of your choice</p>
-                        <p><strong>Skill Training:</strong> Trained in Arcana and Academia Lore</p>
-                        <p><strong>Feat:</strong> Assurance (Arcana) - You can always get a result of 10 + proficiency on Arcana checks</p>
+                        <p><strong>Attribute Boosts:</strong> Intelligence or Wisdom, plus one free boost</p>
+                        <p><strong>Skill Training:</strong> Trained in Arcana (or Nature, Occultism or Religion) and Academia Lore</p>
+                        <p><strong>Feat:</strong> Assurance (in that skill) - You can take a result of 10 + your proficiency bonus instead of rolling</p>
                     </div>
                     <p><strong>Story Hook:</strong> "Years of study have given you deep knowledge of magical theory, ancient history, and scholarly methods. You might be a university graduate, a self-taught researcher, or a former apprentice to a master wizard."</p>
                     <p><strong>Roleplay Potential:</strong> Know-it-all tendencies, book smart but maybe not street smart, connections to academic institutions</p>
@@ -273,9 +252,9 @@
                 <div class="background-example">
                     <h4>🗡️ Guard Background</h4>
                     <div class="background-stats">
-                        <p><strong>Ability Boosts:</strong> Strength, plus one other of your choice</p>
+                        <p><strong>Attribute Boosts:</strong> Strength or Charisma, plus one free boost</p>
                         <p><strong>Skill Training:</strong> Trained in Intimidation and Legal Lore</p>
-                        <p><strong>Feat:</strong> Quick Coercion - You can intimidate someone in just one round instead of one minute</p>
+                        <p><strong>Feat:</strong> Quick Coercion - You can Coerce someone in just one round instead of one minute</p>
                     </div>
                     <p><strong>Story Hook:</strong> "You served as a guard for a town, caravan, or important person. Your experience taught you to watch for trouble and handle threats quickly and decisively."</p>
                     <p><strong>Roleplay Potential:</strong> Protective instincts, respect for law and order, knowledge of criminal behavior</p>
@@ -284,9 +263,9 @@
                 <div class="background-example">
                     <h4>🎭 Entertainer Background</h4>
                     <div class="background-stats">
-                        <p><strong>Ability Boosts:</strong> Charisma, plus one other of your choice</p>
+                        <p><strong>Attribute Boosts:</strong> Dexterity or Charisma, plus one free boost</p>
                         <p><strong>Skill Training:</strong> Trained in Performance and Theater Lore</p>
-                        <p><strong>Feat:</strong> Fascinating Performance - Your performances can captivate audiences and provide tactical advantages</p>
+                        <p><strong>Feat:</strong> Fascinating Performance - Your performance can leave an observer fascinated</p>
                     </div>
                     <p><strong>Story Hook:</strong> "Whether as a traveling minstrel, street performer, or court bard, you've learned to read crowds and command attention through artistry."</p>
                     <p><strong>Roleplay Potential:</strong> Natural showmanship, understanding of different cultures, network of artistic contacts</p>
@@ -329,12 +308,12 @@
                 <div class="class-card">
                     <h4>⚔️ Fighter - The Master of Arms</h4>
                     <div class="class-stats">
-                        <p><strong>Key Ability:</strong> Strength or Dexterity</p>
+                        <p><strong>Key Attribute:</strong> Strength or Dexterity</p>
                         <p><strong>HP per Level:</strong> 10 (very tough)</p>
                         <p><strong>Primary Role:</strong> Defender/Striker</p>
                     </div>
                     <p><strong>The Concept:</strong> Like a professional athlete who's dedicated their life to physical combat. Whether with sword and shield, bow and arrow, or even bare hands, fighters are the masters of warfare.</p>
-                    <p><strong>Signature Feature:</strong> Attack of Opportunity - punish enemies who move carelessly around you</p>
+                    <p><strong>Signature Feature:</strong> Reactive Strike (formerly Attack of Opportunity) - punish enemies who move carelessly around you</p>
                     <p><strong>Perfect for:</strong> Players who want to be the reliable, straightforward hero who protects others and hits hard</p>
                     <div class="real-world-analogy">
                         <p><em>Real-world analogy:</em> Like a professional soldier or martial artist - disciplined, skilled, and focused on physical excellence</p>
@@ -344,7 +323,7 @@
                 <div class="class-card">
                     <h4>🧙 Wizard - The Scholar of Magic</h4>
                     <div class="class-stats">
-                        <p><strong>Key Ability:</strong> Intelligence</p>
+                        <p><strong>Key Attribute:</strong> Intelligence</p>
                         <p><strong>HP per Level:</strong> 6 (fragile)</p>
                         <p><strong>Primary Role:</strong> Striker/Support</p>
                     </div>
@@ -359,12 +338,12 @@
                 <div class="class-card">
                     <h4>🗡️ Rogue - The Skilled Specialist</h4>
                     <div class="class-stats">
-                        <p><strong>Key Ability:</strong> Dexterity</p>
+                        <p><strong>Key Attribute:</strong> Dexterity (or another attribute, depending on your racket)</p>
                         <p><strong>HP per Level:</strong> 8 (moderate)</p>
                         <p><strong>Primary Role:</strong> Striker/Skill Monkey</p>
                     </div>
                     <p><strong>The Concept:</strong> Like a special operations expert who accomplishes through finesse what others attempt through brute force. Masters of precision, stealth, and finding weaknesses.</p>
-                    <p><strong>Signature Feature:</strong> Sneak Attack - deal devastating damage when catching enemies off-guard</p>
+                    <p><strong>Signature Feature:</strong> Sneak Attack - deal devastating extra damage to enemies who are off-guard (formerly flat-footed)</p>
                     <p><strong>Perfect for:</strong> Players who want to be clever, versatile, and excel at non-combat challenges</p>
                     <div class="real-world-analogy">
                         <p><em>Real-world analogy:</em> Like a combination of detective, engineer, and gymnast - solving problems through skill and cleverness</p>
@@ -374,7 +353,7 @@
                 <div class="class-card">
                     <h4>⛪ Cleric - The Divine Champion</h4>
                     <div class="class-stats">
-                        <p><strong>Key Ability:</strong> Wisdom</p>
+                        <p><strong>Key Attribute:</strong> Wisdom</p>
                         <p><strong>HP per Level:</strong> 8 (moderate)</p>
                         <p><strong>Primary Role:</strong> Support/Defender</p>
                     </div>
@@ -399,7 +378,7 @@
                         <ul>
                             <li><strong>Fighter:</strong> Focus on combat mastery and tactical leadership</li>
                             <li><strong>Champion:</strong> Emphasize divine calling and moral code</li>
-                            <li><strong>Paladin (Champion subclass):</strong> Combine divine power with martial prowess</li>
+                            <li><strong>Champion with a holy cause (the classic paladin):</strong> Combine divine power with martial prowess</li>
                         </ul>
                     </div>
 
@@ -409,8 +388,8 @@
                         <p><strong>Class Options:</strong></p>
                         <ul>
                             <li><strong>Wizard:</strong> Academic approach to magic, extensive spellbook</li>
-                            <li><strong>Alchemist:</strong> Create magical items and mutagens</li>
-                            <li><strong>Artificer:</strong> Blend magic with technology and crafting</li>
+                            <li><strong>Alchemist:</strong> Create alchemical bombs, elixirs and mutagens</li>
+                            <li><strong>Inventor (Guns &amp; Gears):</strong> Blend ingenuity with technology and crafting</li>
                         </ul>
                     </div>
                 </div>
@@ -418,11 +397,11 @@
         </section>
 
         <section class="ability-scores">
-            <h2>Step Five: Ability Scores - Your Character's Foundation</h2>
-            <p>Ability scores are like your character's physical and mental attributes - their raw potential in six key areas. Think of them as the fundamental stats that determine what your character is naturally good at, like the base stats in a video game character.</p>
+            <h2>Step Five: Attributes - Your Character's Foundation</h2>
+            <p>Attributes (called ability scores before the Remaster) are your character's physical and mental raw potential in six key areas. In the Remaster you track only the attribute <em>modifier</em> (such as +3), not a score. Think of them as the fundamental stats that determine what your character is naturally good at, like the base stats in a video game character.</p>
 
             <div class="ability-overview">
-                <h3>The Six Abilities Explained</h3>
+                <h3>The Six Attributes Explained</h3>
                 <div class="ability-grid">
                     <div class="ability-card">
                         <h4>💪 Strength (STR)</h4>
@@ -475,18 +454,18 @@
             </div>
 
             <div class="ability-score-generation">
-                <h3>Building Your Ability Scores</h3>
-                <p>In Pathfinder 2.0, you build ability scores through a series of "boosts" from different sources. Think of it like accumulating points from various life experiences:</p>
+                <h3>Building Your Attributes</h3>
+                <p>In Pathfinder 2e, every attribute modifier starts at +0 and you raise it through a series of "boosts" from different sources. Each boost adds +1, a flaw subtracts 1, and boosts from the same step must go to different attributes. Think of it like accumulating points from various life experiences:</p>
 
                 <div class="score-building-process">
-                    <h4>The Ability Score Building Process</h4>
+                    <h4>The Attribute Building Process</h4>
                     <div class="mermaid">
                         graph LR
-                            A[Start: All 10s] --> B[Ancestry Boosts<br/>+2 to specific abilities]
-                            B --> C[Background Boost<br/>+2 to one ability]
-                            C --> D[Class Boost<br/>+2 to key ability]
-                            D --> E[Free Boosts<br/>4 × +2 to any]
-                            E --> F[Final Scores<br/>8-18 range]
+                            A[Start: all +0] --> B[Ancestry Boosts<br/>+1 each, usually two<br/>one may be free]
+                            B --> C[Background Boosts<br/>two boosts, +1 each]
+                            C --> D[Class Boost<br/>+1 to key attribute]
+                            D --> E[Free Boosts<br/>4 × +1, all different]
+                            E --> F[Final Modifiers<br/>max +4 at 1st level]
                             
                             style A fill:#ffeb3b,color:#000
                             style F fill:#4caf50,color:#fff
@@ -495,29 +474,29 @@
 
                 <div class="score-example">
                     <h4>Example: Building a Human Fighter</h4>
-                    <pre><code>Starting Array:    STR 10, DEX 10, CON 10, INT 10, WIS 10, CHA 10
+                    <pre><code>Starting:           STR +0, DEX +0, CON +0, INT +0, WIS +0, CHA +0
 
-Ancestry (Human):  +2 STR, +2 CON (player choice)
-Result:            STR 12, DEX 10, CON 12, INT 10, WIS 10, CHA 10
+Ancestry (Human):   +1 STR, +1 CON (two free boosts)
+Result:             STR +1, DEX +0, CON +1, INT +0, WIS +0, CHA +0
 
-Background (Guard): +2 STR (player choice from STR or other)
-Result:            STR 14, DEX 10, CON 12, INT 10, WIS 10, CHA 10
+Background (Guard): +1 STR (Strength or Charisma), +1 WIS (free)
+Result:             STR +2, DEX +0, CON +1, INT +0, WIS +1, CHA +0
 
-Class (Fighter):   +2 STR (class key ability)
-Result:            STR 16, DEX 10, CON 12, INT 10, WIS 10, CHA 10
+Class (Fighter):    +1 STR (key attribute)
+Result:             STR +3, DEX +0, CON +1, INT +0, WIS +1, CHA +0
 
-Free Boosts (4):   +2 DEX, +2 CON, +2 WIS, +2 INT
-Final Result:      STR 16, DEX 12, CON 14, INT 12, WIS 12, CHA 10</code></pre>
+Free Boosts (4):    +1 STR, +1 DEX, +1 CON, +1 INT
+Final Result:       STR +4, DEX +1, CON +2, INT +1, WIS +1, CHA +0</code></pre>
                 </div>
 
                 <div class="ability-score-tips">
-                    <h4>Ability Score Strategy Tips</h4>
+                    <h4>Attribute Strategy Tips</h4>
                     <ul>
-                        <li><strong>Prioritize your class's key ability:</strong> This affects your most important features</li>
+                        <li><strong>Prioritize your class's key attribute:</strong> This affects your most important features</li>
                         <li><strong>Don't neglect Constitution:</strong> More hit points keep you alive</li>
                         <li><strong>Consider your role:</strong> Defenders need CON, strikers need their attack stat</li>
-                        <li><strong>Plan for advancement:</strong> You get ability boosts every 5 levels</li>
-                        <li><strong>18 is the starting maximum:</strong> Don't waste boosts on abilities already at 18</li>
+                        <li><strong>Plan for advancement:</strong> You get four more boosts at 5th, 10th, 15th and 20th level</li>
+                        <li><strong>+4 is the 1st-level maximum:</strong> Later, a boost to an attribute already at +4 or higher is only a partial boost (two partial boosts = +1)</li>
                     </ul>
                 </div>
             </div>
@@ -525,11 +504,11 @@ Final Result:      STR 16, DEX 12, CON 14, INT 12, WIS 12, CHA 10</code></pre>
 
         <section class="skills-and-feats">
             <h2>Step Six: Skills and Feats - Customizing Your Hero</h2>
-            <p>Skills and feats are like the specialized training and talents that make your character unique. While ability scores provide raw potential, skills show what you've practiced, and feats represent special techniques or natural talents you've developed.</p>
+            <p>Skills and feats are like the specialized training and talents that make your character unique. While attributes provide raw potential, skills show what you've practiced, and feats represent special techniques or natural talents you've developed.</p>
 
             <div class="skills-overview">
                 <h3>Understanding Skills</h3>
-                <p>Think of skills like college courses - you can be untrained (never studied), trained (basic competency), expert (professional level), master (highly specialized), or legendary (world-class). Your proficiency grows over time as you gain experience.</p>
+                <p>Think of skills like schooling - you can be untrained (never studied), trained (basic competency), expert (professional level), master (highly specialized), or legendary (world-class). Your proficiency grows over time as you gain experience.</p>
 
                 <div class="skill-categories">
                     <h4>Skill Categories</h4>
@@ -547,8 +526,9 @@ Final Result:      STR 16, DEX 12, CON 14, INT 12, WIS 12, CHA 10</code></pre>
                             <h5>🧠 Mental Skills</h5>
                             <ul>
                                 <li><strong>Arcana (INT):</strong> Magic theory, spell identification</li>
-                                <li><strong>History (INT):</strong> Past events, ancient knowledge</li>
-                                <li><strong>Investigation (INT):</strong> Finding clues, logical deduction</li>
+                                <li><strong>Lore (INT):</strong> One narrow subject, such as Academia Lore or Legal Lore</li>
+                                <li><strong>Occultism (INT):</strong> Strange lore, the occult, psychic magic</li>
+                                <li><strong>Society (INT):</strong> History, cultures, languages, forged documents</li>
                                 <li><strong>Nature (WIS):</strong> Animals, plants, natural phenomena</li>
                                 <li><strong>Religion (WIS):</strong> Gods, undead, divine magic</li>
                             </ul>
@@ -589,7 +569,7 @@ Final Result:      STR 16, DEX 12, CON 14, INT 12, WIS 12, CHA 10</code></pre>
 
                         <div class="strategy-card">
                             <h5>🎯 Scout/Explorer Strategy</h5>
-                            <p><strong>Focus:</strong> Stealth (for reconnaissance), Survival (for tracking), Perception (for spotting danger)</p>
+                            <p><strong>Focus:</strong> Stealth (for reconnaissance), Survival (for tracking), Perception (for spotting danger; not a skill, but every character has it)</p>
                             <p><strong>Reasoning:</strong> You're the party's eyes and ears, finding paths and avoiding trouble</p>
                         </div>
 
@@ -618,7 +598,7 @@ Final Result:      STR 16, DEX 12, CON 14, INT 12, WIS 12, CHA 10</code></pre>
                         <div class="feat-category">
                             <h5>⚔️ Class Feats</h5>
                             <p>Professional techniques and specializations</p>
-                            <p><strong>Example:</strong> Power Attack (sacrifice accuracy for devastating damage)</p>
+                            <p><strong>Example:</strong> Power Attack (spend two actions on one Strike for an extra weapon damage die)</p>
                         </div>
 
                         <div class="feat-category">
@@ -644,16 +624,16 @@ Final Result:      STR 16, DEX 12, CON 14, INT 12, WIS 12, CHA 10</code></pre>
                             <ul>
                                 <li><strong>Shield Block:</strong> Use your shield to reduce incoming damage</li>
                                 <li><strong>Reactive Shield:</strong> Raise your shield as a reaction to attacks</li>
-                                <li><strong>Attack of Opportunity:</strong> Strike enemies who move carelessly near you</li>
+                                <li><strong>Reactive Strike:</strong> A fighter's 1st-level class feature (not a pick) - strike enemies who move carelessly near you</li>
                             </ul>
                         </div>
 
                         <div class="role-feats">
                             <h5>⚔️ Striker Feats</h5>
                             <ul>
-                                <li><strong>Power Attack:</strong> Trade accuracy for massive damage</li>
-                                <li><strong>Point-Blank Shot:</strong> Improved accuracy with ranged weapons at close range</li>
-                                <li><strong>Twin Takedown:</strong> Attack two enemies simultaneously</li>
+                                <li><strong>Power Attack:</strong> Trade an extra action for an extra weapon damage die</li>
+                                <li><strong>Point-Blank Stance (formerly Point-Blank Shot):</strong> Ignore volley's penalty, or deal extra damage at close range</li>
+                                <li><strong>Twin Takedown:</strong> Strike your hunted prey with both weapons in one action</li>
                             </ul>
                         </div>
 
@@ -662,7 +642,7 @@ Final Result:      STR 16, DEX 12, CON 14, INT 12, WIS 12, CHA 10</code></pre>
                             <ul>
                                 <li><strong>Reach Spell:</strong> Cast spells at greater distances</li>
                                 <li><strong>Battle Medicine:</strong> Heal allies quickly in combat</li>
-                                <li><strong>Inspiring Presence:</strong> Boost allies' morale and performance</li>
+                                <li><strong>Courageous Anthem (bard composition, formerly Inspire Courage):</strong> Boost allies' attacks and damage</li>
                             </ul>
                         </div>
                     </div>
@@ -679,7 +659,7 @@ Final Result:      STR 16, DEX 12, CON 14, INT 12, WIS 12, CHA 10</code></pre>
                 
                 <div class="character-concept">
                     <h4>Step 1: The Concept</h4>
-                    <p><strong>Who:</strong> A former university student who learned to fight to protect ancient knowledge</p>
+                    <p><strong>Who:</strong> A former university scholar who learned to fight to protect ancient knowledge</p>
                     <p><strong>What they want:</strong> To recover lost magical texts and make them available to scholars</p>
                     <p><strong>What haunts them:</strong> Their mentor was murdered by those who wanted to suppress dangerous knowledge</p>
                 </div>
@@ -690,38 +670,38 @@ Final Result:      STR 16, DEX 12, CON 14, INT 12, WIS 12, CHA 10</code></pre>
                         <div class="build-section">
                             <h5>🧬 Ancestry: Human</h5>
                             <p><strong>Reasoning:</strong> Versatility matches the concept of someone who bridged academic and martial worlds</p>
-                            <p><strong>Mechanical benefit:</strong> Extra general feat for versatility, ability boosts in STR and INT</p>
+                            <p><strong>Mechanical benefit:</strong> Two free attribute boosts (STR and INT) and flexible ancestry feats</p>
                         </div>
 
                         <div class="build-section">
                             <h5>📚 Background: Scholar</h5>
                             <p><strong>Reasoning:</strong> University education provides the academic foundation</p>
-                            <p><strong>Mechanical benefit:</strong> Arcana skill, Academia Lore, Assurance feat</p>
+                            <p><strong>Mechanical benefit:</strong> Arcana, Academia Lore, Assurance (Arcana), INT and CON boosts</p>
                         </div>
 
                         <div class="build-section">
                             <h5>⚔️ Class: Fighter</h5>
                             <p><strong>Reasoning:</strong> Learned combat to be effective in dangerous situations</p>
-                            <p><strong>Mechanical benefit:</strong> High combat proficiency, Attack of Opportunity, weapon mastery</p>
+                            <p><strong>Mechanical benefit:</strong> Expert weapon proficiency from 1st level, Reactive Strike, Shield Block</p>
                         </div>
 
                         <div class="build-section">
-                            <h5>📊 Final Ability Scores</h5>
-                            <pre><code>STR 16 (Primary combat stat)
-DEX 12 (Some agility for survival)
-CON 14 (Staying power for adventures)
-INT 14 (Academic background)
-WIS 12 (Practical awareness)
-CHA 10 (Not a natural people person)</code></pre>
+                            <h5>📊 Final Attribute Modifiers</h5>
+                            <pre><code>STR +3 (Primary combat stat)
+DEX +1 (Some agility for survival)
+CON +2 (Staying power for adventures)
+INT +2 (Academic background)
+WIS +1 (Practical awareness)
+CHA +0 (Not a natural people person)</code></pre>
                         </div>
 
                         <div class="build-section">
                             <h5>🎯 Key Skills</h5>
                             <ul>
-                                <li><strong>Arcana (Expert):</strong> Core to the concept</li>
+                                <li><strong>Arcana (trained):</strong> Core to the concept, from the Scholar background</li>
                                 <li><strong>Athletics:</strong> Physical conditioning from training</li>
                                 <li><strong>Intimidation:</strong> Learned to project strength</li>
-                                <li><strong>Research Lore:</strong> From scholar background</li>
+                                <li><strong>Academia Lore:</strong> From the Scholar background</li>
                             </ul>
                         </div>
 
@@ -729,9 +709,9 @@ CHA 10 (Not a natural people person)</code></pre>
                             <h5>🌟 Starting Feats</h5>
                             <ul>
                                 <li><strong>Power Attack (Class):</strong> Decisive strikes when needed</li>
-                                <li><strong>Natural Ambition (Ancestry):</strong> Extra class feat for versatility</li>
+                                <li><strong>Natural Ambition (Ancestry):</strong> An extra 1st-level class feat, such as Sudden Charge</li>
                                 <li><strong>Assurance (Background):</strong> Reliable Arcana checks</li>
-                                <li><strong>Toughness (General):</strong> Extra survivability</li>
+                                <li><strong>Toughness (General, at 3rd level):</strong> Extra survivability once the first general feat arrives</li>
                             </ul>
                         </div>
                     </div>
@@ -780,12 +760,12 @@ CHA 10 (Not a natural people person)</code></pre>
             </div>
 
             <div class="activity-two">
-                <h3>Activity Two: Ability Score Optimization</h3>
-                <p>Practice building ability scores for different character concepts:</p>
+                <h3>Activity Two: Attribute Optimization</h3>
+                <p>Practice building attributes for different character concepts:</p>
                 
                 <div class="score-exercise">
                     <h4>Challenge: The Diplomatic Warrior</h4>
-                    <p><strong>Concept:</strong> Human Champion (Paladin) with Noble background - someone who fights for justice but also leads through inspiration</p>
+                    <p><strong>Concept:</strong> Human Champion (holy cause, the classic paladin) with Noble background - someone who fights for justice but also leads through inspiration</p>
                     
                     <div class="score-challenge">
                         <p><strong>Requirements:</strong></p>
@@ -793,21 +773,21 @@ CHA 10 (Not a natural people person)</code></pre>
                             <li>Needs STR for combat effectiveness</li>
                             <li>Needs CHA for divine spells and social skills</li>
                             <li>Needs CON to survive on the front lines</li>
-                            <li>Has ability boosts: Human (+2 STR, +2 CHA), Noble (+2 CHA), Champion (+2 STR), plus 4 free</li>
+                            <li>Has attribute boosts: Human (two free: STR, CHA), Noble (Intelligence or Charisma, plus one free), Champion (STR, key attribute), plus 4 free</li>
                         </ul>
                         
-                        <p><strong>Your task:</strong> Distribute the ability boosts to create an effective character</p>
+                        <p><strong>Your task:</strong> Distribute the attribute boosts to create an effective character</p>
                         
                         <details>
                             <summary>Click for Sample Solution</summary>
                             <div class="solution">
-                                <pre><code>Starting:     STR 10, DEX 10, CON 10, INT 10, WIS 10, CHA 10
-Human:        STR 12, DEX 10, CON 10, INT 10, WIS 10, CHA 12
-Noble:        STR 12, DEX 10, CON 10, INT 10, WIS 10, CHA 14
-Champion:     STR 14, DEX 10, CON 10, INT 10, WIS 10, CHA 14
-Free Boosts:  STR 16, DEX 10, CON 14, INT 10, WIS 12, CHA 16
+                                <pre><code>Starting:     STR +0, DEX +0, CON +0, INT +0, WIS +0, CHA +0
+Human:        STR +1, DEX +0, CON +0, INT +0, WIS +0, CHA +1
+Noble:        STR +1, DEX +0, CON +1, INT +0, WIS +0, CHA +2  (CHA + free CON)
+Champion:     STR +2, DEX +0, CON +1, INT +0, WIS +0, CHA +2
+Free Boosts:  STR +3, DEX +0, CON +2, INT +0, WIS +1, CHA +3  (STR, CON, WIS, CHA)
 
-Result: Excellent combat (STR 16) and social/divine casting (CHA 16), good survivability (CON 14)</code></pre>
+Result: Excellent combat (STR +3) and social/divine casting (CHA +3), good survivability (CON +2)</code></pre>
                             </div>
                         </details>
                     </div>
@@ -860,10 +840,10 @@ Result: Excellent combat (STR 16) and social/divine casting (CHA 16), good survi
 
         <section class="next-steps">
             <h2>What's Next?</h2>
-            <p>Congratulations! You now understand how to create compelling, mechanically sound Pathfinder 2.0 characters. Character creation is where your adventure begins, but it's just the foundation. In our next lecture, we'll dive into the heart of the game - the<a href="/pf2_actions.html">three-action economy and tactical combat</a>!</p>
+            <p>Congratulations! You now understand how to create compelling, mechanically sound Pathfinder 2e characters. Character creation is where your adventure begins, but it's just the foundation. Coming up in this guide, we'll dive into the heart of the game - the <a href="/pf2_actions.html">three-action economy and tactical combat</a>!</p>
             
             <div class="upcoming-topics">
-                <h3>Upcoming Lectures</h3>
+                <h3>Coming Up in This Guide</h3>
                 <ul>
                     <li><strong>The Action Economy Mastery:</strong> Combat tactics, positioning, and strategic thinking</li>
                     <li><strong>Skills and Exploration:</strong> Beyond combat - investigation, social encounters, and wilderness survival</li>
@@ -877,7 +857,7 @@ Result: Excellent combat (STR 16) and social/divine casting (CHA 16), good survi
                 <h3>Recommended Character Creation Tools</h3>
                 <ul>
                     <li><strong>Pathbuilder 2e:</strong> Mobile app for easy character building and management</li>
-                    <li><strong>Wanderer's Guide:</strong> Web-based character builder with extensive options</li>
+                    <li><strong>Foundry VTT (Pathfinder 2e system):</strong> Digital character sheets that automate the math</li>
                     <li><strong>Archives of Nethys:</strong> Complete rules reference for all options</li>
                     <li><strong>Character Sheet PDFs:</strong> Official Paizo character sheets for print use</li>
                 </ul>
@@ -886,100 +866,100 @@ Result: Excellent combat (STR 16) and social/divine casting (CHA 16), good survi
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_intro.html">Welcome to Pathfinder 2e</a>
+    <a class="next" href="/pf2_adv_char_creation.html">Advanced Character Creation</a>
+</div>
         <p>Your character awaits - ready to step into legend!</p>
    
     </footer>
 
     <script>
-        // Canvas visualization for ability score distribution
-        const canvas = document.getElementById('abilityScoreChart');
-        const ctx = canvas.getContext('2d');
-        
-        // Sample ability score comparison
-        const abilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
-        const humanFighter = [16, 12, 14, 12, 12, 10];
-        const elfWizard = [10, 14, 12, 16, 13, 12];
-        const dwarfCleric = [12, 10, 16, 10, 16, 12];
-        
-        const barWidth = 60;
-        const barSpacing = 90;
-        const maxHeight = 200;
-        const startX = 50;
-        const startY = 250;
-        
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Draw ability labels and bars
-        abilities.forEach((ability, index) => {
-            const x = startX + (index * barSpacing);
-            
-            // Draw ability label
-            ctx.fillStyle = '#333';
-            ctx.font = '12px Arial';
+        // Canvas visualization: 1st-level attribute modifiers (Remaster) for three sample builds
+        (function () {
+            const canvas = document.getElementById('abilityScoreChart');
+            if (!canvas || !canvas.getContext) return;
+            const ctx = canvas.getContext('2d');
+
+            const attributes = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+            // Each build = 10 boosts (ancestry 3, background 2, class 1, free 4), minus any flaw
+            const builds = [
+                { name: 'Human Fighter', color: '#1f6fb2', mods: [4, 1, 2, 1, 1, 0] },
+                { name: 'Elf Wizard',    color: '#2e7d32', mods: [0, 2, 1, 4, 2, 0] },
+                { name: 'Dwarf Cleric',  color: '#c25e00', mods: [2, 0, 3, 0, 4, 0] }
+            ];
+
+            const left = 60, right = 580, baseY = 255, topY = 85; // +4 sits at topY
+            const unit = (baseY - topY) / 4;
+            const groupW = (right - left) / attributes.length;
+            const barW = 20, gap = 4;
+            const text = '#1c1417', grid = '#d6d0cc';
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Title
+            ctx.fillStyle = text;
+            ctx.font = 'bold 15px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText(ability, x + barWidth/2, startY + 20);
-            
-            // Draw bars for each character type
-            const humanHeight = (humanFighter[index] / 18) * maxHeight;
-            const elfHeight = (elfWizard[index] / 18) * maxHeight;
-            const dwarfHeight = (dwarfCleric[index] / 18) * maxHeight;
-            
-            // Human Fighter (blue)
-            ctx.fillStyle = '#2196f3';
-            ctx.fillRect(x, startY - humanHeight, 18, humanHeight);
-            
-            // Elf Wizard (green)
-            ctx.fillStyle = '#4caf50';
-            ctx.fillRect(x + 20, startY - elfHeight, 18, elfHeight);
-            
-            // Dwarf Cleric (orange)
-            ctx.fillStyle = '#ff9800';
-            ctx.fillRect(x + 40, startY - dwarfHeight, 18, dwarfHeight);
-        });
-        
-        // Draw legend
-        ctx.fillStyle = '#2196f3';
-        ctx.fillRect(450, 50, 15, 15);
-        ctx.fillStyle = '#333';
-        ctx.font = '12px Arial';
-        ctx.textAlign = 'left';
-        ctx.fillText('Human Fighter', 470, 62);
-        
-        ctx.fillStyle = '#4caf50';
-        ctx.fillRect(450, 70, 15, 15);
-        ctx.fillStyle = '#333';
-        ctx.fillText('Elf Wizard', 470, 82);
-        
-        ctx.fillStyle = '#ff9800';
-        ctx.fillRect(450, 90, 15, 15);
-        ctx.fillStyle = '#333';
-        ctx.fillText('Dwarf Cleric', 470, 102);
-        
-        // Draw title
-        ctx.fillStyle = '#333';
-        ctx.font = 'bold 14px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Ability Score Comparison by Character Type', canvas.width/2, 30);
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillText('1st-Level Attribute Modifiers by Build', canvas.width / 2, 24);
+
+            // Legend (one row under the title)
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'left';
+            let lx = 140;
+            builds.forEach(b => {
+                ctx.fillStyle = b.color;
+                ctx.fillRect(lx, 39, 14, 14);
+                ctx.fillStyle = text;
+                ctx.fillText(b.name, lx + 20, 51);
+                lx += 20 + ctx.measureText(b.name).width + 30;
+            });
+
+            // Grid lines and y-axis labels (+0 to +4)
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'right';
+            for (let v = 0; v <= 4; v++) {
+                const y = baseY - v * unit;
+                ctx.strokeStyle = v === 0 ? '#5a5054' : grid;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(left, y + 0.5);
+                ctx.lineTo(right, y + 0.5);
+                ctx.stroke();
+                ctx.fillStyle = text;
+                ctx.fillText('+' + v, left - 8, y + 4);
+            }
+
+            // Bars with value labels
+            attributes.forEach((attr, i) => {
+                const gx = left + i * groupW;
+                const clusterW = builds.length * barW + (builds.length - 1) * gap;
+                const x0 = gx + (groupW - clusterW) / 2;
+                builds.forEach((b, j) => {
+                    const v = b.mods[i];
+                    const h = Math.max(v * unit, 2);
+                    const x = x0 + j * (barW + gap);
+                    ctx.fillStyle = b.color;
+                    ctx.fillRect(x, baseY - h, barW, h);
+                    ctx.fillStyle = text;
+                    ctx.font = '11px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('+' + v, x + barW / 2, baseY - h - 4);
+                });
+                ctx.fillStyle = text;
+                ctx.font = 'bold 12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(attr, gx + groupW / 2, baseY + 20);
+            });
+
+            // Note
+            ctx.fillStyle = '#4a4246';
+            ctx.font = 'italic 11px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Remaster attribute modifiers; +4 is the 1st-level maximum.', canvas.width / 2, 293);
+        })();
     </script>
-    <nav class="prev-next-nav">
-        <a href="/pf2_intro.html" class="nav-prev">← Introduction</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_adv_char_creation.html" class="nav-next">Advanced Character Creation →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

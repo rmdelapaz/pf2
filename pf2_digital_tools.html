@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2e: Digital Tools and Technology Deep Dive</title>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="icon" href="/favicon.png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
+    <title>Digital Tools - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Tool</span>
         <h1>Pathfinder 2e: Digital Tools and Technology Deep Dive</h1>
         <p><em>Leveraging Technology to Enhance Your Gaming Experience</em></p>
     </header>
@@ -84,15 +63,15 @@
             <p>Managing character sheets digitally is like upgrading from a paper notebook to a smart tablet - you gain automatic calculations, backup storage, and the ability to share and sync information seamlessly across devices and sessions.</p>
 
             <h3>Pathbuilder 2e: The Mobile Powerhouse</h3>
-            <p>Pathbuilder 2e is like having a personal character creation assistant that never makes math mistakes and always remembers every rule interaction.</p>
+            <p>Pathbuilder 2e is like having a personal character creation assistant that does the math for you and keeps track of most rule interactions.</p>
 
             <pre><code>Pathbuilder 2e Features and Benefits:
 
-📱 MOBILE-FIRST DESIGN
-□ Build and manage characters on phone or tablet
-□ Offline functionality for gaming without internet
-□ Cloud sync across multiple devices
-□ Export to multiple formats (PDF, JSON, etc.)
+📱 PHONE, TABLET OR BROWSER
+□ Build and manage characters on phone, tablet or computer
+□ Step-by-step choices for ancestry, background, class and feats
+□ Options you don't qualify for are flagged or filtered out
+□ Save, back up and export characters (check the app for current options)
 
 Benefits:
 - Character sheet always in your pocket
@@ -101,33 +80,32 @@ Benefits:
 - Easy sharing with GM and other players
 
 ⚡ AUTOMATED CALCULATIONS
-□ Automatic ability score tracking with boosts
-□ Real-time AC, saves, and skill calculation
-□ Hit point management with temporary adjustments
-□ Spell slot tracking and management
+□ Attribute modifiers (formerly ability scores) tracked as you apply boosts
+□ AC, saves, Perception and skills calculated for you
+□ Hit points calculated from ancestry, class and Constitution
+□ Spells and spell slots listed by rank
 
 Example Automation:
-Level 5 Fighter gains +4 Strength boost
-→ Pathbuilder automatically updates:
-  - Attack rolls (+2 increase)
-  - Damage rolls (+2 increase) 
-  - Athletics skill (+2 increase)
-  - Bulk capacity changes
-  - Any strength-based calculations
+A 5th-level fighter applies an attribute boost to Strength (+3 → +4)
+→ The builder automatically updates:
+  - Strength-based attack rolls (+1)
+  - Melee damage rolls (+1)
+  - Athletics (+1)
+  - Bulk limits (+1 to both encumbered and maximum)
+  - Any other Strength-based numbers
 
-🎯 ADVANCED FEATURES
-□ Encounter tracking with initiative and conditions
-□ Equipment management with automatic bulk calculation
-□ Spell preparation and usage tracking
-□ Notes and journal entries
-□ Party sharing and coordination
+🎯 OTHER USEFUL FEATURES
+□ Equipment lists with Bulk totals
+□ Spell lists for prepared and spontaneous casters
+□ Notes for backstory and session details
+□ Features change between versions - check the app itself
 
 Pro Tips for Pathbuilder:
-- Use the "What If" feature to test character builds
-- Set up custom equipment for homebrew items
-- Use party sync for coordinated character creation
-- Export backup files regularly
-- Utilize the built-in dice roller for quick rolls</code></pre>
+- Build a test version of a character before committing at the table
+- Check whether your group allows (and the app supports) homebrew options
+- Export or back up your characters regularly
+- Check whether your VTT can import your build
+- Still learn where your numbers come from, so you can spot mistakes</code></pre>
 
             <h3>Digital Character Sheet Alternatives</h3>
             <p>Different tools serve different needs, like having specialized tools for different cooking tasks - each has its strengths and ideal use cases.</p>
@@ -168,7 +146,7 @@ Strengths:
 
 Best For: Serious players wanting comprehensive features
 Learning Curve: Moderate to advanced
-Cost: Monthly subscription required
+Cost: Paid (check current pricing)
 
 🖨️ FILLABLE PDF SHEETS
 Strengths:
@@ -180,7 +158,7 @@ Strengths:
 
 Best For: Players who prefer traditional feel with digital convenience
 Learning Curve: Minimal
-Cost: Free (official Paizo PDFs available)</code></pre>
+Cost: Usually free</code></pre>
         </section>
 
         <section>
@@ -193,20 +171,20 @@ Cost: Free (official Paizo PDFs available)</code></pre>
             <pre><code>Foundry VTT: Comprehensive Analysis
 
 💰 COST STRUCTURE
-Initial Cost: $50 one-time license purchase
+Initial Cost: One-time license purchase (check the official site for the current price)
 Ongoing Costs: None required (hosting optional)
-Value Proposition: Professional-grade features for lifetime license
+Value Proposition: Professional-grade features without a subscription
 
-Cost Comparison:
-- One night at a restaurant = Foundry license for lifetime use
-- Monthly streaming service = 6 months of competitive VTT subscriptions
-- Board game purchase = Tool that enhances hundreds of gaming sessions
+Cost Perspective:
+- Paid once rather than every month
+- Only the GM who hosts needs a license; players join for free
+- One purchase that can serve hundreds of gaming sessions
 
 ⚙️ CORE FEATURES
 □ Advanced lighting and vision systems
 □ Dynamic audio and visual effects
 □ Comprehensive automation for PF2e rules
-□ Extensive module and customization ecosystem
+□ Extensive add-on and customization ecosystem
 □ High-quality map and token support
 
 Technical Capabilities:
@@ -220,22 +198,19 @@ AUTOMATION FEATURES:
 - Automatic damage application with resistances
 - Condition tracking with automatic modifier application
 - Spell template placement and effect calculation
-- Initiative management with integrated timers
-- Automatic action economy tracking
+- Initiative tracking in the combat tracker
 
 🔧 PF2E SYSTEM INTEGRATION
-□ Official Pathfinder 2e system with full rule support
+□ Free Pathfinder 2e game system with broad rules support
 □ Drag-and-drop spells, items, and abilities
 □ Automatic critical hit/failure calculation
-□ Three-action economy tracking
+□ Action costs shown on actions, spells and feats
 □ Condition automation (frightened, fatigued, etc.)
 
 Advanced PF2e Features:
 - Degrees of success calculation
 - Automatic MAP (Multiple Attack Penalty) application
-- Spell heightening with automatic scaling
-- Treasure generation with automatic distribution
-- Weather and environmental effect automation
+- Spell heightening with automatic scaling by spell rank (formerly spell level)
 
 🌍 HOSTING OPTIONS
 Self-Hosting (Free):
@@ -244,16 +219,16 @@ Self-Hosting (Free):
 □ Requires technical setup and port forwarding
 □ Host computer must be on during play
 
-Cloud Hosting ($3-10/month):
-□ Professional hosting services (Forge, Foundry Cloud)
+Cloud Hosting (paid subscription):
+□ Third-party Foundry hosting services
 □ Always accessible, no technical setup required
 □ Automatic backups and updates
 □ Better performance for larger groups
 
 Example Setup Process:
-1. Purchase Foundry license ($50)
+1. Purchase a Foundry license
 2. Download and install software
-3. Install PF2e system (free from Foundry)
+3. Install the PF2e system (free, from inside Foundry)
 4. Import or create world content
 5. Configure hosting (self or cloud)
 6. Invite players and begin gaming</code></pre>
@@ -265,42 +240,35 @@ Example Setup Process:
 
 💵 PRICING STRUCTURE
 Free Tier:
-□ Basic functionality for up to 5 players
-□ Limited storage space (100MB)
-□ Access to SRD content only
-□ Standard audio/video quality
+□ Core virtual tabletop features at no cost
+□ Limited storage space
+□ Official books and adventures bought separately
 
-Plus Subscription ($5/month):
-□ Increased storage (3GB)
-□ Dynamic lighting features
-□ API script access
-□ Advanced audio controls
-
-Pro Subscription ($10/month):
-□ Unlimited storage
+Paid Subscriptions (Plus and Pro):
+□ More storage
 □ Advanced features and tools
-□ Priority customer support
-□ Enhanced customization options
+□ Scripting at the top tier
+□ Check Roll20 for current tiers, features and prices
 
 🎯 CORE STRENGTHS
-□ Largest user base in VTT community
+□ One of the largest user bases among VTTs
 □ Extensive marketplace with official content
 □ Integrated video chat and voice communication
-□ Beginner-friendly interface and tutorials
-□ Strong mobile app support
+□ Beginner-friendly interface and help guides
+□ Runs in a web browser - nothing to install
 
 Beginner-Friendly Features:
 - Drag-and-drop character sheet creation
 - Automatic dice rolling with modifier calculation
 - Simple map uploading and token placement
-- Built-in tutorial campaigns and content
+- Starter content and help guides
 - Large community with helpful resources
 
 📚 CONTENT ECOSYSTEM
 Official Pathfinder Content:
-□ Core Rulebook integration
-□ Adventure Path modules
-□ Bestiary creatures with full stat blocks
+□ Official rulebooks sold in the marketplace (check which titles are available)
+□ Adventure Paths
+□ Creatures with full stat blocks
 □ Magic items and equipment databases
 □ Pre-made maps and handouts
 
@@ -309,7 +277,7 @@ Community Content:
 □ Custom macros and API scripts
 □ Community-made maps and tokens
 □ Shared campaign templates
-□ Tutorial videos and guides
+□ How-to videos and guides
 
 🔧 AUTOMATION CAPABILITIES
 Basic Automation (Free):
@@ -318,7 +286,7 @@ Basic Automation (Free):
 □ Basic token manipulation
 □ Turn order tracking
 
-Advanced Automation (Plus/Pro):
+Advanced Automation (paid tiers):
 □ Dynamic lighting and line of sight
 □ API scripts for complex rule automation
 □ Advanced macro programming
@@ -345,35 +313,35 @@ Considerations:
 
 Best For: Groups wanting maximum automation with official content
 
-🌟 ASTRAL TABLETOP
+🌟 OTHER BROWSER-BASED VTTs
 Target User: Groups wanting modern, streamlined experience  
 Strengths:
 □ Modern, intuitive interface design
-□ Built-in 3D dice rolling
-□ Excellent fog of war and lighting
-□ Strong mobile device support
+□ Built-in dice rolling
+□ Fog of war and lighting in many of them
+□ Usually work on tablets as well as computers
 
 Considerations:
 □ Smaller user base and content library
-□ Limited automation compared to Foundry/Fantasy Grounds
+□ Limited Pathfinder 2e automation compared to Foundry/Fantasy Grounds
 □ Fewer third-party integrations
-□ Still developing feature set
+□ Smaller services can change or close - keep your own backups
 
 Best For: Groups prioritizing ease of use and visual appeal
 
 🎲 OWLBEAR RODEO
 Target User: Minimalists wanting simple map sharing
 Strengths:
-□ Completely free to use
-□ No account creation required
+□ Free tier available
+□ Quick to set up
 □ Simple map and token sharing
 □ Excellent for quick one-shots
 
 Considerations:
-□ No character sheet integration
-□ Limited automation features
-□ Basic feature set
-□ No persistent campaign storage
+□ No built-in Pathfinder 2e character sheets
+□ Little rules automation
+□ Basic feature set by design
+□ Check current plans for storage limits
 
 Best For: Occasional online play or supplement to in-person gaming
 
@@ -457,22 +425,15 @@ Free Tier:
 □ Essential features for small campaigns
 □ Community access and sharing
 
-Guild Tier ($5/month):
-□ Unlimited articles and content
-□ Advanced map tools and layers
-□ Subscriber-only features and tools
-□ Priority customer support
-
-Master Tier ($13/month):
-□ Advanced customization and themes
-□ Powerful automation and integration tools
-□ Commercial use licensing
-□ Professional publishing features
+Paid Memberships (several tiers):
+□ More storage, privacy options and features
+□ Advanced map tools and customization
+□ Higher tiers add more features (check World Anvil for current tiers and prices)
 
 Value Assessment:
 - Free tier suitable for most hobby campaigns
-- Guild tier recommended for serious long-term campaigns
-- Master tier for professional or extensive world-building projects</code></pre>
+- A paid tier can be worth it for serious long-term campaigns
+- Higher tiers for professional or extensive world-building projects</code></pre>
 
             <h3>Notion: The Flexible Organizer</h3>
             <p>Notion is like having digital LEGO blocks for information - you can build exactly the campaign management system you need using modular, interconnected components.</p>
@@ -488,7 +449,7 @@ Value Assessment:
 
 Database Examples for Gaming:
 CHARACTERS DATABASE:
-Properties: Name, Race, Class, Level, Location, Status, Relationships
+Properties: Name, Ancestry, Class, Level, Location, Status, Relationships
 Views: Active NPCs, By Location, By Faction, Player Characters
 Uses: Track NPC development, plan character interactions
 
@@ -514,14 +475,14 @@ CAMPAIGN DASHBOARD:
 
 Example Dashboard Layout:
 ┌─────────────────────────────────┐
-│ NEXT SESSION: March 15, 2024    │
+│ NEXT SESSION: Saturday, 7 PM    │
 │ Players: All confirmed          │
 │ Location: The Shattered Tower   │
 │ Primary Plot: Ancient Evil Arc  │
 ├─────────────────────────────────┤
 │ ACTIVE QUESTS:                  │
 │ • Rescue the Oracle (Urgent)    │
-│ • Find the Lost Crown          │
+│ • Find the Lost Crown           │
 │ • Investigate Cult Activity     │
 ├─────────────────────────────────┤
 │ PREP CHECKLIST:                 │
@@ -610,7 +571,7 @@ NPC TEMPLATE:
 # {{title}}
 
 ## Basic Information
-- **Race:** 
+- **Ancestry:** 
 - **Occupation:** 
 - **Location:** 
 - **Attitude:** 
@@ -675,18 +636,17 @@ ORGANIZATION FEATURES:
 🤖 BOT INTEGRATION
 Essential Bots for Gaming:
 
-AVRAE (D&D/PF2e Automation):
-Commands:
-- `!roll 1d20+5` - Basic dice rolling with modifiers
-- `!check strength` - Ability check with character sheet integration
-- `!cast fireball -t orc1 orc2` - Spell casting with automatic damage
-- `!init begin` - Initiative tracking and combat management
+DICE ROLLER BOTS:
+Commands (syntax varies by bot):
+- `/roll 1d20+7` - Basic dice rolling with modifiers
+- `/roll 2d8+4` - Damage rolls
+- Some bots also track initiative
 
 Features:
-□ Character sheet import from multiple sources
-□ Spell slot and resource tracking
-□ Condition management with automatic modifiers
-□ Combat automation with damage application
+□ Standard dice notation everyone can read
+□ Shared, visible rolls for online play
+□ Note: Avrae, a popular bot, is built for D&D 5e and doesn't use Pathfinder 2e character sheets
+□ For full Pathfinder 2e automation, use your VTT instead
 
 CARL-BOT (Server Management):
 Features:
@@ -800,18 +760,18 @@ Advanced Search: Combine filters for precise results
 
 Search Examples:
 SPELL RESEARCH:
-Query: "fire AND damage AND area"
-Filters: Spell level 3-5, Arcane tradition
-Result: All arcane fire spells dealing area damage at levels 3-5
+Search: fire damage area
+Filters: Spell rank 3-5 (formerly spell level), Arcane tradition
+Result: Arcane fire spells dealing area damage at ranks 3-5
 
 FEAT COMBINATIONS:
-Query: "attack AND opportunity" 
+Search: Reactive Strike (formerly Attack of Opportunity)
 Filters: Fighter class feats, levels 1-10
-Result: All fighter feats related to attacks of opportunity
+Result: Fighter feats that use or improve Reactive Strike
 
 MONSTER ABILITIES:
-Query: "frightened AND aura"
-Filters: Creature level 5-8, undead type
+Search: frightened aura
+Filters: Creature level 5-8, undead trait
 Result: Undead creatures that cause fear through auras
 
 📚 CROSS-REFERENCING MASTERY
@@ -828,7 +788,7 @@ HYPERLINK NAVIGATION:
 - Understand complex rule interactions through connected browsing
 
 Example Navigation Path:
-Fireball Spell → Fire Trait → Fire Resistance → Protection from Energy → Spell Immunity → Magic Items
+Fireball → Fire trait → Resistances and weaknesses → Damage rules
 
 🎯 PRACTICAL APPLICATIONS
 Session Preparation:
@@ -861,16 +821,16 @@ Features to Look For:
 □ Regular updates with new content
 □ Cross-platform synchronization
 
-Recommended Apps:
-MOBILE APPS:
-- "PF2e Companion" for quick rule lookups
-- "RPG Scribe" for note-taking with rule integration
-- "Game Master 5" adapted for Pathfinder reference
+Options to Consider:
+DIGITAL RULES:
+- Archives of Nethys (2e.aonprd.com) - the official free rules site
+- Pathfinder Nexus on Demiplane - official digital books and character tools
+- Pathbuilder 2e - shows rules text for the options you pick
 
-BROWSER EXTENSIONS:
-- Archives of Nethys quick search tools
-- Auto-linking for rule references in documents
-- Popup definitions for game terms
+BROWSER SHORTCUTS:
+- Bookmark the Archives of Nethys pages you use every session
+- Set up a search shortcut for 2e.aonprd.com
+- Keep a tab open on the conditions list during play
 
 🎲 DIGITAL GM SCREENS
 Customizable Quick Reference:
@@ -889,10 +849,10 @@ SKILL APPLICATIONS:
 - Alternative skill applications
 
 MAGIC SYSTEMS:
-- Spell attack and save DC calculations
-- Concentration and disruption rules
-- Spell component requirements
-- Counterspell and dispel interactions
+- Spell attack modifier and spell DC calculations
+- Disrupting spells (the manipulate and concentrate traits)
+- Spell ranks (formerly spell levels) and heightening
+- Counteract checks (dispelling and counterspelling)
 
 Custom GM Screen Creation:
 Tools: PDF editors, online GM screen builders
@@ -904,7 +864,7 @@ Organization: Most frequently needed information prominent
 Backup Systems for Internet-Free Gaming:
 
 ESSENTIAL DOWNLOADS:
-□ Core Rulebook PDF sections for common rules
+□ Player Core and GM Core PDF sections (or printouts from Archives of Nethys) for common rules
 □ Spell cards or quick reference sheets
 □ Condition and status effect summaries
 □ Equipment lists with stats and descriptions
@@ -929,8 +889,8 @@ Features:
 □ Pre-built soundscapes for fantasy environments
 □ Dynamic mixing with multiple audio layers
 □ Remote control from mobile devices during play
-□ Custom soundset creation for unique campaigns
-□ Integration with virtual tabletops (Foundry, Roll20)
+□ Custom soundset creation for unique campaigns (higher tier)
+□ Integrations with some virtual tabletops (check current support)
 
 Soundscape Examples:
 TAVERN SCENE:
@@ -958,10 +918,9 @@ Interactive Elements:
 - Victory or defeat musical stingers
 
 💰 Cost Analysis:
-Online Player: $6/month for access to all official content
-Device Offline: $10/month for download and offline use
-SuperSyrin: $28/month for content creation tools
-Value: Professional audio production at fraction of custom cost
+Subscription-based, with several tiers (check Syrinscape for current plans)
+Higher tiers add offline use and content creation tools
+Value: Professional audio production at a fraction of custom cost
 
 🎼 SPOTIFY/YOUTUBE MUSIC ALTERNATIVES
 Free Options for Background Music:
@@ -987,10 +946,10 @@ Social Encounter Music:
 
 🔊 AUDIO MANAGEMENT BEST PRACTICES
 Volume Control Strategy:
-□ Background music: 20-30% of speaking volume
-□ Sound effects: 40-50% of speaking volume
-□ Ambient sounds: 15-25% of speaking volume
-□ Combat music: 35-45% but can spike for dramatic moments
+□ Background music: low enough that the quietest player is heard clearly
+□ Sound effects: noticeable but brief
+□ Ambient sounds: barely there - felt more than heard
+□ Combat music: louder, but drop it whenever someone speaks
 
 Technical Setup:
 HARDWARE RECOMMENDATIONS:
@@ -1003,7 +962,7 @@ SOFTWARE SOLUTIONS:
 - VoiceMeeter for advanced audio routing
 - OBS for complex audio scene management
 - Audacity for custom sound effect creation
-- Audio hijack for system audio control</code></pre>
+- Audio Hijack (Mac) for system audio control</code></pre>
 
             <h3>Visual Enhancement and Map Tools</h3>
 
@@ -1017,7 +976,7 @@ Features:
 □ Intuitive drag-and-drop map creation
 □ Extensive asset libraries for fantasy environments
 □ Lighting and shadow effects
-□ Export formats compatible with all VTTs
+□ Exports map images and VTT-ready map files
 □ Active community with additional asset packs
 
 Map Creation Workflow:
@@ -1028,13 +987,13 @@ Map Creation Workflow:
 5. Export in appropriate resolution for VTT use
 
 Time Investment: 1-3 hours for detailed encounter map
-Cost: $20 one-time purchase plus optional asset packs
+Cost: One-time purchase plus optional asset packs
 
 INKARNATE:
 Features:
 □ Web-based map creation (no software installation)
 □ World maps, regional maps, and battle maps
-□ Collaborative editing for group world-building
+□ Shareable maps for group world-building
 □ Extensive stamp and texture libraries
 □ Multiple artistic styles and themes
 
@@ -1044,7 +1003,7 @@ Best Use Cases:
 - Artistic maps for player handouts
 - Quick battle map creation for improvised encounters
 
-Subscription Model: Free tier with basic features, Pro tier ($25/year) for advanced tools
+Subscription Model: Free tier with basic features, paid Pro tier for advanced tools
 
 📷 VISUAL AIDS AND HANDOUTS
 Digital Handout Creation:
@@ -1126,17 +1085,17 @@ Automatic Processes:
 □ Damage resistance and weakness calculation
 
 Example Combat Sequence:
-1. Player declares Power Attack
-2. System automatically applies -5 penalty to attack
+1. Fighter uses Power Attack (2 actions)
+2. System applies the current multiple attack penalty; Power Attack counts as two attacks for later Strikes
 3. Roll result calculated with degrees of success
-4. On hit, damage rolled with automatic critical damage
+4. On hit, damage includes Power Attack's extra weapon die, doubled automatically on a critical hit
 5. Target's resistances applied automatically
 6. Remaining damage applied to hit points
 7. Any conditions (like persistent damage) automatically tracked
 
 SPELL AUTOMATION:
 □ Automatic spell slot consumption
-□ Heightening effects applied based on cast level
+□ Heightening effects applied based on the rank you cast it at
 □ Area effect template placement with precise targeting
 □ Save DC calculation with automatic results processing
 □ Duration tracking with automatic condition removal
@@ -1147,16 +1106,17 @@ Custom Automation Development:
 BASIC MACRO EXAMPLES:
 Quick Healing:
 ```javascript
-// Heal target for amount rolled
-let healAmount = new Roll("2d8+5").roll();
-let target = Array.from(game.user.targets)[0];
+// Heal the first targeted token for 2d8+5 (capped at max HP)
+// Written for recent Foundry versions; the API changes between versions
+const healRoll = await new Roll("2d8+5").evaluate();
+const target = Array.from(game.user.targets)[0];
 if (target) {
-    target.actor.update({
-        "data.attributes.hp.value": 
-        target.actor.data.data.attributes.hp.value + healAmount.total
+    const hp = target.actor.system.attributes.hp;
+    await target.actor.update({
+        "system.attributes.hp.value": Math.min(hp.max, hp.value + healRoll.total)
     });
     ChatMessage.create({
-        content: `${target.name} healed for ${healAmount.total} hit points`
+        content: `${target.name} healed for ${healRoll.total} hit points`
     });
 }
 ```
@@ -1189,7 +1149,7 @@ COMBAT METRICS:
 □ Damage dealt and received by character
 □ Spell usage frequency and effectiveness
 □ Critical hit/miss ratios for balance assessment
-□ Encounter difficulty vs actual challenge rating
+□ Encounter XP budget vs how hard the fight actually played
 
 PLAYER ENGAGEMENT:
 □ Speaking time distribution during sessions
@@ -1247,17 +1207,17 @@ Automated Rule Interpretation:
 RULES CLARIFICATION:
 Example Query: "How does the frightened condition interact with spell attack rolls in Pathfinder 2e?"
 
-AI Processing:
-1. Searches official rule sources
-2. Cross-references condition effects
-3. Provides clear explanation with rule citations
-4. Offers example scenarios for understanding
+What to Expect:
+1. A plain-language explanation and example scenarios
+2. Answers can be wrong, out of date, or mix in pre-Remaster or other games' rules
+3. Ask for the rule name, then look it up yourself
+4. Always confirm on Archives of Nethys before ruling at the table
 
 OPTIMIZATION ASSISTANCE:
 Character Build Analysis:
 - Input character concept and level
 - Receive feat recommendations and synergy analysis
-- Identify potential multiclass combinations
+- Identify potential multiclass archetype options
 - Suggest equipment and tactical approaches
 
 ⚠️ AI INTEGRATION BEST PRACTICES
@@ -1332,7 +1292,7 @@ GM-Only Information:
 PLATFORM SECURITY:
 VTT Security:
 □ Strong passwords for GM accounts
-□ Regular password updates (quarterly)
+□ Unique passwords for each service (a password manager helps)
 □ Two-factor authentication where available
 □ Limited GM privileges sharing
 
@@ -1501,34 +1461,34 @@ Emergency: Text messaging coordination for rescheduling</code></pre>
             <pre><code>Gaming Technology Investment Strategy:
 
 💰 PRIORITY TIER SYSTEM
-Tier 1: Essential (Under $50/year total)
+Tier 1: Essential (free)
 □ Archives of Nethys (Free) - Complete rules reference
 □ Discord (Free) - Group communication and coordination  
 □ Google Drive/Docs (Free) - Basic campaign organization
-□ Pathbuilder 2e (Free tier) - Character sheet management
+□ Pathbuilder 2e (Free to use) - Character sheet management
 □ Roll20 (Free tier) - Basic virtual tabletop functionality
 
-Total Cost: $0-20/year
+Total Cost: Free
 Benefits: Complete basic digital gaming setup
 Covers: All essential gaming functions with minor limitations
 
-Tier 2: Convenience ($50-150/year)
-□ Foundry VTT ($50 one-time) - Advanced virtual tabletop
-□ World Anvil Guild ($60/year) - Professional campaign management
-□ Syrinscape ($72/year) - Professional audio enhancement
-□ Cloud hosting for Foundry ($36-120/year) - Reliable server access
+Tier 2: Convenience (moderate cost)
+□ Foundry VTT (one-time license) - Advanced virtual tabletop
+□ World Anvil paid membership - Professional campaign management
+□ Syrinscape subscription - Professional audio enhancement
+□ Cloud hosting for Foundry (subscription) - Reliable server access
 
-Total Cost: $50-150 first year, $100-200 ongoing
+Total Cost: One purchase plus a few subscriptions - check current prices
 Benefits: Significant quality of life improvements
 Covers: Professional-level tools for serious gaming groups
 
-Tier 3: Luxury ($150-300/year)
-□ Hero Lab Online ($180/year) - Premium character management
-□ Advanced VTT modules and content packs ($50-100/year)
-□ Professional map creation tools ($20-50 one-time)
-□ Premium audio and visual content subscriptions ($100/year)
+Tier 3: Luxury (higher cost)
+□ Hero Lab Online or Pathfinder Nexus on Demiplane - Premium character management and digital books
+□ Premium VTT add-ons and official content packs
+□ Professional map creation tools (one-time purchases)
+□ Premium audio and visual content subscriptions
 
-Total Cost: $150-300/year
+Total Cost: Adds up quickly - budget as a group
 Benefits: Premium experience with extensive features
 Covers: Professional-level content creation and management
 
@@ -1537,30 +1497,29 @@ Value Assessment Framework:
 
 TIME SAVINGS:
 Example: Foundry VTT automation
-- Manual combat resolution: 45 minutes per encounter
-- Automated combat resolution: 25 minutes per encounter  
-- Time saved: 20 minutes per encounter
-- Weekly savings: 40-60 minutes (2-3 encounters per session)
-- Annual savings: 35+ hours of time for more actual gaming
+- Automation handles MAP, degrees of success, damage and conditions
+- Many groups find encounters run noticeably faster
+- Time a few fights before and after to see your own difference
+- Over a long campaign, saved minutes add up to whole extra sessions
 
 QUALITY IMPROVEMENT:
 Example: Professional audio (Syrinscape)
-- Cost: $6/month ($72/year)
+- Cost: One subscription, run by the GM
 - Benefit: Dramatically enhanced immersion for 4-6 players
-- Per-player cost: $12-18/year for professional audio experience
-- Comparison: Less than cost of single movie ticket per player
+- Per-player cost: Small when split across the whole table
+- Comparison: Weigh it against other shared group expenses, like snacks
 
 GROUP INVESTMENT SHARING:
 Shared Cost Model:
 □ GM purchases core tools (VTT license, hosting, campaign tools)
 □ Players contribute to shared tools (audio subscriptions, content)
-□ Group fund for special purchases (modules, premium content)
+□ Group fund for special purchases (adventures, premium content)
 □ Rotate tool ownership for different campaigns
 
 Example Group Budget:
 4 Players + 1 GM = 5 people
-Annual technology budget: $200 total
-Per person contribution: $40/year ($3.33/month)
+Annual technology budget: agreed together up front
+Per person contribution: the total split five ways
 Covers: Premium VTT, audio, cloud hosting, and shared content
 
 📊 TOOL SELECTION MATRIX
@@ -1629,7 +1588,7 @@ AR Gaming Potential:
 □ Mixed reality dice rolling with digital result integration
 □ Enhanced map visualization with dynamic elements
 
-Timeline: 3-5 years for mainstream adoption in gaming
+Timeline: Uncertain - treat it as experimental for now
 
 🤖 ADVANCED AI INTEGRATION
 Next-Generation AI Applications:
@@ -1819,8 +1778,8 @@ CHANGE MANAGEMENT:
                 <ul>
                     <li><strong>Free Foundation:</strong> Archives of Nethys, Discord, Pathbuilder 2e, Roll20 basic</li>
                     <li><strong>Professional Upgrade:</strong> Foundry VTT, World Anvil, Syrinscape, cloud hosting</li>
-                    <li><strong>Community Support:</strong> r/FoundryVTT, Discord servers, YouTube tutorials</li>
-                    <li><strong>Learning Resources:</strong> Official documentation, community guides, video tutorials</li>
+                    <li><strong>Community Support:</strong> r/FoundryVTT, Discord servers, YouTube how-to videos</li>
+                    <li><strong>Learning Resources:</strong> Official documentation, community guides, video walkthroughs</li>
                     <li><strong>Backup Systems:</strong> Multiple communication methods, offline references, analog fallbacks</li>
                 </ul>
             </div>
@@ -1828,27 +1787,13 @@ CHANGE MANAGEMENT:
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_names.html">150 Character Names</a>
+    <a class="next" href="/index.html">Guide Home</a>
+</div>
         <p>May your technology serve your creativity, and your digital tools enhance the magic you create together!</p>
  
     </footer>
-    <nav class="prev-next-nav">
-        <a href="/pf2_worldbuilding.html" class="nav-prev">← Worldbuilding</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_community.html" class="nav-next">Community →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

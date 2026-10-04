@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magic Systems Deep Dive - Pathfinder 2.0</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Magic - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 8</span>
         <h1>Magic Systems Deep Dive</h1>
         <p class="subtitle">The Art and Science of Spellcasting</p>
     </header>
@@ -49,7 +28,7 @@
     <main>
         <section class="introduction">
             <h2>Magic: The Ultimate Problem-Solving Tool</h2>
-            <p>Magic in Pathfinder 2.0 isn't just about throwing fireballs (though that's certainly fun). It's a sophisticated toolkit that lets you reshape reality, solve complex problems, and express your character's relationship with the fundamental forces of the universe. Think of magic like being a scientist, artist, and engineer all at once - you're manipulating the very fabric of existence through knowledge, creativity, and precise technique.</p>
+            <p>Magic in Pathfinder Second Edition isn't just about throwing fireballs (though that's certainly fun). It's a sophisticated toolkit that lets you reshape reality, solve complex problems, and express your character's relationship with the fundamental forces of the universe. Think of magic like being a scientist, artist, and engineer all at once - you're manipulating the very fabric of existence through knowledge, creativity, and precise technique.</p>
             
             <p>Unlike many fantasy systems where magic is mysterious and unpredictable, PF2e treats magic as a learned discipline with consistent rules. Imagine if you could study physics so thoroughly that you could temporarily rewrite the laws of gravity or thermodynamics - that's what spellcasters do every day.</p>
 
@@ -60,7 +39,7 @@
                         graph TB
                             A[MAGIC] --> B[Knowledge<br/>Understanding how reality works]
                             A --> C[Focus<br/>Concentrating your will]
-                            A --> D[Components<br/>Physical tools and gestures]
+                            A --> D[Casting<br/>Concentrate and manipulate]
                             A --> E[Energy<br/>Magical power source]
                             
                             style A fill:#9c27b0,color:#fff
@@ -89,13 +68,13 @@
                         <h4>Primary Classes</h4>
                         <ul>
                             <li><strong>Wizard:</strong> The quintessential scholar, preparing spells like a scientist plans experiments</li>
-                            <li><strong>Sorcerer:</strong> Natural talent channeled through academic understanding</li>
-                            <li><strong>Witch:</strong> Learning from otherworldly patrons who understand reality's secrets</li>
+                            <li><strong>Magus:</strong> Blends arcane study with weapon training (from Secrets of Magic)</li>
+                            <li><strong>Sorcerer or Witch:</strong> Arcane when the sorcerer's bloodline (such as draconic or imperial) or the witch's patron grants arcane magic; both classes' tradition depends on that choice</li>
                         </ul>
                         
-                        <h4>Signature Spells</h4>
+                        <h4>Iconic Spells</h4>
                         <ul>
-                            <li><strong>Magic Missile:</strong> Pure force given form</li>
+                            <li><strong>Force Barrage (formerly magic missile):</strong> Pure force given form</li>
                             <li><strong>Fireball:</strong> Converting energy into explosive heat</li>
                             <li><strong>Teleport:</strong> Folding space to move instantly</li>
                             <li><strong>Disintegrate:</strong> Unmaking matter at the molecular level</li>
@@ -117,16 +96,16 @@
                         <h4>Primary Classes</h4>
                         <ul>
                             <li><strong>Cleric:</strong> Direct servant of a deity, channeling divine will</li>
-                            <li><strong>Champion:</strong> Divine warrior empowered by unwavering faith</li>
+                            <li><strong>Champion:</strong> Divine warrior empowered by unwavering faith (casts divine focus spells rather than slot spells)</li>
                             <li><strong>Oracle:</strong> Cursed/blessed with divine power beyond their control</li>
                         </ul>
                         
-                        <h4>Signature Spells</h4>
+                        <h4>Iconic Spells</h4>
                         <ul>
                             <li><strong>Heal:</strong> Channeling divine mercy to mend wounds</li>
                             <li><strong>Bless:</strong> Invoking divine favor upon allies</li>
-                            <li><strong>Flame Strike:</strong> Calling down divine wrath</li>
-                            <li><strong>Resurrection:</strong> Returning souls from death through divine intervention</li>
+                            <li><strong>Divine Immolation (formerly flame strike):</strong> Calling down divine wrath</li>
+                            <li><strong>Resurrect:</strong> A ritual that returns souls from death through divine intervention</li>
                         </ul>
                         
                         <h4>Real-World Analogy</h4>
@@ -145,15 +124,15 @@
                         <h4>Primary Classes</h4>
                         <ul>
                             <li><strong>Druid:</strong> Guardian of natural balance, shapeshifter and healer</li>
-                            <li><strong>Ranger:</strong> Wilderness warrior with nature magic</li>
-                            <li><strong>Barbarian (Instinct):</strong> Primal fury channeled into supernatural power</li>
+                            <li><strong>Ranger:</strong> Wilderness warrior who can pick up a little primal magic through feats</li>
+                            <li><strong>Sorcerer or Witch:</strong> Primal when the bloodline (such as fey or elemental) or patron grants primal magic</li>
                         </ul>
                         
-                        <h4>Signature Spells</h4>
+                        <h4>Iconic Spells</h4>
                         <ul>
-                            <li><strong>Goodberry:</strong> Imbuing natural food with life energy</li>
+                            <li><strong>Cornucopia (formerly goodberry):</strong> Imbuing natural food with life energy</li>
                             <li><strong>Lightning Bolt:</strong> Calling upon the storm's fury</li>
-                            <li><strong>Wild Shape:</strong> Taking on animal forms</li>
+                            <li><strong>Animal Form:</strong> Taking on animal forms (druids of the untamed order also get the untamed form focus spell, formerly wild shape)</li>
                             <li><strong>Earthquake:</strong> Awakening the earth's power</li>
                         </ul>
                         
@@ -173,15 +152,15 @@
                         <h4>Primary Classes</h4>
                         <ul>
                             <li><strong>Bard:</strong> Weaving magic through performance and emotional resonance</li>
-                            <li><strong>Psychic:</strong> Pure mental magic through thought and will</li>
-                            <li><strong>Summoner:</strong> Bonding with entities from other planes of existence</li>
+                            <li><strong>Psychic:</strong> Pure mental magic through thought and will (from Dark Archive)</li>
+                            <li><strong>Sorcerer or Witch:</strong> Occult when the bloodline (such as aberrant or hag) or patron grants occult magic</li>
                         </ul>
                         
-                        <h4>Signature Spells</h4>
+                        <h4>Iconic Spells</h4>
                         <ul>
-                            <li><strong>Charm Person:</strong> Reshaping emotional connections</li>
+                            <li><strong>Charm:</strong> Reshaping emotional connections</li>
                             <li><strong>Suggestion:</strong> Implanting ideas directly into minds</li>
-                            <li><strong>Phantasmal Force:</strong> Creating illusions that feel real</li>
+                            <li><strong>Illusory Creature:</strong> Creating illusions that look and sound real</li>
                             <li><strong>Dominate:</strong> Overriding another's will entirely</li>
                         </ul>
                         
@@ -229,7 +208,7 @@
                             <tr>
                                 <td><strong>Weaknesses</strong></td>
                                 <td>Complexity, Preparation</td>
-                                <td>Moral Constraints</td>
+                                <td>Edicts &amp; Anathema</td>
                                 <td>Limited Options</td>
                                 <td>Subtle Effects</td>
                             </tr>
@@ -259,14 +238,14 @@
                     <div class="spell-block">
                         <div class="spell-header">
                             <p><strong>Fireball</strong> - Spell 3</p>
-                            <p><em>Evocation, Fire</em></p>
+                            <p><em>Concentrate, Fire, Manipulate</em></p>
                         </div>
                         
                         <div class="spell-casting">
-                            <p><strong>Cast:</strong> ⚡⚡ somatic, verbal</p>
+                            <p><strong>Cast:</strong> ⚡⚡ (two actions)</p>
                             <p><strong>Range:</strong> 500 feet</p>
                             <p><strong>Area:</strong> 20-foot burst</p>
-                            <p><strong>Save:</strong> Basic Reflex</p>
+                            <p><strong>Defense:</strong> Basic Reflex</p>
                         </div>
                         
                         <div class="spell-effect">
@@ -281,15 +260,15 @@
                     
                     <div class="component-grid">
                         <div class="component-card">
-                            <h5>🎯 Level and Traditions</h5>
-                            <p><strong>Spell 3:</strong> This is a 3rd-level spell</p>
+                            <h5>🎯 Rank and Traditions</h5>
+                            <p><strong>Spell 3:</strong> This is a 3rd-rank spell (spell rank, formerly spell level, runs from 1 to 10)</p>
                             <p><strong>Traditions:</strong> Available to Arcane and Primal casters</p>
-                            <p><strong>Power Scale:</strong> Higher level = more powerful effects</p>
+                            <p><strong>Power Scale:</strong> Higher rank = more powerful effects</p>
                         </div>
 
                         <div class="component-card">
                             <h5>🏷️ Traits</h5>
-                            <p><strong>Evocation:</strong> School of magic (direct energy manipulation)</p>
+                            <p><strong>Concentrate &amp; Manipulate:</strong> How the spell is cast (these traits replaced the old verbal and somatic components)</p>
                             <p><strong>Fire:</strong> Damage type and thematic element</p>
                             <p><strong>Usage:</strong> Helps with resistances, immunities, and interactions</p>
                         </div>
@@ -297,9 +276,9 @@
                         <div class="component-card">
                             <h5>⚡ Actions and Components</h5>
                             <p><strong>⚡⚡:</strong> Takes 2 actions to cast</p>
-                            <p><strong>Somatic:</strong> Requires precise hand gestures</p>
-                            <p><strong>Verbal:</strong> Requires speaking magical words</p>
-                            <p><strong>Restriction:</strong> Can't cast if silenced or hands are bound</p>
+                            <p><strong>Concentrate:</strong> Requires mental focus and words of power</p>
+                            <p><strong>Manipulate:</strong> Requires gestures, so it can trigger reactions such as Reactive Strike (formerly Attack of Opportunity)</p>
+                            <p><strong>Restriction:</strong> Silence or being restrained can stop you casting (subtle spells get around silence)</p>
                         </div>
 
                         <div class="component-card">
@@ -311,9 +290,9 @@
 
                         <div class="component-card">
                             <h5>🎲 Save and Effect</h5>
-                            <p><strong>Basic Reflex:</strong> Targets roll Reflex save against your spell DC</p>
+                            <p><strong>Basic Reflex:</strong> Targets roll a Reflex save against your spell DC: critical success no damage, success half, failure full, critical failure double</p>
                             <p><strong>6d6 fire damage:</strong> Roll six six-sided dice</p>
-                            <p><strong>Heightening:</strong> +2d6 damage for each level above 3rd</p>
+                            <p><strong>Heightening:</strong> +2d6 damage for each rank above 3rd</p>
                         </div>
                     </div>
                 </div>
@@ -321,39 +300,39 @@
 
             <div class="spell-components">
                 <h3>Spell Components: The Tools of Magic</h3>
-                <p>Think of spell components like ingredients in a recipe - each one serves a purpose in channeling magical energy:</p>
+                <p>Think of spell components like ingredients in a recipe - each one serves a purpose in channeling magical energy. The pre-Remaster Core Rulebook (2019) listed four components; the Remaster folds them into two traits, concentrate and manipulate, and the cards below show both:</p>
                 
                 <div class="component-types">
                     <div class="component-type">
-                        <h4>🗣️ Verbal Components</h4>
-                        <p><strong>What it is:</strong> Speaking magical words, incantations, or sounds</p>
+                        <h4>🗣️ Verbal Components (now the concentrate trait)</h4>
+                        <p><strong>What it is:</strong> Speaking magical words and focusing your mind</p>
                         <p><strong>Real-world analogy:</strong> Like a computer programmer typing code - the precise words create the magical effect</p>
-                        <p><strong>Restriction:</strong> Can't cast if silenced, gagged, or in an area of magical silence</p>
+                        <p><strong>Restriction:</strong> Under the silence spell you can't cast spells unless they have the subtle trait</p>
                         <p><strong>Creative Description:</strong> "I whisper the ancient Draconic phrase that translates to 'flame, dance at my command'"</p>
                     </div>
 
                     <div class="component-type">
-                        <h4>👋 Somatic Components</h4>
+                        <h4>👋 Somatic Components (now the manipulate trait)</h4>
                         <p><strong>What it is:</strong> Precise hand gestures and body movements</p>
                         <p><strong>Real-world analogy:</strong> Like a conductor directing an orchestra - the movements guide magical energy</p>
-                        <p><strong>Restriction:</strong> Need at least one free hand, can't cast if hands are bound</p>
+                        <p><strong>Restriction:</strong> You can't take manipulate actions while restrained, and they can trigger Reactive Strike from an adjacent foe that has it</p>
                         <p><strong>Creative Description:</strong> "I trace a complex sigil in the air, my fingers leaving trails of light"</p>
                     </div>
 
                     <div class="component-type">
-                        <h4>🧪 Material Components</h4>
+                        <h4>🧪 Material Components (pre-Remaster)</h4>
                         <p><strong>What it is:</strong> Physical objects that focus or fuel the spell</p>
-                        <p><strong>Types:</strong> Common (provided by component pouch) or specific (must acquire separately)</p>
+                        <p><strong>Remaster:</strong> Ordinary materials are gone (no component pouch to track); handling them is part of the manipulate trait</p>
                         <p><strong>Real-world analogy:</strong> Like a laboratory's chemical reagents - some are common, others are rare and expensive</p>
-                        <p><strong>Examples:</strong> Diamond dust for restoration magic, silver mirror for scrying</p>
+                        <p><strong>Costly magic:</strong> A few powerful spells and rituals, such as those that return the dead to life, list a Cost in valuable materials you use up</p>
                     </div>
 
                     <div class="component-type">
-                        <h4>🎯 Focus Components</h4>
-                        <p><strong>What it is:</strong> Reusable magical tools that help channel energy</p>
-                        <p><strong>Examples:</strong> Wizard's staff, cleric's holy symbol, druid's primal focus</p>
-                        <p><strong>Benefit:</strong> Can be used instead of material components for most spells</p>
-                        <p><strong>Enhancement:</strong> Higher-quality foci provide bonuses to spellcasting</p>
+                        <h4>🎯 Focus Components (pre-Remaster)</h4>
+                        <p><strong>What it is:</strong> Reusable tools that help channel energy</p>
+                        <p><strong>Examples:</strong> Wizard's staff, cleric's religious symbol, druid's primal focus</p>
+                        <p><strong>Remaster:</strong> Also folded into the manipulate trait; these items are now mostly flavor</p>
+                        <p><strong>Enhancement:</strong> Magic items such as staves and wands give extra castings rather than flat bonuses to your spell attack or DC</p>
                     </div>
                 </div>
 
@@ -364,23 +343,23 @@
                     <div class="tactical-scenarios">
                         <div class="scenario">
                             <h5>⚔️ Combat Casting with Weapons</h5>
-                            <p><strong>Problem:</strong> You're holding a sword and shield - how do you cast somatic spells?</p>
+                            <p><strong>Problem:</strong> You're holding a sword and shield - can you still cast spells?</p>
                             <p><strong>Solutions:</strong></p>
                             <ul>
-                                <li>Use a staff as both weapon and focus</li>
-                                <li>Emblazon your holy symbol on your shield (clerics)</li>
-                                <li>Drop/sheathe weapon as free action, cast, then pick up/draw</li>
-                                <li>Use spells without somatic components</li>
+                                <li>Under the Remaster rules, most spells don't need a free hand, so you can usually cast with your hands full</li>
+                                <li>Use a staff as both weapon and spell source</li>
+                                <li>Watch out for Reactive Strike: step away from foes that have it before casting manipulate spells</li>
+                                <li>Pre-Remaster rules: material components needed a free hand; dropping an item (Release) is a free action, but drawing or stowing one takes an Interact action</li>
                             </ul>
                         </div>
 
                         <div class="scenario">
                             <h5>🤐 Silenced Spellcasting</h5>
-                            <p><strong>Problem:</strong> Enemy casts Silence - no verbal components allowed</p>
+                            <p><strong>Problem:</strong> You're caught in a silence effect - no words of power</p>
                             <p><strong>Solutions:</strong></p>
                             <ul>
                                 <li>Move outside the silence area</li>
-                                <li>Use spells with only somatic components</li>
+                                <li>Cast subtle spells (Conceal Spell, a wizard and witch feat, gives a spell the subtle trait)</li>
                                 <li>Dispel the silence effect</li>
                                 <li>Switch to non-magical tactics temporarily</li>
                             </ul>
@@ -388,11 +367,11 @@
 
                         <div class="scenario">
                             <h5>🔒 Bound and Gagged</h5>
-                            <p><strong>Problem:</strong> Captured and restrained - can't use verbal or somatic</p>
+                            <p><strong>Problem:</strong> Captured and restrained - no manipulate actions, and a gag stops your words of power</p>
                             <p><strong>Solutions:</strong></p>
                             <ul>
-                                <li>Psychic spells (thought-based, no components)</li>
-                                <li>Subtle spell metamagic (removes components)</li>
+                                <li>If you can still speak, look for spells or versions of spells that lack the manipulate trait</li>
+                                <li>Subtle spells work under silence, but subtle doesn't remove the manipulate trait</li>
                                 <li>Focus on escape through other means first</li>
                                 <li>Use magic items that don't require spellcasting</li>
                             </ul>
@@ -417,7 +396,7 @@
                         <div class="method-details">
                             <h5>How It Works</h5>
                             <ul>
-                                <li>Each day, choose specific spells to prepare in your spell slots</li>
+                                <li>Each day, choose specific spells to prepare in your spell slots (a 1-hour part of your daily preparations)</li>
                                 <li>Can only cast spells you've prepared</li>
                                 <li>Must rest and spend time preparing to change your spell selection</li>
                                 <li>Can prepare the same spell multiple times in different slots</li>
@@ -427,7 +406,7 @@
                             <ul>
                                 <li><strong>Flexibility:</strong> Access to your entire spell list (if known)</li>
                                 <li><strong>Optimization:</strong> Tailor your selection to expected challenges</li>
-                                <li><strong>Power:</strong> Often have more total spells than spontaneous casters</li>
+                                <li><strong>Breadth:</strong> Can swap your whole loadout every day (spontaneous casters usually get more slots per rank, though)</li>
                             </ul>
 
                             <h5>Challenges</h5>
@@ -448,10 +427,11 @@
                                 
                                 <p><strong>Sample 5th Level Wizard Preparation:</strong></p>
                                 <ul>
-                                    <li><strong>3rd-level (2 slots):</strong> Fireball, Counterspell</li>
-                                    <li><strong>2nd-level (3 slots):</strong> Mirror Image, Web, Invisibility</li>
-                                    <li><strong>1st-level (4 slots):</strong> Magic Missile x2, Shield, Identify</li>
-                                    <li><strong>Cantrips:</strong> Detect Magic, Light, Mage Hand, Prestidigitation, Shield</li>
+                                    <li><strong>3rd rank (2 slots):</strong> Fireball, Slow</li>
+                                    <li><strong>2nd rank (3 slots):</strong> Blur, Web, Invisibility</li>
+                                    <li><strong>1st rank (3 slots):</strong> Force Barrage x2, Grease</li>
+                                    <li><strong>Cantrips (5):</strong> Detect Magic, Light, Telekinetic Hand (formerly mage hand), Prestidigitation, Shield</li>
+                                    <li><strong>Plus:</strong> the extra curriculum slots your arcane school grants</li>
                                 </ul>
                             </div>
                         </div>
@@ -464,8 +444,8 @@
                         <div class="method-details">
                             <h5>How It Works</h5>
                             <ul>
-                                <li>Know a limited number of spells permanently</li>
-                                <li>Can cast any known spell using available spell slots</li>
+                                <li>Know a limited number of spells permanently (your repertoire)</li>
+                                <li>Can cast any known spell using an available slot of its rank; signature spells can be cast at any rank you have slots for</li>
                                 <li>Add new spells known when leveling up</li>
                                 <li>Can retrain some spells during level advancement</li>
                             </ul>
@@ -486,19 +466,19 @@
 
                             <h5>Spell Selection Example (Sorcerer)</h5>
                             <div class="selection-example">
-                                <p><strong>5th Level Sorcerer Spells Known:</strong></p>
+                                <p><strong>5th Level Sorcerer Spells Known (arcane bloodline; each rank's first spell comes from your bloodline):</strong></p>
                                 <ul>
-                                    <li><strong>3rd-level (1 known):</strong> Fireball</li>
-                                    <li><strong>2nd-level (2 known):</strong> Mirror Image, Scorching Ray</li>
-                                    <li><strong>1st-level (4 known):</strong> Magic Missile, Shield, Burning Hands, Charm Person</li>
-                                    <li><strong>Cantrips (5 known):</strong> Detect Magic, Light, Mage Hand, Prestidigitation, Produce Flame</li>
+                                    <li><strong>3rd rank (3 known):</strong> Fireball, Haste, Slow</li>
+                                    <li><strong>2nd rank (4 known):</strong> Blur, Blazing Bolt (formerly scorching ray), Invisibility, Dispel Magic</li>
+                                    <li><strong>1st rank (4 known):</strong> Force Barrage, Breathe Fire (formerly burning hands), Charm, Fear</li>
+                                    <li><strong>Cantrips (5 known):</strong> Detect Magic, Light, Shield, Prestidigitation, Ignition (formerly produce flame)</li>
                                 </ul>
                                 
                                 <p><strong>Daily Spell Slots:</strong></p>
                                 <ul>
-                                    <li>3rd-level: 2 slots (can cast Fireball twice, or use for lower spells)</li>
-                                    <li>2nd-level: 3 slots</li>
-                                    <li>1st-level: 4 slots</li>
+                                    <li>3rd rank: 3 slots (cast Fireball up to three times, or a heightened signature spell)</li>
+                                    <li>2nd rank: 4 slots</li>
+                                    <li>1st rank: 4 slots</li>
                                 </ul>
                             </div>
                         </div>
@@ -513,16 +493,16 @@
                             <ul>
                                 <li>Special spells tied to your class features or abilities</li>
                                 <li>Use Focus Points instead of spell slots</li>
-                                <li>Usually start with 1 Focus Point, can gain more</li>
-                                <li>Refocus during short rests to regain 1 Focus Point</li>
+                                <li>Usually start with 1 Focus Point, can gain more (your focus pool holds at most 3)</li>
+                                <li>Refocus (a 10-minute activity) to regain 1 Focus Point</li>
                             </ul>
 
                             <h5>Examples by Class</h5>
                             <ul>
-                                <li><strong>Wizard:</strong> School spells (Diviner's Sight, Force Bolt)</li>
-                                <li><strong>Cleric:</strong> Domain spells (Fire Ray, Healing Hands)</li>
-                                <li><strong>Druid:</strong> Order spells (Wild Shape, Heal Animal)</li>
-                                <li><strong>Bard:</strong> Composition spells (Inspire Courage, Counter Performance)</li>
+                                <li><strong>Wizard:</strong> School spells tied to your arcane school (such as Force Bolt)</li>
+                                <li><strong>Cleric:</strong> Domain spells (Fire Ray, Healer's Blessing)</li>
+                                <li><strong>Druid:</strong> Order spells (Untamed Form, formerly wild shape; Heal Animal)</li>
+                                <li><strong>Bard:</strong> Compositions (Counter Performance is a focus spell; Courageous Anthem, formerly inspire courage, is a composition cantrip that costs no Focus Points)</li>
                             </ul>
 
                             <h5>Strategic Value</h5>
@@ -547,10 +527,10 @@
                     <div class="strategy-examples">
                         <div class="strategy-card">
                             <h5>🏃 Resource Conservation</h5>
-                            <p><strong>Strategy:</strong> Save high-level slots for major threats</p>
+                            <p><strong>Strategy:</strong> Save high-rank slots for major threats</p>
                             <ul>
-                                <li>Use cantrips and low-level spells for minor encounters</li>
-                                <li>Reserve your highest-level slots for boss fights</li>
+                                <li>Use cantrips and low-rank spells for minor encounters</li>
+                                <li>Reserve your highest-rank slots for boss fights</li>
                                 <li>Use focus spells and class abilities before spell slots</li>
                                 <li>Consider non-magical solutions when possible</li>
                             </ul>
@@ -571,7 +551,7 @@
                             <h5>⚖️ Balanced Approach</h5>
                             <p><strong>Strategy:</strong> Moderate spending throughout the day</p>
                             <ul>
-                                <li>Use mid-level spells for most encounters</li>
+                                <li>Use mid-rank spells for most encounters</li>
                                 <li>Keep some resources in reserve for emergencies</li>
                                 <li>Adapt spending based on party needs</li>
                                 <li>Most sustainable for long adventuring days</li>
@@ -582,38 +562,38 @@
 
                 <div class="heightening">
                     <h4>Heightening: Getting More from Your Spells</h4>
-                    <p>Heightening lets you cast lower-level spells using higher-level slots for increased effect - like using premium ingredients in a familiar recipe.</p>
+                    <p>Heightening lets you cast lower-rank spells using higher-rank slots for increased effect - like using premium ingredients in a familiar recipe. (Cantrips heighten automatically to half your level, rounded up.)</p>
                     
                     <div class="heightening-examples">
                         <div class="heighten-example">
                             <h5>🔥 Fireball Progression</h5>
                             <ul>
-                                <li><strong>3rd Level:</strong> 6d6 damage (21 average)</li>
-                                <li><strong>4th Level:</strong> 8d6 damage (28 average)</li>
-                                <li><strong>5th Level:</strong> 10d6 damage (35 average)</li>
-                                <li><strong>6th Level:</strong> 12d6 damage (42 average)</li>
+                                <li><strong>3rd Rank:</strong> 6d6 damage (21 average)</li>
+                                <li><strong>4th Rank:</strong> 8d6 damage (28 average)</li>
+                                <li><strong>5th Rank:</strong> 10d6 damage (35 average)</li>
+                                <li><strong>6th Rank:</strong> 12d6 damage (42 average)</li>
                             </ul>
-                            <p><em>Each level adds 2d6 damage - significant scaling!</em></p>
+                            <p><em>Each rank adds 2d6 damage - significant scaling!</em></p>
                         </div>
 
                         <div class="heighten-example">
-                            <h5>⚡ Magic Missile Scaling</h5>
+                            <h5>⚡ Force Barrage Scaling</h5>
                             <ul>
-                                <li><strong>1st Level:</strong> 3 missiles, 1d4+1 each</li>
-                                <li><strong>3rd Level:</strong> 5 missiles</li>
-                                <li><strong>5th Level:</strong> 7 missiles</li>
-                                <li><strong>7th Level:</strong> 9 missiles</li>
+                                <li><strong>1st Rank:</strong> 1 shard per action spent (up to 3), 1d4+1 force each</li>
+                                <li><strong>3rd Rank:</strong> 2 shards per action (up to 6)</li>
+                                <li><strong>5th Rank:</strong> 3 shards per action (up to 9)</li>
+                                <li><strong>7th Rank:</strong> 4 shards per action (up to 12)</li>
                             </ul>
-                            <p><em>Reliable damage that scales with slot level</em></p>
+                            <p><em>Automatic hits that scale with slot rank (heightened +2)</em></p>
                         </div>
 
                         <div class="heighten-example">
                             <h5>💚 Heal Versatility</h5>
                             <ul>
-                                <li><strong>1-action (1st):</strong> 1d8 + spellcasting modifier</li>
-                                <li><strong>2-action (1st):</strong> 1d8 + mod, ranged</li>
-                                <li><strong>3-action (1st):</strong> 1d8 + mod, 30-foot emanation</li>
-                                <li><strong>Heightened:</strong> +1d8 per level</li>
+                                <li><strong>1-action (1st):</strong> 1d8 by touch</li>
+                                <li><strong>2-action (1st):</strong> 1d8 + 8 at 30 feet</li>
+                                <li><strong>3-action (1st):</strong> 1d8 to everyone in a 30-foot emanation (damages undead too)</li>
+                                <li><strong>Heightened (+1):</strong> +1d8, and the 2-action version adds another 8</li>
                             </ul>
                             <p><em>Same spell, different action costs, all scalable</em></p>
                         </div>
@@ -623,77 +603,77 @@
         </section>
 
         <section class="metamagic">
-            <h2>Metamagic: Customizing Your Spells</h2>
-            <p>Metamagic is like having a toolkit that lets you modify your spells on the fly. Think of it as being able to add special features to your magical "apps" - making them stronger, faster, or work in new ways.</p>
+            <h2>Spellshape (formerly Metamagic): Customizing Your Spells</h2>
+            <p>Spellshape is like having a toolkit that lets you modify your spells on the fly. Think of it as being able to add special features to your magical "apps" - making them stronger, faster, or work in new ways.</p>
 
             <div class="metamagic-overview">
-                <h3>How Metamagic Works</h3>
-                <p>Most metamagic requires spending an additional action when casting the spell, effectively "overclocking" your magic for enhanced effects.</p>
+                <h3>How Spellshape Works</h3>
+                <p>Spellshape actions come from class feats. Each one is its own action that you use directly before Casting the Spell, effectively "overclocking" your magic for enhanced effects.</p>
                 
                 <div class="metamagic-mechanics">
                     <div class="mechanic-card">
                         <h4>⚡ Action Cost</h4>
-                        <p>Most metamagic adds 1 action to your spell's casting time</p>
-                        <p><strong>Example:</strong> Fireball normally costs 2 actions, but Empowered Fireball costs 3</p>
-                        <p><strong>Limitation:</strong> Can't use metamagic if it would make a spell cost more than 3 actions</p>
+                        <p>Most spellshape feats are a single action you spend right before the spell</p>
+                        <p><strong>Example:</strong> Fireball normally costs 2 actions; Widen Spell + Fireball costs 3</p>
+                        <p><strong>Limitation:</strong> You only have 3 actions a turn, and if you do anything else between the spellshape action and the spell, the benefit is wasted</p>
                     </div>
 
                     <div class="mechanic-card">
                         <h4>🎯 Flexibility</h4>
-                        <p>Can apply metamagic to any applicable spell you cast</p>
-                        <p><strong>Decision Point:</strong> Choose whether to use metamagic when you start casting</p>
+                        <p>Can apply a spellshape action to any spell that meets its conditions</p>
+                        <p><strong>Decision Point:</strong> Choose whether to use it before you start casting</p>
                         <p><strong>Resource Trade:</strong> Extra action for enhanced effect</p>
                     </div>
                 </div>
             </div>
 
             <div class="metamagic-types">
-                <h3>Common Metamagic Options</h3>
+                <h3>Common Spellshape Options</h3>
                 
                 <div class="metamagic-grid">
                     <div class="metamagic-card">
-                        <h4>🔥 Empower Spell</h4>
-                        <p><strong>Effect:</strong> Maximize some of your spell's damage dice</p>
-                        <p><strong>Example:</strong> Your Fireball's first 2d6 automatically roll 6s</p>
-                        <p><strong>Best For:</strong> Damage spells when you need guaranteed high damage</p>
-                        <p><strong>Strategic Use:</strong> Finishing off tough enemies, ensuring key targets go down</p>
+                        <h4>🔥 Overwhelming Energy</h4>
+                        <p><strong>Effect:</strong> Your spell ignores an amount of energy resistance equal to your level (a 10th-level feat)</p>
+                        <p><strong>Example:</strong> Your Fireball burns a fire-resistant foe at full strength</p>
+                        <p><strong>Best For:</strong> Damage spells against resistant enemies</p>
+                        <p><strong>Strategic Use:</strong> Fighting elementals, fiends and other foes that shrug off energy damage</p>
                     </div>
 
                     <div class="metamagic-card">
                         <h4>📏 Reach Spell</h4>
-                        <p><strong>Effect:</strong> Increase spell's range significantly</p>
-                        <p><strong>Example:</strong> Touch spell becomes 30 feet, 30-foot spell becomes 120 feet</p>
+                        <p><strong>Effect:</strong> Increase a spell's range by 30 feet</p>
+                        <p><strong>Example:</strong> Touch spell becomes 30 feet, 30-foot spell becomes 60 feet</p>
                         <p><strong>Best For:</strong> Touch spells, staying safe while casting</p>
                         <p><strong>Strategic Use:</strong> Healing allies from safety, attacking from maximum range</p>
                     </div>
 
                     <div class="metamagic-card">
                         <h4>🔄 Widen Spell</h4>
-                        <p><strong>Effect:</strong> Increase area of effect spells</p>
-                        <p><strong>Example:</strong> 20-foot burst becomes 30-foot burst</p>
+                        <p><strong>Effect:</strong> Increase the area of burst, cone or line spells that have no duration</p>
+                        <p><strong>Example:</strong> 20-foot burst becomes 25-foot burst</p>
                         <p><strong>Best For:</strong> Area damage spells, crowd control</p>
                         <p><strong>Strategic Use:</strong> Catching more enemies, affecting larger areas</p>
                     </div>
 
                     <div class="metamagic-card">
-                        <h4>🤫 Silent Spell</h4>
-                        <p><strong>Effect:</strong> Cast without verbal components</p>
-                        <p><strong>Example:</strong> Cast Fireball while silenced</p>
+                        <h4>🤫 Conceal Spell</h4>
+                        <p><strong>Effect:</strong> The spell gains the subtle trait, hiding the signs that you're casting (Remaster version; the old Silent Spell feat is gone)</p>
+                        <p><strong>Example:</strong> Cast a spell while silenced, or without onlookers noticing</p>
                         <p><strong>Best For:</strong> Stealth casting, bypassing silence effects</p>
-                        <p><strong>Strategic Use:</strong> Surprise attacks, overcoming verbal restrictions</p>
+                        <p><strong>Strategic Use:</strong> Social scenes and infiltration (the spell's effects can still be seen)</p>
                     </div>
 
                     <div class="metamagic-card">
-                        <h4>🎭 Still Spell</h4>
-                        <p><strong>Effect:</strong> Cast without somatic components</p>
-                        <p><strong>Example:</strong> Cast while hands are bound or holding weapons</p>
-                        <p><strong>Best For:</strong> Combat casting, restrictive situations</p>
-                        <p><strong>Strategic Use:</strong> Maintaining defenses while casting</p>
+                        <h4>🎭 Melodious Spell</h4>
+                        <p><strong>Effect:</strong> A bard weaves the casting into a performance, giving the spell the subtle trait</p>
+                        <p><strong>Example:</strong> Cast mid-song at a noble's party without anyone spotting the magic</p>
+                        <p><strong>Best For:</strong> Bards in social and stealthy situations</p>
+                        <p><strong>Strategic Use:</strong> The bard's answer to Conceal Spell</p>
                     </div>
 
                     <div class="metamagic-card">
-                        <h4>⚡ Quicken Spell</h4>
-                        <p><strong>Effect:</strong> Reduce casting time (high-level metamagic)</p>
+                        <h4>⚡ Quickened Casting</h4>
+                        <p><strong>Effect:</strong> Once per day, a free action that cuts 1 action from a cantrip or a spell at least 2 ranks below your highest slot (a 10th-level feat)</p>
                         <p><strong>Example:</strong> 2-action spell becomes 1-action</p>
                         <p><strong>Best For:</strong> Emergency casting, action economy optimization</p>
                         <p><strong>Strategic Use:</strong> Casting multiple spells per turn, emergency heals</p>
@@ -702,39 +682,39 @@
             </div>
 
             <div class="metamagic-strategy">
-                <h3>Metamagic Strategy</h3>
+                <h3>Spellshape Strategy</h3>
                 
                 <div class="strategy-scenarios">
                     <div class="scenario-card">
                         <h4>💀 The Finishing Move</h4>
-                        <p><strong>Situation:</strong> Boss monster at low health, need guaranteed damage</p>
-                        <p><strong>Solution:</strong> Empower Spell + Fireball</p>
-                        <p><strong>Result:</strong> Maximum damage on some dice ensures the kill</p>
-                        <p><strong>Cost:</strong> 3 actions instead of 2, but fight ends</p>
+                        <p><strong>Situation:</strong> A fire-resistant boss at low health, and you need your damage to land</p>
+                        <p><strong>Solution:</strong> Overwhelming Energy + Fireball</p>
+                        <p><strong>Result:</strong> The boss's fire resistance (up to your level) no longer soaks the blast</p>
+                        <p><strong>Cost:</strong> 3 actions instead of 2, but the damage actually lands</p>
                     </div>
 
                     <div class="scenario-card">
                         <h4>🏹 The Sniper Shot</h4>
-                        <p><strong>Situation:</strong> Enemy spellcaster far away, need to disrupt them</p>
-                        <p><strong>Solution:</strong> Reach Spell + Counterspell</p>
-                        <p><strong>Result:</strong> Can counter their spell from much farther away</p>
+                        <p><strong>Situation:</strong> Enemy spellcaster just out of range, need to disrupt them</p>
+                        <p><strong>Solution:</strong> Reach Spell + Slow</p>
+                        <p><strong>Result:</strong> Slow reaches 60 feet instead of 30 and can cost the caster an action every turn</p>
                         <p><strong>Cost:</strong> Extra action for tactical positioning</p>
                     </div>
 
                     <div class="scenario-card">
                         <h4>🤐 The Silent Strike</h4>
                         <p><strong>Situation:</strong> Need to cast while maintaining stealth</p>
-                        <p><strong>Solution:</strong> Silent Spell + Still Spell + Charm Person</p>
-                        <p><strong>Result:</strong> Enchant target without any visible or audible casting</p>
-                        <p><strong>Cost:</strong> Becomes 3-action spell, but maintains cover</p>
+                        <p><strong>Solution:</strong> Conceal Spell + Charm</p>
+                        <p><strong>Result:</strong> Charm the target without any obvious signs of casting</p>
+                        <p><strong>Cost:</strong> 3 actions in total, but maintains cover</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="spell-schools">
-            <h2>Schools of Magic: Specialized Approaches</h2>
-            <p>Schools of magic are like academic departments in a university - each one focuses on a different aspect of magical theory and practice. Understanding schools helps you specialize your character and understand how different spells work together.</p>
+            <h2>Schools of Magic: Specialized Approaches (pre-Remaster rules)</h2>
+            <p>Schools of magic are like academic departments in a university - each one focuses on a different aspect of magical theory and practice. The eight schools below are pre-Remaster rules (Core Rulebook, 2019): the Remaster removed spell schools, so spells no longer carry a school trait. They're still a handy way to think about what spells do, and you'll meet them in older books and adventures. The spell names in these cards are the pre-Remaster names.</p>
 
             <div class="school-overview">
                 <div class="school-grid">
@@ -746,7 +726,7 @@
                             <h4>Philosophy</h4>
                             <p>Channel pure magical energy to create dramatic effects. Like being an energy engineer who works with fundamental forces.</p>
                             
-                            <h4>Signature Spells</h4>
+                            <h4>Iconic Spells</h4>
                             <ul>
                                 <li><strong>Magic Missile:</strong> Pure force darts</li>
                                 <li><strong>Fireball:</strong> Explosive fire damage</li>
@@ -772,11 +752,11 @@
                             <h4>Philosophy</h4>
                             <p>Manipulate perception and create false sensory input. Like being a master of special effects and psychological manipulation.</p>
                             
-                            <h4>Signature Spells</h4>
+                            <h4>Iconic Spells</h4>
                             <ul>
                                 <li><strong>Invisibility:</strong> Become unseen</li>
                                 <li><strong>Mirror Image:</strong> Create false duplicates</li>
-                                <li><strong>Phantasmal Force:</strong> Implant false sensory experiences</li>
+                                <li><strong>Illusory Creature:</strong> Create a convincing false creature</li>
                                 <li><strong>Hallucinatory Terrain:</strong> Change how an area appears</li>
                             </ul>
                             
@@ -798,9 +778,9 @@
                             <h4>Philosophy</h4>
                             <p>Influence thoughts, emotions, and behavior. Like being a psychologist with supernatural tools.</p>
                             
-                            <h4>Signature Spells</h4>
+                            <h4>Iconic Spells</h4>
                             <ul>
-                                <li><strong>Charm Person:</strong> Make someone friendly</li>
+                                <li><strong>Charm:</strong> Make someone friendly</li>
                                 <li><strong>Command:</strong> Force a single action</li>
                                 <li><strong>Suggestion:</strong> Implant a course of action</li>
                                 <li><strong>Dominate:</strong> Control another's actions</li>
@@ -824,12 +804,12 @@
                             <h4>Philosophy</h4>
                             <p>Change the fundamental properties of matter and energy. Like being a molecular engineer who can reorganize reality.</p>
                             
-                            <h4>Signature Spells</h4>
+                            <h4>Iconic Spells</h4>
                             <ul>
                                 <li><strong>Enlarge:</strong> Increase size and strength</li>
-                                <li><strong>Polymorph:</strong> Change into different forms</li>
+                                <li><strong>Animal Form:</strong> Change into a dangerous animal</li>
                                 <li><strong>Haste:</strong> Accelerate time for allies</li>
-                                <li><strong>Disintegrate:</strong> Break down molecular bonds</li>
+                                <li><strong>Fly:</strong> Grant the power of flight</li>
                             </ul>
                             
                             <h4>Versatile Applications</h4>
@@ -844,25 +824,25 @@
 
                     <div class="school-card necromancy">
                         <h3>💀 Necromancy</h3>
-                        <p><strong>The Life and Death Mage's School:</strong> Vitality manipulation</p>
+                        <p><strong>The Life and Death Mage's School:</strong> Positive and negative energy (now vitality and void)</p>
                         
                         <div class="school-details">
                             <h4>Philosophy</h4>
                             <p>Control life force, death, and undeath. Like being a doctor who works with the fundamental forces of existence.</p>
                             
-                            <h4>Signature Spells</h4>
+                            <h4>Iconic Spells</h4>
                             <ul>
                                 <li><strong>Harm:</strong> Drain life energy</li>
                                 <li><strong>Heal:</strong> Restore life force</li>
-                                <li><strong>Animate Dead:</strong> Create undead servants</li>
+                                <li><strong>False Life:</strong> Bolster yourself with temporary Hit Points</li>
                                 <li><strong>Vampiric Touch:</strong> Steal vitality</li>
                             </ul>
                             
                             <h4>Dual Nature</h4>
                             <ul>
                                 <li>Both healing and harming magic</li>
-                                <li>Information gathering (speak with dead)</li>
-                                <li>Undead creation and control</li>
+                                <li>Information gathering (talking corpse)</li>
+                                <li>Undead-related magic</li>
                                 <li>Life force manipulation</li>
                             </ul>
                         </div>
@@ -876,9 +856,9 @@
                             <h4>Philosophy</h4>
                             <p>Move things through space and summon entities from elsewhere. Like being a logistics expert with teleportation technology.</p>
                             
-                            <h4>Signature Spells</h4>
+                            <h4>Iconic Spells</h4>
                             <ul>
-                                <li><strong>Summon Monster:</strong> Call forth creatures</li>
+                                <li><strong>Summon Animal:</strong> Call forth creatures</li>
                                 <li><strong>Teleport:</strong> Instant transportation</li>
                                 <li><strong>Web:</strong> Create restraining substances</li>
                                 <li><strong>Dimension Door:</strong> Short-range teleportation</li>
@@ -902,11 +882,11 @@
                             <h4>Philosophy</h4>
                             <p>Create barriers and protections against harm. Like being a security expert with supernatural tools.</p>
                             
-                            <h4>Signature Spells</h4>
+                            <h4>Iconic Spells</h4>
                             <ul>
-                                <li><strong>Shield:</strong> Deflect attacks</li>
+                                <li><strong>Shield (cantrip):</strong> Deflect attacks</li>
                                 <li><strong>Dispel Magic:</strong> Remove magical effects</li>
-                                <li><strong>Counterspell:</strong> Interrupt enemy spellcasting</li>
+                                <li><strong>Resist Energy:</strong> Shrug off fire, cold and other energy</li>
                                 <li><strong>Globe of Invulnerability:</strong> Magical immunity barrier</li>
                             </ul>
                             
@@ -928,7 +908,7 @@
                             <h4>Philosophy</h4>
                             <p>Gather information across time and space. Like being an intelligence analyst with supernatural sources.</p>
                             
-                            <h4>Signature Spells</h4>
+                            <h4>Iconic Spells</h4>
                             <ul>
                                 <li><strong>Detect Magic:</strong> Sense magical auras</li>
                                 <li><strong>See Invisibility:</strong> Pierce concealment</li>
@@ -950,31 +930,31 @@
 
             <div class="school-specialization">
                 <h3>School Specialization Benefits</h3>
-                <p>Some classes, especially Wizards, can specialize in a particular school for enhanced benefits:</p>
+                <p>Wizards have always specialized. Pre-Remaster wizards picked one of the eight schools (or became universalists); Remaster wizards instead attend an arcane school with its own curriculum of spells:</p>
                 
                 <div class="specialization-benefits">
                     <div class="benefit-card">
                         <h4>🎯 Enhanced Focus</h4>
-                        <p>Gain additional focus spells from your chosen school</p>
-                        <p><strong>Example:</strong> Evocation wizards get Force Bolt as a focus spell</p>
+                        <p>Gain a school focus spell and a Focus Point</p>
+                        <p><strong>Example:</strong> Pre-Remaster evocation wizards got Force Bolt as a focus spell</p>
                     </div>
 
                     <div class="benefit-card">
-                        <h4>💪 School Powers</h4>
-                        <p>Special abilities that enhance your school's magic</p>
-                        <p><strong>Example:</strong> Illusion wizards can make their illusions more convincing</p>
+                        <h4>💪 Curriculum</h4>
+                        <p>In the Remaster, each arcane school teaches a curriculum: a short list of spells at each rank</p>
+                        <p><strong>Example:</strong> You learn your school's curriculum spells and gain a curriculum cantrip</p>
                     </div>
 
                     <div class="benefit-card">
                         <h4>📚 Improved Learning</h4>
-                        <p>Easier to learn and prepare spells from your school</p>
-                        <p><strong>Example:</strong> Specialists can prepare extra spells from their school</p>
+                        <p>Extra spell slots for your school's spells</p>
+                        <p><strong>Example:</strong> One extra slot per rank, which can only hold a school (or curriculum) spell</p>
                     </div>
 
                     <div class="benefit-card">
-                        <h4>🚫 Opposition School</h4>
-                        <p>Must choose an opposition school that's harder to learn</p>
-                        <p><strong>Trade-off:</strong> Specialization focus for some versatility</p>
+                        <h4>🚫 No Opposition School</h4>
+                        <p>Unlike some other fantasy games, Pathfinder 2e never made you give up an "opposition" school</p>
+                        <p><strong>Trade-off:</strong> The extra slots are locked to your school's spells; wizards who want flexibility take the universalist (pre-Remaster) or unified magical theory (Remaster) path instead</p>
                     </div>
                 </div>
             </div>
@@ -991,34 +971,33 @@
                     <div class="scenario-exercise">
                         <h4>Character A: The Battle Controller</h4>
                         <p><strong>Concept:</strong> 5th-level Wizard who focuses on controlling the battlefield rather than dealing damage</p>
-                        <p><strong>Available Spell Levels:</strong> 3rd (2 slots), 2nd (3 slots), 1st (4 slots), Cantrips (5)</p>
+                        <p><strong>Available Spell Ranks:</strong> 3rd (2 slots), 2nd (3 slots), 1st (3 slots), Cantrips (5), plus any extra slots from your arcane school</p>
                         
                         <div class="spell-budget">
                             <p><strong>Your Mission:</strong> Choose spells that control enemies, protect allies, and solve problems</p>
                             
                             <div class="spell-selection">
-                                <h5>🎯 3rd-Level Spells (Choose 2)</h5>
-                                <p>Options: Fireball, Lightning Bolt, Counterspell, Slow, Haste, Dispel Magic, Fly</p>
+                                <h5>🎯 3rd-Rank Spells (Choose 2)</h5>
+                                <p>Options: Fireball, Lightning Bolt, Slow, Haste, Paralyze, Earthbind</p>
                                 <ul>
                                     <li>Choice 1: _______________</li>
                                     <li>Choice 2: _______________</li>
                                 </ul>
 
-                                <h5>🎯 2nd-Level Spells (Choose 3)</h5>
-                                <p>Options: Web, Mirror Image, Invisibility, Blur, Scorching Ray, Glitterdust, See Invisibility</p>
+                                <h5>🎯 2nd-Rank Spells (Choose 3)</h5>
+                                <p>Options: Web, Blur, Invisibility, Dispel Magic, Blazing Bolt, See the Unseen (formerly see invisibility)</p>
                                 <ul>
                                     <li>Choice 1: _______________</li>
                                     <li>Choice 2: _______________</li>
                                     <li>Choice 3: _______________</li>
                                 </ul>
 
-                                <h5>🎯 1st-Level Spells (Choose 4)</h5>
-                                <p>Options: Shield, Magic Missile, Color Spray, Sleep, Grease, Identify, Alarm, Feather Fall</p>
+                                <h5>🎯 1st-Rank Spells (Choose 3)</h5>
+                                <p>Options: Force Barrage, Sleep, Grease, Fear, Charm, Alarm, Gentle Landing (formerly feather fall)</p>
                                 <ul>
                                     <li>Choice 1: _______________</li>
                                     <li>Choice 2: _______________</li>
                                     <li>Choice 3: _______________</li>
-                                    <li>Choice 4: _______________</li>
                                 </ul>
                             </div>
                         </div>
@@ -1028,20 +1007,21 @@
                             <div class="solution">
                                 <p><strong>Optimal Controller Build:</strong></p>
                                 <ul>
-                                    <li><strong>3rd Level:</strong> Counterspell (stop enemy magic), Slow (debuff multiple enemies)</li>
-                                    <li><strong>2nd Level:</strong> Web (area control), Mirror Image (personal defense), Invisibility (utility/stealth)</li>
-                                    <li><strong>1st Level:</strong> Shield (defense), Grease (control), Sleep (disable weak enemies), Identify (utility)</li>
+                                    <li><strong>3rd Rank:</strong> Slow (cost a dangerous foe actions), Paralyze (lock down one enemy)</li>
+                                    <li><strong>2nd Rank:</strong> Web (area control), Blur (personal defense), Invisibility (utility/stealth)</li>
+                                    <li><strong>1st Rank:</strong> Grease (control), Sleep (disable weaker enemies), Fear (debuff)</li>
+                                    <li><strong>Cantrip:</strong> Shield (defense, and it's free to prepare)</li>
                                 </ul>
                                 
-                                <p><strong>Strategy:</strong> This build emphasizes battlefield control over raw damage. You shut down enemy spellcasters, slow groups of enemies, create difficult terrain, and have personal defenses while maintaining utility options.</p>
+                                <p><strong>Strategy:</strong> This build emphasizes battlefield control over raw damage. You take actions away from dangerous foes, create difficult terrain, and have personal defenses while maintaining utility options. (Counterspell isn't a spell in Pathfinder 2e: it's a class feat reaction that expends a matching prepared spell.)</p>
                             </div>
                         </details>
                     </div>
 
                     <div class="scenario-exercise">
                         <h4>Character B: The Divine Healer</h4>
-                        <p><strong>Concept:</strong> 5th-level Cleric focused on keeping the party alive and fighting evil</p>
-                        <p><strong>Special Consideration:</strong> Clerics get access to all divine spells, so selection is about daily preparation</p>
+                        <p><strong>Concept:</strong> 5th-level Cleric focused on keeping the party alive and fighting undead</p>
+                        <p><strong>Special Consideration:</strong> Clerics can prepare any common divine spell, so selection is about daily preparation. A healing font also gives five extra slots (at 5th level) that can only hold heal</p>
                         
                         <div class="divine-selection">
                             <p><strong>Today's Adventure:</strong> Exploring an undead-infested crypt</p>
@@ -1050,24 +1030,24 @@
                                 <h5>🌟 Key Considerations</h5>
                                 <ul>
                                     <li>Party will take sustained damage over multiple fights</li>
-                                    <li>Undead are immune to many effects but vulnerable to positive energy</li>
+                                    <li>Undead are immune to many effects but vulnerable to vitality (formerly positive energy)</li>
                                     <li>May encounter incorporeal undead (resistant to physical damage)</li>
                                     <li>Likely need light sources and detection magic</li>
                                 </ul>
 
                                 <h5>📋 Plan Your Spell Preparation</h5>
-                                <p><strong>3rd-Level (2 slots):</strong> _______, _______</p>
-                                <p><strong>2nd-Level (3 slots):</strong> _______, _______, _______</p>
-                                <p><strong>1st-Level (4 slots):</strong> _______, _______, _______, _______</p>
+                                <p><strong>3rd Rank (2 slots):</strong> _______, _______</p>
+                                <p><strong>2nd Rank (3 slots):</strong> _______, _______, _______</p>
+                                <p><strong>1st Rank (3 slots):</strong> _______, _______, _______</p>
                                 
                                 <p><strong>Key Divine Spells to Consider:</strong></p>
                                 <ul>
                                     <li><strong>Heal:</strong> Major healing, damages undead</li>
-                                    <li><strong>Harm:</strong> Major damage to undead</li>
+                                    <li><strong>Harm:</strong> Void damage (formerly negative energy) - it hurts the living and heals undead, so leave it behind today</li>
                                     <li><strong>Bless:</strong> Party-wide bonuses</li>
-                                    <li><strong>Protection from Evil:</strong> Defense against undead</li>
-                                    <li><strong>Detect Undead:</strong> Find hidden threats</li>
-                                    <li><strong>Light:</strong> Illuminate dark areas</li>
+                                    <li><strong>Protection (formerly protection from evil):</strong> +1 to AC and saves for an ally</li>
+                                    <li><strong>Vitality Lash (formerly disrupt undead):</strong> Cantrip that damages undead</li>
+                                    <li><strong>Light:</strong> Cantrip that illuminates dark areas</li>
                                 </ul>
                             </div>
                         </div>
@@ -1077,12 +1057,14 @@
                             <div class="solution">
                                 <p><strong>Anti-Undead Loadout:</strong></p>
                                 <ul>
-                                    <li><strong>3rd Level:</strong> Heal x2 (major healing/undead damage)</li>
-                                    <li><strong>2nd Level:</strong> Harm, Bless, See Invisibility</li>
-                                    <li><strong>1st Level:</strong> Heal, Protection from Evil, Detect Undead, Light</li>
+                                    <li><strong>3rd Rank:</strong> Heal x2 (major healing/undead damage)</li>
+                                    <li><strong>2nd Rank:</strong> Heal, Dispel Magic, See the Unseen (finds invisible foes)</li>
+                                    <li><strong>1st Rank:</strong> Bless, Protection, Heal</li>
+                                    <li><strong>Cantrips:</strong> Vitality Lash, Light</li>
+                                    <li><strong>Healing font:</strong> five more 3rd-rank Heals</li>
                                 </ul>
                                 
-                                <p><strong>Strategy:</strong> Multiple Heal spells serve double duty (healing allies, damaging undead). Harm provides another offensive option. Bless improves party performance. Detection and protection spells handle specific undead abilities.</p>
+                                <p><strong>Strategy:</strong> Multiple Heal spells serve double duty (healing allies, damaging undead). Harm stays at home because it would heal the undead. Bless improves party performance. Vitality Lash gives you an at-will attack, and protection and detection spells handle specific undead abilities.</p>
                             </div>
                         </details>
                     </div>
@@ -1090,24 +1072,24 @@
             </div>
 
             <div class="activity-two">
-                <h3>Activity Two: Metamagic Tactics</h3>
-                <p>Practice using metamagic to solve tactical problems:</p>
+                <h3>Activity Two: Spellshape Tactics</h3>
+                <p>Practice using spellshape actions (and heightening) to solve tactical problems:</p>
                 
                 <div class="metamagic-scenarios">
                     <div class="scenario-challenge">
                         <h4>Scenario A: The Distant Enemy</h4>
-                        <p><strong>Situation:</strong> Enemy wizard is 80 feet away on a tower, casting a dangerous spell next turn. Your Counterspell has a range of 60 feet.</p>
+                        <p><strong>Situation:</strong> Enemy wizard is 50 feet away on a tower and will start a dangerous spell next turn. You know Reach Spell, and your Slow has a range of 30 feet.</p>
                         
                         <div class="tactical-analysis">
                             <p><strong>Available Options:</strong></p>
                             <ul>
-                                <li>Move closer (but may trigger opportunity attacks)</li>
+                                <li>Move closer (but you may walk into the reach of guards with Reactive Strike)</li>
                                 <li>Use a different spell</li>
-                                <li>Apply metamagic to solve the range problem</li>
+                                <li>Apply a spellshape action to solve the range problem</li>
                             </ul>
                             
                             <p><strong>Your Solution:</strong></p>
-                            <p>Metamagic Used: _______________</p>
+                            <p>Spellshape Used: _______________</p>
                             <p>Total Actions Required: _______________</p>
                             <p>Final Effect: _______________</p>
                         </div>
@@ -1115,28 +1097,28 @@
                         <details>
                             <summary>Click for Optimal Solution</summary>
                             <div class="solution">
-                                <p><strong>Best Answer:</strong> Reach Spell + Counterspell</p>
+                                <p><strong>Best Answer:</strong> Reach Spell + Slow</p>
                                 <ul>
-                                    <li><strong>Normal Counterspell:</strong> 60-foot range, 2 actions</li>
-                                    <li><strong>Reach Counterspell:</strong> 120-foot range, 3 actions</li>
-                                    <li><strong>Result:</strong> Can counter from current position, stopping the dangerous spell</li>
+                                    <li><strong>Normal Slow:</strong> 30-foot range, 2 actions</li>
+                                    <li><strong>Reach Spell + Slow:</strong> 60-foot range, 3 actions</li>
+                                    <li><strong>Result:</strong> Unless the wizard critically succeeds at its Fortitude save, it's slowed and loses at least one action next turn, which can be enough to stop a 3-action spell</li>
                                 </ul>
-                                <p><em>The extra action is worth it to prevent whatever nasty spell they were planning!</em></p>
+                                <p><em>The extra action is worth it to blunt whatever nasty spell they were planning! (Spellshape actions can't be added to reactions such as Counterspell.)</em></p>
                             </div>
                         </details>
                     </div>
 
                     <div class="scenario-challenge">
                         <h4>Scenario B: The Perfect Moment</h4>
-                        <p><strong>Situation:</strong> Five enemies are perfectly lined up for a Fireball, but there's a 50% chance some will survive and attack your fragile allies.</p>
+                        <p><strong>Situation:</strong> You're a 7th-level wizard. Five enemies are clustered perfectly for a Fireball, but there's a real chance some will survive and attack your fragile allies.</p>
                         
                         <div class="damage-analysis">
                             <p><strong>Standard Fireball:</strong> 6d6 damage (average 21)</p>
                             <p><strong>Enemy HP:</strong> Most have around 25 HP</p>
-                            <p><strong>Problem:</strong> Some might survive with 1-10 HP and retaliate</p>
+                            <p><strong>Problem:</strong> Even on a failed save, some will survive with a few HP and retaliate</p>
                             
                             <p><strong>Your Enhancement Strategy:</strong></p>
-                            <p>Metamagic Applied: _______________</p>
+                            <p>Enhancement Applied: _______________</p>
                             <p>Expected Result: _______________</p>
                             <p>Action Cost: _______________</p>
                         </div>
@@ -1144,12 +1126,12 @@
                         <details>
                             <summary>Click for Maximum Impact</summary>
                             <div class="solution">
-                                <p><strong>Best Answer:</strong> Empower Spell + Fireball</p>
+                                <p><strong>Best Answer:</strong> Heighten it - cast Fireball from a 4th-rank slot (Pathfinder 2e has no "maximize the dice" spellshape)</p>
                                 <ul>
-                                    <li><strong>Effect:</strong> Maximize first 2d6 (guaranteed 12 damage)</li>
-                                    <li><strong>Total Damage:</strong> 12 + 4d6 (average 26 total)</li>
-                                    <li><strong>Result:</strong> Much more likely to kill all enemies</li>
-                                    <li><strong>Cost:</strong> 3 actions instead of 2, but fight likely ends</li>
+                                    <li><strong>Effect:</strong> 8d6 instead of 6d6</li>
+                                    <li><strong>Total Damage:</strong> 28 average on a failed save, 56 on a critical failure, 14 on a success</li>
+                                    <li><strong>Result:</strong> Most enemies that fail the save now drop; those that succeed still take half</li>
+                                    <li><strong>Cost:</strong> Still 2 actions, leaving your third action free - the price is a higher-rank slot</li>
                                 </ul>
                             </div>
                         </details>
@@ -1160,9 +1142,9 @@
                         <p><strong>Situation:</strong> Need to charm a guard without alerting others nearby. Normal spellcasting would be too obvious.</p>
                         
                         <div class="stealth-casting">
-                            <p><strong>Standard Charm Person:</strong></p>
+                            <p><strong>Standard Charm:</strong></p>
                             <ul>
-                                <li>Verbal and somatic components</li>
+                                <li>Concentrate and manipulate traits</li>
                                 <li>Clearly magical to observers</li>
                                 <li>2-action casting time</li>
                             </ul>
@@ -1175,19 +1157,19 @@
                             </ul>
                             
                             <p><strong>Your Stealth Solution:</strong></p>
-                            <p>Metamagic Combination: _______________</p>
+                            <p>Spellshape Used: _______________</p>
                             <p>Final Casting: _______________</p>
                         </div>
                         
                         <details>
                             <summary>Click for Perfect Infiltration</summary>
                             <div class="solution">
-                                <p><strong>Best Answer:</strong> Silent Spell + Still Spell + Charm Person</p>
+                                <p><strong>Best Answer:</strong> Conceal Spell + Charm (a bard would use Melodious Spell)</p>
                                 <ul>
-                                    <li><strong>Silent Spell:</strong> Removes verbal components (no words)</li>
-                                    <li><strong>Still Spell:</strong> Removes somatic components (no gestures)</li>
-                                    <li><strong>Result:</strong> Completely invisible spellcasting</li>
-                                    <li><strong>Cost:</strong> 3 actions total, but perfect stealth</li>
+                                    <li><strong>Conceal Spell:</strong> Gives the spell the subtle trait (1 action)</li>
+                                    <li><strong>Charm:</strong> 2 actions, Will save</li>
+                                    <li><strong>Result:</strong> No telltale words, gestures or glowing runes - though the guard still gets its save</li>
+                                    <li><strong>Cost:</strong> 3 actions total, but no one sees you cast</li>
                                 </ul>
                                 <p><em>The guard never sees it coming - they just suddenly find you much more likeable!</em></p>
                             </div>
@@ -1278,10 +1260,10 @@
                         <div class="optimization-examples">
                             <h5>Examples</h5>
                             <ul>
-                                <li><strong>Area Effects:</strong> One Fireball > three Magic Missiles when facing groups</li>
-                                <li><strong>Duration Spells:</strong> Haste affects multiple rounds, giving more total actions</li>
-                                <li><strong>Reactions:</strong> Counterspell and Shield provide defense without using your turn</li>
-                                <li><strong>Persistent Effects:</strong> Web continues affecting enemies for minutes</li>
+                                <li><strong>Area Effects:</strong> One Fireball beats a single-target spell when facing groups</li>
+                                <li><strong>Duration Spells:</strong> Haste lasts 1 minute, giving an extra Strike or Stride action every round</li>
+                                <li><strong>Reactions:</strong> The Shield cantrip's Shield Block and the Counterspell feat provide defense on enemy turns</li>
+                                <li><strong>Persistent Effects:</strong> Web keeps hindering enemies for a full minute</li>
                             </ul>
                         </div>
                     </div>
@@ -1294,9 +1276,9 @@
                             <h5>Classic Combinations</h5>
                             <ul>
                                 <li><strong>Web + Fireball:</strong> Restrain enemies, then blast the group</li>
-                                <li><strong>Grease + Create Pit:</strong> Slippery surface makes climbing out harder</li>
+                                <li><strong>Grease + Trip:</strong> Slippery ground plus a fighter's Trip keeps enemies on the floor</li>
                                 <li><strong>Invisibility + Buffs:</strong> Hidden character casts multiple enhancement spells</li>
-                                <li><strong>Silence + Stealth:</strong> Move quietly through areas with guards</li>
+                                <li><strong>Silence + Stealth:</strong> Silence on the party scout lets them move quietly past guards</li>
                             </ul>
                         </div>
                     </div>
@@ -1339,21 +1321,21 @@
                 <div class="combo-examples">
                     <div class="combo-card">
                         <h4>🕷️ The Web of Destruction</h4>
-                        <p><strong>Setup:</strong> Web (2 actions) → Next turn: Fireball (2 actions)</p>
+                        <p><strong>Setup:</strong> Web (3 actions) → Next turn: Fireball (2 actions)</p>
                         
                         <div class="combo-breakdown">
                             <h5>Why It Works</h5>
                             <ul>
-                                <li><strong>Web:</strong> Restrains enemies in 20-foot area, difficult terrain</li>
-                                <li><strong>Fireball:</strong> 20-foot burst perfectly matches Web area</li>
-                                <li><strong>Synergy:</strong> Restrained enemies can't easily escape the blast zone</li>
-                                <li><strong>Bonus:</strong> Web is flammable and takes damage too</li>
+                                <li><strong>Web:</strong> 10-foot burst of difficult terrain that can slow or immobilize enemies</li>
+                                <li><strong>Fireball:</strong> 20-foot burst easily covers the whole web</li>
+                                <li><strong>Synergy:</strong> Stuck enemies can't easily escape the blast zone</li>
+                                <li><strong>Catch:</strong> Fire clears the web, so the blast is the finale, not the opener</li>
                             </ul>
                             
                             <h5>Tactical Considerations</h5>
                             <ul>
                                 <li>Position Web to avoid catching allies</li>
-                                <li>Enemy saves determine restraint success</li>
+                                <li>Enemies' Athletics checks or Reflex saves determine whether they get stuck</li>
                                 <li>Works best when enemies are grouped together</li>
                                 <li>Alternative: Use Lightning Bolt for line of enemies</li>
                             </ul>
@@ -1362,13 +1344,13 @@
 
                     <div class="combo-card">
                         <h4>⚡ The Haste Advantage</h4>
-                        <p><strong>Setup:</strong> Haste on fighter → Fighter gets 4 actions per turn</p>
+                        <p><strong>Setup:</strong> Haste on fighter → Fighter gets 4 actions per turn (the extra one can only Strike or Stride)</p>
                         
                         <div class="combo-breakdown">
                             <h5>Mathematical Advantage</h5>
                             <ul>
                                 <li><strong>Normal Fighter Turn:</strong> 3 actions (Strike, Strike, other)</li>
-                                <li><strong>Hasted Fighter Turn:</strong> 4 actions (Strike x3, other)</li>
+                                <li><strong>Hasted Fighter Turn:</strong> 4 actions (Strike x3, other; the third Strike takes the −10 multiple attack penalty)</li>
                                 <li><strong>Duration:</strong> 1 minute = 10 rounds</li>
                                 <li><strong>Total Gain:</strong> 10 extra actions over the fight</li>
                             </ul>
@@ -1377,7 +1359,7 @@
                             <ul>
                                 <li><strong>Melee Fighters:</strong> More attacks = more damage</li>
                                 <li><strong>Mobile Characters:</strong> Extra movement for positioning</li>
-                                <li><strong>Spellcasters:</strong> More spells per turn (occasionally)</li>
+                                <li><strong>Spellcasters:</strong> Rarely - the extra action can't be used to cast</li>
                                 <li><strong>Anyone Critical:</strong> When one person needs to accomplish a lot</li>
                             </ul>
                         </div>
@@ -1390,10 +1372,10 @@
                         <div class="combo-breakdown">
                             <h5>Strategic Value</h5>
                             <ul>
-                                <li><strong>Safety:</strong> Can't be targeted while invisible</li>
-                                <li><strong>Positioning:</strong> Move freely without opportunity attacks</li>
+                                <li><strong>Safety:</strong> Enemies must find you first, and even then attacks against a hidden target need a flat check</li>
+                                <li><strong>Positioning:</strong> Move around without being seen</li>
                                 <li><strong>Surprise:</strong> Enemies don't know what you're planning</li>
-                                <li><strong>Duration:</strong> Invisibility lasts until you attack or cast offensive spell</li>
+                                <li><strong>Duration:</strong> Invisibility lasts 10 minutes but ends after you use a hostile action (heightened to 4th rank, it lasts 1 minute and doesn't end)</li>
                             </ul>
                             
                             <h5>Safe Spells to Cast</h5>
@@ -1413,9 +1395,9 @@
                         <div class="combo-breakdown">
                             <h5>Layered Control</h5>
                             <ul>
-                                <li><strong>Slow:</strong> Reduces enemy actions and speed</li>
-                                <li><strong>Web:</strong> Restrains and creates difficult terrain</li>
-                                <li><strong>Grease:</strong> Adds slipping hazard</li>
+                                <li><strong>Slow:</strong> Takes away enemy actions</li>
+                                <li><strong>Web:</strong> Difficult terrain that can immobilize</li>
+                                <li><strong>Grease:</strong> Adds a slipping hazard that can knock foes prone</li>
                                 <li><strong>Result:</strong> Enemies become nearly immobilized</li>
                             </ul>
                             
@@ -1433,17 +1415,17 @@
 
             <div class="counterspell-mastery">
                 <h3>Counterspell: The Art of Magical Defense</h3>
-                <p>Counterspell is like being a magical goalkeeper - it requires timing, positioning, and game sense to use effectively.</p>
+                <p>Counterspell is like being a magical goalkeeper - it requires timing, positioning, and game sense to use effectively. In Pathfinder 2e it's a class feat (in Player Core, wizards and witches can take Counterspell), not a spell.</p>
                 
                 <div class="counterspell-guide">
                     <div class="cs-mechanics">
                         <h4>🎯 Counterspell Mechanics</h4>
                         <ul>
-                            <li><strong>Trigger:</strong> Enemy begins casting a spell</li>
-                            <li><strong>Reaction:</strong> Spend your reaction to attempt</li>
-                            <li><strong>Range:</strong> 60 feet (120 with Reach metamagic)</li>
-                            <li><strong>Check:</strong> Roll against enemy's spell DC</li>
-                            <li><strong>Success:</strong> Their spell fails and is lost</li>
+                            <li><strong>Trigger:</strong> A creature Casts a Spell that you have prepared</li>
+                            <li><strong>Reaction:</strong> Spend your reaction and expend that spell</li>
+                            <li><strong>Range:</strong> You must be able to see the spell's manifestations</li>
+                            <li><strong>Check:</strong> A counteract check against the enemy's spell; your spell's rank compared with theirs sets how well you must roll</li>
+                            <li><strong>Success:</strong> Their spell is counteracted and the casting is wasted</li>
                         </ul>
                     </div>
 
@@ -1466,8 +1448,8 @@
                             <ul>
                                 <li><strong>Save for Big Spells:</strong> Don't waste on cantrips</li>
                                 <li><strong>Watch Initiative Order:</strong> Know when enemies act</li>
-                                <li><strong>Position Carefully:</strong> Stay within 60 feet of key targets</li>
-                                <li><strong>Consider Metamagic:</strong> Reach for distant casters</li>
+                                <li><strong>Prepare to Counter:</strong> You can only counter spells you have prepared, so guess the enemy's favorites</li>
+                                <li><strong>Remember Dispel Magic:</strong> It ends spells already cast and works at 120 feet</li>
                             </ul>
                         </div>
                     </div>
@@ -1490,23 +1472,23 @@
                         <div class="implement-examples">
                             <h5>Staves</h5>
                             <ul>
-                                <li><strong>Staff of Fire:</strong> Extra fire spells and enhanced fire magic</li>
-                                <li><strong>Staff of Healing:</strong> Additional healing spells per day</li>
-                                <li><strong>Staff of Power:</strong> Multiple spell types and combat capability</li>
+                                <li><strong>Staff of Fire:</strong> Extra fire spells, cast using the staff's daily charges</li>
+                                <li><strong>Staff of Healing:</strong> Additional heal spells per day, and a bonus to the healing</li>
+                                <li><strong>Staff of Power:</strong> A high-level staff with many spells and combat capability</li>
                             </ul>
 
                             <h5>Wands</h5>
                             <ul>
-                                <li><strong>Wand of Magic Missiles:</strong> Reliable damage without spending slots</li>
-                                <li><strong>Wand of Fear:</strong> Crowd control option</li>
-                                <li><strong>Wand of Detect Magic:</strong> Unlimited magical detection</li>
+                                <li><strong>Magic Wand (any spell of 1st rank or higher):</strong> One extra casting per day without spending a slot, plus a risky overcharge</li>
+                                <li><strong>Wand of Fear:</strong> A crowd control option once per day</li>
+                                <li><strong>Specialty Wands:</strong> Such as the wand of manifold missiles or wand of smoldering fireballs, which add a twist to the spell</li>
                             </ul>
 
-                            <h5>Orbs and Crystals</h5>
+                            <h5>Scrolls and Other Aids</h5>
                             <ul>
                                 <li><strong>Crystal Ball:</strong> Enhanced scrying abilities</li>
-                                <li><strong>Orb of Storms:</strong> Weather magic specialization</li>
-                                <li><strong>Focusing Crystal:</strong> Improved spell accuracy or damage</li>
+                                <li><strong>Scrolls:</strong> One-shot spells from your tradition's list</li>
+                                <li><strong>Bonded Item (wizards):</strong> Drain it once per day to recast a spell you already cast</li>
                             </ul>
                         </div>
                     </div>
@@ -1518,23 +1500,23 @@
                         <div class="enhancement-examples">
                             <h5>Spell Attack and DC</h5>
                             <ul>
-                                <li><strong>+1 Striking Rune (on staff):</strong> Better spell attack rolls</li>
-                                <li><strong>Potency Crystal:</strong> Higher spell DCs</li>
-                                <li><strong>Bracers of Spell Power:</strong> Enhanced magical energy</li>
+                                <li><strong>No "spell potency" rune:</strong> Your spell attack and DC rise through proficiency and your key attribute, not items</li>
+                                <li><strong>Runes on a staff:</strong> Potency and striking runes improve the staff's Strikes only, never your spells</li>
+                                <li><strong>Apex Items (high level):</strong> Raise one attribute modifier, which nudges your DC up indirectly</li>
                             </ul>
 
                             <h5>Spell Slots and Recovery</h5>
                             <ul>
-                                <li><strong>Pearl of Power:</strong> Recover expended spell slots</li>
-                                <li><strong>Ring of Spell Storing:</strong> Store spells for later use</li>
-                                <li><strong>Vest of the Archmagi:</strong> Additional high-level slots</li>
+                                <li><strong>Staves:</strong> Prepare one each day to gain charges for casting its spells</li>
+                                <li><strong>Wands:</strong> A daily extra casting of one spell</li>
+                                <li><strong>Ring of Wizardry (Core Rulebook):</strong> Additional spell slots for wizards</li>
                             </ul>
 
-                            <h5>Metamagic Enhancement</h5>
+                            <h5>Spell-Altering Items</h5>
                             <ul>
-                                <li><strong>Rod of Maximized Spell:</strong> Automatic Empower effect</li>
-                                <li><strong>Silent Spell Gem:</strong> Cast silently once per day</li>
-                                <li><strong>Quicken Spell Rod:</strong> Reduce casting time</li>
+                                <li><strong>Wand of Manifold Missiles:</strong> Keeps firing missiles on later turns</li>
+                                <li><strong>Wand of Smoldering Fireballs:</strong> A fireball that leaves lingering fire damage</li>
+                                <li><strong>Spellshape Feats:</strong> Pathfinder 2e puts most spell tweaks in feats rather than rods</li>
                             </ul>
                         </div>
                     </div>
@@ -1546,23 +1528,23 @@
                         <div class="protection-examples">
                             <h5>Spell Defense</h5>
                             <ul>
-                                <li><strong>Mantle of Spell Resistance:</strong> Resist incoming magic</li>
-                                <li><strong>Amulet of Proof against Detection:</strong> Block divination</li>
-                                <li><strong>Ring of Counterspells:</strong> Automatic counterspell reactions</li>
+                                <li><strong>Resilient Rune:</strong> Item bonus to all saving throws, on armor or explorer's clothing</li>
+                                <li><strong>Energy-Resistant Rune:</strong> Resistance to one energy damage type</li>
+                                <li><strong>Spellguard Shield:</strong> A shield that helps against hostile spells</li>
                             </ul>
 
                             <h5>Physical Defense</h5>
                             <ul>
-                                <li><strong>Mage Armor (permanent):</strong> Constant AC bonus</li>
-                                <li><strong>Ring of Protection:</strong> AC and saving throw bonuses</li>
-                                <li><strong>Cloak of Displacement:</strong> Miss chance from illusion</li>
+                                <li><strong>Armor Potency Runes:</strong> Item bonus to AC, even on explorer's clothing</li>
+                                <li><strong>Mystic Armor (formerly mage armor):</strong> A spell that protects you all day</li>
+                                <li><strong>Shield Cantrip:</strong> +1 AC and a Shield Block when you need it</li>
                             </ul>
 
                             <h5>Emergency Escape</h5>
                             <ul>
-                                <li><strong>Boots of Teleportation:</strong> Emergency escape option</li>
-                                <li><strong>Feather Fall Ring:</strong> Automatic fall protection</li>
-                                <li><strong>Dimension Door Scroll:</strong> One-use escape spell</li>
+                                <li><strong>Boots of Bounding:</strong> Faster movement and longer leaps</li>
+                                <li><strong>Feather Token:</strong> One-use items with handy effects</li>
+                                <li><strong>Translocate Scroll (formerly dimension door):</strong> One-use escape spell</li>
                             </ul>
                         </div>
                     </div>
@@ -1574,23 +1556,23 @@
                         <div class="utility-examples">
                             <h5>Information Gathering</h5>
                             <ul>
-                                <li><strong>Eyes of the Eagle:</strong> Enhanced vision</li>
-                                <li><strong>Gem of Seeing:</strong> True sight ability</li>
-                                <li><strong>Lens of Detection:</strong> See invisible creatures</li>
+                                <li><strong>Eagle-Eye Elixir:</strong> Alchemical boost to Perception</li>
+                                <li><strong>Truesight (formerly true seeing):</strong> See through illusions and transformations</li>
+                                <li><strong>See the Unseen Scroll:</strong> See invisible creatures</li>
                             </ul>
 
                             <h5>Movement and Access</h5>
                             <ul>
-                                <li><strong>Boots of Flying:</strong> Personal flight</li>
+                                <li><strong>Winged Boots:</strong> Personal flight</li>
                                 <li><strong>Chime of Opening:</strong> Unlock doors and containers</li>
                                 <li><strong>Rope of Climbing:</strong> Magical assistance with vertical movement</li>
                             </ul>
 
                             <h5>Communication</h5>
                             <ul>
-                                <li><strong>Sending Stones:</strong> Long-distance communication</li>
-                                <li><strong>Helm of Telepathy:</strong> Mind-to-mind contact</li>
-                                <li><strong>Crystal of Communication:</strong> Group messaging</li>
+                                <li><strong>Sending:</strong> A spell for long-distance communication</li>
+                                <li><strong>Telepathy:</strong> A spell for mind-to-mind contact</li>
+                                <li><strong>Message:</strong> A cantrip for quiet words across a battlefield</li>
                             </ul>
                         </div>
                     </div>
@@ -1615,7 +1597,7 @@
 
                             <h5>Mid-Level Focuses (Levels 6-10)</h5>
                             <ul>
-                                <li><strong>Power Enhancement:</strong> Better spell attack/DC bonuses</li>
+                                <li><strong>Power Enhancement:</strong> Staves and wands of your best spells</li>
                                 <li><strong>Spell Expansion:</strong> More slots or new spell options</li>
                                 <li><strong>Specialized Tools:</strong> Items for your character's niche</li>
                             </ul>
@@ -1667,10 +1649,10 @@
 
         <section class="next-steps">
             <h2>What's Next?</h2>
-            <p>You've now mastered the intricate art of magic in Pathfinder 2.0! From understanding the philosophical differences between magical traditions to optimizing spell combinations and item synergies, you have the knowledge to make magic feel truly magical while remaining tactically effective.</p>
+            <p>You've now mastered the intricate art of magic in Pathfinder 2e! From understanding the philosophical differences between magical traditions to optimizing spell combinations and item synergies, you have the knowledge to make magic feel truly magical while remaining tactically effective.</p>
             
             <div class="upcoming-topics">
-                <h3>Upcoming Lectures</h3>
+                <h3>Coming Up in This Guide</h3>
                 <ul>
                     <li><strong>Equipment and Treasure:</strong> Weapons, armor, magical items, and wealth management</li>
                     <li><strong>Advanced Combat Tactics:</strong> Conditions, environmental hazards, and tactical depth</li>
@@ -1685,8 +1667,8 @@
                 <ul>
                     <li>✅ Understand the four magical traditions and their philosophies</li>
                     <li>✅ Master spell preparation methods (prepared vs spontaneous)</li>
-                    <li>✅ Use metamagic to enhance spells tactically</li>
-                    <li>✅ Recognize spell schools and their specializations</li>
+                    <li>✅ Use spellshape actions to enhance spells tactically</li>
+                    <li>✅ Recognize the pre-Remaster spell schools and the Remaster terms that replaced them</li>
                     <li>✅ Combine spells for maximum effectiveness</li>
                     <li>✅ Integrate magical items into your casting strategy</li>
                     <li>🎯 Practice spell selection for different scenarios</li>
@@ -1700,7 +1682,7 @@
                 <ul>
                     <li><strong>Archives of Nethys:</strong> Complete spell database with search filters</li>
                     <li><strong>Spell Slot Calculators:</strong> Tools for managing daily resources</li>
-                    <li><strong>Metamagic Guides:</strong> Advanced tactics and combinations</li>
+                    <li><strong>Spellshape Guides:</strong> Advanced tactics and combinations</li>
                     <li><strong>Magical Item Compendiums:</strong> Comprehensive equipment lists</li>
                     <li><strong>Class Guides:</strong> Specialized advice for each spellcasting class</li>
                 </ul>
@@ -1709,27 +1691,13 @@
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_skills.html">Skills &amp; Exploration</a>
+    <a class="next" href="/pf2_items.html">Equipment &amp; Treasure</a>
+</div>
         <p>The arcane mysteries are yours to command - may your spells fly true and your magic inspire legends!</p>
   
     </footer>
-    <nav class="prev-next-nav">
-        <a href="/pf2_skills.html" class="nav-prev">← Skills</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_items.html" class="nav-next">Items →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

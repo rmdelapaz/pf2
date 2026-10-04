@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2e: Player Collaboration and Table Dynamics</title>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="icon" href="/favicon.png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
+    <title>Player Collaboration - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 12</span>
         <h1>Pathfinder 2e: Player Collaboration and Table Dynamics</h1>
         <p><em>Building Great Gaming Groups and Positive Social Experiences</em></p>
     </header>
@@ -148,7 +127,7 @@ Best: "Seeing the orc advancing on Zara, my character calls out 'Not on my watch
 □ Offer suggestions while respecting others' autonomy
 
 Combat Communication Examples:
-- "If you can knock it prone, I can get sneak attack damage"
+- "If you can knock it prone, it's off-guard (formerly flat-footed) and I can get sneak attack damage"
 - "I'll try to flank with you next round"
 - "Save your big spell - I think I can handle this"
 - "I'm low on hit points and might need healing soon"
@@ -311,9 +290,9 @@ Positioning Examples:
 
 Synergy Examples:
 - Fighter knocks enemy prone → Rogue gets sneak attack
-- Wizard casts web → Ranger uses precise shot through gaps
-- Cleric blesses weapons → Everyone gets attack bonuses
-- Barbarian grapples → Others attack with advantage
+- Wizard slows or immobilizes enemies → Ranger focuses fire on their Hunt Prey target
+- Cleric casts bless → Allies in the aura get a +1 status bonus to attack rolls
+- Barbarian Grapples → The grabbed enemy is off-guard, so everyone's attacks land more often
 
 🛡️ PROTECTIVE ACTIONS
 □ Use Aid actions to help allies succeed at crucial moments
@@ -322,8 +301,8 @@ Synergy Examples:
 □ Share healing resources and support abilities
 
 Protection Examples:
-- "I ready my shield to block if the orc attacks the wizard"
-- "I'll use my reaction to heal you if you go down"
+- "I'll Raise my Shield and stand in the doorway so the orc has to get past me to reach the wizard"
+- "If you go down, I'll heal you on my turn - so take the risky shot"
 - "Move behind me - I have better AC to tank this hit"
 
 🎪 DRAMATIC MOMENTS
@@ -817,7 +796,7 @@ Resource Sharing:
 - NPC and location databases
 
 🎮 GAMING-SPECIFIC TOOLS
-□ D&D Beyond or Pathbuilder for character management
+□ Pathbuilder 2e or Pathfinder Nexus on Demiplane for character management
 □ Roll20 or Foundry for virtual tabletop needs
 □ Campaign tracking apps for progress monitoring
 □ Dice rolling apps for consistency
@@ -1121,27 +1100,13 @@ Based on assessment results:
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_char_adv.html">Character Advancement</a>
+    <a class="next" href="/pf2_gm.html">Game Master Essentials</a>
+</div>
         <p>Great gaming experiences are built on great relationships - may your tables be filled with laughter, collaboration, and lasting friendships!</p>
       
     </footer>
-    <nav class="prev-next-nav">
-        <a href="/pf2_char_adv.html" class="nav-prev">← Character Advancement</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_horror.html" class="nav-next">Horror →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

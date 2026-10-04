@@ -3,220 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>150 Pathfinder 2E Character Names</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>150 Character Names - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+        /* Name cards: grid of small panels (the grid itself is not a card) */
+        main .name-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+            gap: 12px;
+            margin: 1rem 0 1.6rem;
+            background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important;
+        }
+        main .name-grid .name-card {
+            background: var(--surface) !important;
+            border: 1px solid var(--border) !important;
+            border-left: 4px solid var(--gold) !important;
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
             margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #8B4513 0%, #CD853F 25%, #DEB887 50%, #F4A460 75%, #FFE4B5 100%);
-            color: #333;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 3px solid #8B4513;
-        }
-        h1 {
-            text-align: center;
-            color: #8B4513;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #A0522D;
-            border-bottom: 3px solid #CD853F;
-            padding-bottom: 10px;
-            margin-top: 40px;
-        }
-        .name-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .name-card {
-            background: linear-gradient(145deg, #FFF8DC, #F5DEB3);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #CD853F;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.2s ease;
-            border: 1px solid #DEB887;
-        }
-        .name-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            border-left-color: #8B4513;
-        }
-        .name {
-            font-weight: bold;
-            color: #8B4513;
-            font-size: 1.1em;
-        }
-        .origin {
-            font-size: 0.9em;
-            color: #A0522D;
-            font-style: italic;
-        }
-        .race-suggestion {
-            font-size: 0.8em;
-            color: #654321;
-            margin-top: 5px;
-        }
+        .name { font-weight: 700; color: var(--accent); font-size: 1.1em; }
+        .origin { font-size: 0.92em; color: var(--muted); font-style: italic; }
+        .race-suggestion { font-size: 0.88em; color: var(--text); margin-top: 4px; }
         .location-tag {
-            background: #CD853F;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 12px;
-            font-size: 0.7em;
-            margin-top: 5px;
-            display: inline-block;
+            background: var(--accent); color: var(--accent-ink);
+            padding: 2px 8px; border-radius: 12px; font-size: 0.78em; margin-top: 6px; display: inline-block;
         }
-        .tips-section {
-            background: #FFF8DC;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
-            border: 2px solid #DEB887;
+        main .example-box, main .analogy-box, main .pathfinder-box {
+            background: color-mix(in srgb, var(--c) 8%, var(--surface)) !important;
+            border-left: 4px solid var(--c) !important;
         }
-        .example-box {
-            background: #FFE4E1;
-            border: 2px solid #F0A0A0;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        .analogy-box {
-            background: #F0FFF0;
-            border: 2px solid #90EE90;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        .pathfinder-box {
-            background: #E6E6FA;
-            border: 2px solid #9370DB;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        .canvas-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-        canvas {
-            border: 3px solid #8B4513;
-            border-radius: 10px;
-            max-width: 100%;
-        }
-        .region-legend {
+        main .example-box { --c: #c0392b; }
+        main .analogy-box { --c: #2e8b3e; }
+        main .pathfinder-box { --c: #7b3fb0; }
+        .canvas-container { text-align: center; }
+        main .region-legend {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+            gap: 8px; margin: 1rem 0;
         }
-        .region-item {
-            background: #F5DEB3;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #CD853F;
-            text-align: center;
-        }
-
-        /* Dark mode overrides */
-        [data-theme="dark"] body {
-            background: linear-gradient(135deg, #1a0f08 0%, #2c1a0e 25%, #3d2516 50%, #2c1a0e 75%, #1a0f08 100%);
-            color: #d4c5b0;
-        }
-        [data-theme="dark"] .container {
-            background: rgba(30, 25, 20, 0.95);
-            border-color: #6d4c2a;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
-        [data-theme="dark"] h1 { color: #d4a56a; }
-        [data-theme="dark"] h2 { color: #c4875a; border-bottom-color: #6d4c2a; }
-        [data-theme="dark"] .name-card {
-            background: linear-gradient(145deg, #2a2018, #33261a);
-            border-color: #5a3d24;
-            border-left-color: #6d4c2a;
-        }
-        [data-theme="dark"] .name-card:hover { border-left-color: #d4a56a; }
-        [data-theme="dark"] .name { color: #d4a56a; }
-        [data-theme="dark"] .origin { color: #b88a5e; }
-        [data-theme="dark"] .race-suggestion { color: #a08060; }
-        [data-theme="dark"] .location-tag { background: #6d4c2a; }
-        [data-theme="dark"] .tips-section {
-            background: #2a2018;
-            border-color: #5a3d24;
-        }
-        [data-theme="dark"] .example-box {
-            background: #2a1a1a;
-            border-color: #6d3a3a;
-        }
-        [data-theme="dark"] .analogy-box {
-            background: #1a2a1a;
-            border-color: #3a6d3a;
-        }
-        [data-theme="dark"] .pathfinder-box {
-            background: #1f1a2a;
-            border-color: #4a3a6d;
-        }
-        [data-theme="dark"] canvas { border-color: #6d4c2a; }
-        [data-theme="dark"] .region-item {
-            background: #33261a;
-            border-color: #5a3d24;
+        main .region-legend .region-item {
+            background: var(--surface-2); border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 8px; margin: 0; text-align: center;
         }
     </style>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
-    <div class="container">
-        <h1>⚔️ 150 Pathfinder 2E Character Names ⚔️</h1>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+    <header>
+        <span class="lesson-kicker">Tool</span>
+        <h1>150 Pathfinder 2e Character Names</h1>
+        <p class="subtitle">Names from across Golarion, with the regional traditions behind them</p>
+    </header>
+
+    <main>
         
         <div class="tips-section">
             <h2>🗺️ Pathfinder's Golarion: A World of Diverse Naming Traditions</h2>
-            <p>Pathfinder 2E's setting of Golarion draws inspiration from real-world cultures and historical periods, creating rich naming traditions that reflect the world's diverse nations and peoples. Understanding these regional influences helps create authentic characters that fit seamlessly into the setting.</p>
+            <p>Pathfinder Second Edition's setting of Golarion draws inspiration from real-world cultures and historical periods, creating rich naming traditions that reflect the world's diverse nations and peoples. Understanding these regional influences helps create authentic characters that fit seamlessly into the setting.</p>
             
             <div class="region-legend">
                 <div class="region-item"><strong>Absalom</strong><br>Cosmopolitan Mix</div>
@@ -265,7 +120,7 @@
 
         <div class="canvas-container">
             <canvas id="pathfinderWheel" width="450" height="450"></canvas>
-            <p><em>Golarion Regional Name Generator - Click to explore different regions!</em></p>
+            <p><em>Golarion Regional Name Generator - Click the wheel to pick a random region!</em></p>
         </div>
 
         <h2>👑 Male Character Names (50)</h2>
@@ -278,8 +133,8 @@
         <div class="name-grid" id="neutralNames"></div>
 
         <div class="pathfinder-box">
-            <h3>🎲 Pathfinder 2E Specific Considerations</h3>
-            <p><strong>Ancestry Matters:</strong> Pathfinder 2E's ancestry system affects naming conventions. Elves live for centuries and may have names reflecting multiple eras, while halflings often use descriptive nicknames.</p>
+            <h3>🎲 Pathfinder 2e Specific Considerations</h3>
+            <p><strong>Ancestry Matters:</strong> Pathfinder 2e's ancestry system affects naming conventions. Elves live for centuries and may have names reflecting multiple eras, while halflings often use descriptive nicknames.</p>
             <p><strong>Regional Backgrounds:</strong> Your character's background can suggest naming patterns. A Noble from Cheliax might have multiple names and titles, while a Street Urchin from Absalom might only have a nickname.</p>
             <p><strong>Religious Influence:</strong> Many Golarion names reflect religious traditions. Followers of Sarenrae might have sun-themed names, while worshippers of Pharasma might have death-related surnames.</p>
         </div>
@@ -325,7 +180,7 @@
 
         <div class="example-box">
             <h3>🗡️ Practical Campaign Applications</h3>
-            <p><strong>Age of Ashes AP:</strong> Names from Breachill should reflect the town's Chelaxian founding but with frontier practicality.</p>
+            <p><strong>Age of Ashes AP:</strong> Breachill is a small frontier town, so names there should have a frontier practicality.</p>
             <p><strong>Extinction Curse AP:</strong> Circus performers might have stage names from various cultures, reflecting the traveling show's diverse membership.</p>
             <p><strong>Agents of Edgewatch AP:</strong> Absalom guard names should reflect the city's cosmopolitan nature and professional military structure.</p>
             <p><strong>Abomination Vaults AP:</strong> Otari is a small logging town, so names should be practical and reflect the working-class population.</p>
@@ -335,7 +190,7 @@
             <h3>🌟 Unique Pathfinder Elements</h3>
             <p><strong>Starstone Aspirants:</strong> Characters seeking to take the Test of the Starstone might adopt new names reflecting their divine aspirations.</p>
             <p><strong>Pathfinder Society:</strong> Society agents often use codenames or titles earned through their adventures and discoveries.</p>
-            <p><strong>Academic Traditions:</strong> Magaambya scholars, Twilight Academy students, or other learned institutions have their own naming conventions.</p>
+            <p><strong>Academic Traditions:</strong> Magaambya scholars, Arcanamirium graduates, or members of other learned institutions have their own naming conventions.</p>
             <p><strong>Revolutionary Names:</strong> Characters from Galt might have changed their names during the Red Revolution, abandoning noble titles for egalitarian monikers.</p>
         </div>
 
@@ -344,7 +199,7 @@
             <ul>
                 <li><strong>Golarion Linguistics:</strong> How the Common tongue and regional languages affect naming</li>
                 <li><strong>Historical Naming:</strong> How names change during major events like the Chelish Civil War or Goblinblood Wars</li>
-                <li><strong>Planar Influences:</strong> How extraplanar heritage affects naming (tieflings, aasimars, etc.)</li>
+                <li><strong>Planar Influences:</strong> How extraplanar heritage affects naming (nephilim, the Remaster heritage that replaced aasimars and tieflings)</li>
                 <li><strong>Guild Traditions:</strong> Professional organizations and their naming conventions</li>
                 <li><strong>Magical Academies:</strong> How formal magical education influences name adoption</li>
                 <li><strong>Adventuring Companies:</strong> How party names and reputation affect individual identity</li>
@@ -353,7 +208,7 @@
         </div>
 
         <div class="mermaid">
-            pie title Pathfinder Name Inspiration Sources
+            pie title Name Inspiration Sources (rough weighting)
                 "Regional Culture" : 30
                 "Ancestry Heritage" : 25
                 "Religious Tradition" : 15
@@ -367,31 +222,38 @@
             <p>Pathfinder's world has a rich history that affects naming conventions. The Age of Darkness saw many traditional names lost, while the recent Goblinblood Wars have influenced frontier naming. The fall of Ancient Osirion means many "pharaonic" names are considered archaic, while Cheliax's diabolical turn has made infernal names more common among the nobility.</p>
             <p>Understanding these historical layers helps create names that feel authentic to Golarion's timeline and your character's place within it.</p>
         </div>
-    </div>
+    </main>
+
+    <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_100.html">Sample Characters</a>
+    <a class="next" href="/pf2_digital_tools.html">Digital Tools</a>
+</div>
+    </footer>
 
     <script>
         // Pathfinder character name data with regional and ancestry influences
         const maleNames = [
             {name: "Marcus Aurelius Thrune", origin: "Cheliax", race: "Human Noble"},
-            {name: "Khalid ibn Rashid al-Qadiri", origin: "Qadira", race: "Human/Ifrit"},
+            {name: "Khalid ibn Rashid al-Qadiri", origin: "Qadira", race: "Human (fire-touched heritage)"},
             {name: "Ezra Blackwood", origin: "Varisia", race: "Human Ranger"},
             {name: "Dmitri Surtova", origin: "Brevoy", race: "Human Noble"},
             {name: "Khaemwaset Ankhu", origin: "Osirion", race: "Human/Sphinx"},
             {name: "Thorek Ironforge", origin: "Five Kings Mountains", race: "Dwarf"},
             {name: "Silvyr Moonwhisper", origin: "Kyonin", race: "Elf"},
-            {name: "Bingo Applebottom", origin: "Halfling settlements", race: "Halfling"},
+            {name: "Bunzo Applebottom", origin: "Halfling settlements", race: "Halfling"},
             {name: "Ragnar Ironwolf", origin: "Land of Linnorm Kings", race: "Human Barbarian"},
             {name: "Chen Wei-Ming", origin: "Tian Xia", race: "Human/Kitsune"},
             {name: "Kofi Ashanti", origin: "Mwangi Expanse", race: "Human/Anadi"},
             {name: "Lysander Draconis", origin: "Taldor", race: "Human Noble"},
-            {name: "Gavril Rostova", origin: "Ustalav", race: "Human/Dhampir"},
+            {name: "Gavril Rostov", origin: "Ustalav", race: "Human/Dhampir"},
             {name: "Bjorn the Skald", origin: "Land of Linnorm Kings", race: "Human Bard"},
             {name: "Alessandro di Medici", origin: "Taldor", race: "Human Merchant"},
             {name: "Hakim al-Zawiya", origin: "Qadira", race: "Human Cleric"},
-            {name: "Erik von Zarovich", origin: "Ustalav", race: "Human/Vampire"},
+            {name: "Erik Vaszolyi", origin: "Ustalav", race: "Human/Vampire"},
             {name: "Tobin Steadyhand", origin: "Andoran", race: "Halfling Rogue"},
             {name: "Valdris Ironbeard", origin: "Five Kings Mountains", race: "Dwarf Fighter"},
-            {name: "Seraphim Dawnbringer", origin: "Absalom", race: "Aasimar Paladin"},
+            {name: "Seraphim Dawnbringer", origin: "Absalom", race: "Nephilim Champion"},
             {name: "Casimir Volkov", origin: "Irrisen", race: "Human Witch"},
             {name: "Thaddeus Kroft", origin: "Korvosa", race: "Human Guard"},
             {name: "Malik ibn Farid", origin: "Qadira", race: "Human Merchant"},
@@ -403,35 +265,35 @@
             {name: "Zhao Xinyi", origin: "Tian Xia", race: "Human Monk"},
             {name: "Kwame Goldweaver", origin: "Mwangi Expanse", race: "Human Alchemist"},
             {name: "Lucianus Maximus", origin: "Taldor", race: "Human Gladiator"},
-            {name: "Petyr Baelish", origin: "Brevoy", race: "Human Rogue"},
+            {name: "Pyotr Valesh", origin: "Brevoy", race: "Human Rogue"},
             {name: "Omar al-Hakeem", origin: "Qadira", race: "Human Oracle"},
-            {name: "Klaus von Wulfenbach", origin: "Ustalav", race: "Human Inventor"},
+            {name: "Klaus von Wulfhausen", origin: "Ustalav", race: "Human Inventor"},
             {name: "Cedric Ashford", origin: "Andoran", race: "Human Gunslinger"},
-            {name: "Thorin Oathkeeper", origin: "Five Kings Mountains", race: "Dwarf Paladin"},
+            {name: "Thorgar Oathkeeper", origin: "Five Kings Mountains", race: "Dwarf Champion"},
             {name: "Fenris Moonhunter", origin: "Kyonin", race: "Elf Ranger"},
-            {name: "Samwell Brandybuck", origin: "Halfling settlements", race: "Halfling"},
+            {name: "Sammel Barleybrook", origin: "Halfling settlements", race: "Halfling"},
             {name: "Olaf Frostbeard", origin: "Land of Linnorm Kings", race: "Human Skald"},
             {name: "Li Wei", origin: "Tian Xia", race: "Human/Tengu"},
             {name: "Jabari Stormcaller", origin: "Mwangi Expanse", race: "Human Druid"},
             {name: "Constantine Palaiologos", origin: "Taldor", race: "Human Cleric"},
-            {name: "Viktor Frankenstein", origin: "Ustalav", race: "Human Alchemist"},
+            {name: "Viktor Kessendorf", origin: "Ustalav", race: "Human Alchemist"},
             {name: "Yusuf al-Battani", origin: "Qadira", race: "Human Astronomer"},
             {name: "Wilhelm Staufen", origin: "Cheliax", race: "Human Hellknight"},
-            {name: "Dain Ironfoot", origin: "Five Kings Mountains", race: "Dwarf King"},
-            {name: "Celeborn Starweaver", origin: "Kyonin", race: "Elf Noble"},
-            {name: "Merric Buckleberry", origin: "Halfling settlements", race: "Halfling"},
+            {name: "Durgan Ironfoot", origin: "Five Kings Mountains", race: "Dwarf King"},
+            {name: "Caladrel Starweaver", origin: "Kyonin", race: "Elf Noble"},
+            {name: "Merrin Buckleberry", origin: "Halfling settlements", race: "Halfling"},
             {name: "Erik Bloodaxe", origin: "Land of Linnorm Kings", race: "Human Jarl"},
             {name: "Hiroshi Yamamoto", origin: "Tian Xia", race: "Human Samurai"}
         ];
 
         const femaleNames = [
             {name: "Livia Claudia Thrune", origin: "Cheliax", race: "Human Noble"},
-            {name: "Jamila bint Rashid", origin: "Qadira", race: "Human/Ifrit"},
+            {name: "Jamila bint Rashid", origin: "Qadira", race: "Human (fire-touched heritage)"},
             {name: "Sarah Blackwood", origin: "Varisia", race: "Human Witch"},
             {name: "Natasha Surtova", origin: "Brevoy", race: "Human Noble"},
             {name: "Nefertiti Khenti", origin: "Osirion", race: "Human/Sphinx"},
             {name: "Daina Ironforge", origin: "Five Kings Mountains", race: "Dwarf"},
-            {name: "Aerdrie Moonwhisper", origin: "Kyonin", race: "Elf"},
+            {name: "Aeriel Moonwhisper", origin: "Kyonin", race: "Elf"},
             {name: "Rosie Greenhill", origin: "Halfling settlements", race: "Halfling"},
             {name: "Sigrid Ironwolf", origin: "Land of Linnorm Kings", race: "Human Barbarian"},
             {name: "Li Mei-Lin", origin: "Tian Xia", race: "Human/Kitsune"},
@@ -441,37 +303,37 @@
             {name: "Astrid the Skald", origin: "Land of Linnorm Kings", race: "Human Bard"},
             {name: "Isabella di Medici", origin: "Taldor", race: "Human Merchant"},
             {name: "Fatima al-Zawiya", origin: "Qadira", race: "Human Cleric"},
-            {name: "Elizaveta von Zarovich", origin: "Ustalav", race: "Human/Vampire"},
-            {name: "Belladonna Took", origin: "Andoran", race: "Halfling Rogue"},
+            {name: "Elizaveta Vaszolyi", origin: "Ustalav", race: "Human/Vampire"},
+            {name: "Belladonna Thistlewick", origin: "Andoran", race: "Halfling Rogue"},
             {name: "Vera Ironbeard", origin: "Five Kings Mountains", race: "Dwarf Fighter"},
-            {name: "Seraphina Dawnbringer", origin: "Absalom", race: "Aasimar Paladin"},
-            {name: "Anastasia Volkov", origin: "Irrisen", race: "Human Witch"},
+            {name: "Seraphina Dawnbringer", origin: "Absalom", race: "Nephilim Champion"},
+            {name: "Anastasia Volkova", origin: "Irrisen", race: "Human Witch"},
             {name: "Cressida Kroft", origin: "Korvosa", race: "Human Guard"},
-            {name: "Zahra ibn Farid", origin: "Qadira", race: "Human Merchant"},
+            {name: "Zahra bint Farid", origin: "Qadira", race: "Human Merchant"},
             {name: "Liberty Pemberton", origin: "Andoran", race: "Human Revolutionary"},
             {name: "Marta Hammerfall", origin: "Five Kings Mountains", race: "Dwarf Cleric"},
-            {name: "Arwen Silverleaf", origin: "Kyonin", race: "Elf Wizard"},
+            {name: "Aravelle Silverleaf", origin: "Kyonin", race: "Elf Wizard"},
             {name: "Pearl Goodfellow", origin: "River Kingdoms", race: "Halfling Bard"},
             {name: "Helga Ironjaw", origin: "Land of Linnorm Kings", race: "Human/Were"},
             {name: "Mei Xinyi", origin: "Tian Xia", race: "Human Monk"},
             {name: "Asha Goldweaver", origin: "Mwangi Expanse", race: "Human Alchemist"},
-            {name: "Claudia Maximus", origin: "Taldor", race: "Human Gladiator"},
-            {name: "Catelyn Baelish", origin: "Brevoy", race: "Human Rogue"},
+            {name: "Claudia Maxima", origin: "Taldor", race: "Human Gladiator"},
+            {name: "Katarina Valesh", origin: "Brevoy", race: "Human Rogue"},
             {name: "Layla al-Hakeem", origin: "Qadira", race: "Human Oracle"},
-            {name: "Agatha von Wulfenbach", origin: "Ustalav", race: "Human Inventor"},
+            {name: "Agatha von Wulfhausen", origin: "Ustalav", race: "Human Inventor"},
             {name: "Victoria Ashford", origin: "Andoran", race: "Human Gunslinger"},
-            {name: "Disa Oathkeeper", origin: "Five Kings Mountains", race: "Dwarf Paladin"},
+            {name: "Disa Oathkeeper", origin: "Five Kings Mountains", race: "Dwarf Champion"},
             {name: "Luna Moonhunter", origin: "Kyonin", race: "Elf Ranger"},
-            {name: "Primrose Brandybuck", origin: "Halfling settlements", race: "Halfling"},
+            {name: "Primrose Barleybrook", origin: "Halfling settlements", race: "Halfling"},
             {name: "Ingrid Frostbeard", origin: "Land of Linnorm Kings", race: "Human Skald"},
             {name: "Xiu Wei", origin: "Tian Xia", race: "Human/Tengu"},
             {name: "Kesi Stormcaller", origin: "Mwangi Expanse", race: "Human Druid"},
             {name: "Helena Palaiologos", origin: "Taldor", race: "Human Cleric"},
-            {name: "Elsa Frankenstein", origin: "Ustalav", race: "Human Alchemist"},
+            {name: "Elsa Kessendorf", origin: "Ustalav", race: "Human Alchemist"},
             {name: "Aisha al-Battani", origin: "Qadira", race: "Human Astronomer"},
             {name: "Cordelia Staufen", origin: "Cheliax", race: "Human Hellknight"},
             {name: "Dara Ironfoot", origin: "Five Kings Mountains", race: "Dwarf King"},
-            {name: "Galadriel Starweaver", origin: "Kyonin", race: "Elf Noble"},
+            {name: "Galathiel Starweaver", origin: "Kyonin", race: "Elf Noble"},
             {name: "Daisy Buckleberry", origin: "Halfling settlements", race: "Halfling"},
             {name: "Freydis Bloodaxe", origin: "Land of Linnorm Kings", race: "Human Jarl"},
             {name: "Akiko Yamamoto", origin: "Tian Xia", race: "Human Samurai"}
@@ -479,17 +341,17 @@
 
         const neutralNames = [
             {name: "River Starfall", origin: "Absalom", race: "Any"},
-            {name: "Sage ibn Hakim", origin: "Qadira", race: "Human/Djinn"},
-            {name: "Storm Blackwood", origin: "Varisia", race: "Human/Orc"},
+            {name: "Sage al-Hakim", origin: "Qadira", race: "Human/Djinn"},
+            {name: "Storm Blackwood", origin: "Varisia", race: "Orc or Dromaar"},
             {name: "Phoenix Draconis", origin: "Taldor", race: "Human/Dragon"},
-            {name: "Raven Nightwhisper", origin: "Ustalav", race: "Human/Undead"},
+            {name: "Raven Nightwhisper", origin: "Ustalav", race: "Human/Dhampir"},
             {name: "Ember Ironforge", origin: "Five Kings Mountains", race: "Dwarf"},
             {name: "Whisper Moonleaf", origin: "Kyonin", race: "Elf"},
             {name: "Lucky Greenhill", origin: "Halfling settlements", race: "Halfling"},
             {name: "Winter Frostborn", origin: "Land of Linnorm Kings", race: "Human/Giant"},
             {name: "Jade Feng", origin: "Tian Xia", race: "Human/Kami"},
             {name: "Sun Ashanti", origin: "Mwangi Expanse", race: "Human/Elemental"},
-            {name: "Dawn the Lightbringer", origin: "Absalom", race: "Aasimar"},
+            {name: "Dawn the Lightbringer", origin: "Absalom", race: "Nephilim"},
             {name: "Ash Volkov", origin: "Irrisen", race: "Human/Fey"},
             {name: "Vale Kroft", origin: "Korvosa", race: "Human"},
             {name: "Ocean al-Bahr", origin: "Qadira", race: "Human/Marid"},
@@ -564,6 +426,17 @@
             '#00D2D3', '#FF9F43', '#10AC84', '#EE5A24'
         ];
 
+        // Dark text on light segments, white text on dark segments
+        function textColorFor(hex) {
+            const n = parseInt(hex.slice(1), 16);
+            const lin = c => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+            const L = 0.2126 * lin(n >> 16) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255);
+            return L > 0.2 ? '#1a1a1a' : '#ffffff';
+        }
+
+        // Caption under the wheel doubles as the result display
+        const wheelCaption = canvas.parentElement.querySelector('p em');
+
         function drawPathfinderWheel() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             const centerX = canvas.width / 2;
@@ -589,9 +462,10 @@
                 
                 ctx.save();
                 ctx.rotate(startAngle + (endAngle - startAngle) / 2);
-                ctx.fillStyle = '#333';
+                ctx.fillStyle = textColorFor(regionColors[i]);
                 ctx.font = 'bold 12px Arial';
                 ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
                 ctx.fillText(regions[i], radius * 0.7, 0);
                 ctx.restore();
             }
@@ -631,8 +505,14 @@
                     requestAnimationFrame(animate);
                 } else {
                     spinning = false;
-                    const finalRegion = regions[Math.floor(((rotation % (2 * Math.PI)) / (2 * Math.PI)) * regions.length)];
-                    alert(`Your character hails from: ${finalRegion}! Check the names from this region for inspiration.`);
+                    // The pointer sits at angle 0 (right side). Segment i spans
+                    // [i*step + rotation, (i+1)*step + rotation], so find the
+                    // segment containing angle -rotation in wheel coordinates.
+                    const step = (2 * Math.PI) / regions.length;
+                    const local = ((-rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+                    const finalRegion = regions[Math.floor(local / step) % regions.length];
+                    const msg = `Your character hails from: ${finalRegion}! Check the names from this region for inspiration. (Click to spin again.)`;
+                    if (wheelCaption) wheelCaption.textContent = msg;
                 }
             }
             
@@ -642,24 +522,6 @@
         canvas.addEventListener('click', spinPathfinderWheel);
         drawPathfinderWheel();
     </script>
-    <nav class="prev-next-nav">
-        <a href="/pf2_100.html" class="nav-prev">← 100 Characters</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_groups.html" class="nav-next">Group Dynamics →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

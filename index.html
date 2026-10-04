@@ -3,94 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction to Pathfinder 2.0 RPG</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>The Pathfinder 2e Guide: Three Actions, Endless Heroes</title>
+    <meta name="description" content="A free 17-part guide to Pathfinder Second Edition (Remaster rules): character creation, the three-action economy, degrees of success, skills, magic, equipment, tactics, advancement, game mastering and campaigns, plus a dice roller with exact odds, 315 sample characters and 150 names.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
+    <style>
+        .home { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding-bottom: 24px; }
+        .hero {
+            margin-top: 28px;
+            padding: clamp(36px, 7vw, 72px) clamp(20px, 5vw, 56px);
+            border-radius: 20px;
+            background:
+                radial-gradient(circle at 85% 20%, rgba(232, 194, 106, 0.22), transparent 45%),
+                linear-gradient(135deg, var(--hero-1), var(--hero-2));
+            color: #fff;
+            box-shadow: var(--shadow);
+        }
+        .hero h1 { color: #fff; font-size: clamp(2.1rem, 6vw, 3.4rem); margin: 0 0 14px; }
+        .hero p { color: rgba(255, 255, 255, 0.93); font-size: clamp(1.05rem, 2.2vw, 1.22rem); max-width: 64ch; margin: 0 0 24px; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+        .btn-hero { display: inline-block; padding: 12px 22px; border-radius: 999px; font-weight: 700; text-decoration: none; background: #fff; color: #2a0f1a; border: 2px solid #fff; }
+        .btn-hero:hover { background: #f7e6ec; color: #2a0f1a; }
+        .btn-hero.ghost { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.7); }
+        .btn-hero.ghost:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+        .turn-card {
+            display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap;
+            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px; padding: 10px 16px; font-weight: 700; color: #fff;
+        }
+        .turn-card .pips { font-size: 1.3rem; letter-spacing: 4px; color: #f2d48a; }
+        .turn-card .lbl { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.9); }
+
+        .section-head { margin: 52px 0 16px; }
+        .section-head h2 { margin: 0 0 8px; }
+        .section-head p { color: var(--muted); max-width: 70ch; margin: 0; }
+        .group-label { font-family: "Alegreya", Georgia, serif; font-weight: 700; color: var(--gold); letter-spacing: 0.04em; text-transform: uppercase; margin: 26px 0 10px; font-size: 0.95rem; }
+        .part-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 14px; }
+        .part-card {
+            display: flex; flex-direction: column; gap: 6px;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+            padding: 18px 20px; box-shadow: var(--shadow); text-decoration: none; color: var(--text);
+            border-left: 4px solid var(--accent); transition: transform 0.15s, border-color 0.15s;
+        }
+        .part-card:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--text); }
+        .part-card .num { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+        .part-card h3 { margin: 0; font-size: 1.12rem; color: var(--heading); }
+        .part-card h3 .icon { margin-right: 6px; }
+        .part-card p { margin: 0; color: var(--muted); font-size: 0.97rem; line-height: 1.55; }
+        .part-card.tool { border-left-color: var(--gold); }
+        .quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 12px; }
+        .quick div { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+        .quick h3 { margin: 0 0 4px; font-size: 1.02rem; color: var(--heading); }
+        .quick p { margin: 0; color: var(--text); font-size: 0.95rem; line-height: 1.55; }
+        .home-footer { text-align: center; color: var(--muted); margin-top: 36px; }
+    </style>
 </head>
 <body>
-    <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
+<nav class="site-nav">
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+
+<div class="home">
+    <header class="hero">
+        <h1>The Pathfinder 2e Guide</h1>
+        <p>Pathfinder Second Edition from Paizo is a fantasy roleplaying game with deep character building and clean, tactical turns: three actions, one reaction, and four degrees of success on every roll. This 17-part guide follows the Remaster rules (Player Core and GM Core) and takes you from your first character to running whole campaigns.</p>
+        <div class="hero-actions">
+            <a class="btn-hero" href="/pf2_intro.html">Start with Part 1 →</a>
+            <a class="btn-hero ghost" href="/pf2_dice_roller.html">Roll the Dice</a>
         </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
-    <header>
-        <h1>Welcome to Pathfinder 2.0 RPG</h1>
-        <p class="subtitle">Your Gateway to Epic Adventures</p>
+        <div class="turn-card" aria-label="A turn: three actions and one reaction">
+            <span class="lbl">Your turn</span><span class="pips" aria-hidden="true">◆◆◆ ⟲</span><span class="lbl">3 actions + 1 reaction</span>
+        </div>
     </header>
 
     <main>
-        <h3>Pathfinder 2nd RPG</h3>
-            <p>Like D&amp;D's more complex cousin. Some call if Mathfinder due to it's "crunchiness" aka complexity. Offers more character customization options but requires more rule-learning. Think of it as the "advanced mode" of fantasy gaming.</p>
-            <ul>
-                <li><a href="/pf2_intro.html">Introduction</a></li>
-                <li><a href="/pf2_char.html">Character Creation</a></li>
-                <li><a href="/pf2_adv_char_creation.html">Advanced Character Creation</a></li>
-                <li><a href="/pf2_character_examples.html">Character Examples</a></li>
-                <li><a href="/pf2_100.html">100 Characters</a></li>
-                <li><a href="/pf2_names.html">Character Names</a></li>
-                <li><a href="/pf2_groups.html">Character Group Dynamics</a></li>
-                <li><a href="/pf2_actions.html">Core Mechanics</a></li>
-                <li><a href="/pf2_dice_roller.html">Dice Roller</a></li>
-                <li><a href="/pf2_skills.html">Skills</a></li>
-                <li><a href="/pf2_magic.html">Magic</a></li>
-                <li><a href="/pf2_items.html">Items</a></li>
-                <li><a href="/pf2_adv_combat.html">Advanced Combat </a></li>
-                  <li><a href="/pf2_char_adv.html">Character Advancement and Growth</a></li>
-                <li><a href="/pf2_player_collab.html">Player Collaboration</a></li>
-                <li><a href="/pf2_horror.html">Horror</a></li>
-                <li><a href="/pf2_campaign.html">Campaign</a></li>
-                <li><a href="/pf2_gm.html">Introduction to Game Mastery</a></li>
-                <li><a href="/pf2_worldbuilding.html">Worldbuilding</a></li>
-                <li><a href="/pf2_digital_tools.html">Digital Tools</a></li>
-                <li><a href="/pf2_community.html">Community</a></li>
-           
-               
-            </ul>
+        <section>
+            <div class="section-head">
+                <h2>Pathfinder 2e at a Glance</h2>
+                <p>Four ideas carry most of the game. Each part of the guide builds on them.</p>
+            </div>
+            <div class="quick">
+                <div><h3>Three Actions</h3><p>On your turn you get three actions and one reaction. Move, Strike, cast a spell (most take two actions) or Raise a Shield: mix them however you like.</p></div>
+                <div><h3>Degrees of Success</h3><p>Roll d20 + modifier against a DC. Beat it by 10 for a critical success; miss by 10 for a critical failure. A natural 20 or 1 shifts the result one step.</p></div>
+                <div><h3>Proficiency</h3><p>Trained, expert, master and legendary add 2, 4, 6 or 8 plus your level, so everyone grows every level and the best get much better.</p></div>
+                <div><h3>Build Choices</h3><p>Ancestry, heritage, background and class, then a feat at almost every level. That's where the game's famous customization lives.</p></div>
+            </div>
+        </section>
 
-    <footer>
-        <p>Ready for your first adventure? The dice are calling, and legends await!</p>
+        <section>
+            <div class="section-head">
+                <h2>The 17 Parts</h2>
+                <p>Players come first, then the rules in play, then running the game. Read in order or jump to what you need.</p>
+            </div>
+
+            <p class="group-label">Heroes</p>
+            <div class="part-grid">
+                <a class="part-card" href="/pf2_intro.html"><span class="num">Part 1</span><h3><span class="icon" aria-hidden="true">🗺️</span>Welcome to Pathfinder 2e</h3><p>What the game is, how a session flows and what makes it different.</p></a>
+                <a class="part-card" href="/pf2_char.html"><span class="num">Part 2</span><h3><span class="icon" aria-hidden="true">🧝</span>Character Creation</h3><p>Ancestry, heritage, background, class and attribute boosts, step by step.</p></a>
+                <a class="part-card" href="/pf2_adv_char_creation.html"><span class="num">Part 3</span><h3><span class="icon" aria-hidden="true">🧩</span>Advanced Character Creation</h3><p>Feats, archetypes and builds that hold together from level 1 to 20.</p></a>
+                <a class="part-card" href="/pf2_character_examples.html"><span class="num">Part 4</span><h3><span class="icon" aria-hidden="true">👤</span>Character Examples</h3><p>Worked heroes and the adventuring parties they fit into.</p></a>
+                <a class="part-card" href="/pf2_groups.html"><span class="num">Part 5</span><h3><span class="icon" aria-hidden="true">👥</span>Party Dynamics</h3><p>Roles, synergy and building a party whose members help each other.</p></a>
+            </div>
+
+            <p class="group-label">Play the Game</p>
+            <div class="part-grid">
+                <a class="part-card" href="/pf2_actions.html"><span class="num">Part 6</span><h3><span class="icon" aria-hidden="true">⚙️</span>Core Mechanics</h3><p>The three-action economy, checks, degrees of success and the multiple attack penalty.</p></a>
+                <a class="part-card" href="/pf2_skills.html"><span class="num">Part 7</span><h3><span class="icon" aria-hidden="true">🧭</span>Skills &amp; Exploration</h3><p>Skill actions, exploration activities and what to do between fights.</p></a>
+                <a class="part-card" href="/pf2_magic.html"><span class="num">Part 8</span><h3><span class="icon" aria-hidden="true">✨</span>Magic</h3><p>The four traditions, spell ranks, cantrips, focus spells and casting in play.</p></a>
+                <a class="part-card" href="/pf2_items.html"><span class="num">Part 9</span><h3><span class="icon" aria-hidden="true">🛡️</span>Equipment &amp; Treasure</h3><p>Weapons, armor, runes, Bulk and the magic items that keep you level-appropriate.</p></a>
+                <a class="part-card" href="/pf2_adv_combat.html"><span class="num">Part 10</span><h3><span class="icon" aria-hidden="true">⚔️</span>Advanced Combat</h3><p>Conditions, positioning, flanking and teamwork tactics.</p></a>
+                <a class="part-card" href="/pf2_char_adv.html"><span class="num">Part 11</span><h3><span class="icon" aria-hidden="true">📈</span>Character Advancement</h3><p>Levels, proficiency increases, feats and growing your hero's story.</p></a>
+                <a class="part-card" href="/pf2_player_collab.html"><span class="num">Part 12</span><h3><span class="icon" aria-hidden="true">🤝</span>Player Collaboration</h3><p>Table dynamics, communication and playing well together.</p></a>
+            </div>
+
+            <p class="group-label">Run the Game</p>
+            <div class="part-grid">
+                <a class="part-card" href="/pf2_gm.html"><span class="num">Part 13</span><h3><span class="icon" aria-hidden="true">📖</span>Game Master Essentials</h3><p>Running sessions, setting DCs and building balanced encounters.</p></a>
+                <a class="part-card" href="/pf2_campaign.html"><span class="num">Part 14</span><h3><span class="icon" aria-hidden="true">🏗️</span>Campaign &amp; Adventure Design</h3><p>Structuring adventures and campaigns that hold together.</p></a>
+                <a class="part-card" href="/pf2_worldbuilding.html"><span class="num">Part 15</span><h3><span class="icon" aria-hidden="true">🌍</span>Worldbuilding</h3><p>Golarion and your own settings: cultures, faiths and places worth exploring.</p></a>
+                <a class="part-card" href="/pf2_horror.html"><span class="num">Part 16</span><h3><span class="icon" aria-hidden="true">🕯️</span>Horror &amp; Atmosphere</h3><p>Dread, pacing and safety tools for darker Pathfinder games.</p></a>
+                <a class="part-card" href="/pf2_community.html"><span class="num">Part 17</span><h3><span class="icon" aria-hidden="true">🏘️</span>Community Building</h3><p>Finding players, starting groups and growing a welcoming community.</p></a>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-head">
+                <h2>Tools</h2>
+                <p>Use these at the table or while you build characters.</p>
+            </div>
+            <div class="part-grid">
+                <a class="part-card tool" href="/pf2_dice_roller.html"><span class="num">Tool</span><h3><span class="icon" aria-hidden="true">🎲</span>Dice Roller</h3><p>Checks with all four degrees of success, exact odds, MAP, Hero Point rerolls and damage.</p></a>
+                <a class="part-card tool" href="/pf2_100.html"><span class="num">Tool</span><h3><span class="icon" aria-hidden="true">🧙</span>Sample Characters</h3><p>315 ready-made heroes for solo play and parties of two to six, all Remaster-legal.</p></a>
+                <a class="part-card tool" href="/pf2_names.html"><span class="num">Tool</span><h3><span class="icon" aria-hidden="true">📜</span>150 Character Names</h3><p>Names from across Golarion, with the regional traditions behind them.</p></a>
+                <a class="part-card tool" href="/pf2_digital_tools.html"><span class="num">Tool</span><h3><span class="icon" aria-hidden="true">💻</span>Digital Tools</h3><p>Character builders, virtual tabletops and rules references for Pathfinder 2e.</p></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="home-footer">
+        <p>Pathfinder is published by Paizo Inc. The full rules are in Player Core and GM Core, and free on Archives of Nethys, the official online rules reference.</p>
     </footer>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+</div>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

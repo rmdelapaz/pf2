@@ -3,45 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Action Economy Mastery - Pathfinder 2.0</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Core Mechanics: The Three-Action Economy - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 6</span>
         <h1>The Action Economy Mastery</h1>
         <p class="subtitle">Tactical Combat Through Three-Action Thinking</p>
     </header>
@@ -49,7 +27,7 @@
     <main>
         <section class="introduction">
             <h2>The Revolution of Three Actions</h2>
-            <p>Imagine if every turn in combat was like having exactly three moves in chess, but you could choose any combination of moves - capture a piece, move a pawn, and castle all in one turn. That's the revolutionary simplicity and tactical depth of Pathfinder 2.0's three-action economy.</p>
+            <p>Imagine if every turn in combat was like having exactly three moves in chess, but you could choose any combination of moves - capture a piece, move a pawn, and castle all in one turn. That's the revolutionary simplicity and tactical depth of Pathfinder 2e's three-action economy.</p>
             
             <p>Unlike the complex maze of action types in other systems (move actions, standard actions, swift actions, immediate actions, free actions), PF2e gives you exactly three actions per turn. Period. This creates a beautifully elegant system where tactical depth emerges from simple choices rather than rules complexity.</p>
 
@@ -57,7 +35,7 @@
                 <h3>Old System vs New System</h3>
                 <div class="comparison-visual">
                     <div class="old-system">
-                        <h4>❌ Complex Action Types (Old Way)</h4>
+                        <h4>❌ Complex Action Types (Pathfinder First Edition)</h4>
                         <ul>
                             <li>1 Standard Action (attack, cast spell)</li>
                             <li>1 Move Action (move, draw weapon)</li>
@@ -95,16 +73,16 @@
                         <ul>
                             <li><strong>Strike:</strong> Make a weapon or unarmed attack</li>
                             <li><strong>Stride:</strong> Move up to your Speed</li>
-                            <li><strong>Raise Shield:</strong> Increase your AC by +2</li>
-                            <li><strong>Draw/Sheathe:</strong> Pull out or put away a weapon</li>
-                            <li><strong>Cast a Spell:</strong> Most spells (unless specified otherwise)</li>
+                            <li><strong>Raise a Shield:</strong> +2 circumstance bonus to AC until the start of your next turn</li>
+                            <li><strong>Interact (draw/stow):</strong> Pull out or put away a weapon</li>
+                            <li><strong>Cast a 1-action spell:</strong> A few spells, such as the <em>shield</em> cantrip or the 1-action version of <em>heal</em> (most spells take 2 actions)</li>
                         </ul>
                         
                         <h4>Skill Examples:</h4>
                         <ul>
                             <li><strong>Demoralize:</strong> Intimidate an enemy</li>
                             <li><strong>Hide:</strong> Attempt to become hidden</li>
-                            <li><strong>Aid:</strong> Help an ally with their next action</li>
+                            <li><strong>Prepare to Aid:</strong> Spend 1 action getting ready, then Aid an ally's check with your reaction</li>
                         </ul>
                     </div>
                     <div class="real-world-analogy">
@@ -120,13 +98,14 @@
                         <ul>
                             <li><strong>Double Slice:</strong> Attack with both weapons simultaneously</li>
                             <li><strong>Sudden Charge:</strong> Move twice and attack</li>
-                            <li><strong>Combat Grab:</strong> Attack and grapple in one motion</li>
+                            <li><strong>Vicious Swing (formerly Power Attack):</strong> One heavy Strike that deals an extra weapon damage die</li>
                         </ul>
                         
                         <h4>Spell Examples:</h4>
                         <ul>
-                            <li><strong>Heal (2-action):</strong> More powerful healing</li>
-                            <li><strong>Magic Missile:</strong> Multiple force bolts</li>
+                            <li><strong>Most spells:</strong> Two actions is the standard casting cost</li>
+                            <li><strong>Heal (2-action):</strong> Reaches an ally 30 feet away and heals more</li>
+                            <li><strong>Force Barrage (formerly magic missile):</strong> One force bolt per action spent, so two actions fire two</li>
                         </ul>
                     </div>
                     <div class="real-world-analogy">
@@ -140,9 +119,9 @@
                     <div class="examples-list">
                         <h4>Examples:</h4>
                         <ul>
-                            <li><strong>Heal (3-action):</strong> Massive area healing</li>
-                            <li><strong>Whirlwind Strike:</strong> Attack all adjacent enemies</li>
-                            <li><strong>Metamagic + Powerful Spell:</strong> Enhanced spellcasting</li>
+                            <li><strong>Heal (3-action):</strong> Heals every living creature in a 30-foot emanation</li>
+                            <li><strong>Whirlwind Strike (high-level fighter feat):</strong> Strike every enemy within reach</li>
+                            <li><strong>Metamagic + a 2-action spell:</strong> Enhanced spellcasting</li>
                         </ul>
                     </div>
                     <div class="real-world-analogy">
@@ -156,9 +135,9 @@
                     <div class="examples-list">
                         <h4>Examples:</h4>
                         <ul>
-                            <li><strong>Attack of Opportunity:</strong> Strike enemies who move carelessly</li>
+                            <li><strong>Reactive Strike (formerly Attack of Opportunity):</strong> Strike an adjacent enemy who moves away or lets its guard down. Fighters get it at 1st level and many monsters have it, but most characters don't</li>
                             <li><strong>Shield Block:</strong> Reduce damage with your shield</li>
-                            <li><strong>Counterspell:</strong> Disrupt enemy magic</li>
+                            <li><strong>Counterspell (class feat):</strong> Disrupt enemy magic</li>
                         </ul>
                     </div>
                     <div class="special-note">
@@ -175,13 +154,13 @@
                     <div class="examples-list">
                         <h4>Examples:</h4>
                         <ul>
-                            <li><strong>Speak:</strong> Say a few words or shout a command</li>
-                            <li><strong>Drop Item:</strong> Let go of something you're holding</li>
-                            <li><strong>Some Feats:</strong> Special abilities that trigger automatically</li>
+                            <li><strong>Speak:</strong> Speaking isn't an action at all, so a few words or a shouted command cost nothing</li>
+                            <li><strong>Release:</strong> Let go of something you're holding (a true free action)</li>
+                            <li><strong>Some Feats:</strong> Free actions with a trigger, usable once each time it happens</li>
                         </ul>
                     </div>
                     <div class="special-note">
-                        <p><strong>GM Discretion:</strong> Usually limited to reasonable amounts per turn</p>
+                        <p><strong>GM Discretion:</strong> Keep combat talk to a few quick sentences per turn</p>
                     </div>
                 </div>
             </div>
@@ -229,7 +208,7 @@
                     <ul>
                         <li><strong>Against High AC:</strong> Third attacks rarely hit - better to move, defend, or use skills</li>
                         <li><strong>Against Low AC:</strong> Multiple attacks can be devastating</li>
-                        <li><strong>Agile Weapons:</strong> Daggers, rapiers, and fists have reduced penalty</li>
+                        <li><strong>Agile Weapons:</strong> Daggers, shortswords, and fists have a reduced penalty</li>
                         <li><strong>Critical Fishing:</strong> Sometimes that low-chance attack can still critically hit!</li>
                     </ul>
                 </div>
@@ -240,7 +219,7 @@
                 <div class="trait-examples">
                     <div class="trait-card">
                         <h4>🗡️ Agile Weapons</h4>
-                        <p><strong>Examples:</strong> Rapier, Shortsword, Dagger, Fist</p>
+                        <p><strong>Examples:</strong> Dagger, Shortsword, Kukri, Fist</p>
                         <p><strong>Benefit:</strong> Multiple Attack Penalty is only -4/-8 instead of -5/-10</p>
                         <p><strong>Strategy:</strong> Better for characters planning multiple attacks</p>
                     </div>
@@ -254,7 +233,7 @@
                     
                     <div class="trait-card">
                         <h4>🏹 Ranged Weapons</h4>
-                        <p><strong>Examples:</strong> Longbow, Crossbow, Throwing Knife</p>
+                        <p><strong>Examples:</strong> Longbow, Crossbow, thrown Dagger</p>
                         <p><strong>Benefit:</strong> Attack from safety, standard MAP</p>
                         <p><strong>Strategy:</strong> Position for clear shots, reload management</p>
                     </div>
@@ -287,7 +266,7 @@
                         <div class="combo-actions">
                             <span class="action">⚡ Strike</span>
                             <span class="action">⚡ Strike</span>
-                            <span class="action">⚡ Raise Shield / Move</span>
+                            <span class="action">⚡ Raise a Shield / Stride</span>
                         </div>
                         <p><strong>When to Use:</strong> Most combat situations</p>
                         <p><strong>Benefits:</strong> Good damage potential with defense or positioning</p>
@@ -310,10 +289,10 @@
                         <h4>🛡️ The Defensive Maneuver</h4>
                         <div class="combo-actions">
                             <span class="action">⚡ Strike</span>
-                            <span class="action">⚡ Raise Shield</span>
-                            <span class="action">⚡ Take Cover / Dodge</span>
+                            <span class="action">⚡ Step</span>
+                            <span class="action">⚡ Raise a Shield</span>
                         </div>
-                        <p><strong>When to Use:</strong> When facing multiple enemies or tough opponents</p>
+                        <p><strong>When to Use:</strong> When facing multiple enemies or tough opponents (Step moves 5 feet without triggering Reactive Strike)</p>
                         <p><strong>Benefits:</strong> Maximizes survivability</p>
                         <p><strong>Best For:</strong> Tanks, low-HP characters in danger</p>
                     </div>
@@ -321,9 +300,9 @@
                     <div class="combo-card supportive">
                         <h4>🤝 The Team Player</h4>
                         <div class="combo-actions">
-                            <span class="action">⚡ Aid Ally</span>
+                            <span class="action">⚡ Prepare to Aid</span>
                             <span class="action">⚡ Stride</span>
-                            <span class="action">⚡ Strike / Cast Spell</span>
+                            <span class="action">⚡ Strike</span>
                         </div>
                         <p><strong>When to Use:</strong> When an ally needs help with a crucial action</p>
                         <p><strong>Benefits:</strong> Improves party effectiveness</p>
@@ -333,9 +312,9 @@
                     <div class="combo-card caster">
                         <h4>🧙 The Spellcaster Special</h4>
                         <div class="combo-actions">
-                            <span class="action">⚡ Cast Spell</span>
-                            <span class="action">⚡ Stride</span>
-                            <span class="action">⚡ Hide / Take Cover</span>
+                            <span class="action">⚡ Cast a Spell</span>
+                            <span class="action">⚡ (most spells take 2)</span>
+                            <span class="action">⚡ Stride / Take Cover</span>
                         </div>
                         <p><strong>When to Use:</strong> When you need to cast and survive</p>
                         <p><strong>Benefits:</strong> Magical effect plus positioning</p>
@@ -355,7 +334,7 @@
                             <span class="action">⚡ Strike (door)</span>
                             <span class="action">⚡ Strike (door)</span>
                         </div>
-                        <p>Multiple attacks against objects don't suffer MAP - bash away!</p>
+                        <p>Careful: Strikes against objects still take the multiple attack penalty, and the door's Hardness soaks damage. Force Open (Athletics) is usually the better tool, though it has the attack trait too.</p>
                     </div>
 
                     <div class="situation-card">
@@ -365,7 +344,7 @@
                             <span class="action">⚡ Strike</span>
                             <span class="action">⚡ Move to Safety</span>
                         </div>
-                        <p>Some feats let you aim for bonus accuracy on your next attack</p>
+                        <p>There's no basic Aim action, but some feats and class features set up a more accurate next attack</p>
                     </div>
 
                     <div class="situation-card">
@@ -407,23 +386,23 @@
                                 
                                 <!-- Enemies -->
                                 <circle cx="75" cy="50" r="8" fill="#f44336"/>
-                                <text x="75" y="54" text-anchor="middle" fill="white" font-size="6">E</text>
+                                <text x="75" y="53" text-anchor="middle" fill="white" font-size="9">E</text>
                                 <circle cx="125" cy="100" r="8" fill="#f44336"/>
-                                <text x="125" y="104" text-anchor="middle" fill="white" font-size="6">E</text>
+                                <text x="125" y="103" text-anchor="middle" fill="white" font-size="9">E</text>
                                 
                                 <!-- Allies behind -->
                                 <circle cx="100" cy="100" r="8" fill="#4caf50"/>
-                                <text x="100" y="104" text-anchor="middle" fill="white" font-size="6">A</text>
+                                <text x="100" y="103" text-anchor="middle" fill="white" font-size="9">A</text>
                                 <circle cx="75" cy="125" r="8" fill="#4caf50"/>
-                                <text x="75" y="129" text-anchor="middle" fill="white" font-size="6">A</text>
+                                <text x="75" y="128" text-anchor="middle" fill="white" font-size="9">A</text>
                                 
                                 <!-- Threat lines -->
                                 <line x1="100" y1="75" x2="75" y2="50" stroke="#ff9800" stroke-width="2" stroke-dasharray="3,3"/>
                                 <line x1="100" y1="75" x2="125" y2="100" stroke="#ff9800" stroke-width="2" stroke-dasharray="3,3"/>
                             </svg>
                         </div>
-                        <p><strong>Strategy:</strong> Position between enemies and allies, use reach and opportunity attacks to control space</p>
-                        <p><strong>Key Actions:</strong> Stride to intercept, Strike to threaten, Raise Shield for defense</p>
+                        <p><strong>Strategy:</strong> Position between enemies and allies, use reach and Reactive Strike (if you have it) to control space</p>
+                        <p><strong>Key Actions:</strong> Stride to intercept, Strike to threaten, Raise a Shield for defense</p>
                     </div>
 
                     <div class="concept-card">
@@ -435,7 +414,7 @@
                                 <!-- Archer on high ground -->
                                 <rect x="170" y="20" width="25" height="10" fill="#8bc34a"/>
                                 <circle cx="182" cy="20" r="8" fill="#ff9800"/>
-                                <text x="182" y="24" text-anchor="middle" fill="white" font-size="6">A</text>
+                                <text x="182" y="23" text-anchor="middle" fill="white" font-size="9">A</text>
                                 
                                 <!-- Enemies below -->
                                 <circle cx="100" cy="75" r="8" fill="#f44336"/>
@@ -464,19 +443,19 @@
                                 
                                 <!-- Tank in front -->
                                 <circle cx="100" cy="50" r="8" fill="#2196f3"/>
-                                <text x="100" y="54" text-anchor="middle" fill="white" font-size="6">T</text>
+                                <text x="100" y="53" text-anchor="middle" fill="white" font-size="9">T</text>
                                 
                                 <!-- Rogue flanking -->
                                 <circle cx="100" cy="100" r="8" fill="#9c27b0"/>
-                                <text x="100" y="104" text-anchor="middle" fill="white" font-size="6">R</text>
+                                <text x="100" y="103" text-anchor="middle" fill="white" font-size="9">R</text>
                                 
                                 <!-- Flanking line -->
-                                <line x1="100" y1="50" x2="100" y2="100" stroke="#ffeb3b" stroke-width="3"/>
-                                <text x="120" y="75" fill="#ffeb3b" font-size="10">FLANK!</text>
+                                <line x1="100" y1="50" x2="100" y2="100" stroke="#e65100" stroke-width="3"/>
+                                <text x="116" y="79" fill="#4e2600" font-size="12" font-weight="bold">FLANK!</text>
                             </svg>
                         </div>
-                        <p><strong>Strategy:</strong> Work with allies to flank enemies, gain Sneak Attack bonuses</p>
-                        <p><strong>Key Actions:</strong> Stride for flanking, Strike with advantage, Hide for Sneak Attack</p>
+                        <p><strong>Strategy:</strong> Work with allies to flank enemies; a flanked enemy is off-guard (formerly flat-footed: −2 AC), which turns on Sneak Attack</p>
+                        <p><strong>Key Actions:</strong> Stride for flanking, Strike the off-guard target, Hide (foes are off-guard to attackers they can't see)</p>
                     </div>
 
                     <div class="concept-card">
@@ -487,11 +466,11 @@
                                 
                                 <!-- Wizard in back -->
                                 <circle cx="50" cy="125" r="8" fill="#673ab7"/>
-                                <text x="50" y="129" text-anchor="middle" fill="white" font-size="6">W</text>
+                                <text x="50" y="128" text-anchor="middle" fill="white" font-size="9">W</text>
                                 
                                 <!-- Spell effect area -->
                                 <circle cx="125" cy="75" r="30" fill="#ff9800" fill-opacity="0.3" stroke="#ff9800" stroke-width="2" stroke-dasharray="3,3"/>
-                                <text x="125" y="78" text-anchor="middle" fill="#ff9800" font-size="8">SPELL</text>
+                                <text x="125" y="79" text-anchor="middle" fill="#4e2600" font-size="11" font-weight="bold">SPELL</text>
                                 
                                 <!-- Enemies caught in area -->
                                 <circle cx="110" cy="60" r="6" fill="#f44336"/>
@@ -513,7 +492,7 @@
                         <h4>🔄 The Tactical Retreat</h4>
                         <p><strong>Situation:</strong> You're surrounded and taking heavy damage</p>
                         <div class="tactic-sequence">
-                            <p><strong>Turn 1:</strong> Stride away → Stride away → Take Cover</p>
+                            <p><strong>Turn 1:</strong> Step away → Stride away → Take Cover (if you reached cover)</p>
                             <p><strong>Result:</strong> Create distance, force enemies to chase, buy time for healing</p>
                         </div>
                         <p><em>Remember: Sometimes the best offense is a good defense</em></p>
@@ -524,7 +503,7 @@
                         <p><strong>Situation:</strong> Enemy spellcaster needs to be stopped</p>
                         <div class="tactic-sequence">
                             <p><strong>Option A:</strong> Stride → Stride → Strike (get into melee)</p>
-                            <p><strong>Option B:</strong> Sudden Charge → Strike (special 2-action ability)</p>
+                            <p><strong>Option B:</strong> Sudden Charge (a 2-action fighter or barbarian feat: two Strides and a Strike) → one more action spare</p>
                         </div>
                         <p><em>Pressure casters to disrupt their spellcasting</em></p>
                     </div>
@@ -533,7 +512,7 @@
                         <h4>🎯 The Perfect Setup</h4>
                         <p><strong>Situation:</strong> You want to maximize your next turn's potential</p>
                         <div class="tactic-sequence">
-                            <p><strong>This Turn:</strong> Stride (position) → Aid Ally → Draw Weapon</p>
+                            <p><strong>This Turn:</strong> Stride (position) → Prepare to Aid → Interact (draw weapon)</p>
                             <p><strong>Next Turn:</strong> Ready for full attack sequence</p>
                         </div>
                         <p><em>Sometimes setup turns create bigger advantages than immediate attacks</em></p>
@@ -552,8 +531,8 @@
                     <div class="class-features">
                         <h4>Key Features:</h4>
                         <ul>
-                            <li><strong>Attack of Opportunity:</strong> Punish enemy movement (Reaction)</li>
-                            <li><strong>Weapon Mastery:</strong> Higher accuracy means more successful attacks</li>
+                            <li><strong>Reactive Strike:</strong> Punish enemy movement (Reaction)</li>
+                            <li><strong>Weapon Expertise:</strong> Fighters start at expert with weapons, so they hit more often</li>
                             <li><strong>Fighter Feats:</strong> Many combo and efficiency abilities</li>
                         </ul>
                     </div>
@@ -561,12 +540,12 @@
                     <div class="typical-turns">
                         <h4>Typical Fighter Turns:</h4>
                         <div class="turn-example">
-                            <p><strong>Early Combat:</strong> Stride → Strike → Raise Shield</p>
+                            <p><strong>Early Combat:</strong> Stride → Strike → Raise a Shield</p>
                             <p><em>Close distance, attack, defend</em></p>
                         </div>
                         <div class="turn-example">
                             <p><strong>In Melee:</strong> Strike → Strike → Strike (if facing weak armor)</p>
-                            <p><em>OR Strike → Strike → Intimidate (if facing strong armor)</em></p>
+                            <p><em>OR Strike → Strike → Demoralize (if facing strong armor)</em></p>
                         </div>
                         <div class="turn-example">
                             <p><strong>Controlling Space:</strong> Strike → Stride → Strike</p>
@@ -577,7 +556,7 @@
                     <div class="advanced-tactics">
                         <h4>Advanced Fighter Tactics:</h4>
                         <ul>
-                            <li><strong>Zone Control:</strong> Use reach weapons and AoO to control large areas</li>
+                            <li><strong>Zone Control:</strong> Use reach weapons and Reactive Strike to control large areas</li>
                             <li><strong>Combo Feats:</strong> Many fighter feats create powerful 2-action combinations</li>
                             <li><strong>Accuracy Advantage:</strong> Higher hit chance makes risky tactics more viable</li>
                         </ul>
@@ -591,14 +570,14 @@
                         <ul>
                             <li><strong>Sneak Attack:</strong> Massive damage when conditions are met</li>
                             <li><strong>Skills Galore:</strong> Many useful skill actions</li>
-                            <li><strong>Mobility:</strong> Often faster and more agile</li>
+                            <li><strong>Mobility:</strong> Acrobatics, Tumble Through and rogue feats for getting around</li>
                         </ul>
                     </div>
                     
                     <div class="typical-turns">
                         <h4>Typical Rogue Turns:</h4>
                         <div class="turn-example">
-                            <p><strong>Setup Turn:</strong> Stride → Hide → Stride</p>
+                            <p><strong>Setup Turn:</strong> Stride → Hide → Sneak</p>
                             <p><em>Get into position for sneak attack</em></p>
                         </div>
                         <div class="turn-example">
@@ -616,7 +595,7 @@
                         <ul>
                             <li><strong>Sneak Attack Setup:</strong> Use teammates and terrain to create flanking</li>
                             <li><strong>Hit and Run:</strong> Strike hard, then use superior mobility to escape</li>
-                            <li><strong>Skill Integration:</strong> Combat skills like Demoralize enhance damage</li>
+                            <li><strong>Skill Integration:</strong> Demoralize leaves the target frightened, lowering its AC and saves</li>
                         </ul>
                     </div>
                 </div>
@@ -635,15 +614,15 @@
                     <div class="typical-turns">
                         <h4>Typical Wizard Turns:</h4>
                         <div class="turn-example">
-                            <p><strong>Opening Blast:</strong> Cast Spell → Stride → Take Cover</p>
+                            <p><strong>Opening Blast:</strong> Cast a Spell (2 actions) → Stride</p>
                             <p><em>Unleash magic, then get to safety</em></p>
                         </div>
                         <div class="turn-example">
-                            <p><strong>Big Magic:</strong> Metamagic + Spell (3 actions)</p>
+                            <p><strong>Big Magic:</strong> Metamagic (1 action) + a 2-action spell</p>
                             <p><em>Enhanced spells for maximum effect</em></p>
                         </div>
                         <div class="turn-example">
-                            <p><strong>Support Turn:</strong> Cast Spell → Aid Ally → Stride</p>
+                            <p><strong>Support Turn:</strong> Cast a Spell (2 actions) → Prepare to Aid</p>
                             <p><em>Buff teammates and reposition</em></p>
                         </div>
                     </div>
@@ -681,7 +660,7 @@
                         </div>
                         <div class="turn-example">
                             <p><strong>Mass Healing:</strong> Heal (3-action)</p>
-                            <p><em>Heal everyone in a large area</em></p>
+                            <p><em>Heal every living creature within 30 feet (careful: that includes living enemies)</em></p>
                         </div>
                     </div>
                     
@@ -711,10 +690,10 @@
                     <div class="scenario-options">
                         <p><strong>Your options this turn:</strong></p>
                         <ul>
-                            <li>Strike (sword): +8 to hit, 1d8+4 damage</li>
+                            <li>Strike (longsword): +8 to hit, 1d8+3 damage</li>
                             <li>Stride: Move 25 feet</li>
-                            <li>Raise Shield: +2 AC until start of next turn</li>
-                            <li>Take Cover: +2 AC if near suitable cover</li>
+                            <li>Raise a Shield: +2 circumstance bonus to AC until the start of your next turn</li>
+                            <li>Step: Move 5 feet without triggering reactions like Reactive Strike</li>
                         </ul>
                         
                         <p><strong>Plan your three actions:</strong></p>
@@ -727,13 +706,13 @@
                         <details>
                             <summary>Click for Analysis</summary>
                             <div class="solution">
-                                <p><strong>Option 1 (Aggressive):</strong> Strike → Strike → Raise Shield</p>
+                                <p><strong>Option 1 (Aggressive):</strong> Strike → Strike → Raise a Shield</p>
                                 <p><em>Good if you think you can drop one goblin quickly</em></p>
                                 
-                                <p><strong>Option 2 (Defensive):</strong> Strike → Raise Shield → Take Cover</p>
-                                <p><em>Better if you're worried about surviving their attacks</em></p>
+                                <p><strong>Option 2 (Defensive):</strong> Strike → Step (so fewer goblins can reach you) → Raise a Shield</p>
+                                <p><em>Better if you're worried about surviving their attacks. Don't plan on Raise a Shield plus Take Cover: both are circumstance bonuses, so only the higher one counts</em></p>
                                 
-                                <p><strong>Option 3 (Retreat):</strong> Stride → Stride → Raise Shield</p>
+                                <p><strong>Option 3 (Retreat):</strong> Stride → Stride → Raise a Shield</p>
                                 <p><em>Best if you need to buy time for allies to help</em></p>
                             </div>
                         </details>
@@ -747,10 +726,10 @@
                     <div class="scenario-options">
                         <p><strong>Your options:</strong></p>
                         <ul>
-                            <li>Strike (dagger): +7 to hit, 1d4+3 damage (+2d6 if Sneak Attack)</li>
+                            <li>Strike (dagger, agile): +7 to hit, 1d4+3 damage (+1d6 Sneak Attack against an off-guard target)</li>
                             <li>Stride: Move 30 feet</li>
                             <li>Hide: Attempt to become hidden</li>
-                            <li>Throwing Knife: +7 to hit at range, 1d4+3 damage</li>
+                            <li>Throw a dagger: +7 to hit, 1d4+3 damage (range increment 10 feet, so −4 at 30 feet)</li>
                         </ul>
                         
                         <p><strong>Plan your approach:</strong></p>
@@ -766,10 +745,10 @@
                                 <p><strong>Option 1 (Close Combat):</strong> Stride → Strike (Sneak Attack) → Hide</p>
                                 <p><em>Get into flanking position for maximum damage</em></p>
                                 
-                                <p><strong>Option 2 (Ranged):</strong> Throwing Knife → Throwing Knife → Hide</p>
-                                <p><em>Attack from safety, though no Sneak Attack bonus</em></p>
+                                <p><strong>Option 2 (Ranged):</strong> Throw a dagger → Throw a second dagger → Hide</p>
+                                <p><em>Attack from safety, but flanking only works in melee, so no Sneak Attack, and the range penalty hurts</em></p>
                                 
-                                <p><strong>Analysis:</strong> Option 1 is better - the flanking gives Sneak Attack for much higher damage!</p>
+                                <p><strong>Analysis:</strong> Option 1 is better - flanking with your ally makes the caster off-guard, which triggers Sneak Attack and lowers its AC by 2. (Hide only works if you have cover or concealment; otherwise a second agile Strike at −4 is a fine third action.)</p>
                             </div>
                         </details>
                     </div>
@@ -793,7 +772,7 @@
                             <li>Third Attack (-2 vs AC 16): Need to roll _____ or higher (____% chance)</li>
                         </ul>
                         
-                        <p><strong>Alternative: What if you used an agile weapon (rapier) instead?</strong></p>
+                        <p><strong>Alternative: What if you used an agile weapon (shortsword) instead?</strong></p>
                         <ul>
                             <li>First Attack (+8 vs AC 16): Need to roll _____ or higher (____% chance)</li>
                             <li>Second Attack (+4 vs AC 16): Need to roll _____ or higher (____% chance)</li>
@@ -810,7 +789,7 @@
                                     <li>Third: Need 18+ (15% chance)</li>
                                 </ul>
                                 
-                                <p><strong>Rapier (Agile):</strong></p>
+                                <p><strong>Shortsword (Agile):</strong></p>
                                 <ul>
                                     <li>First: Need 8+ (65% chance)</li>
                                     <li>Second: Need 12+ (45% chance)</li>
@@ -839,37 +818,37 @@
                             <!-- Party members -->
                             <circle cx="100" cy="150" r="12" fill="#2196f3"/>
                             <text x="100" y="155" text-anchor="middle" fill="white" font-size="10">F</text>
-                            <text x="100" y="170" text-anchor="middle" font-size="8">Fighter</text>
+                            <text x="100" y="175" text-anchor="middle" fill="#222" font-size="10">Fighter</text>
                             
                             <circle cx="130" cy="150" r="10" fill="#4caf50"/>
                             <text x="130" y="155" text-anchor="middle" fill="white" font-size="8">C</text>
-                            <text x="130" y="170" text-anchor="middle" font-size="8">Cleric</text>
+                            <text x="130" y="134" text-anchor="middle" fill="#222" font-size="10">Cleric</text>
                             
                             <circle cx="160" cy="150" r="10" fill="#9c27b0"/>
                             <text x="160" y="155" text-anchor="middle" fill="white" font-size="8">R</text>
-                            <text x="160" y="170" text-anchor="middle" font-size="8">Rogue</text>
+                            <text x="160" y="175" text-anchor="middle" fill="#222" font-size="10">Rogue</text>
                             
                             <circle cx="190" cy="150" r="10" fill="#673ab7"/>
                             <text x="190" y="155" text-anchor="middle" fill="white" font-size="8">W</text>
-                            <text x="190" y="170" text-anchor="middle" font-size="8">Wizard</text>
+                            <text x="190" y="134" text-anchor="middle" fill="#222" font-size="10">Wizard</text>
                             
                             <!-- Enemies ahead -->
                             <circle cx="280" cy="140" r="10" fill="#f44336"/>
-                            <text x="280" y="145" text-anchor="middle" fill="white" font-size="8">O1</text>
+                            <text x="280" y="145" text-anchor="middle" fill="white" font-size="9">O1</text>
                             <circle cx="280" cy="160" r="10" fill="#f44336"/>
-                            <text x="280" y="165" text-anchor="middle" fill="white" font-size="8">O2</text>
+                            <text x="280" y="165" text-anchor="middle" fill="white" font-size="9">O2</text>
                             <circle cx="310" cy="150" r="10" fill="#f44336"/>
-                            <text x="310" y="155" text-anchor="middle" fill="white" font-size="8">O3</text>
+                            <text x="310" y="155" text-anchor="middle" fill="white" font-size="9">O3</text>
                             
                             <!-- Labels -->
-                            <text x="200" y="90" text-anchor="middle" font-size="12" font-weight="bold">Narrow Corridor</text>
-                            <text x="75" y="150" text-anchor="middle" font-size="8">Your Party</text>
-                            <text x="295" y="130" text-anchor="middle" font-size="8">Orcs</text>
+                            <text x="200" y="90" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">Narrow Corridor (10 ft wide)</text>
+                            <text x="145" y="220" text-anchor="middle" fill="#222" font-size="12">Your Party</text>
+                            <text x="295" y="220" text-anchor="middle" fill="#222" font-size="12">Orcs (40 ft ahead)</text>
                         </svg>
                     </div>
                     
                     <div class="puzzle-challenge">
-                        <p><strong>Situation:</strong> Your party is in a narrow corridor facing three orcs. The corridor is only 10 feet wide (one character abreast). The orcs are 40 feet ahead.</p>
+                        <p><strong>Situation:</strong> Your party is in a narrow corridor facing three orcs. The corridor is only 10 feet wide (two characters abreast). The orcs are 40 feet ahead.</p>
                         
                         <p><strong>Challenge:</strong> Plan the first round of actions for each character to maximize tactical advantage:</p>
                         
@@ -899,16 +878,16 @@
                                 <ul>
                                     <li>Narrow corridor limits positioning options</li>
                                     <li>Fighter should advance to engage</li>
-                                    <li>Ranged attacks can happen over allies' heads</li>
+                                    <li>You can shoot past allies, but each creature in the way gives the target lesser cover (+1 AC)</li>
                                     <li>Area spells could hit multiple enemies</li>
                                 </ul>
                                 
                                 <p><strong>Sample Solution:</strong></p>
                                 <ul>
                                     <li><strong>Fighter:</strong> Stride → Stride → Raise Shield (close to melee range)</li>
-                                    <li><strong>Cleric:</strong> Stride → Cast Bless → Stride (buff party, stay in support range)</li>
-                                    <li><strong>Rogue:</strong> Stride → Ready Action (Strike when flanking) → Hide</li>
-                                    <li><strong>Wizard:</strong> Cast Burning Hands → Stride → Take Cover (hit multiple orcs)</li>
+                                    <li><strong>Cleric:</strong> Stride → Cast <em>bless</em> (2 actions; buff the party, stay in support range)</li>
+                                    <li><strong>Rogue:</strong> Stride → Ready (2 actions: Strike the first orc that comes within reach)</li>
+                                    <li><strong>Wizard:</strong> Cast a 2-action ranged spell → Step (stay behind the line). Save short cones such as <em>breathe fire</em> (formerly burning hands, 15 feet) for when the orcs close in</li>
                                 </ul>
                             </div>
                         </details>
@@ -919,10 +898,10 @@
 
         <section class="next-steps">
             <h2>What's Next?</h2>
-            <p>You've now mastered the heart of Pathfinder 2.0 - the three-action economy that makes every combat turn a tactical puzzle. With this foundation, you understand how to think strategically about positioning, timing, and resource management in ways that make every battle engaging and dynamic.</p>
+            <p>You've now mastered the heart of Pathfinder 2e - the three-action economy that makes every combat turn a tactical puzzle. With this foundation, you understand how to think strategically about positioning, timing, and resource management in ways that make every battle engaging and dynamic.</p>
             
             <div class="upcoming-topics">
-                <h3>Upcoming Lectures</h3>
+                <h3>Coming Up in This Guide</h3>
                 <ul>
                     <li><strong><a href="/pf2_skills.html">Skills and Exploration</a>:</strong> Beyond combat - investigation, social encounters, and skill challenges</li>
                     <li><strong>Magic Systems Deep Dive:</strong> Spell preparation, traditions, and magical tactics</li>
@@ -949,112 +928,126 @@
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_groups.html">Party Dynamics</a>
+    <a class="next" href="/pf2_skills.html">Skills &amp; Exploration</a>
+</div>
         <p>The battlefield awaits your strategic mastery!</p>
 
     </footer>
 
     <script>
         // Action Economy Visualization
+        // Hit chances are computed with the PF2 degree-of-success rules:
+        // d20 + modifier vs AC; natural 20 = one step better, natural 1 = one step worse.
         const canvas = document.getElementById('actionEconomyChart');
         const ctx = canvas.getContext('2d');
-        
-        // Clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Draw action economy comparison
+
+        const ATTACK_MOD = 8;   // e.g. a 1st-level fighter
+        const TARGET_AC = 16;   // e.g. a goblin warrior
+
+        // Chance (0-100) of a success or critical success
+        function hitChance(mod, dc) {
+            let hits = 0;
+            for (let r = 1; r <= 20; r++) {
+                const t = r + mod;
+                let degree; // 0 crit fail, 1 fail, 2 success, 3 crit success
+                if (t >= dc + 10) degree = 3;
+                else if (t >= dc) degree = 2;
+                else if (t <= dc - 10) degree = 0;
+                else degree = 1;
+                if (r === 20) degree = Math.min(3, degree + 1);
+                if (r === 1) degree = Math.max(0, degree - 1);
+                if (degree >= 2) hits++;
+            }
+            return hits * 5;
+        }
+        const strike = (map) => hitChance(ATTACK_MOD - map, TARGET_AC);
+
+        // accuracy: null = no roll needed (the action simply happens)
         const scenarios = [
-            { name: 'Triple Attack', actions: ['Strike', 'Strike', 'Strike'], accuracy: [65, 40, 15], color: '#f44336' },
-            { name: 'Balanced Fighter', actions: ['Strike', 'Strike', 'Raise Shield'], accuracy: [65, 40, 100], color: '#2196f3' },
-            { name: 'Mobile Striker', actions: ['Stride', 'Strike', 'Stride'], accuracy: [100, 65, 100], color: '#4caf50' },
-            { name: 'Spell + Move', actions: ['Cast Spell', 'Stride', 'Take Cover'], accuracy: [90, 100, 100], color: '#9c27b0' }
+            { name: 'Triple Attack', actions: ['Strike 1', 'Strike 2 (-5)', 'Strike 3 (-10)'], accuracy: [strike(0), strike(5), strike(10)], color: '#c62828' },
+            { name: 'Agile Triple', actions: ['Strike 1', 'Strike 2 (-4)', 'Strike 3 (-8)'], accuracy: [strike(0), strike(4), strike(8)], color: '#ef6c00' },
+            { name: 'Balanced Fighter', actions: ['Strike 1', 'Strike 2 (-5)', 'Raise a Shield'], accuracy: [strike(0), strike(5), null], color: '#1565c0' },
+            { name: 'Mobile Striker', actions: ['Stride', 'Strike 1', 'Stride'], accuracy: [null, strike(0), null], color: '#2e7d32' }
         ];
-        
-        const barWidth = 60;
-        const groupSpacing = 180;
-        const actionSpacing = 20;
-        const maxHeight = 120;
-        const startY = 300;
-        
-        scenarios.forEach((scenario, scenarioIndex) => {
-            const groupX = 50 + (scenarioIndex * groupSpacing);
-            
-            // Draw scenario label
-            ctx.fillStyle = '#333';
-            ctx.font = 'bold 12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(scenario.name, groupX + barWidth, 30);
-            
-            scenario.actions.forEach((action, actionIndex) => {
-                const x = groupX + (actionIndex * actionSpacing);
-                const height = (scenario.accuracy[actionIndex] / 100) * maxHeight;
-                
-                // Draw action bar
-                ctx.fillStyle = scenario.color;
-                ctx.fillRect(x, startY - height, 18, height);
-                
-                // Draw action label
-                ctx.fillStyle = '#333';
-                ctx.font = '8px Arial';
-                ctx.textAlign = 'center';
-                ctx.save();
-                ctx.translate(x + 9, startY + 15);
-                ctx.rotate(-Math.PI / 4);
-                ctx.fillText(action, 0, 0);
-                ctx.restore();
-                
-                // Draw accuracy percentage
-                ctx.fillStyle = '#333';
-                ctx.font = '10px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText(scenario.accuracy[actionIndex] + '%', x + 9, startY - height - 5);
-            });
-        });
-        
-        // Draw title and legend
-        ctx.fillStyle = '#333';
+
+        const plotLeft = 60, plotRight = canvas.width - 20;
+        const groupWidth = (plotRight - plotLeft) / scenarios.length;
+        const barWidth = 40, barGap = 52;
+        const maxHeight = 190;
+        const baseY = 300;
+
+        // Title and assumptions
+        ctx.fillStyle = '#222';
         ctx.font = 'bold 16px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText('Action Economy Efficiency Comparison', canvas.width / 2, 20);
-        
+        ctx.fillText('Chance to Hit Across a Three-Action Turn', canvas.width / 2, 22);
+        ctx.fillStyle = '#444';
         ctx.font = '12px Arial';
-        ctx.textAlign = 'left';
-        ctx.fillText('Height = Success Rate | Three bars = Three actions per turn', 50, canvas.height - 20);
-        
-        // Draw y-axis labels
+        ctx.textAlign = 'center';
+        ctx.fillText('Assumes attack modifier +' + ATTACK_MOD + ' vs AC ' + TARGET_AC + '; hit = success or critical success, natural 20/1 rules included', canvas.width / 2, 42);
+
+        // Grid lines and y-axis labels (drawn first, behind the bars)
         for (let i = 0; i <= 100; i += 25) {
-            const y = startY - (i / 100) * maxHeight;
-            ctx.fillStyle = '#666';
-            ctx.font = '10px Arial';
-            ctx.textAlign = 'right';
-            ctx.fillText(i + '%', 45, y + 3);
-            
-            // Draw grid line
-            ctx.strokeStyle = '#eee';
+            const y = baseY - (i / 100) * maxHeight;
+            ctx.strokeStyle = '#ddd';
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.moveTo(50, y);
-            ctx.lineTo(canvas.width - 50, y);
+            ctx.moveTo(plotLeft, y);
+            ctx.lineTo(plotRight, y);
             ctx.stroke();
+            ctx.fillStyle = '#444';
+            ctx.font = '11px Arial';
+            ctx.textAlign = 'right';
+            ctx.fillText(i + '%', plotLeft - 6, y + 4);
         }
-    </script>
-    <nav class="prev-next-nav">
-        <a href="/pf2_groups.html" class="nav-prev">← Group Dynamics</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_dice_roller.html" class="nav-next">Dice Roller →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
+
+        scenarios.forEach((scenario, si) => {
+            const groupX = plotLeft + si * groupWidth + (groupWidth - (2 * barGap + barWidth)) / 2;
+
+            ctx.fillStyle = '#222';
+            ctx.font = 'bold 13px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(scenario.name, groupX + barGap + barWidth / 2, 72);
+
+            scenario.actions.forEach((action, ai) => {
+                const x = groupX + ai * barGap;
+                const value = scenario.accuracy[ai];
+                const pct = value === null ? 100 : value;
+                const height = (pct / 100) * maxHeight;
+
+                if (value === null) {
+                    ctx.fillStyle = '#b0bec5';   // grey: no roll needed
+                } else {
+                    ctx.fillStyle = scenario.color;
+                }
+                ctx.fillRect(x, baseY - height, barWidth, height);
+
+                ctx.fillStyle = '#222';
+                ctx.font = 'bold 11px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(value === null ? 'no roll' : value + '%', x + barWidth / 2, baseY - height - 5);
+
+                // Action label under the bar, split into two lines
+                const words = action.split(' ');
+                const line1 = words[0];
+                const line2 = words.slice(1).join(' ');
+                ctx.fillStyle = '#222';
+                ctx.font = '11px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(line1, x + barWidth / 2, baseY + 16);
+                if (line2) ctx.fillText(line2, x + barWidth / 2, baseY + 30);
+            });
         });
+
+        ctx.fillStyle = '#444';
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText('Bar height = chance to hit. Grey bars are actions with no roll (they just happen).', plotLeft, canvas.height - 34);
+        ctx.fillText('Multiple attack penalty: -5 / -10, or -4 / -8 with an agile weapon.', plotLeft, canvas.height - 16);
     </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathfinder 2e: Worldbuilding Mastery</title>
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="icon" href="/favicon.png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
+    <title>Worldbuilding - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 15</span>
         <h1>Pathfinder 2e: Worldbuilding Mastery</h1>
         <p><em>Creating Living, Breathing Worlds for Epic Adventures</em></p>
     </header>
@@ -388,11 +367,11 @@ Education Examples:
 APPRENTICESHIP TRADITIONS:
 - Skills learned through hands-on practice with masters
 - Knowledge closely tied to practical application
-- Strong mentor-student relationships
+- Strong mentor-apprentice relationships
 - Innovation through gradual improvement of techniques
 
 SCHOLARLY ACADEMIES:
-- Formal institutions with structured curricula
+- Formal institutions with structured programs of study
 - Emphasis on theoretical knowledge and research
 - Competition for admission and advancement
 - Innovation through systematic investigation
@@ -473,7 +452,7 @@ SHARED INSTITUTIONS:
 □ Merchant guilds that facilitate trade
 
 CULTURAL EXCHANGE PROGRAMS:
-□ Student or apprentice exchanges between cultures
+□ Scholar or apprentice exchanges between cultures
 □ Seasonal festivals that celebrate multiple traditions
 □ Competitive events that bring cultures together peacefully
 □ Collaborative projects that require different cultural skills
@@ -575,8 +554,9 @@ TRAVEL TIME AND DIFFICULTY:
 
 Travel System Example:
 Overland Travel in the Northlands:
-- Normal roads: 25 miles per day on foot, 50 miles mounted
-- Wilderness paths: 15 miles per day, navigation challenges
+- Normal roads: about 20 miles per day on foot (Speed 25 feet),
+  about 32 miles mounted (riding horse, Speed 40 feet)
+- Wilderness paths: roughly half that (difficult terrain), navigation challenges
 - Winter travel: Half speed, survival challenges, weather delays
 - Magical travel: Teleportation circles in major cities only
 
@@ -921,7 +901,8 @@ LEARNED SKILL MODEL:
 - Magical services are available but expensive
 
 CULTURAL TRADITION MODEL:
-- Different cultures have different magical traditions
+- Different cultures have different magical traditions (Pathfinder 2e's
+  four traditions - arcane, divine, occult, primal - fit this neatly)
 - Magic is tied to cultural identity and practices
 - Magical knowledge is preserved through cultural institutions
 - Cross-cultural magical exchange creates opportunities and conflicts
@@ -969,8 +950,8 @@ PLANAR RELATIONSHIPS:
 □ How do planar boundaries change over time or in different locations?
 □ What opportunities and threats come from planar connections?
 
-Planar Integration Example - The Feywild Overlaps:
-Phenomenon: Certain forests exist simultaneously in Material and Feywild planes
+Planar Integration Example - The First World Overlaps:
+Phenomenon: Certain forests exist simultaneously in the Material Plane and the First World (the realm of the fey)
 Effects: Time flows differently, seasons follow fey rather than natural patterns
 Inhabitants: Fey creatures interact regularly with material world residents
 Opportunities: Magical resources available nowhere else, unique crafting techniques
@@ -988,6 +969,10 @@ ACTIVE PANTHEON:
 - Divine intervention in major events
 - Competing religions reflect divine conflicts
 - Mortal actions can gain or lose divine favor
+- In Pathfinder 2e (Remaster), define each deity by its edicts (what
+  followers should do) and anathema (what they must never do) - deities
+  no longer have alignments; holy/unholy sanctification marks the
+  servants of the most good- or evil-leaning faiths
 
 DISTANT DIVINITY:
 - Gods exist but rarely intervene directly
@@ -1648,27 +1633,13 @@ ARCHIVAL AND BACKUP SYSTEMS:
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_campaign.html">Campaign &amp; Adventure Design</a>
+    <a class="next" href="/pf2_horror.html">Horror &amp; Atmosphere</a>
+</div>
         <p>May your worlds be rich with possibility, your cultures vibrant with life, and your stories legendary in their scope and heart!</p>
 
     </footer>
-    <nav class="prev-next-nav">
-        <a href="/pf2_gm.html" class="nav-prev">← Game Mastery</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_digital_tools.html" class="nav-next">Digital Tools →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

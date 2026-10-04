@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Combat Tactics - Pathfinder 2.0</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Advanced Combat Tactics - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 10</span>
         <h1>Advanced Combat Tactics</h1>
         <p class="subtitle">Mastering the Battlefield Through Strategy and Positioning</p>
     </header>
@@ -109,65 +88,65 @@
                 </div>
 
                 <div class="beneficial-conditions">
-                    <h4>🌟 Beneficial Conditions: Empowering Your Heroes</h4>
+                    <h4>🌟 Beneficial Effects: Empowering Your Heroes</h4>
                     
                     <div class="beneficial-grid">
                         <div class="condition-card positive">
-                            <h5>💪 Inspired</h5>
+                            <h5>💪 Courageous Anthem (formerly Inspire Courage)</h5>
                             <div class="condition-mechanics">
-                                <p><strong>Effect:</strong> +1 status bonus to attack rolls, damage rolls, saves, and skill checks</p>
-                                <p><strong>Source:</strong> Bard performances, Rally activities</p>
-                                <p><strong>Duration:</strong> Usually 1 round, renewable</p>
+                                <p><strong>Effect:</strong> +1 status bonus to attack rolls, damage rolls, and saves against fear (a spell effect, not an official condition)</p>
+                                <p><strong>Source:</strong> The bard's composition cantrip</p>
+                                <p><strong>Duration:</strong> 1 round, renewable each turn</p>
                             </div>
                             <div class="tactical-applications">
                                 <h6>Tactical Applications:</h6>
                                 <ul>
                                     <li><strong>Pre-Combat:</strong> Rally the party before engaging</li>
                                     <li><strong>Critical Moments:</strong> Boost accuracy for important attacks</li>
-                                    <li><strong>Save-or-Die:</strong> Improve chances against dangerous effects</li>
-                                    <li><strong>Skill Challenges:</strong> Edge needed for crucial skill checks</li>
+                                    <li><strong>Fear Effects:</strong> Better saves against fear (the save bonus applies only to fear)</li>
+                                    <li><strong>Damage Boost:</strong> +1 damage on every hit adds up across the whole party</li>
                                 </ul>
                             </div>
                             <div class="condition-strategy">
-                                <p><strong>Strategy:</strong> Stack with other bonuses for maximum effect. Time activation for moments when the bonus matters most.</p>
+                                <p><strong>Strategy:</strong> Stack it with circumstance and item bonuses for maximum effect (it won't stack with another status bonus such as bless). Time activation for moments when the bonus matters most.</p>
                             </div>
                         </div>
 
                         <div class="condition-card positive">
-                            <h5>⚡ Hasted</h5>
+                            <h5>⚡ Quickened (from Haste)</h5>
                             <div class="condition-mechanics">
-                                <p><strong>Effect:</strong> +1 action per turn, +1 to AC and Reflex saves</p>
-                                <p><strong>Source:</strong> Haste spell, magical items</p>
-                                <p><strong>Duration:</strong> Usually 1 minute</p>
+                                <p><strong>Effect:</strong> 1 extra action each turn, usable only to Stride or Strike (no bonus to AC or saves)</p>
+                                <p><strong>Source:</strong> Haste spell, some magic items and abilities</p>
+                                <p><strong>Duration:</strong> 1 minute for haste</p>
                             </div>
                             <div class="tactical-applications">
                                 <h6>Tactical Applications:</h6>
                                 <ul>
-                                    <li><strong>Action Economy:</strong> Four actions per turn instead of three</li>
+                                    <li><strong>Action Economy:</strong> Four actions per turn instead of three (the extra one must be a Stride or Strike)</li>
                                     <li><strong>Positioning:</strong> Move and attack more freely</li>
-                                    <li><strong>Defense:</strong> Better AC and Reflex saves</li>
-                                    <li><strong>Versatility:</strong> More options each turn</li>
+                                    <li><strong>Defense:</strong> Use the extra Stride to move, keeping a normal action free for Raise a Shield</li>
+                                    <li><strong>Limits:</strong> The extra action can't be used to cast spells or use skills</li>
                                 </ul>
                             </div>
                             <div class="condition-strategy">
-                                <p><strong>Strategy:</strong> Game-changing condition. Prioritize protecting the hasted character. Best on characters who can use extra actions effectively.</p>
+                                <p><strong>Strategy:</strong> Game-changing condition. Prioritize protecting the hasted character. Best on characters who Strike or move a lot.</p>
                             </div>
                         </div>
 
                         <div class="condition-card positive">
-                            <h5>🔍 Guided</h5>
+                            <h5>🔍 Sure Strike (formerly True Strike)</h5>
                             <div class="condition-mechanics">
-                                <p><strong>Effect:</strong> Next attack automatically hits</p>
-                                <p><strong>Source:</strong> True Strike spell, certain abilities</p>
-                                <p><strong>Duration:</strong> Until next attack or end of turn</p>
+                                <p><strong>Effect:</strong> Roll your next attack roll twice and use the better result; it ignores circumstance penalties to the roll and the flat check for a concealed or hidden target. It does not hit automatically.</p>
+                                <p><strong>Source:</strong> Sure Strike spell (it affects only the caster)</p>
+                                <p><strong>Duration:</strong> Until your next attack roll or the end of your turn</p>
                             </div>
                             <div class="tactical-applications">
                                 <h6>Tactical Applications:</h6>
                                 <ul>
-                                    <li><strong>High-Value Targets:</strong> Guarantee important attacks land</li>
+                                    <li><strong>High-Value Targets:</strong> Make important attacks much more likely to land</li>
                                     <li><strong>Power Attacks:</strong> Combine with high-damage abilities</li>
-                                    <li><strong>Touch Spells:</strong> Ensure spell delivery attacks succeed</li>
-                                    <li><strong>Critical Fishing:</strong> Natural 20s still critically hit</li>
+                                    <li><strong>Spell Attacks:</strong> Works on spell attack rolls too</li>
+                                    <li><strong>Critical Fishing:</strong> Rolling twice also raises your chance to crit</li>
                                 </ul>
                             </div>
                             <div class="condition-strategy">
@@ -184,9 +163,9 @@
                         <div class="condition-card negative">
                             <h5>😨 Frightened</h5>
                             <div class="condition-mechanics">
-                                <p><strong>Effect:</strong> -1 to -4 status penalty to all checks and DCs</p>
+                                <p><strong>Effect:</strong> Status penalty equal to its value (frightened 2 = −2) to all checks and DCs</p>
                                 <p><strong>Source:</strong> Intimidation, fear spells, monster abilities</p>
-                                <p><strong>Duration:</strong> Decreases by 1 each turn until gone</p>
+                                <p><strong>Duration:</strong> Decreases by 1 at the end of each of the creature's turns</p>
                             </div>
                             <div class="tactical-applications">
                                 <h6>Tactical Applications:</h6>
@@ -194,7 +173,7 @@
                                     <li><strong>Accuracy Reduction:</strong> Enemies miss more attacks</li>
                                     <li><strong>Save Penalties:</strong> Spells more likely to affect them</li>
                                     <li><strong>Skill Debuffs:</strong> Worse at Athletics, Perception, etc.</li>
-                                    <li><strong>Stacking Effect:</strong> Combines with other penalties</li>
+                                    <li><strong>Stacking Effect:</strong> Combines with circumstance and item penalties (not other status penalties)</li>
                                 </ul>
                             </div>
                             <div class="condition-strategy">
@@ -205,15 +184,15 @@
                         <div class="condition-card negative">
                             <h5>🕷️ Restrained</h5>
                             <div class="condition-mechanics">
-                                <p><strong>Effect:</strong> Can't move, -2 to attacks, flat-footed, -2 to Reflex saves</p>
-                                <p><strong>Source:</strong> Web spells, grappling, entangle effects</p>
+                                <p><strong>Effect:</strong> Off-guard (formerly flat-footed) and immobilized; can't use attack or manipulate actions except to Escape or Force Open</p>
+                                <p><strong>Source:</strong> A critical success to Grapple, some spells and monster abilities</p>
                                 <p><strong>Duration:</strong> Until escaped or effect ends</p>
                             </div>
                             <div class="tactical-applications">
                                 <h6>Tactical Applications:</h6>
                                 <ul>
                                     <li><strong>Mobility Denial:</strong> Enemy can't reposition</li>
-                                    <li><strong>Easier Targeting:</strong> Flat-footed condition aids attacks</li>
+                                    <li><strong>Easier Targeting:</strong> Off-guard (−2 AC) aids attacks</li>
                                     <li><strong>Area Control:</strong> Keeps enemies in spell/effect areas</li>
                                     <li><strong>Escape Prevention:</strong> Stops retreat attempts</li>
                                 </ul>
@@ -226,7 +205,7 @@
                         <div class="condition-card negative">
                             <h5>🤕 Slowed</h5>
                             <div class="condition-mechanics">
-                                <p><strong>Effect:</strong> Lose 1 action per turn (2 actions instead of 3)</p>
+                                <p><strong>Effect:</strong> Lose actions equal to its value each turn (slowed 1 = 2 actions instead of 3)</p>
                                 <p><strong>Source:</strong> Slow spell, certain attacks, magic items</p>
                                 <p><strong>Duration:</strong> Usually 1 minute or until removed</p>
                             </div>
@@ -236,7 +215,7 @@
                                     <li><strong>Action Denial:</strong> Enemies can't do as much per turn</li>
                                     <li><strong>Positioning Issues:</strong> Harder to move and attack</li>
                                     <li><strong>Reduced Threat:</strong> Fewer attacks or actions possible</li>
-                                    <li><strong>Spell Disruption:</strong> Multi-action spells become impossible</li>
+                                    <li><strong>Spell Disruption:</strong> Three-action spells and activities become impossible at slowed 1</li>
                                 </ul>
                             </div>
                             <div class="condition-strategy">
@@ -245,19 +224,19 @@
                         </div>
 
                         <div class="condition-card negative">
-                            <h5>🎯 Flat-Footed</h5>
+                            <h5>🎯 Off-Guard</h5>
                             <div class="condition-mechanics">
-                                <p><strong>Effect:</strong> -2 circumstance penalty to AC</p>
-                                <p><strong>Source:</strong> Flanking, being off-guard, surprise, many abilities</p>
-                                <p><strong>Duration:</strong> Usually until start of your next turn</p>
+                                <p><strong>Effect:</strong> −2 circumstance penalty to AC</p>
+                                <p><strong>Source:</strong> Flanking, being grabbed, restrained or prone, many abilities</p>
+                                <p><strong>Duration:</strong> As long as whatever causes it lasts</p>
                             </div>
                             <div class="tactical-applications">
                                 <h6>Tactical Applications:</h6>
                                 <ul>
-                                    <li><strong>Easier Hits:</strong> 10% better chance to hit flat-footed enemies</li>
+                                    <li><strong>Easier Hits:</strong> About 10 percentage points better chance to hit off-guard enemies</li>
                                     <li><strong>Critical Fishing:</strong> Better crit chances on important attacks</li>
                                     <li><strong>Sneak Attack:</strong> Enables rogue damage bonuses</li>
-                                    <li><strong>Spell Attacks:</strong> Touch spells more likely to hit</li>
+                                    <li><strong>Spell Attacks:</strong> Spell attack rolls target AC too, so they hit more often</li>
                                 </ul>
                             </div>
                             <div class="condition-strategy">
@@ -279,24 +258,24 @@
                         <div class="stacking-card">
                             <h5>✅ Conditions That Stack</h5>
                             <ul>
-                                <li><strong>Different Types:</strong> Circumstance + Status + Item bonuses all stack</li>
-                                <li><strong>Unnamed Bonuses:</strong> Multiple sources of unnamed bonuses stack</li>
-                                <li><strong>Different Conditions:</strong> Frightened + Sickened + Clumsy all apply</li>
+                                <li><strong>Different Types:</strong> Circumstance + Status + Item bonuses (or penalties) all stack</li>
+                                <li><strong>Untyped Penalties:</strong> Penalties with no type (like the multiple attack penalty) stack</li>
+                                <li><strong>Different Conditions:</strong> Frightened + off-guard both apply (status + circumstance); frightened, sickened and clumsy are all status penalties, so only the worst of those counts</li>
                             </ul>
                             <div class="stacking-example">
-                                <p><strong>Example:</strong> Frightened 2 (-2 status) + Flanked (-2 circumstance to AC) = -4 total penalty to enemy's AC</p>
+                                <p><strong>Example:</strong> Frightened 2 (−2 status) + off-guard from flanking (−2 circumstance) = −4 total penalty to the enemy's AC</p>
                             </div>
                         </div>
 
                         <div class="stacking-card">
                             <h5>❌ Conditions That Don't Stack</h5>
                             <ul>
-                                <li><strong>Same Type:</strong> Only highest status bonus applies</li>
+                                <li><strong>Same Type:</strong> Only the highest bonus (and the worst penalty) of each type applies</li>
                                 <li><strong>Same Condition:</strong> Frightened 2 + Frightened 1 = Frightened 2</li>
                                 <li><strong>Duplicate Sources:</strong> Two Bless spells don't stack</li>
                             </ul>
                             <div class="stacking-example">
-                                <p><strong>Example:</strong> Inspire Courage (+1 status) + Heroism (+1 status) = +1 total (not +2)</p>
+                                <p><strong>Example:</strong> Courageous Anthem (+1 status) + Heroism (+1 status) = +1 total (not +2)</p>
                             </div>
                         </div>
                     </div>
@@ -308,15 +287,15 @@
                     <div class="synergy-examples">
                         <div class="synergy-card">
                             <h5>🎯 The Accuracy Cascade</h5>
-                            <p><strong>Combination:</strong> Flat-Footed + Frightened + True Strike</p>
+                            <p><strong>Combination:</strong> Off-Guard + Frightened + Sure Strike</p>
                             <div class="synergy-breakdown">
                                 <p><strong>Effects:</strong></p>
                                 <ul>
-                                    <li>Flat-Footed: -2 to enemy AC</li>
-                                    <li>Frightened 2: -2 to enemy's AC</li>
-                                    <li>True Strike: Next attack automatically hits</li>
+                                    <li>Off-Guard: −2 to enemy AC</li>
+                                    <li>Frightened 2: −2 to enemy's AC</li>
+                                    <li>Sure Strike: Roll the next attack twice, keep the better</li>
                                 </ul>
-                                <p><strong>Result:</strong> Guaranteed hit with effective +4 bonus (great for critical fishing)</p>
+                                <p><strong>Result:</strong> Two chances to hit against an AC that is 4 lower (great for critical fishing)</p>
                             </div>
                         </div>
 
@@ -326,9 +305,9 @@
                             <div class="synergy-breakdown">
                                 <p><strong>Effects:</strong></p>
                                 <ul>
-                                    <li>Restrained: Can't move, -2 attacks, flat-footed</li>
+                                    <li>Restrained: Immobilized, off-guard, can't attack</li>
                                     <li>Slowed: Only 2 actions per turn</li>
-                                    <li>Prone: -2 to attacks, flat-footed to melee</li>
+                                    <li>Prone: −2 to attacks, off-guard (doesn't add to restrained's off-guard), must Crawl or Stand</li>
                                 </ul>
                                 <p><strong>Result:</strong> Enemy is nearly helpless and easy to finish off</p>
                             </div>
@@ -341,8 +320,8 @@
                                 <p><strong>Effects:</strong></p>
                                 <ul>
                                     <li>Confused: Random actions, might attack allies</li>
-                                    <li>Stupefied: Penalties to mental abilities</li>
-                                    <li>Fascinated: Must focus on one thing</li>
+                                    <li>Stupefied: Penalty to Intelligence-, Wisdom- and Charisma-based checks and DCs, plus a flat check to cast spells</li>
+                                    <li>Fascinated: −2 to Perception and skill checks; can't use concentrate actions unrelated to the fascination</li>
                                 </ul>
                                 <p><strong>Result:</strong> Enemy becomes unpredictable and ineffective</p>
                             </div>
@@ -362,9 +341,9 @@
                             <div class="method-card">
                                 <h5>⚔️ Combat Maneuvers</h5>
                                 <ul>
-                                    <li><strong>Grapple:</strong> Grab enemy to inflict Grabbed condition</li>
-                                    <li><strong>Trip:</strong> Knock enemy down for Prone condition</li>
-                                    <li><strong>Shove:</strong> Push enemy around and make them Off-Guard</li>
+                                    <li><strong>Grapple:</strong> Inflict Grabbed (Restrained on a critical success)</li>
+                                    <li><strong>Trip:</strong> Knock enemy down for Prone condition (a crit also deals 1d6 bludgeoning)</li>
+                                    <li><strong>Shove:</strong> Push enemy 5 feet (10 on a crit) into hazards or out of position</li>
                                     <li><strong>Disarm:</strong> Remove weapons to reduce threat</li>
                                 </ul>
                                 <p><strong>Best For:</strong> Fighters, monks, characters with high Athletics</p>
@@ -385,8 +364,8 @@
                                 <h5>🗣️ Skill-Based Applications</h5>
                                 <ul>
                                     <li><strong>Intimidation:</strong> Demoralize for Frightened condition</li>
-                                    <li><strong>Performance:</strong> Fascinate enemies or inspire allies</li>
-                                    <li><strong>Medicine:</strong> Treat conditions during combat</li>
+                                    <li><strong>Performance:</strong> Bards' composition spells (not the skill itself) bolster allies</li>
+                                    <li><strong>Medicine:</strong> Battle Medicine (a feat) heals mid-fight; Treat Poison helps against toxins</li>
                                     <li><strong>Athletics:</strong> Various combat maneuvers</li>
                                 </ul>
                                 <p><strong>Best For:</strong> Bards, rogues, skill-focused characters</p>
@@ -405,7 +384,7 @@
                                     <li><strong>Action-Denying:</strong> Paralyzed, stunned, confused</li>
                                     <li><strong>Severely Limiting:</strong> Restrained, slowed, blinded</li>
                                     <li><strong>Moderately Harmful:</strong> Frightened, sickened, enfeebled</li>
-                                    <li><strong>Minor Inconveniences:</strong> Clumsy, flat-footed (temporary)</li>
+                                    <li><strong>Minor Inconveniences:</strong> Clumsy, off-guard (temporary)</li>
                                 </ol>
                             </div>
 
@@ -415,10 +394,10 @@
                                     <div class="technique-card">
                                         <h6>✨ Magical Removal</h6>
                                         <ul>
-                                            <li><strong>Remove Fear:</strong> Eliminates frightened</li>
-                                            <li><strong>Remove Disease:</strong> Cures diseases and related conditions</li>
-                                            <li><strong>Restoration:</strong> Removes ability damage and drain</li>
-                                            <li><strong>Dispel Magic:</strong> Removes magical conditions</li>
+                                            <li><strong>Clear Mind (formerly Remove Fear):</strong> Can end frightened and other mental conditions</li>
+                                            <li><strong>Cleanse Affliction (formerly Remove Disease):</strong> Helps against diseases, poisons and curses</li>
+                                            <li><strong>Sound Body and similar spells:</strong> Counteract lingering physical conditions (PF2 has no ability damage)</li>
+                                            <li><strong>Dispel Magic:</strong> Counteracts a magical effect, including many that impose conditions</li>
                                         </ul>
                                     </div>
 
@@ -427,7 +406,7 @@
                                         <ul>
                                             <li><strong>Medicine Skill:</strong> Treat wounds, disease, poison</li>
                                             <li><strong>Rest:</strong> Many conditions fade with time</li>
-                                            <li><strong>Environmental:</strong> Fresh air for poison, light for blindness</li>
+                                            <li><strong>Environmental:</strong> Leave the area of a lingering effect (smoke, fog, spell zones)</li>
                                             <li><strong>Physical Aid:</strong> Help allies escape grapples</li>
                                         </ul>
                                     </div>
@@ -435,8 +414,8 @@
                                     <div class="technique-card">
                                         <h6>⚔️ Combat Solutions</h6>
                                         <ul>
-                                            <li><strong>Escape Artist:</strong> Get out of restraints</li>
-                                            <li><strong>Break Free:</strong> Athletics to escape grapples</li>
+                                            <li><strong>Escape (Acrobatics):</strong> Slip free of grabbed or restrained</li>
+                                            <li><strong>Escape (Athletics):</strong> Force your way out of a grapple</li>
                                             <li><strong>Destroy Source:</strong> Attack the web/trap causing condition</li>
                                             <li><strong>Reposition:</strong> Move to safer locations</li>
                                         </ul>
@@ -459,7 +438,7 @@
                 <div class="terrain-grid">
                     <div class="terrain-category">
                         <h4>🚧 Difficult Terrain</h4>
-                        <p><strong>Effect:</strong> Costs 2 squares of movement per square entered</p>
+                        <p><strong>Effect:</strong> Each square costs 5 extra feet of movement (greater difficult terrain: 10 extra feet)</p>
                         
                         <div class="terrain-details">
                             <h5>Natural Examples</h5>
@@ -472,8 +451,8 @@
 
                             <h5>Created Examples</h5>
                             <ul>
-                                <li><strong>Grease spells:</strong> Slippery surfaces</li>
-                                <li><strong>Entangle effects:</strong> Grasping plants and roots</li>
+                                <li><strong>Web (legacy spell):</strong> Sticky strands that are difficult terrain</li>
+                                <li><strong>Entangling Flora (formerly Entangle):</strong> Grasping plants and roots</li>
                                 <li><strong>Caltrops:</strong> Scattered spikes</li>
                                 <li><strong>Oil spills:</strong> Flammable and slippery</li>
                             </ul>
@@ -506,7 +485,7 @@
                                 <div class="cover-example">
                                     <h6>🛡️ Standard Cover</h6>
                                     <p><strong>Effect:</strong> +2 circumstance bonus to AC</p>
-                                    <p><strong>Examples:</strong> Trees, pillars, walls, other creatures</p>
+                                    <p><strong>Examples:</strong> Trees, pillars, low walls (a creature in the way gives only lesser cover, +1)</p>
                                 </div>
                                 <div class="cover-example">
                                     <h6>🏰 Greater Cover</h6>
@@ -541,9 +520,9 @@
                             <h5>Magical Hazards</h5>
                             <ul>
                                 <li><strong>Wall of Fire:</strong> Damage for passing through</li>
-                                <li><strong>Spike Growth:</strong> Piercing damage and difficult terrain</li>
-                                <li><strong>Cloudkill:</strong> Poison damage in area</li>
-                                <li><strong>Blade Barrier:</strong> Slashing damage wall</li>
+                                <li><strong>Thorn and spike effects:</strong> Piercing damage and difficult terrain</li>
+                                <li><strong>Poison clouds:</strong> Poison damage in an area</li>
+                                <li><strong>Blade walls:</strong> Slashing damage to anyone passing through</li>
                             </ul>
 
                             <h5>Using Hazards Tactically</h5>
@@ -569,8 +548,8 @@
                             <div class="barrier-spell">
                                 <h5>🔥 Wall of Fire</h5>
                                 <div class="spell-details">
-                                    <p><strong>Dimensions:</strong> 60-foot line, 10 feet high</p>
-                                    <p><strong>Effect:</strong> Blocks line of sight, damages creatures passing through</p>
+                                    <p><strong>Dimensions:</strong> Line up to 60 feet long and 10 feet high, or a 10-foot-radius ring</p>
+                                    <p><strong>Effect:</strong> Creatures on each side are concealed from the other; damages creatures passing through or starting their turn in it</p>
                                     <p><strong>Duration:</strong> 1 minute</p>
                                 </div>
                                 <div class="tactical-uses">
@@ -585,10 +564,10 @@
                             </div>
 
                             <div class="barrier-spell">
-                                <h5>🕷️ Web</h5>
+                                <h5>🕷️ Web (legacy spell)</h5>
                                 <div class="spell-details">
-                                    <p><strong>Area:</strong> 20-foot burst</p>
-                                    <p><strong>Effect:</strong> Difficult terrain, possible restraining</p>
+                                    <p><strong>Area:</strong> 10-foot burst</p>
+                                    <p><strong>Effect:</strong> Difficult terrain; a failed check slows a creature, a critical failure immobilizes it</p>
                                     <p><strong>Duration:</strong> 1 minute</p>
                                 </div>
                                 <div class="tactical-uses">
@@ -605,7 +584,7 @@
                             <div class="barrier-spell">
                                 <h5>🗿 Wall of Stone</h5>
                                 <div class="spell-details">
-                                    <p><strong>Dimensions:</strong> Customizable panels</p>
+                                    <p><strong>Dimensions:</strong> Customizable shape</p>
                                     <p><strong>Effect:</strong> Permanent physical barrier</p>
                                     <p><strong>Duration:</strong> Permanent until destroyed</p>
                                 </div>
@@ -627,10 +606,10 @@
                         
                         <div class="control-examples">
                             <div class="control-spell">
-                                <h5>🌿 Entangle</h5>
+                                <h5>🌿 Entangling Flora (formerly Entangle)</h5>
                                 <div class="control-mechanics">
-                                    <p><strong>Area:</strong> 40-foot burst</p>
-                                    <p><strong>Effect:</strong> Difficult terrain, saves to avoid restraining</p>
+                                    <p><strong>Area:</strong> 20-foot burst</p>
+                                    <p><strong>Effect:</strong> Difficult terrain; failed Reflex saves slow creatures, critical failures immobilize them</p>
                                     <p><strong>Advantage:</strong> Large area, multiple enemies affected</p>
                                 </div>
                             </div>
@@ -638,17 +617,17 @@
                             <div class="control-spell">
                                 <h5>🧊 Grease</h5>
                                 <div class="control-mechanics">
-                                    <p><strong>Area:</strong> 10-foot square</p>
-                                    <p><strong>Effect:</strong> Difficult terrain, saves to avoid falling prone</p>
+                                    <p><strong>Area:</strong> 4 contiguous 5-foot squares</p>
+                                    <p><strong>Effect:</strong> Slippery ground; creatures must save (or use Acrobatics) to avoid falling prone</p>
                                     <p><strong>Advantage:</strong> Low level, reliable effect</p>
                                 </div>
                             </div>
 
                             <div class="control-spell">
-                                <h5>⚡ Lightning Storm</h5>
+                                <h5>⚡ Storm and Cloud Spells</h5>
                                 <div class="control-mechanics">
-                                    <p><strong>Area:</strong> Large cylinder</p>
-                                    <p><strong>Effect:</strong> Ongoing damage and difficult terrain</p>
+                                    <p><strong>Area:</strong> Varies by spell</p>
+                                    <p><strong>Effect:</strong> Ongoing damage or obscured areas</p>
                                     <p><strong>Advantage:</strong> Damage + control combination</p>
                                 </div>
                             </div>
@@ -682,10 +661,10 @@
                             <div class="technique-card">
                                 <h5>🌊 Elemental Shaping</h5>
                                 <ul>
-                                    <li><strong>Shape Earth:</strong> Create holes, walls, ramps</li>
+                                    <li><strong>Shape Stone:</strong> Reshape stone into walls, ramps, openings</li>
                                     <li><strong>Control Water:</strong> Create currents, barriers, floods</li>
                                     <li><strong>Wind Control:</strong> Create updrafts, barriers, movement</li>
-                                    <li><strong>Plant Growth:</strong> Instant difficult terrain</li>
+                                    <li><strong>Plant Magic:</strong> Instant difficult terrain (e.g. Entangling Flora)</li>
                                 </ul>
                             </div>
                         </div>
@@ -710,15 +689,15 @@
                             <div class="line-types">
                                 <div class="line-type">
                                     <h6>👁️ Line of Sight</h6>
-                                    <p><strong>Requirement:</strong> Unblocked path from any corner of your square to any corner of target's square</p>
-                                    <p><strong>Blocks LoS:</strong> Solid barriers, total concealment, total cover</p>
+                                    <p><strong>Requirement:</strong> You can see the target with no solid, opaque barrier in the way</p>
+                                    <p><strong>Blocks LoS:</strong> Solid opaque barriers (darkness and fog make targets concealed or hidden instead)</p>
                                     <p><strong>Needed For:</strong> Targeting with most spells and abilities</p>
                                 </div>
                                 <div class="line-type">
                                     <h6>⚡ Line of Effect</h6>
                                     <p><strong>Requirement:</strong> Unblocked path for magical energy to reach target</p>
-                                    <p><strong>Blocks LoE:</strong> Solid barriers that would block physical projectiles</p>
-                                    <p><strong>Needed For:</strong> All targeted spells and supernatural abilities</p>
+                                    <p><strong>Blocks LoE:</strong> Solid physical barriers, even transparent ones like a glass window</p>
+                                    <p><strong>Needed For:</strong> Almost all spells and effects that target or affect you</p>
                                 </div>
                             </div>
                         </div>
@@ -742,12 +721,12 @@
                             <div class="flanking-requirements">
                                 <p><strong>Requirements for Flanking:</strong></p>
                                 <ul>
-                                    <li>You and an ally are adjacent to the same enemy</li>
-                                    <li>You are on opposite sides or corners of the enemy</li>
-                                    <li>Both you and your ally can attack the enemy</li>
-                                    <li>Both you and your ally threaten the enemy</li>
+                                    <li>You and an ally both have the enemy within your melee reach</li>
+                                    <li>A line between the centers of your spaces passes through opposite sides or opposite corners of the enemy's space</li>
+                                    <li>Both of you can act and are wielding melee weapons or able to make unarmed attacks</li>
+                                    <li>Neither of you is under an effect that prevents attacking</li>
                                 </ul>
-                                <p><strong>Benefit:</strong> Enemy is flat-footed to both flanking attackers</p>
+                                <p><strong>Benefit:</strong> Enemy is off-guard to both flanking attackers</p>
                             </div>
                         </div>
 
@@ -758,14 +737,14 @@
                                     <h6>🔄 The Pincer Movement</h6>
                                     <p><strong>Setup:</strong> Two melee fighters approach enemy from opposite sides</p>
                                     <p><strong>Execution:</strong> Coordinate movement to establish flanking</p>
-                                    <p><strong>Benefit:</strong> Guaranteed flat-footed condition, enables sneak attacks</p>
+                                    <p><strong>Benefit:</strong> Off-guard target, which enables sneak attack</p>
                                 </div>
 
                                 <div class="flanking-scenario">
                                     <h6>🐺 The Pack Tactics</h6>
                                     <p><strong>Setup:</strong> Multiple allies surround high-value target</p>
-                                    <p><strong>Execution:</strong> Everyone gets flanking bonuses</p>
-                                    <p><strong>Benefit:</strong> Focus fire with improved accuracy</p>
+                                    <p><strong>Execution:</strong> Each pair on opposite sides flanks the target</p>
+                                    <p><strong>Benefit:</strong> Target is off-guard to every flanker, so focus fire lands more often</p>
                                 </div>
 
                                 <div class="flanking-scenario">
@@ -833,8 +812,8 @@
                                 <div class="threat-range">
                                     <h6>🏹 Ranged Threats</h6>
                                     <ul>
-                                        <li><strong>Bow Range:</strong> 150+ feet effective range</li>
-                                        <li><strong>Spell Range:</strong> Varies by spell (30-500+ feet)</li>
+                                        <li><strong>Bow Range:</strong> Longbow range increment 100 feet (shortbow 60); −2 per extra increment, up to six increments</li>
+                                        <li><strong>Spell Range:</strong> Varies by spell (touch to 500 feet or more)</li>
                                         <li><strong>Area Effects:</strong> Burst/cone ranges and sizes</li>
                                     </ul>
                                 </div>
@@ -890,14 +869,14 @@
                                     <h6>🏃 Hit-and-Run</h6>
                                     <p><strong>Pattern:</strong> Move in, attack, move out</p>
                                     <p><strong>Best For:</strong> High-mobility characters, ranged attackers</p>
-                                    <p><strong>Advantage:</strong> Minimize retaliation while dealing damage</p>
+                                    <p><strong>Advantage:</strong> Minimize retaliation while dealing damage (but moving out of reach triggers Reactive Strike, formerly Attack of Opportunity, from fighters and monsters that have it)</p>
                                 </div>
 
                                 <div class="movement-type">
                                     <h6>🔄 Flanking Rotation</h6>
                                     <p><strong>Pattern:</strong> Continuously reposition to maintain flanking</p>
                                     <p><strong>Best For:</strong> Coordinated melee teams</p>
-                                    <p><strong>Advantage:</strong> Persistent flat-footed conditions</p>
+                                    <p><strong>Advantage:</strong> Enemies stay off-guard</p>
                                 </div>
 
                                 <div class="movement-type">
@@ -937,10 +916,10 @@
                         <div class="speed-tactics">
                             <h5>Improving Initiative</h5>
                             <ul>
-                                <li><strong>High Dexterity:</strong> Core initiative modifier</li>
-                                <li><strong>Incredible Initiative:</strong> Feat for +2 bonus</li>
-                                <li><strong>Alert feats:</strong> Various initiative improvements</li>
-                                <li><strong>Magic items:</strong> Boots of speed, haste effects</li>
+                                <li><strong>High Perception:</strong> Initiative is usually a Perception check (Wisdom-based)</li>
+                                <li><strong>Incredible Initiative:</strong> General feat for a +2 circumstance bonus</li>
+                                <li><strong>Skill initiative:</strong> The GM may let you roll Stealth (when Avoiding Notice) or another skill instead</li>
+                                <li><strong>Magic items:</strong> Items that boost Perception</li>
                             </ul>
                         </div>
                     </div>
@@ -952,8 +931,8 @@
                             <h5>🔄 Delay Action</h5>
                             <div class="delay-mechanics">
                                 <p><strong>How it Works:</strong> Choose not to act, jump back into initiative order later</p>
-                                <p><strong>New Initiative:</strong> Act on chosen initiative count, stay there</p>
-                                <p><strong>Limitation:</strong> Can't delay past the end of the round</p>
+                                <p><strong>New Initiative:</strong> Act when you choose to return; your initiative moves to that spot</p>
+                                <p><strong>Limitation:</strong> Delay a full round without returning and you lose that turn's actions</p>
                             </div>
                             
                             <h6>Strategic Uses of Delay</h6>
@@ -968,16 +947,16 @@
                         <div class="ready-action">
                             <h5>⚡ Ready Action</h5>
                             <div class="ready-mechanics">
-                                <p><strong>How it Works:</strong> Prepare action with specific trigger</p>
+                                <p><strong>How it Works:</strong> Spend 2 actions to prepare one single action or free action with a specific trigger</p>
                                 <p><strong>Trigger:</strong> Must be observable and specific</p>
-                                <p><strong>Response:</strong> Use reaction when trigger occurs</p>
+                                <p><strong>Response:</strong> Use your reaction to take that action when the trigger occurs</p>
                             </div>
                             
                             <h6>Ready Action Examples</h6>
                             <ul>
-                                <li><strong>"If enemy moves, I attack"</strong> - Punish repositioning</li>
-                                <li><strong>"If ally falls, I heal"</strong> - Emergency response</li>
-                                <li><strong>"If enemy casts, I counterspell"</strong> - Spell defense</li>
+                                <li><strong>"If an enemy moves adjacent, I Strike"</strong> - Punish advances</li>
+                                <li><strong>"If my adjacent ally falls, I cast a one-action Heal"</strong> - Emergency response</li>
+                                <li><strong>"If the caster steps out of cover, I shoot"</strong> - Spell defense</li>
                                 <li><strong>"If door opens, I attack"</strong> - Ambush preparation</li>
                             </ul>
                         </div>
@@ -996,15 +975,15 @@
                                 </div>
 
                                 <div class="method">
-                                    <h6>⚡ Haste Effects</h6>
-                                    <p>Some speed effects can improve initiative retroactively</p>
-                                    <p><strong>Example:</strong> Boots of Speed activation</p>
+                                    <h6>🎲 Initiative Skill Choice</h6>
+                                    <p>The activity you're doing when combat starts sets which check you roll</p>
+                                    <p><strong>Example:</strong> Avoiding Notice lets you roll Stealth for initiative</p>
                                 </div>
 
                                 <div class="method">
                                     <h6>🎯 Targeting Initiative</h6>
-                                    <p>Some spells and effects can change enemy initiative</p>
-                                    <p><strong>Example:</strong> Slow spell effects</p>
+                                    <p>Few effects move an enemy in the order, but you can shrink their turns</p>
+                                    <p><strong>Example:</strong> Slow (slowed) or stunning effects</p>
                                 </div>
                             </div>
                         </div>
@@ -1024,7 +1003,7 @@
                             <div class="combo-example">
                                 <h5>🕷️ The Web-Fireball Combo</h5>
                                 <div class="combo-sequence">
-                                    <p><strong>Turn 1 (Wizard):</strong> Cast Web to restrain enemies</p>
+                                    <p><strong>Turn 1 (Wizard):</strong> Cast Web (a legacy spell) to slow and immobilize enemies</p>
                                     <p><strong>Turn 2 (Sorcerer):</strong> Cast Fireball on webbed area</p>
                                     <p><strong>Result:</strong> Enemies can't easily escape the blast area</p>
                                 </div>
@@ -1038,8 +1017,8 @@
                                 <h5>🛡️ The Tank-and-Flank</h5>
                                 <div class="combo-sequence">
                                     <p><strong>Turn 1 (Fighter):</strong> Engage enemy in melee</p>
-                                    <p><strong>Turn 2 (Rogue):</strong> Move to flanking position</p>
-                                    <p><strong>Turn 3 (Rogue):</strong> Sneak attack with advantage</p>
+                                    <p><strong>Turn 2 (Rogue):</strong> Stride to the flanking position</p>
+                                    <p><strong>Same turn (Rogue):</strong> Strike the off-guard enemy for sneak attack damage</p>
                                 </div>
                                 <div class="timing-notes">
                                     <p><strong>Timing Key:</strong> Fighter must engage first to set up flank</p>
@@ -1057,21 +1036,21 @@
                             <div class="reaction-combo">
                                 <h5>🔄 The Counterspell Chain</h5>
                                 <div class="chain-sequence">
-                                    <p><strong>Enemy Action:</strong> Begins casting dangerous spell</p>
-                                    <p><strong>Player Reaction:</strong> Counterspell attempt</p>
-                                    <p><strong>Enemy Reaction:</strong> Counter the counterspell</p>
-                                    <p><strong>Ally Reaction:</strong> Counter the counter-counterspell</p>
+                                    <p><strong>Enemy Action:</strong> Casts a dangerous spell</p>
+                                    <p><strong>Player Reaction:</strong> Counterspell (a class feat that spends a matching spell)</p>
+                                    <p><strong>If it fails:</strong> A champion's reaction can shield an ally from part of the damage</p>
+                                    <p><strong>Next turn:</strong> Focus fire on the caster before it casts again</p>
                                 </div>
-                                <p><strong>Result:</strong> Spell battles within spell battles</p>
+                                <p><strong>Result:</strong> Layered answers to big spells</p>
                             </div>
 
                             <div class="reaction-combo">
                                 <h5>🛡️ The Protection Net</h5>
                                 <div class="chain-sequence">
                                     <p><strong>Enemy Action:</strong> Attacks ally</p>
-                                    <p><strong>Champion Reaction:</strong> Retributive Strike</p>
-                                    <p><strong>Cleric Reaction:</strong> Heal ally if hit</p>
-                                    <p><strong>Rogue Action (next turn):</strong> Sneak attack while enemy is distracted</p>
+                                    <p><strong>Champion Reaction:</strong> Champion's reaction (such as a paladin's Retributive Strike)</p>
+                                    <p><strong>Cleric (on their turn):</strong> Heal the ally if hit</p>
+                                    <p><strong>Rogue Action (next turn):</strong> Sneak attack if the enemy is flanked or otherwise off-guard</p>
                                 </div>
                                 <p><strong>Result:</strong> Layered protection and counter-attack</p>
                             </div>
@@ -1132,15 +1111,15 @@
                                     <div class="strategy-option">
                                         <h6>❌ Spread Damage</h6>
                                         <p><strong>Turn 1:</strong> Each enemy takes 15 damage (5 HP left each)</p>
-                                        <p><strong>Turn 2:</strong> All 4 enemies still attacking (4 enemy actions)</p>
+                                        <p><strong>Turn 2:</strong> All 4 enemies still attacking</p>
                                         <p><strong>Result:</strong> Face maximum enemy action economy</p>
                                     </div>
 
                                     <div class="strategy-option">
                                         <h6>✅ Focus Fire</h6>
-                                        <p><strong>Turn 1:</strong> One enemy takes 60 damage (dead), others untouched</p>
-                                        <p><strong>Turn 2:</strong> Only 3 enemies attacking (3 enemy actions)</p>
-                                        <p><strong>Result:</strong> 25% reduction in enemy actions immediately</p>
+                                        <p><strong>Turn 1:</strong> Attackers pair up: two enemies take 30 damage each (dead), two untouched</p>
+                                        <p><strong>Turn 2:</strong> Only 2 enemies attacking</p>
+                                        <p><strong>Result:</strong> 50% reduction in enemy attacks immediately</p>
                                     </div>
                                 </div>
                             </div>
@@ -1203,7 +1182,7 @@
                                 <div class="technique">
                                     <h6>🔗 Action Linking</h6>
                                     <p><strong>Concept:</strong> One character's action enables another's</p>
-                                    <p><strong>Example:</strong> Fighter grapples enemy, Rogue gets automatic sneak attack</p>
+                                    <p><strong>Example:</strong> Fighter grapples enemy (grabbed = off-guard), so every Rogue hit adds sneak attack</p>
                                     <p><strong>Benefit:</strong> 1 + 1 = 3 in terms of effectiveness</p>
                                 </div>
 
@@ -1218,7 +1197,7 @@
                                     <h6>⚡ Reaction Coordination</h6>
                                     <p><strong>Concept:</strong> Multiple characters ready reactions for same trigger</p>
                                     <p><strong>Example:</strong> "When enemy moves, we all attack it"</p>
-                                    <p><strong>Benefit:</strong> Burst damage outside normal action economy</p>
+                                    <p><strong>Benefit:</strong> Strikes land at the moment you choose (Ready costs 2 actions each, so it's a trade, not free damage)</p>
                                 </div>
                             </div>
                         </div>
@@ -1245,7 +1224,7 @@
                                 <div class="combo">
                                     <h6>🛡️ Support + 🎯 Any Role</h6>
                                     <p><strong>Synergy:</strong> Support amplifies effectiveness of any other role</p>
-                                    <p><strong>Example:</strong> Bard inspiration + Fighter's important attack</p>
+                                    <p><strong>Example:</strong> Bard's Courageous Anthem + Fighter's important attack</p>
                                 </div>
                             </div>
                         </div>
@@ -1318,9 +1297,9 @@
                             <h5>Information Sharing Spells</h5>
                             <ul>
                                 <li><strong>Detect Magic:</strong> Share magical threat assessment</li>
-                                <li><strong>Know Direction:</strong> Coordinate movement and positioning</li>
-                                <li><strong>Comprehend Languages:</strong> Understand enemy communications</li>
-                                <li><strong>Zone of Truth:</strong> Verify information from captured enemies</li>
+                                <li><strong>Know the Way (formerly Know Direction):</strong> Coordinate movement and positioning</li>
+                                <li><strong>Translate (formerly Comprehend Language):</strong> Understand enemy communications</li>
+                                <li><strong>Ring of Truth (formerly Zone of Truth):</strong> Verify information from captured enemies</li>
                             </ul>
                         </div>
                     </div>
@@ -1637,8 +1616,8 @@
                 <div class="condition-scenarios">
                     <div class="scenario-exercise">
                         <h4>Scenario A: The Overwhelming Mage</h4>
-                        <p><strong>Enemy:</strong> 8th-level enemy wizard with high AC (19), moderate saves, dangerous spells</p>
-                        <p><strong>Your Resources:</strong> Fighter (Athletics +12), Rogue (Stealth +11), Cleric (various spells), Wizard (control spells)</p>
+                        <p><strong>Enemy:</strong> 8th-level enemy wizard with a lower AC than a warrior of its level, moderate saves, dangerous spells</p>
+                        <p><strong>Your Resources:</strong> 8th-level party: Fighter (Athletics +16), Rogue (Stealth +18), Cleric (various spells), Wizard (control spells)</p>
                         
                         <div class="condition-challenge">
                             <h5>🎯 Your Mission</h5>
@@ -1676,27 +1655,27 @@
                                 
                                 <p><strong>Step 1 - Primary Condition: Grabbed/Restrained</strong></p>
                                 <ul>
-                                    <li><strong>Application:</strong> Fighter grapples (Athletics +12 vs enemy's Athletics or Acrobatics)</li>
-                                    <li><strong>Effect:</strong> -2 to attacks, flat-footed, can't move</li>
-                                    <li><strong>Why:</strong> Prevents repositioning and disrupts spellcasting with somatic components</li>
+                                    <li><strong>Application:</strong> Fighter grapples (Athletics +16 vs the wizard's Fortitude DC)</li>
+                                    <li><strong>Effect:</strong> Grabbed: off-guard and immobilized, and manipulate actions (including most spellcasting) need a DC 5 flat check; a critical success makes it restrained instead</li>
+                                    <li><strong>Why:</strong> Prevents repositioning and disrupts spellcasting</li>
                                 </ul>
 
-                                <p><strong>Step 2 - Supporting Conditions: Frightened + Sickened</strong></p>
+                                <p><strong>Step 2 - Supporting Conditions: Frightened, with Sickened as backup</strong></p>
                                 <ul>
-                                    <li><strong>Frightened:</strong> Rogue uses Intimidation while enemy is grappled</li>
-                                    <li><strong>Sickened:</strong> Cleric casts a spell that nauseates</li>
-                                    <li><strong>Synergy:</strong> Both reduce spell attack rolls and spell DCs significantly</li>
+                                    <li><strong>Frightened:</strong> Rogue uses Intimidation (Demoralize) while enemy is grappled</li>
+                                    <li><strong>Sickened:</strong> Cleric casts a spell that sickens</li>
+                                    <li><strong>Synergy:</strong> Both lower spell attack rolls and spell DCs, but they're both status penalties, so only the worse one applies; sickened keeps the pressure on as frightened ticks down</li>
                                 </ul>
 
                                 <p><strong>Step 3 - Execution Order:</strong></p>
                                 <ol>
-                                    <li><strong>Fighter:</strong> Grapple the wizard (restrained condition)</li>
+                                    <li><strong>Fighter:</strong> Grapple the wizard (grabbed, or restrained on a crit)</li>
                                     <li><strong>Rogue:</strong> Demoralize grappled wizard (frightened condition)</li>
                                     <li><strong>Cleric:</strong> Cast spell for sickened condition</li>
-                                    <li><strong>Wizard:</strong> Fireball or other finishing attack</li>
+                                    <li><strong>Wizard:</strong> A single-target damage spell (a fireball would catch the adjacent fighter)</li>
                                 </ol>
 
-                                <p><strong>Final Result:</strong> Enemy wizard with -2 to attacks (grappled), -2 to everything (frightened), -2 to attacks and saves (sickened), flat-footed, and unable to move. Effectively neutralized!</p>
+                                <p><strong>Final Result:</strong> Enemy wizard grabbed (off-guard, unable to move, flat check to cast most spells) and frightened 1 or 2 (a penalty to every check and DC, with sickened taking over as it fades). Effectively neutralized!</p>
                             </div>
                         </details>
                     </div>
@@ -1735,28 +1714,28 @@
                                 <p><strong>Terrain Exploitation:</strong></p>
                                 <ul>
                                     <li><strong>Narrow passage:</strong> Forces single-file movement</li>
-                                    <li><strong>High walls:</strong> Prevent flanking, create shooting gallery</li>
+                                    <li><strong>High walls:</strong> Limit approach angles, create shooting gallery</li>
                                     <li><strong>Rocky debris:</strong> Available for improvised barriers</li>
                                 </ul>
 
                                 <p><strong>Layer 1 - Web Spell:</strong></p>
                                 <ul>
                                     <li>Cast Web at canyon entrance</li>
-                                    <li>Creates difficult terrain and potential restraining</li>
+                                    <li>Creates difficult terrain; goblins that fail are slowed or immobilized</li>
                                     <li>Forces goblins to cluster together</li>
                                 </ul>
 
                                 <p><strong>Layer 2 - Grease Behind Web:</strong></p>
                                 <ul>
                                     <li>Cast Grease spell behind the Web</li>
-                                    <li>Goblins who escape Web fall prone</li>
+                                    <li>Goblins who fail their checks on the grease fall prone</li>
                                     <li>Creates compound movement problems</li>
                                 </ul>
 
                                 <p><strong>Layer 3 - Fire Damage:</strong></p>
                                 <ul>
-                                    <li>Use fire spells/arrows on the Web (flammable)</li>
-                                    <li>Burning Web deals ongoing damage</li>
+                                    <li>Use fire spells/arrows on the Web (burning it is a GM call; the spell has no fire rule)</li>
+                                    <li>Fire spells deal their own damage (persistent fire if the spell says so)</li>
                                     <li>Forces goblins to take damage or find alternative route</li>
                                 </ul>
 
@@ -1860,7 +1839,7 @@
                                     <li><strong>Escape Plan:</strong> Side doors provide multiple exit routes if needed</li>
                                 </ul>
 
-                                <p><strong>Advanced Tactic:</strong> Wizard's Wall of Fire also blocks king's line of sight to most of the party, limiting his spell targeting options!</p>
+                                <p><strong>Advanced Tactic:</strong> Wizard's Wall of Fire also makes everyone on the far side concealed from the king, so he needs a DC 5 flat check to target them with spells and attacks!</p>
                             </div>
                         </details>
                     </div>
@@ -1932,21 +1911,21 @@
 
                                 <p><strong>Round 1 Execution (Initiative Order):</strong></p>
                                 <ol>
-                                    <li><strong>Cleric (First):</strong> Cast True Strike on Rogue for guaranteed hit</li>
-                                    <li><strong>Fighter (Second):</strong> Grapple the enemy (flat-footed condition)</li>
-                                    <li><strong>Wizard (Third):</strong> Cast spell requiring save (enemy has penalties from grapple)</li>
-                                    <li><strong>Rogue (Fourth):</strong> Sneak attack with True Strike (auto-hit, massive damage)</li>
+                                    <li><strong>Cleric (First):</strong> Cast Heroism on the Rogue (+1 status to attack rolls)</li>
+                                    <li><strong>Fighter (Second):</strong> Grapple the enemy if it's no more than one size larger (grabbed = off-guard)</li>
+                                    <li><strong>Wizard (Third):</strong> Cast a debilitating spell that targets the enemy's weakest save, such as Slow if its Fortitude is low (grabbing doesn't lower saves)</li>
+                                    <li><strong>Rogue (Fourth):</strong> Sneak attack the off-guard enemy, boosted by Heroism</li>
                                 </ol>
 
                                 <p><strong>Synergy Breakdown:</strong></p>
                                 <ul>
-                                    <li><strong>True Strike → Rogue:</strong> Guarantees the highest damage attack hits</li>
-                                    <li><strong>Grapple → Flat-footed:</strong> Rogue gets sneak attack, wizard gets save penalties</li>
-                                    <li><strong>Save Penalties → Spell Success:</strong> Control spell more likely to work</li>
-                                    <li><strong>All Together:</strong> Guaranteed damage + likely successful save-or-suck spell</li>
+                                    <li><strong>Heroism → Rogue:</strong> Makes the highest-damage attacks more likely to hit</li>
+                                    <li><strong>Grapple → Off-guard:</strong> Rogue gets sneak attack, everyone gets −2 to the enemy's AC</li>
+                                    <li><strong>Weakest Save → Spell Success:</strong> Control spell more likely to work</li>
+                                    <li><strong>All Together:</strong> Likely heavy damage + a good chance at a debilitating spell</li>
                                 </ul>
 
-                                <p><strong>Expected Result:</strong> Enemy takes massive sneak attack damage AND is likely affected by a powerful debuff spell, setting up easy elimination in round 2!</p>
+                                <p><strong>Expected Result:</strong> Enemy probably takes heavy sneak attack damage AND is likely affected by a powerful debuff spell, setting up elimination in round 2!</p>
                             </div>
                         </details>
                     </div>
@@ -1956,16 +1935,16 @@
 
         <section class="next-steps">
             <h2>What's Next?</h2>
-            <p>You've now mastered the pinnacle of Pathfinder 2.0 combat - the advanced tactics that separate good players from legendary ones. You understand how to read battlefields like chess boards, manipulate conditions like a master strategist, and coordinate with your team like a military commander. These skills will transform every combat from a simple damage race into a strategic masterpiece.</p>
+            <p>You've now mastered the pinnacle of Pathfinder Second Edition combat - the advanced tactics that separate good players from legendary ones. You understand how to read battlefields like chess boards, manipulate conditions like a master strategist, and coordinate with your team like a military commander. These skills will transform every combat from a simple damage race into a strategic masterpiece.</p>
             
             <div class="upcoming-topics">
-                <h3>Upcoming Lectures</h3>
+                <h3>Coming Up in This Guide</h3>
                 <ul>
                     <li><strong><a href="/pf2_char_adv.html">Character Advancement</a>:</strong> Leveling up, feat selection, and long-term character development</li>
                     <li><strong><a href="/pf2_campaign.html">Campaign and Adventure Design</a>:</strong> Creating memorable stories and balanced challenges</li>
-                    <li><strong>Game Master Essentials:</strong> Running engaging games with proper pacing and player agency</li>
-                    <li><strong>Party Dynamics:</strong> Team building, role optimization, and group synergy</li>
-                    <li><strong>Advanced Rules Mastery:</strong> Edge cases, complex interactions, and system mastery</li>
+                    <li><strong><a href="/pf2_gm.html">Game Master Essentials</a>:</strong> Running engaging games with proper pacing and player agency</li>
+                    <li><strong><a href="/pf2_player_collab.html">Player Collaboration and Table Dynamics</a>:</strong> Team building, role optimization, and group synergy</li>
+                    <li><strong>Rules Lookups:</strong> Archives of Nethys (2e.aonprd.com), the official free rules site, for edge cases and exact rules text</li>
                 </ul>
             </div>
 
@@ -1998,111 +1977,98 @@
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_items.html">Equipment &amp; Treasure</a>
+    <a class="next" href="/pf2_char_adv.html">Character Advancement</a>
+</div>
         <p>The battlefield bends to your will - command it with wisdom, strike with precision, and victory shall be yours!</p>
    
     </footer>
 
     <script>
-        // Condition Scale Visualization
+        // Condition Severity Scale: a rough ranking (not rules data).
+        // Harmful conditions on the left, beneficial effects on the right.
+        // Drawn on a light figure panel in both themes, so text is dark.
         const canvas = document.getElementById('conditionScale');
         const ctx = canvas.getContext('2d');
-        
-        // Clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Define condition categories
+
         const conditions = [
-            { name: 'Dying', severity: -10, color: '#000000' },
+            { name: 'Dying', severity: -10, color: '#212121' },
             { name: 'Unconscious', severity: -9, color: '#424242' },
             { name: 'Paralyzed', severity: -8, color: '#616161' },
             { name: 'Stunned', severity: -7, color: '#757575' },
             { name: 'Restrained', severity: -6, color: '#9e9e9e' },
-            { name: 'Prone', severity: -5, color: '#ff5722' },
-            { name: 'Frightened', severity: -4, color: '#ff9800' },
-            { name: 'Sickened', severity: -3, color: '#ffc107' },
-            { name: 'Flat-footed', severity: -2, color: '#ffeb3b' },
-            { name: 'Clumsy', severity: -1, color: '#fff59d' },
-            { name: 'Normal', severity: 0, color: '#e8f5e8' },
-            { name: 'Inspired', severity: 1, color: '#c8e6c9' },
-            { name: 'Blessed', severity: 2, color: '#a5d6a7' },
-            { name: 'Hasted', severity: 3, color: '#81c784' },
-            { name: 'Heroism', severity: 4, color: '#66bb6a' },
-            { name: 'True Strike', severity: 5, color: '#4caf50' }
+            { name: 'Prone', severity: -5, color: '#e64a19' },
+            { name: 'Frightened', severity: -4, color: '#f57c00' },
+            { name: 'Sickened', severity: -3, color: '#ffa000' },
+            { name: 'Off-guard', severity: -2, color: '#fbc02d' },
+            { name: 'Clumsy', severity: -1, color: '#fdd835' },
+            { name: 'Normal', severity: 0, color: '#bdbdbd' },
+            { name: 'Bless', severity: 1, color: '#a5d6a7' },
+            { name: 'Anthem', severity: 2, color: '#81c784' },
+            { name: 'Heroism', severity: 3, color: '#66bb6a' },
+            { name: 'Sure Strike', severity: 4, color: '#43a047' },
+            { name: 'Quickened', severity: 5, color: '#2e7d32' }
         ];
-        
-        // Chart dimensions
+
         const chartWidth = 700;
-        const chartHeight = 120;
         const startX = 50;
-        const startY = 160;
-        
-        // Draw scale
+        const baseY = 132;          // bars grow up from this baseline
+        const unit = 7;             // px per severity step (max 70px)
         const barWidth = chartWidth / conditions.length;
-        
-        conditions.forEach((condition, index) => {
-            const x = startX + (index * barWidth);
-            const height = 80 + (condition.severity * 3); // Scale height based on severity
-            const y = startY - height;
-            
-            // Draw condition bar
-            ctx.fillStyle = condition.color;
-            ctx.fillRect(x, y, barWidth - 2, height);
-            
-            // Draw condition name
-            ctx.fillStyle = '#333';
-            ctx.font = '10px Arial';
-            ctx.textAlign = 'center';
-            ctx.save();
-            ctx.translate(x + barWidth/2, startY + 20);
-            ctx.rotate(-Math.PI/4);
-            ctx.fillText(condition.name, 0, 0);
-            ctx.restore();
-            
-            // Draw severity value
-            ctx.fillStyle = condition.severity >= 0 ? '#2e7d32' : '#d32f2f';
-            ctx.font = 'bold 12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(condition.severity > 0 ? '+' + condition.severity : condition.severity.toString(), x + barWidth/2, y - 5);
-        });
-        
-        // Draw center line
-        const centerIndex = conditions.findIndex(c => c.severity === 0);
-        const centerX = startX + (centerIndex * barWidth) + barWidth/2;
-        ctx.strokeStyle = '#333';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(centerX, startY - 100);
-        ctx.lineTo(centerX, startY + 50);
-        ctx.stroke();
-        
-        // Labels
-        ctx.fillStyle = '#333';
+
+        // Title and legend
+        ctx.fillStyle = '#212121';
         ctx.font = 'bold 16px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText('Condition Severity Scale', startX + chartWidth/2, 30);
-        
+        ctx.fillText('Condition Severity Scale (rough ranking)', startX + chartWidth / 2, 22);
+
         ctx.font = '12px Arial';
-        ctx.fillText('Harmful ←', startX + 100, 50);
-        ctx.fillText('→ Beneficial', startX + chartWidth - 100, 50);
-    </script>
-    <nav class="prev-next-nav">
-        <a href="/pf2_items.html" class="nav-prev">← Items</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_char_adv.html" class="nav-next">Character Advancement →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
+        ctx.fillStyle = '#b71c1c';
+        ctx.textAlign = 'left';
+        ctx.fillText('\u2190 More harmful conditions', startX, 44);
+        ctx.fillStyle = '#1b5e20';
+        ctx.textAlign = 'right';
+        ctx.fillText('Beneficial effects \u2192', startX + chartWidth, 44);
+
+        conditions.forEach((condition, index) => {
+            const x = startX + index * barWidth;
+            const height = Math.max(Math.abs(condition.severity) * unit, 3);
+            ctx.fillStyle = condition.color;
+            ctx.fillRect(x + 2, baseY - height, barWidth - 4, height);
+
+            // Rotated label under the baseline
+            ctx.save();
+            ctx.translate(x + barWidth / 2 + 4, baseY + 12);
+            ctx.rotate(-Math.PI / 5);
+            ctx.fillStyle = '#212121';
+            ctx.font = '11px Arial';
+            ctx.textAlign = 'right';
+            ctx.fillText(condition.name, 0, 0);
+            ctx.restore();
         });
+
+        // Baseline
+        ctx.strokeStyle = '#424242';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(startX, baseY + 0.5);
+        ctx.lineTo(startX + chartWidth, baseY + 0.5);
+        ctx.stroke();
+
+        // Divider at "Normal"
+        const centerIndex = conditions.findIndex(c => c.severity === 0);
+        const centerX = startX + centerIndex * barWidth + barWidth / 2;
+        ctx.strokeStyle = '#212121';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 3]);
+        ctx.beginPath();
+        ctx.moveTo(centerX, 52);
+        ctx.lineTo(centerX, baseY);
+        ctx.stroke();
+        ctx.setLineDash([]);
     </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>

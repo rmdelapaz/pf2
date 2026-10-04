@@ -3,45 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Character Creation - Pathfinder 2.0</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <title>Advanced Character Creation - The Pathfinder 2e Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <script type="module" src="/js/diagrams.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      mermaid.initialize({ startOnLoad: true, theme: isDark ? 'dark' : 'default' });
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.mermaid').forEach(el => {
-          if (!el.getAttribute('data-mermaid-src')) el.setAttribute('data-mermaid-src', el.textContent.trim());
-        });
-      });
-      new MutationObserver(async () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-        document.querySelectorAll('.mermaid').forEach(el => {
-          const src = el.getAttribute('data-mermaid-src');
-          if (src) { el.removeAttribute('data-processed'); el.innerHTML = src; }
-        });
-        await mermaid.run();
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    </script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('pf2-theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        })();
-    </script>
 </head>
 <body>
     <nav class="site-nav">
-        <div class="nav-left">
-            <a href="/index.html">🏠 Home</a>
-            <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
-            <a href="https://rays-home.netlify.app/contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </nav>
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
     <header>
+        <span class="lesson-kicker">Part 3</span>
         <h1>Advanced Character Creation</h1>
         <p class="subtitle">Mastering the Art of Character Optimization and Synergy</p>
     </header>
@@ -63,7 +42,7 @@
                             A --> D[Party Integration<br/>Complements team strengths and covers weaknesses]
                             A --> E[Growth Potential<br/>Improves consistently across all levels]
                             
-                            B --> F[Ability score efficiency]
+                            B --> F[Attribute efficiency]
                             B --> G[Feat combinations]
                             B --> H[Action economy optimization]
                             
@@ -106,12 +85,12 @@
                             <p>Like choosing between a college major in engineering vs. art, every character choice has trade-offs.</p>
                             
                             <div class="cost-example">
-                                <h6>Example: Feat Selection at Level 2</h6>
+                                <h6>Example: Early Fighter Feat Choices</h6>
                                 <p><strong>Options for a Fighter:</strong></p>
                                 <ul>
-                                    <li><strong>Power Attack:</strong> More damage per hit, but accuracy penalty</li>
-                                    <li><strong>Shield Block:</strong> Better defense, but requires shield and reaction</li>
-                                    <li><strong>Intimidating Strike:</strong> Damage + debuff, but requires Intimidation skill</li>
+                                    <li><strong>Power Attack (1st):</strong> An extra weapon damage die, but it costs two actions and counts as two attacks for your multiple attack penalty</li>
+                                    <li><strong>Reactive Shield (1st):</strong> Better defense, but requires a shield and uses your reaction</li>
+                                    <li><strong>Intimidating Strike (2nd):</strong> Damage + frightened, but costs two actions</li>
                                 </ul>
                                 
                                 <p><strong>Analysis Framework:</strong></p>
@@ -137,11 +116,12 @@
                                 <h6>Example: Weapon Choice Scaling</h6>
                                 <canvas id="weaponScalingChart" width="600" height="300"></canvas>
                                 
+                                <p><em>Chart model (illustrative, not a full damage calculator): average damage on a normal hit = number of weapon dice × average die roll + attribute modifier + weapon specialization. Assumes the same Strength build for all three weapons, striking runes at 4th (2 dice), 12th (3 dice) and 19th level (4 dice), an attribute modifier of +4 that rises to +5 at 10th and +6 at 20th, and weapon specialization of +2 from 7th level, doubled to +4 from 15th. Ignores critical hits, property runes and feats.</em></p>
                                 <p><strong>Key Insights:</strong></p>
                                 <ul>
-                                    <li><strong>Early Game (1-5):</strong> Weapon choice matters less, proficiency dominates</li>
-                                    <li><strong>Mid Game (6-12):</strong> Weapon traits become crucial, striking runes scale damage</li>
-                                    <li><strong>Late Game (13-20):</strong> Specialization feats create dramatic differences</li>
+                                    <li><strong>Early Game (1-5):</strong> Flat bonuses are a big share of each hit, so the gaps between die sizes are smallest</li>
+                                    <li><strong>Mid Game (6-12):</strong> Striking runes multiply the weapon die, so bigger dice pull ahead; traits like agile decide how often you hit</li>
+                                    <li><strong>Late Game (13-20):</strong> Extra striking dice widen the gap further; an agile dagger trades per-hit damage for more accurate follow-up Strikes</li>
                                 </ul>
                             </div>
                         </div>
@@ -162,16 +142,16 @@
                                 <p><strong>Individual Elements:</strong></p>
                                 <ul>
                                     <li><strong>High Charisma:</strong> Better Intimidation checks</li>
-                                    <li><strong>Intimidating Strike:</strong> Attack + demoralize in one action</li>
-                                    <li><strong>Frightening weapon rune:</strong> Automatic fear on crits</li>
-                                    <li><strong>Dreadful aspect ancestry feat:</strong> Fear aura</li>
+                                    <li><strong>Intimidating Strike:</strong> Strike + frightened in one two-action activity</li>
+                                    <li><strong>Fearsome weapon rune:</strong> Frightened on crits</li>
+                                    <li><strong>Intimidating Glare skill feat:</strong> Demoralize with a look, no shared language needed</li>
                                 </ul>
                                 
                                 <p><strong>Synergistic Result:</strong></p>
                                 <ul>
                                     <li>High Charisma improves all fear effects</li>
-                                    <li>Multiple fear sources stack and reinforce each other</li>
-                                    <li>Frightened enemies are easier to hit (feeding more fear)</li>
+                                    <li>Multiple fear sources keep the frightened condition topped up (it doesn't stack, but you can refresh it each round)</li>
+                                    <li>Frightened enemies take a penalty to AC and all their checks (so they're easier to hit and to scare again)</li>
                                     <li>Party benefits from enemies' reduced effectiveness</li>
                                 </ul>
                                 
@@ -228,7 +208,7 @@
 
         <section class="advanced-ancestry-selection">
             <h2>Advanced Ancestry Selection: Beyond the Obvious</h2>
-            <p>While basic character creation focuses on ability score bonuses, advanced selection considers the entire ancestry package - how heritage choices, ancestry feats, and cultural elements create unique character opportunities that might not be immediately obvious.</p>
+            <p>While basic character creation focuses on attribute boosts, advanced selection considers the entire ancestry package - how heritage choices, ancestry feats, and cultural elements create unique character opportunities that might not be immediately obvious.</p>
 
             <div class="ancestry-deep-analysis">
                 <h3>Hidden Ancestry Synergies</h3>
@@ -251,23 +231,23 @@
 
                                 <div class="synergy-point">
                                     <h6>👁️ Keen Senses</h6>
-                                    <p><strong>Elf Feature:</strong> Expert in Perception automatically</p>
-                                    <p><strong>Barbarian Benefit:</strong> Better initiative, spot ambushes, find hidden enemies</p>
+                                    <p><strong>Elf Feature:</strong> Low-light vision</p>
+                                    <p><strong>Barbarian Benefit:</strong> Pairs with the barbarian's expert Perception (which also rolls initiative): spot ambushes and hidden enemies in dim light</p>
                                     <p><strong>Tactical Value:</strong> Strike first, avoid surprises</p>
                                 </div>
 
                                 <div class="synergy-point">
                                     <h6>🔮 Elven Weapon Familiarity</h6>
                                     <p><strong>Access:</strong> Elven curve blade (two-handed, finesse, forceful)</p>
-                                    <p><strong>Unique Benefit:</strong> Only two-handed finesse weapon</p>
-                                    <p><strong>Build Option:</strong> Dex-based barbarian with full two-handed damage</p>
+                                    <p><strong>Unique Benefit:</strong> One of the few two-handed finesse weapons</p>
+                                    <p><strong>Build Option:</strong> Use Dexterity for attack rolls with a two-handed weapon (damage still adds Strength)</p>
                                 </div>
 
                                 <div class="synergy-point">
-                                    <h6>🛡️ Magic Resistance Heritage</h6>
-                                    <p><strong>Seer Elf Heritage:</strong> Bonus to saves vs mental effects</p>
-                                    <p><strong>Barbarian Weakness:</strong> Low Will saves, vulnerable to charm/fear</p>
-                                    <p><strong>Perfect Match:</strong> Shore up your biggest weakness</p>
+                                    <h6>🛡️ Magical Awareness Heritage</h6>
+                                    <p><strong>Seer Elf Heritage:</strong> The detect magic cantrip and a bonus to identify magic</p>
+                                    <p><strong>Barbarian Weakness:</strong> Few tools for spotting or understanding magic</p>
+                                    <p><strong>Perfect Match:</strong> Shore up a blind spot without spending a class feat</p>
                                 </div>
                             </div>
                             
@@ -275,7 +255,7 @@
                                 <h5>Final Build Vision</h5>
                                 <p><strong>Character Concept:</strong> A graceful, deadly warrior who flows like wind through battle</p>
                                 <p><strong>Combat Style:</strong> Mobile striker who dances around enemies with a curved blade</p>
-                                <p><strong>Mechanical Identity:</strong> Fast, perceptive, magically resistant barbarian</p>
+                                <p><strong>Mechanical Identity:</strong> Fast, perceptive, magically aware barbarian</p>
                                 <p><strong>Story Hook:</strong> Perhaps an elf raised by human barbarians, or an elven warrior tradition that emphasizes primal fury</p>
                             </div>
                         </div>
@@ -283,7 +263,7 @@
 
                     <div class="case-study">
                         <h4>🧙‍♀️ Case Study: The Goblin Wizard Scholar</h4>
-                        <p><strong>Surface Contradiction:</strong> Goblins seem chaotic and impulsive, wizards need discipline</p>
+                        <p><strong>Surface Contradiction:</strong> Goblins seem unruly and impulsive, wizards need discipline</p>
                         <p><strong>Hidden Synergy:</strong> Goblin traits create unique wizard advantages</p>
                         
                         <div class="goblin-wizard-analysis">
@@ -291,28 +271,28 @@
                             <div class="advantage-grid">
                                 <div class="advantage-point">
                                     <h6>🎯 Size and Stealth</h6>
-                                    <p><strong>Small Size:</strong> Better at hiding, harder to target</p>
+                                    <p><strong>Small Size:</strong> Easy to tuck behind larger allies (Small doesn't raise AC in Pathfinder 2e)</p>
                                     <p><strong>Wizard Benefit:</strong> Fragile spellcasters need survival tools</p>
                                     <p><strong>Tactical Application:</strong> Hide behind larger allies, use cover effectively</p>
                                 </div>
 
                                 <div class="advantage-point">
                                     <h6>⚡ Charisma Boost</h6>
-                                    <p><strong>Unexpected Asset:</strong> Good social stats for a "monster" race</p>
+                                    <p><strong>Unexpected Asset:</strong> Good social stats for an ancestry others underestimate</p>
                                     <p><strong>Wizard Application:</strong> Better at gathering information, making contacts</p>
                                     <p><strong>Character Development:</strong> The charming scholar who surprises people</p>
                                 </div>
 
                                 <div class="advantage-point">
                                     <h6>🔥 Goblin Ancestry Feats</h6>
-                                    <p><strong>Goblin Scuttle:</strong> Move when allies move near you</p>
-                                    <p><strong>Very Sneaky:</strong> Better stealth in groups</p>
+                                    <p><strong>Goblin Scuttle:</strong> Step as a reaction when an ally ends a move next to you</p>
+                                    <p><strong>Very Sneaky:</strong> Sneak farther and stay hidden more easily</p>
                                     <p><strong>Wizard Synergy:</strong> Mobility without spending your own actions</p>
                                 </div>
 
                                 <div class="advantage-point">
                                     <h6>🧠 Intelligence Focus</h6>
-                                    <p><strong>No Ability Conflicts:</strong> Cha boost doesn't compete with Int</p>
+                                    <p><strong>No Attribute Conflicts:</strong> The free ancestry boost goes to Int, and the Cha boost doesn't compete with it (the Wis flaw does cost a little Will save)</p>
                                     <p><strong>Skill Synergy:</strong> High Int + social skills = perfect researcher</p>
                                     <p><strong>Build Efficiency:</strong> All ancestry features contribute</p>
                                 </div>
@@ -328,12 +308,12 @@
                 
                 <div class="heritage-examples">
                     <div class="heritage-showcase">
-                        <h4>🔥 Elemental Heritage Combinations</h4>
+                        <h4>🔥 Elemental Heritage Combinations (versatile heritages)</h4>
                         
                         <div class="elemental-builds">
                             <div class="elemental-build">
-                                <h5>Flame Oracle + Ifrit Heritage</h5>
-                                <p><strong>Synergy:</strong> Fire resistance protects against your own curse backlash</p>
+                                <h5>Flame Oracle + Naari Heritage (formerly ifrit)</h5>
+                                <p><strong>Synergy:</strong> Fire resistance makes it safer to fight inside the fires you create</p>
                                 <p><strong>Thematic Coherence:</strong> Born of fire, blessed by fire, surrounded by fire</p>
                                 <p><strong>Mechanical Advantage:</strong> Can use fire spells more aggressively</p>
                             </div>
@@ -341,14 +321,14 @@
                             <div class="elemental-build">
                                 <h5>Storm Druid + Undine Heritage</h5>
                                 <p><strong>Synergy:</strong> Water spells + weather magic = hurricane theme</p>
-                                <p><strong>Resistance Benefits:</strong> Fire resistance balances elemental weakness</p>
-                                <p><strong>Spell Selection:</strong> Access to both primal and elemental magic</p>
+                                <p><strong>Resistance Benefits:</strong> Elemental heritages usually grant an energy resistance; check which one yours gives</p>
+                                <p><strong>Spell Selection:</strong> Storm order focus spells plus water-themed primal spells</p>
                             </div>
 
                             <div class="elemental-build">
                                 <h5>Mountain Monk + Oread Heritage</h5>
-                                <p><strong>Synergy:</strong> Earth magic + ki powers = earthbending monk</p>
-                                <p><strong>Defensive Bonus:</strong> Acid resistance + high AC = incredible durability</p>
+                                <p><strong>Synergy:</strong> Earth magic + qi spells (formerly ki spells) = earthbending monk</p>
+                                <p><strong>Defensive Bonus:</strong> Heritage resistance + Mountain Stance's high AC = incredible durability</p>
                                 <p><strong>Flavor Integration:</strong> Stone-like endurance with martial arts</p>
                             </div>
                         </div>
@@ -374,30 +354,30 @@
                             <h5>Example: The Archer's Path</h5>
                             <div class="feat-progression">
                                 <div class="feat-step">
-                                    <h6>Level 1: Point-Blank Shot</h6>
-                                    <p><strong>Effect:</strong> Better accuracy at close range</p>
-                                    <p><strong>Foundation:</strong> Establishes ranged combat focus</p>
-                                </div>
-                                <div class="feat-arrow">↓</div>
-                                <div class="feat-step">
-                                    <h6>Level 2: Precise Shot</h6>
-                                    <p><strong>Requirement:</strong> Point-Blank Shot</p>
-                                    <p><strong>Effect:</strong> No penalty for shooting into melee</p>
-                                    <p><strong>Builds On:</strong> Solves ranged combat problems</p>
+                                    <h6>Level 1: Point-Blank Stance (formerly Point-Blank Shot)</h6>
+                                    <p><strong>Effect:</strong> Ignore volley's penalty, or add damage at close range</p>
+                                    <p><strong>Foundation:</strong> Establishes ranged combat focus (not a prerequisite, but it shapes the build)</p>
                                 </div>
                                 <div class="feat-arrow">↓</div>
                                 <div class="feat-step">
                                     <h6>Level 4: Double Shot</h6>
-                                    <p><strong>Requirement:</strong> Precise Shot</p>
-                                    <p><strong>Effect:</strong> Fire two arrows with one action</p>
+                                    <p><strong>Requirement:</strong> A ranged weapon with reload 0</p>
+                                    <p><strong>Effect:</strong> Two Strikes at two different targets for two actions, each at −2</p>
+                                    <p><strong>Builds On:</strong> Turns your accuracy into extra attacks</p>
+                                </div>
+                                <div class="feat-arrow">↓</div>
+                                <div class="feat-step">
+                                    <h6>Level 6: Triple Shot</h6>
+                                    <p><strong>Requirement:</strong> Double Shot</p>
+                                    <p><strong>Effect:</strong> Double Shot can hit the same target, or spend three actions for three Strikes</p>
                                     <p><strong>Payoff:</strong> Dramatic increase in damage potential</p>
                                 </div>
                                 <div class="feat-arrow">↓</div>
                                 <div class="feat-step">
-                                    <h6>Level 6: Multi-Shot</h6>
-                                    <p><strong>Requirement:</strong> Double Shot</p>
-                                    <p><strong>Effect:</strong> Hit multiple targets with one shot</p>
-                                    <p><strong>Mastery:</strong> Area control through archery</p>
+                                    <h6>Level 16: Multishot Stance</h6>
+                                    <p><strong>Requirement:</strong> Triple Shot</p>
+                                    <p><strong>Effect:</strong> A stance that shrinks Double Shot's penalty while you hold your position</p>
+                                    <p><strong>Mastery:</strong> A rain of accurate arrows every turn</p>
                                 </div>
                             </div>
                         </div>
@@ -411,37 +391,33 @@
                         <div class="web-example">
                             <h5>Example: The Social Manipulator</h5>
                             <div class="web-visualization">
-                                <svg class="inline-svg" width="400" height="300" viewBox="0 0 400 300">
-                                    <!-- Central concept -->
-                                    <circle cx="200" cy="150" r="40" fill="#ff9800" stroke="#333" stroke-width="2"/>
-                                    <text x="200" y="155" text-anchor="middle" font-size="12" font-weight="bold">Social Control</text>
-                                    
-                                    <!-- Supporting feats -->
-                                    <circle cx="100" cy="80" r="25" fill="#2196f3" stroke="#333" stroke-width="1"/>
-                                    <text x="100" y="85" text-anchor="middle" font-size="10">Bon Mot</text>
-                                    
-                                    <circle cx="300" cy="80" r="25" fill="#2196f3" stroke="#333" stroke-width="1"/>
-                                    <text x="300" y="85" text-anchor="middle" font-size="10">Charming Touch</text>
-                                    
-                                    <circle cx="80" cy="220" r="25" fill="#2196f3" stroke="#333" stroke-width="1"/>
-                                    <text x="80" y="225" text-anchor="middle" font-size="10">Intimidating Glare</text>
-                                    
-                                    <circle cx="320" cy="220" r="25" fill="#2196f3" stroke="#333" stroke-width="1"/>
-                                    <text x="320" y="225" text-anchor="middle" font-size="10">Fascinating Performance</text>
-                                    
-                                    <circle cx="200" cy="250" r="25" fill="#4caf50" stroke="#333" stroke-width="1"/>
-                                    <text x="200" y="255" text-anchor="middle" font-size="10">Group Impression</text>
-                                    
+                                <svg class="inline-svg" width="400" height="300" viewBox="0 0 400 300" role="img" aria-label="Five social feats connected to a central Social Control theme">
                                     <!-- Connection lines -->
-                                    <line x1="200" y1="150" x2="100" y2="80" stroke="#666" stroke-width="2"/>
-                                    <line x1="200" y1="150" x2="300" y2="80" stroke="#666" stroke-width="2"/>
-                                    <line x1="200" y1="150" x2="80" y2="220" stroke="#666" stroke-width="2"/>
-                                    <line x1="200" y1="150" x2="320" y2="220" stroke="#666" stroke-width="2"/>
-                                    <line x1="200" y1="150" x2="200" y2="250" stroke="#666" stroke-width="2"/>
-                                    
+                                    <line x1="200" y1="150" x2="95" y2="45" stroke="#666" stroke-width="2"/>
+                                    <line x1="200" y1="150" x2="305" y2="45" stroke="#666" stroke-width="2"/>
+                                    <line x1="200" y1="150" x2="95" y2="215" stroke="#666" stroke-width="2"/>
+                                    <line x1="200" y1="150" x2="305" y2="215" stroke="#666" stroke-width="2"/>
+                                    <line x1="200" y1="150" x2="200" y2="275" stroke="#666" stroke-width="2"/>
                                     <!-- Cross-connections -->
-                                    <line x1="100" y1="80" x2="300" y2="80" stroke="#ddd" stroke-width="1" stroke-dasharray="3,3"/>
-                                    <line x1="80" y1="220" x2="320" y2="220" stroke="#ddd" stroke-width="1" stroke-dasharray="3,3"/>
+                                    <line x1="95" y1="45" x2="305" y2="45" stroke="#999" stroke-width="1.5" stroke-dasharray="4,4"/>
+                                    <line x1="95" y1="215" x2="305" y2="215" stroke="#999" stroke-width="1.5" stroke-dasharray="4,4"/>
+                                    <!-- Central concept -->
+                                    <ellipse cx="200" cy="150" rx="92" ry="36" fill="#ffb74d" stroke="#333" stroke-width="2"/>
+                                    <text x="200" y="157" text-anchor="middle" font-size="20" font-weight="bold" fill="#1c1417" font-family="Arial">Social Control</text>
+                                    <!-- Supporting feats -->
+                                    <rect x="10" y="28" width="170" height="34" rx="8" fill="#90caf9" stroke="#333" stroke-width="1.5"/>
+                                    <text x="95" y="51" text-anchor="middle" font-size="17" fill="#1c1417" font-family="Arial">Bon Mot</text>
+                                    <rect x="220" y="18" width="170" height="54" rx="8" fill="#90caf9" stroke="#333" stroke-width="1.5"/>
+                                    <text x="305" y="41" text-anchor="middle" font-size="17" fill="#1c1417" font-family="Arial">Group</text>
+                                    <text x="305" y="61" text-anchor="middle" font-size="17" fill="#1c1417" font-family="Arial">Coercion</text>
+                                    <rect x="10" y="188" width="170" height="54" rx="8" fill="#90caf9" stroke="#333" stroke-width="1.5"/>
+                                    <text x="95" y="211" text-anchor="middle" font-size="17" fill="#1c1417" font-family="Arial">Intimidating</text>
+                                    <text x="95" y="231" text-anchor="middle" font-size="17" fill="#1c1417" font-family="Arial">Glare</text>
+                                    <rect x="220" y="188" width="170" height="54" rx="8" fill="#90caf9" stroke="#333" stroke-width="1.5"/>
+                                    <text x="305" y="211" text-anchor="middle" font-size="17" fill="#1c1417" font-family="Arial">Fascinating</text>
+                                    <text x="305" y="231" text-anchor="middle" font-size="17" fill="#1c1417" font-family="Arial">Performance</text>
+                                    <rect x="115" y="258" width="170" height="34" rx="8" fill="#a5d6a7" stroke="#333" stroke-width="1.5"/>
+                                    <text x="200" y="281" text-anchor="middle" font-size="17" fill="#1c1417" font-family="Arial">Group Impression</text>
                                 </svg>
                             </div>
                             
@@ -449,10 +425,10 @@
                                 <h6>How the Web Works</h6>
                                 <ul>
                                     <li><strong>Central Theme:</strong> Controlling enemies through social manipulation</li>
-                                    <li><strong>Bon Mot:</strong> Uses Diplomacy to make enemies flat-footed</li>
-                                    <li><strong>Intimidating Glare:</strong> Fear effects without speaking</li>
-                                    <li><strong>Charming Touch:</strong> Make enemies friendly temporarily</li>
-                                    <li><strong>Fascinating Performance:</strong> Entrance multiple enemies</li>
+                                    <li><strong>Bon Mot:</strong> Uses Diplomacy to give a foe a penalty to Perception and Will saves</li>
+                                    <li><strong>Intimidating Glare:</strong> Demoralize without speaking</li>
+                                    <li><strong>Group Coercion:</strong> Coerce several targets at once</li>
+                                    <li><strong>Fascinating Performance:</strong> Fascinate an observer (more at higher proficiency)</li>
                                     <li><strong>Group Impression:</strong> Affect multiple targets with social skills</li>
                                 </ul>
                                 
@@ -470,23 +446,23 @@
                             <h5>Example: The Critical Fishing Build</h5>
                             <div class="combo-breakdown">
                                 <div class="combo-feat">
-                                    <h6>🎯 Improved Critical</h6>
-                                    <p><strong>Base Effect:</strong> Critical hit on 19-20 instead of just 20</p>
-                                    <p><strong>Standalone Value:</strong> Moderate - 5% more crits</p>
+                                    <h6>🎯 High Accuracy</h6>
+                                    <p><strong>Base Effect:</strong> You crit by beating AC by 10 or more (or a natural 20 that hits), so every +1 to hit adds about 5% to your crit chance</p>
+                                    <p><strong>Standalone Value:</strong> Moderate - flanking (off-guard, formerly flat-footed) and fighter proficiency both help</p>
                                 </div>
                                 
                                 <p class="combo-plus">+</p>
                                 
                                 <div class="combo-feat">
                                     <h6>💀 Critical Specialization</h6>
-                                    <p><strong>Base Effect:</strong> Special effects on critical hits</p>
+                                    <p><strong>Base Effect:</strong> Weapon-group effects on critical hits (a sword crit leaves the target off-guard)</p>
                                     <p><strong>Standalone Value:</strong> Good - adds utility to crits</p>
                                 </div>
                                 
                                 <p class="combo-plus">+</p>
                                 
                                 <div class="combo-feat">
-                                    <h6>⚡ Deadly Weapon</h6>
+                                    <h6>⚡ Deadly Weapon Trait</h6>
                                     <p><strong>Base Effect:</strong> Extra damage dice on critical hits</p>
                                     <p><strong>Standalone Value:</strong> Good - more crit damage</p>
                                 </div>
@@ -496,7 +472,7 @@
                                 <div class="combo-result">
                                     <h6>🌟 Devastating Critical Machine</h6>
                                     <p><strong>Combined Effect:</strong> Frequent crits that deal massive damage and special effects</p>
-                                    <p><strong>Synergy Value:</strong> Incredible - each feat multiplies the value of the others</p>
+                                    <p><strong>Synergy Value:</strong> Incredible - each piece multiplies the value of the others</p>
                                 </div>
                             </div>
                         </div>
@@ -530,15 +506,15 @@
                         <div class="mapping-example">
                             <h5>Example: Master Archer Analysis</h5>
                             <div class="requirement-chain">
-                                <p><strong>Ultimate Goal:</strong> Triple Shot (Level 12 feat)</p>
+                                <p><strong>Ultimate Goal:</strong> Multishot Stance (Level 16 feat)</p>
+                                <p class="requirement-arrow">↑ Requires</p>
+                                <p><strong>Prerequisite:</strong> Triple Shot (Level 6 feat)</p>
                                 <p class="requirement-arrow">↑ Requires</p>
                                 <p><strong>Prerequisite:</strong> Double Shot (Level 4 feat)</p>
-                                <p class="requirement-arrow">↑ Requires</p>
-                                <p><strong>Prerequisite:</strong> Precise Shot (Level 2 feat)</p>
-                                <p class="requirement-arrow">↑ Requires</p>
-                                <p><strong>Prerequisite:</strong> Point-Blank Shot (Level 1 feat)</p>
+                                <p class="requirement-arrow">↑ Supported by</p>
+                                <p><strong>Foundation:</strong> Point-Blank Stance (Level 1 feat, not a prerequisite)</p>
                                 
-                                <p><strong>Planning Result:</strong> Need to commit feat slots at levels 1, 2, 4, and 12</p>
+                                <p><strong>Planning Result:</strong> Need to commit feat slots at levels 4, 6 and 16, with level 1 as a strong start</p>
                             </div>
                         </div>
                     </div>
@@ -608,9 +584,9 @@
                             <div class="progression-steps">
                                 <div class="step">
                                     <h6>Step 1: Take Dedication Feat</h6>
-                                    <p><strong>Requirements:</strong> Usually specific ability scores and skills</p>
+                                    <p><strong>Requirements:</strong> Usually a +2 in the class's key attribute (for example Intelligence +2 for Wizard Dedication), sometimes a skill</p>
                                     <p><strong>Benefit:</strong> Basic abilities from the archetype class</p>
-                                    <p><strong>Restriction:</strong> Can't take other archetype dedications until you have 2+ archetype feats</p>
+                                    <p><strong>Restriction:</strong> Can't take another dedication until you have two more feats from this archetype</p>
                                 </div>
 
                                 <div class="step">
@@ -637,8 +613,8 @@
                 
                 <div class="case-study-grid">
                     <div class="case-study">
-                        <h4>⚔️🧙 The Magus Build: Fighter + Wizard Archetype</h4>
-                        <p><strong>Concept:</strong> A warrior who weaves magic into their swordwork</p>
+                        <h4>⚔️🧙 The Spellblade Build: Fighter + Wizard Archetype</h4>
+                        <p><strong>Concept:</strong> A warrior who weaves magic into their swordwork (for a full class built on this idea, see the magus in Secrets of Magic)</p>
                         
                         <div class="build-analysis">
                             <h5>Build Breakdown</h5>
@@ -647,7 +623,7 @@
                                     <h6>🎯 Primary Class: Fighter</h6>
                                     <ul>
                                         <li><strong>Why Fighter:</strong> Best attack progression, weapon specialization</li>
-                                        <li><strong>Key Features:</strong> Attack of Opportunity, combat expertise</li>
+                                        <li><strong>Key Features:</strong> Reactive Strike (formerly Attack of Opportunity), combat expertise</li>
                                         <li><strong>Fighting Style:</strong> One-handed weapon + free hand for spells</li>
                                     </ul>
                                 </div>
@@ -655,7 +631,7 @@
                                 <div class="component">
                                     <h6>🔮 Archetype: Wizard</h6>
                                     <ul>
-                                        <li><strong>Dedication Benefits:</strong> Spellcasting, cantrips, spell slots</li>
+                                        <li><strong>Dedication Benefits:</strong> A spellbook and two cantrips; spell slots come from later archetype feats</li>
                                         <li><strong>Spell Selection:</strong> Focus on utility and battlefield control</li>
                                         <li><strong>Advanced Feats:</strong> More spells, wizard focus spells</li>
                                     </ul>
@@ -664,8 +640,8 @@
                                 <div class="component">
                                     <h6>🌟 Synergy Points</h6>
                                     <ul>
-                                        <li><strong>Shield Spell:</strong> Fighter tactics + magical defense</li>
-                                        <li><strong>True Strike:</strong> Guarantee important attacks hit</li>
+                                        <li><strong>Shield Cantrip:</strong> Fighter tactics + magical defense</li>
+                                        <li><strong>Sure Strike (formerly true strike):</strong> Roll an important attack twice and take the better result</li>
                                         <li><strong>Utility Magic:</strong> Solve problems weapons can't</li>
                                         <li><strong>Prestidigitation:</strong> Endless minor magical tricks</li>
                                     </ul>
@@ -675,9 +651,9 @@
                             <div class="progression-timeline">
                                 <h5>Feat Progression Example</h5>
                                 <ul>
-                                    <li><strong>Level 2:</strong> Wizard Dedication (gain cantrips and 1st level spells)</li>
-                                    <li><strong>Level 4:</strong> Basic Wizard Spellcasting (more spell slots)</li>
-                                    <li><strong>Level 6:</strong> Advanced Wizard Spellcasting (2nd level spells)</li>
+                                    <li><strong>Level 2:</strong> Wizard Dedication (spellbook and cantrips)</li>
+                                    <li><strong>Level 4:</strong> Basic Wizard Spellcasting (a 1st-rank slot, then a 2nd-rank slot at 6th and a 3rd-rank slot at 8th; spell rank was formerly spell level)</li>
+                                    <li><strong>Level 6:</strong> Another wizard archetype feat or a fighter feat</li>
                                     <li><strong>Level 8:</strong> Either more wizard feats or return to fighter specialization</li>
                                 </ul>
                             </div>
@@ -700,19 +676,19 @@
                                 <div class="synergy">
                                     <h6>💚 Healing + Stealth</h6>
                                     <p><strong>Combination:</strong> Emergency healing without revealing position</p>
-                                    <p><strong>Benefit:</strong> Party medic who can't be targeted</p>
+                                    <p><strong>Benefit:</strong> Party medic who is hard to target</p>
                                 </div>
 
                                 <div class="synergy">
                                     <h6>🔍 Divine Knowledge</h6>
-                                    <p><strong>Combination:</strong> Religion skill + Detect Evil</p>
+                                    <p><strong>Combination:</strong> Religion skill + divine magic (there's no alignment to detect in the Remaster; focus on creatures instead)</p>
                                     <p><strong>Benefit:</strong> Perfect spy for fighting undead and fiends</p>
                                 </div>
 
                                 <div class="synergy">
-                                    <h6>⚡ Harm + Sneak Attack</h6>
-                                    <p><strong>Combination:</strong> Harm spell delivers via touch + sneak attack damage</p>
-                                    <p><strong>Benefit:</strong> Devastating surprise attack option</p>
+                                    <h6>⚡ Harm + Ambush</h6>
+                                    <p><strong>Combination:</strong> Open with Sneak Attack Strikes, keep a harm spell (void damage, formerly negative energy) in reserve for living foes</p>
+                                    <p><strong>Benefit:</strong> A surprise burst of damage (Sneak Attack itself only applies to Strikes)</p>
                                 </div>
                             </div>
                         </div>
@@ -734,8 +710,8 @@
 
                                 <div class="element">
                                     <h6>🦅 Animal Companions</h6>
-                                    <p><strong>Ranger Feature:</strong> Animal companion</p>
-                                    <p><strong>Druid Addition:</strong> Wild empathy, speak with animals</p>
+                                    <p><strong>Ranger Feature:</strong> Animal companion (a 1st-level ranger feat)</p>
+                                    <p><strong>Druid Addition:</strong> Primal spells for talking to and aiding animals</p>
                                     <p><strong>Enhanced Bond:</strong> Better communication and control</p>
                                 </div>
 
@@ -788,9 +764,9 @@
                             </div>
 
                             <div class="factor">
-                                <h5>📊 Ability Score Requirements</h5>
+                                <h5>📊 Attribute Requirements</h5>
                                 <p><strong>Consider:</strong> Does the archetype need stats you're not using?</p>
-                                <p><strong>Example:</strong> Wizard archetype needs Intelligence - do you have it?</p>
+                                <p><strong>Example:</strong> Wizard archetype needs Intelligence +2 - do you have it?</p>
                             </div>
 
                             <div class="factor">
@@ -822,7 +798,7 @@
                             
                             <div class="analysis-sections">
                                 <h5>Mechanical Synergies</h5>
-                                <p>How do the ability scores, skills, and features work together?</p>
+                                <p>How do the attributes, skills, and features work together?</p>
                                 <ul>
                                     <li>Synergy 1: _______________</li>
                                     <li>Synergy 2: _______________</li>
@@ -844,8 +820,8 @@
                             <div class="solution">
                                 <p><strong>Hidden Synergies:</strong></p>
                                 <ul>
-                                    <li><strong>Charisma + Divine:</strong> Goblin Cha boost enhances divine social skills and some divine magic</li>
-                                    <li><strong>Small Size + Healer:</strong> Harder to target the party's primary healer</li>
+                                    <li><strong>Charisma + Divine:</strong> The goblin Cha boost powers the Charlatan's Deception and the cleric's social side</li>
+                                    <li><strong>Small Size + Healer:</strong> Easy to slip behind the front line and heal from cover</li>
                                     <li><strong>Charlatan + Religion:</strong> Perfect for infiltrating corrupt religious organizations</li>
                                     <li><strong>Deception + Divine Magic:</strong> "Faith healing" covers for actual magical healing</li>
                                 </ul>
@@ -897,16 +873,16 @@
                                 <p><strong>Optimal Mounted Fighter Progression:</strong></p>
                                 <ul>
                                     <li><strong>Level 1 (Human):</strong> Natural Ambition → Additional class feat</li>
-                                    <li><strong>Level 1 (Background):</strong> Animal Whisperer → Handle Animal</li>
+                                    <li><strong>Level 1 (Background):</strong> Animal Whisperer → Train Animal</li>
                                     <li><strong>Level 1 (Class):</strong> Reactive Shield</li>
                                     <li><strong>Level 1 (Bonus):</strong> Power Attack</li>
-                                    <li><strong>Level 2:</strong> Cavalier Dedication → Gain mount</li>
+                                    <li><strong>Level 2:</strong> Cavalier Dedication (needs trained Nature or Society) → Gain mount</li>
                                     <li><strong>Level 3:</strong> Toughness → More survivability</li>
-                                    <li><strong>Level 4:</strong> Mounted Shield → Defend mount</li>
-                                    <li><strong>Level 5:</strong> Weapon Specialization → Class feature</li>
-                                    <li><strong>Level 6:</strong> Charge Attack → Mounted damage</li>
-                                    <li><strong>Level 8:</strong> Trampling Charge → Area control</li>
-                                    <li><strong>Level 10:</strong> Spirited Charge → Devastating charges</li>
+                                    <li><strong>Level 4:</strong> Cavalier's Charge → Mounted damage</li>
+                                    <li><strong>Level 5:</strong> Fighter weapon mastery (class feature) and an ancestry feat</li>
+                                    <li><strong>Level 6:</strong> Mounted Shield → Defend mount</li>
+                                    <li><strong>Level 8:</strong> Impressive Mount → Mature, more independent mount</li>
+                                    <li><strong>Level 10:</strong> Trampling Charge → Area control</li>
                                 </ul>
                                 
                                 <p><strong>Strategy:</strong> Early mount acquisition, then build around mounted advantages while maintaining ground combat capability through core fighter features.</p>
@@ -939,7 +915,7 @@
                                 <p>Chosen Archetype: _______________</p>
                                 <p>Reasoning: _______________</p>
                                 
-                                <h6>Ability Score Priorities</h6>
+                                <h6>Attribute Priorities</h6>
                                 <p>Primary: _______ (for combat effectiveness)</p>
                                 <p>Secondary: _______ (for archetype requirements)</p>
                                 <p>Tertiary: _______ (for survivability)</p>
@@ -962,16 +938,16 @@
                                 
                                 <p><strong>Why This Combination:</strong></p>
                                 <ul>
-                                    <li><strong>Champion Base:</strong> High AC, reaction to protect allies, divine spells</li>
-                                    <li><strong>Cleric Archetype:</strong> More healing spells, divine font</li>
-                                    <li><strong>Ability Synergy:</strong> Both use Charisma for divine magic</li>
+                                    <li><strong>Champion Base:</strong> High AC, reaction to protect allies, devotion spells</li>
+                                    <li><strong>Cleric Archetype:</strong> Divine spell slots for extra heal spells</li>
+                                    <li><strong>Attribute Plan:</strong> Champion devotion spells use Charisma, but cleric archetype spells use Wisdom (and the Dedication needs Wisdom +2)</li>
                                     <li><strong>Thematic Coherence:</strong> Holy warrior perfectly matches healing priest</li>
                                 </ul>
                                 
                                 <p><strong>Key Features:</strong></p>
                                 <ul>
-                                    <li><strong>Champion's Reaction:</strong> Protect allies automatically</li>
-                                    <li><strong>Divine Font:</strong> Unlimited healing per day</li>
+                                    <li><strong>Champion's Reaction:</strong> Protect allies as a reaction</li>
+                                    <li><strong>Heal Spells:</strong> Extra healing from the cleric archetype's spell slots</li>
                                     <li><strong>Heavy Armor:</strong> Frontline survivability</li>
                                     <li><strong>Lay on Hands:</strong> Quick touch healing</li>
                                 </ul>
@@ -989,7 +965,7 @@
                 
                 <div class="optimization-challenge">
                     <h4>The Challenge: Design the Ultimate Scout</h4>
-                    <p><strong>Requirements:</strong> Character excel at reconnaissance, stealth, and information gathering</p>
+                    <p><strong>Requirements:</strong> Character excels at reconnaissance, stealth, and information gathering</p>
                     <p><strong>Party Role:</strong> Primary scout and infiltrator</p>
                     <p><strong>Level Target:</strong> Optimize for levels 5-10 play</p>
                     
@@ -1041,16 +1017,16 @@
                             <p><strong>Approach A: Rogue Skill Master</strong></p>
                             <ul>
                                 <li><strong>Core:</strong> Rogue with Investigator archetype</li>
-                                <li><strong>Skills:</strong> Stealth, Investigation, Perception, Society</li>
-                                <li><strong>Feats:</strong> Skill Mastery, Legendary Sneak, Terrain Expertise</li>
+                                <li><strong>Skills:</strong> Stealth, Thievery, Society, plus high Perception</li>
+                                <li><strong>Feats:</strong> Skill Mastery, Swift Sneak, Terrain Expertise</li>
                                 <li><strong>Advantage:</strong> Unmatched skill bonuses and legendary capabilities</li>
                             </ul>
                             
                             <p><strong>Approach B: Druid Shapeshifter Scout</strong></p>
                             <ul>
-                                <li><strong>Core:</strong> Druid with animal focus</li>
-                                <li><strong>Magic:</strong> Wild Shape, Pass Without Trace, Speak with Animals</li>
-                                <li><strong>Forms:</strong> Bird for aerial recon, small animals for infiltration</li>
+                                <li><strong>Core:</strong> Druid of the untamed order</li>
+                                <li><strong>Magic:</strong> Untamed form (formerly wild shape) plus stealth and animal-speech spells</li>
+                                <li><strong>Forms:</strong> Flying forms for aerial recon (at higher spell ranks), tiny animals for infiltration</li>
                                 <li><strong>Advantage:</strong> Can go places no humanoid can access</li>
                             </ul>
                             
@@ -1058,7 +1034,7 @@
                             <ul>
                                 <li><strong>Core:</strong> Ranger with Rogue archetype</li>
                                 <li><strong>Balance:</strong> Hunting abilities + thievery skills</li>
-                                <li><strong>Features:</strong> Track anything, sneak attack, animal companion</li>
+                                <li><strong>Features:</strong> Track anything, Sneak Attacker (rogue archetype feat), animal companion</li>
                                 <li><strong>Advantage:</strong> Works in any environment, has backup in combat</li>
                             </ul>
                         </div>
@@ -1101,9 +1077,9 @@
                 <h3>Advanced Character Building Resources</h3>
                 <ul>
                     <li><strong>Character Optimization Forums:</strong> Community discussions on advanced builds</li>
-                    <li><strong>Feat Chain Calculators:</strong> Tools for planning long-term progressions</li>
-                    <li><strong>Synergy Databases:</strong> Collections of tested ability combinations</li>
-                    <li><strong>Build Competition Archives:</strong> Examples of optimized characters for inspiration</li>
+                    <li><strong>Pathbuilder 2e:</strong> Plan feats level by level and check prerequisites</li>
+                    <li><strong>Archives of Nethys:</strong> Search feats by trait and prerequisite to map out chains</li>
+                    <li><strong>Pathfinder Society:</strong> Organized play is a great testbed for builds at many levels</li>
                     <li><strong>Theoretical Optimization Guides:</strong> Mathematical analysis of game mechanics</li>
                 </ul>
             </div>
@@ -1111,6 +1087,10 @@
     </main>
 
     <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_char.html">Character Creation</a>
+    <a class="next" href="/pf2_character_examples.html">Character Examples</a>
+</div>
         <p>Your mastery of character creation knows no bounds - forge legends through perfect synergy!</p>
     </footer>
 
@@ -1127,18 +1107,26 @@
         canvas.style.maxWidth = '100%';
         ctx.scale(dpr, dpr);
 
-        const checkDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+        // Canvases sit on a light figure panel in both themes, so always draw light colors.
+        const checkDark = () => false;
 
-        // Avg damage per strike at each level (simplified model)
-        // Greatsword (2d12 base, brutal), Longsword (1d8, versatile), Dagger (1d4, agile)
+        // Illustrative model (stated in the note under the chart): average damage on a normal hit =
+        // weapon dice x average die + attribute modifier + weapon specialization.
+        // Greatsword d12 (avg 6.5), longsword d8 (avg 4.5), dagger d4 (avg 2.5).
+        // Striking runes: 2 dice at 4th, 3 at 12th, 4 at 19th. Attribute +4, +5 at 10th, +6 at 20th.
+        // Weapon specialization +2 from 7th, +4 (greater) from 15th. No crits, property runes or feats.
         const levels = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-        const greatsword = [13,14,15,16,18,22,24,26,28,30,34,36,40,42,46,48,52,54,58,62];
-        const longsword  = [8,9,10,11,13,16,18,20,22,24,28,30,34,36,40,42,46,48,52,56];
-        const dagger     = [5,6,7,8,10,12,14,16,18,20,23,25,28,30,33,35,38,40,43,46];
+        const diceAt = lv => lv >= 19 ? 4 : lv >= 12 ? 3 : lv >= 4 ? 2 : 1;
+        const attrAt = lv => lv >= 20 ? 6 : lv >= 10 ? 5 : 4;
+        const specAt = lv => lv >= 15 ? 4 : lv >= 7 ? 2 : 0;
+        const avgHit = dieAvg => levels.map(lv => diceAt(lv) * dieAvg + attrAt(lv) + specAt(lv));
+        const greatsword = avgHit(6.5);
+        const longsword  = avgHit(4.5);
+        const dagger     = avgHit(2.5);
 
         function draw() {
             const W = 600, H = 300;
-            const pad = {t:30, r:20, b:45, l:50};
+            const pad = {t:30, r:20, b:62, l:50};
             const gW = W - pad.l - pad.r;
             const gH = H - pad.t - pad.b;
             const dark = checkDark();
@@ -1164,21 +1152,22 @@
 
             // Labels
             ctx.fillStyle = dark ? '#cbd5e1' : '#334155';
-            ctx.font = 'bold 12px Trebuchet MS, sans-serif';
+            ctx.font = 'bold 13px Trebuchet MS, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('Average Damage by Level — Weapon Type Comparison', W / 2, 18);
+            ctx.fillText('Average Damage per Hit by Level (illustrative model)', W / 2, 19);
 
-            ctx.font = '10px Trebuchet MS, sans-serif';
+            ctx.font = '11px Trebuchet MS, sans-serif';
             // X labels
             levels.forEach((lv, i) => {
                 const x = pad.l + (gW / (levels.length - 1)) * i;
-                if (lv % 2 === 1 || lv === 20) ctx.fillText(lv, x, H - pad.b + 16);
+                if (lv % 2 === 1 || lv === 20) ctx.fillText(lv, x, H - pad.b + 15);
             });
-            ctx.fillText('Character Level', W / 2, H - 5);
+            ctx.fillText('Character Level', (pad.l + W - pad.r) / 2, H - pad.b + 31);
 
             // Y labels
             ctx.textAlign = 'right';
-            const maxD = 70;
+            ctx.font = '11px Trebuchet MS, sans-serif';
+            const maxD = 42;
             for (let i = 0; i <= 6; i++) {
                 const val = Math.round((maxD / 6) * (6 - i));
                 const y = pad.t + (gH / 6) * i;
@@ -1207,22 +1196,22 @@
                 });
             }
 
-            line(greatsword, '#ef4444');
-            line(longsword, '#3b82f6');
-            line(dagger, '#22c55e');
+            line(greatsword, '#dc2626');
+            line(longsword, '#2563eb');
+            line(dagger, '#15803d');
 
             // Legend
-            const ly = H - pad.b + 32;
-            const items = [['Greatsword (2-hand)','#ef4444'],['Longsword (versatile)','#3b82f6'],['Dagger (agile)','#22c55e']];
-            ctx.font = '10px Trebuchet MS, sans-serif';
+            const ly = H - 8;
+            const items = [['Greatsword (d12, two-hand)','#dc2626'],['Longsword (d8)','#2563eb'],['Dagger (d4, agile)','#15803d']];
+            ctx.font = '11px Trebuchet MS, sans-serif';
             ctx.textAlign = 'left';
-            let lx = pad.l + 40;
+            let lx = pad.l + 10;
             items.forEach(([label, c]) => {
                 ctx.fillStyle = c;
                 ctx.fillRect(lx, ly - 6, 14, 3);
                 ctx.fillStyle = dark ? '#cbd5e1' : '#334155';
                 ctx.fillText(label, lx + 18, ly);
-                lx += 150;
+                lx += 18 + ctx.measureText(label).width + 30;
             });
 
             // Phase annotations
@@ -1232,7 +1221,7 @@
             ctx.fillRect(pad.l, pad.t, x5 - pad.l, gH);
             ctx.fillRect(x12, pad.t, W - pad.r - x12, gH);
             ctx.fillStyle = dark ? '#94a3b8' : '#64748b';
-            ctx.font = '9px Trebuchet MS, sans-serif';
+            ctx.font = '11px Trebuchet MS, sans-serif';
             ctx.textAlign = 'center';
             ctx.fillText('Early', (pad.l + x5) / 2, pad.t + 14);
             ctx.fillText('Mid Game', (x5 + x12) / 2, pad.t + 14);
@@ -1241,27 +1230,8 @@
 
         draw();
         // Redraw on theme change
-        new MutationObserver(draw).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
     })();
     </script>
-    <nav class="prev-next-nav">
-        <a href="/pf2_char.html" class="nav-prev">← Character Creation</a>
-        <a href="/index.html" class="nav-home">📋 Contents</a>
-        <a href="/pf2_character_examples.html" class="nav-next">Character Examples →</a>
-    </nav>
-    <script>
-        const toggle = document.getElementById('themeToggle');
-        function applyTheme(dark) {
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            localStorage.setItem('pf2-theme', dark ? 'dark' : 'light');
-            toggle.textContent = dark ? '☀️' : '🌙';
-        }
-        const savedDark = localStorage.getItem('pf2-theme') === 'dark';
-        applyTheme(savedDark);
-        toggle.addEventListener('click', () => {
-            const nowDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-            applyTheme(nowDark);
-        });
-    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
 </body>
 </html>
