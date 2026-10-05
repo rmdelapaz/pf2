@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Sheets - The Pathfinder 2e Guide</title>
+    <meta name="description" content="Fillable Pathfinder 2e character sheets in three pages, with modifiers worked out from attributes, ranks and level, plus Pathbuilder 2e import. Save, print and export.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="/js/site.js?v=1"></script>
+    <link rel="stylesheet" href="/styles/main.css?v=2">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <style>
+        /* ===== Controls (themed) ===== */
+        main .sheet-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; margin: 20px auto 6px; max-width: 860px; }
+        main .sheet-controls select {
+            min-height: 40px; padding: 6px 10px; border-radius: 8px; min-width: 200px; width: auto;
+            background: var(--surface); color: var(--text); border: 1px solid var(--border-strong); font: inherit; font-size: 0.95rem;
+        }
+        main .sheet-controls button, main .tabs button, main .pb-panel button {
+            min-height: 40px; padding: 7px 14px; margin: 0; border-radius: 8px; font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+            background: var(--surface); color: var(--heading); border: 1px solid var(--border-strong); width: auto;
+        }
+        main .sheet-controls button:hover, main .tabs button:hover, main .pb-panel button:hover { border-color: var(--accent); color: var(--accent); background: var(--surface); }
+        main .sheet-controls button.primary, main .pb-panel button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+        main .sheet-controls button.primary:hover, main .pb-panel button.primary:hover { color: var(--accent-ink); background: var(--accent); filter: brightness(1.08); }
+        main .sheet-controls button.armed { background: #a3161a; border-color: #a3161a; color: #fff; }
+        main .tabs { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: 12px auto 0; background: none; border: 0; box-shadow: none; padding: 0; }
+        main .tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+        main .pb-panel { max-width: 860px; margin: 10px auto 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 16px; box-shadow: var(--shadow); }
+        main .pb-panel > summary { cursor: pointer; font-weight: 700; color: var(--accent); }
+        main .pb-panel p, main .pb-panel ol { margin: 0.6rem 0; }
+        main .pb-panel .pb-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+        main .pb-panel .pb-row input { flex: 1 1 200px; width: auto; max-width: 260px; }
+        main .pb-panel textarea { width: 100%; min-height: 80px; font-family: ui-monospace, Consolas, monospace; font-size: 0.85rem; }
+        main .pb-panel .pb-note { color: var(--muted); font-size: 0.9rem; }
+        #importFile, #pbFile { display: none; }
+        .sheet-status { text-align: center; min-height: 1.6em; margin: 4px 0 0; color: var(--muted); font-weight: 600; }
+        .sheet-help { max-width: 860px; margin: 10px auto 0; color: var(--muted); font-size: 0.95rem; }
+
+        /* ===== The sheet: a light page in both themes ===== */
+        .pf-sheet {
+            --ink: #23171b; --soft: #54454a; --line: #b9a9ae; --red: #8b1e3f; --paper: #fdfbf7;
+            width: min(8.5in, 100%); margin: 14px auto; padding: 14px 16px;
+            background: var(--paper); color: var(--ink); border: 2px solid #4a1d2b; border-radius: 6px;
+            font-family: "Source Sans 3", "Segoe UI", sans-serif; font-size: 14px; line-height: 1.3; box-shadow: var(--shadow);
+            color-scheme: light;
+        }
+        .pf-sheet .page + .page { display: none; }
+        .pf-sheet[data-page="feats"] .page, .pf-sheet[data-page="spells"] .page { display: none; }
+        .pf-sheet[data-page="feats"] .page.p-feats { display: block; }
+        .pf-sheet[data-page="spells"] .page.p-spells { display: block; }
+        .pf-sheet .lbl { display: block; font: 700 12px/1.2 "Alegreya", Georgia, serif; letter-spacing: 0.05em; text-transform: uppercase; color: var(--red); margin: 0 0 2px; }
+        .pf-sheet .box { border: 1.5px solid var(--line); border-radius: 5px; padding: 6px 8px; }
+        .pf-sheet input[type="text"], .pf-sheet select, .pf-sheet textarea, .pf-sheet .val {
+            width: 100%; max-width: none; min-height: 0; margin: 0; background: transparent; color: var(--ink);
+            border: 0; border-bottom: 1px dotted var(--line); border-radius: 0; padding: 2px; font: inherit; box-shadow: none;
+        }
+        .pf-sheet textarea { border-bottom: 0; resize: vertical; min-height: 54px; line-height: 1.35; }
+        .pf-sheet .val { display: block; min-height: 1.35em; white-space: pre-wrap; }
+        .pf-sheet .tx.val { min-height: 3.4em; border-bottom: 0; }
+        .pf-sheet input::placeholder, .pf-sheet textarea::placeholder { color: #6b5d62; opacity: 1; }
+        .pf-sheet input:focus, .pf-sheet select:focus, .pf-sheet textarea:focus { outline: 2px solid var(--red); outline-offset: 1px; background: rgba(139, 30, 63, 0.06); }
+        .pf-sheet select option { background: #fdfbf7; color: #23171b; }
+        .pf-sheet input[type="checkbox"] { width: 15px; height: 15px; margin: 0; accent-color: var(--red); vertical-align: middle; }
+        .pf-sheet .out { display: inline-block; min-width: 2.2em; text-align: center; font-weight: 700; color: var(--ink); }
+        .pf-sheet small.k { display: block; font-size: 10px; color: var(--soft); text-transform: uppercase; letter-spacing: 0.04em; }
+        .pf-sheet .stack > * + * { margin-top: 8px; }
+
+        .pf-sheet .head { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 4px 12px; border-bottom: 2px solid #4a1d2b; padding-bottom: 6px; margin-bottom: 10px; }
+        .pf-sheet .head .name { grid-row: span 2; align-self: end; }
+        .pf-sheet .head .name input, .pf-sheet .head .name .val { font: 700 1.45rem "Alegreya", Georgia, serif; }
+        .pf-sheet .attrs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 10px; }
+        .pf-sheet .attr { display: block; border: 2px solid var(--ink); border-radius: 8px; text-align: center; padding: 3px 2px 5px; }
+        .pf-sheet .attr .lbl { color: var(--ink); margin: 0; }
+        .pf-sheet .attr input, .pf-sheet .attr .val { text-align: center; font: 700 1.35rem "Alegreya", Georgia, serif; border-bottom: 0; }
+        .pf-sheet .attr .partial { display: flex; gap: 4px; align-items: center; justify-content: center; font-size: 10px; color: var(--soft); }
+        .pf-sheet .main3 { display: grid; grid-template-columns: 1fr 1.05fr 1.05fr; gap: 10px; }
+        .pf-sheet .stat { display: grid; grid-template-columns: 1fr 2.6em 3.4em 2.6em; gap: 4px; align-items: center; font-size: 13px; padding: 1px 0; }
+        .pf-sheet .stat .nm { font-weight: 600; }
+        .pf-sheet .stat .nm small { color: var(--soft); font-weight: 400; margin-left: 3px; }
+        .pf-sheet .stat .out { border-bottom: 1px solid var(--line); }
+        .pf-sheet .stat select, .pf-sheet .stat input, .pf-sheet .stat .val { text-align: center; padding: 0; font-size: 13px; }
+        .pf-sheet .stat.head-row { font: 700 10px "Alegreya", Georgia, serif; color: var(--red); text-transform: uppercase; letter-spacing: 0.04em; }
+        .pf-sheet .stat.head-row span { text-align: center; }
+        .pf-sheet .stat.head-row span:first-child { text-align: left; }
+        .pf-sheet .stat .lore input, .pf-sheet .stat .lore .val { text-align: left; font-weight: 600; }
+        .pf-sheet .big { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .pf-sheet .big .box { text-align: center; }
+        .pf-sheet .big .box input, .pf-sheet .big .box .val { text-align: center; font-weight: 700; font-size: 1.2rem; }
+        .pf-sheet .big .out { font-size: 1.25rem; display: block; padding: 2px 0; }
+        .pf-sheet .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .pf-sheet .checks { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; font-size: 12px; }
+        .pf-sheet .checks b { min-width: 4.6em; color: var(--soft); font-weight: 600; }
+        .pf-sheet .checks .val { display: inline-block; width: 3em; }
+        .pf-sheet table.strikes { width: 100%; border-collapse: collapse; display: table; margin: 0; font-size: 13px; }
+        .pf-sheet table.strikes th { font: 700 10px "Alegreya", Georgia, serif; text-transform: uppercase; letter-spacing: 0.04em; color: var(--red); text-align: left; border: 0; background: none; padding: 1px 3px; }
+        .pf-sheet table.strikes td { border: 0; padding: 1px 3px; background: none; color: var(--ink); }
+        .pf-sheet .coins { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 4px; }
+        .pf-sheet .coins small { display: block; text-align: center; font-size: 10px; font-weight: 700; color: var(--soft); }
+        .pf-sheet .coins input, .pf-sheet .coins .val { text-align: center; }
+        .pf-sheet .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .pf-sheet .looks { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px 10px; margin-bottom: 10px; }
+
+        .pf-sheet .spellhead { display: grid; grid-template-columns: 1.2fr 1fr 1fr 0.8fr 0.8fr 0.8fr; gap: 6px 10px; margin-bottom: 10px; align-items: end; }
+        .pf-sheet .spellhead .box { text-align: center; }
+        .pf-sheet .spellhead .out { font-size: 1.2rem; }
+        .pf-sheet .spells { columns: 3 230px; column-gap: 10px; }
+        .pf-sheet .lvl { break-inside: avoid; border: 1.5px solid var(--line); border-radius: 5px; padding: 4px 6px; margin: 0 0 8px; }
+        .pf-sheet .lvl-head { display: flex; gap: 6px; align-items: center; border-bottom: 1.5px solid var(--ink); padding-bottom: 2px; margin-bottom: 2px; }
+        .pf-sheet .lvl-head b { font: 700 1rem "Alegreya", Georgia, serif; min-width: 1.5em; padding: 0 3px; text-align: center; border: 1.5px solid var(--ink); border-radius: 4px; white-space: nowrap; }
+        .pf-sheet .lvl-head small { font-size: 10px; color: var(--soft); text-transform: uppercase; }
+        .pf-sheet .lvl-head input, .pf-sheet .lvl-head .val { width: 2.6em; text-align: center; }
+        .pf-sheet .sp input[type="text"], .pf-sheet .sp .val { font-size: 13px; padding: 1px 2px; }
+
+        @media (max-width: 760px) {
+            .pf-sheet { padding: 12px; }
+            .pf-sheet .head { grid-template-columns: 1fr 1fr; }
+            .pf-sheet .head .name { grid-column: 1 / -1; grid-row: auto; }
+            .pf-sheet .attrs { grid-template-columns: repeat(3, 1fr); }
+            .pf-sheet .main3, .pf-sheet .two { grid-template-columns: 1fr; }
+            .pf-sheet .looks { grid-template-columns: repeat(2, 1fr); }
+            .pf-sheet .spellhead { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ===== Print: three US Letter pages per character ===== */
+        .print-container { display: none; }
+        @media print {
+            @page { size: letter portrait; margin: 0.35in; }
+            .site-nav, .skip-link, body > header, .sheet-controls, .pb-panel, .tabs, .sheet-status, .sheet-help, #sheet, footer, .site-footer { display: none !important; }
+            html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+            main { margin: 0 !important; padding: 0 !important; width: auto !important; max-width: none !important; }
+            .print-container { display: block !important; border: 0 !important; padding: 0 !important; margin: 0 !important; box-shadow: none !important; background: none !important; border-radius: 0 !important; }
+            .print-container .pf-sheet { width: 7.8in !important; margin: 0 auto !important; padding: 0 !important; border: 0 !important; box-shadow: none !important; font-size: 10.5px; line-height: 1.15; }
+            .print-container .pf-sheet .page { display: flex !important; flex-direction: column; height: 10.25in; box-sizing: border-box; overflow: hidden;
+                border: 1.5pt solid #4a1d2b; border-radius: 4px; padding: 0.12in 0.14in; page-break-after: always; break-after: page; }
+            .print-container .pf-sheet:last-child .page:last-child { page-break-after: auto; break-after: auto; }
+            .print-container .pf-sheet .stat { font-size: 10px; padding: 0; }
+            .print-container .pf-sheet .val { min-height: 1.15em; padding: 0 2px; }
+            .print-container .pf-sheet .tx.val { min-height: 2.2em; }
+            .print-container .pf-sheet .box { padding: 3px 6px; }
+            .print-container .pf-sheet .stack > * + * { margin-top: 5px; }
+            .print-container .pf-sheet .main3, .print-container .pf-sheet .two { flex: 1; min-height: 0; }
+            .print-container .pf-sheet .main3 > .stack, .print-container .pf-sheet .two > .stack { display: flex; flex-direction: column; }
+            .print-container .pf-sheet .grow { flex: 1; display: flex; flex-direction: column; }
+            .print-container .pf-sheet .grow .tx.val { flex: 1; }
+            .print-container .pf-sheet .spells { flex: 1; }
+            .print-container .pf-sheet .sp .val { font-size: 10px; min-height: 2.6em; }
+            .print-container .pf-sheet .lvl { margin-bottom: 5px; padding: 3px 5px; }
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="site-nav">
+    <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+    <a href="/index.html">Home</a>
+    <a href="https://rays-home.netlify.app/contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+    <header>
+        <h1>Character Sheets</h1>
+        <p>Fill in, save and print Pathfinder 2e characters on three pages, with every modifier worked out from your attributes, ranks and level.</p>
+    </header>
+
+    <main id="main">
+        <div class="sheet-controls">
+            <select id="sheetSelect" aria-label="Saved sheets"><option value="">— Select Sheet —</option></select>
+            <button type="button" class="primary" id="newBtn">✨ New</button>
+            <button type="button" id="saveBtn">💾 Save</button>
+            <button type="button" id="copyBtn">📋 Copy</button>
+            <button type="button" id="deleteBtn">🗑️ Delete</button>
+            <button type="button" id="printBtn">🖨️ Print</button>
+            <button type="button" id="printAllBtn">🖨️ Print All</button>
+            <button type="button" id="blankBtn">📄 Print Blank</button>
+            <button type="button" id="exportBtn">📤 Export</button>
+            <button type="button" id="importBtn">📥 Import</button>
+            <input type="file" id="importFile" accept=".json,application/json">
+        </div>
+        <p class="sheet-status" id="status" role="status" aria-live="polite"></p>
+
+        <details class="pb-panel" id="pbPanel">
+            <summary>🧭 Import from Pathbuilder 2e</summary>
+            <ol>
+                <li>In Pathbuilder 2e, open your character and choose <strong>Menu → Export → Export JSON</strong>. It shows a six-digit number.</li>
+                <li>Enter the number here and open your export. It opens in a new tab on Pathbuilder's site.
+                    <div class="pb-row" style="margin-top:6px"><input type="text" id="pbId" inputmode="numeric" placeholder="123456" aria-label="Pathbuilder export number"><button type="button" id="pbOpen">Open My Export</button></div></li>
+                <li>Select everything on that page (Ctrl+A or ⌘A), copy it, paste it below and press <strong>Import</strong>. If you saved the export as a file instead, use <strong>Choose File</strong>.</li>
+            </ol>
+            <textarea id="pbJson" rows="4" placeholder='{"success":true,"build":{"name":…}}' aria-label="Pasted Pathbuilder character data"></textarea>
+            <div class="pb-row" style="margin-top:6px"><button type="button" class="primary" id="pbPaste">Import</button><button type="button" id="pbFileBtn">Choose File</button><input type="file" id="pbFile" accept=".json,.txt,application/json"></div>
+            <p class="pb-note">Pathbuilder's site checks for real browsers, so this page can't fetch the export by itself; copying it across takes a few seconds. Importing the same character again updates its sheet. Pathbuilder 2e is a separate app by Redrazors; this tool is unofficial.</p>
+        </details>
+
+        <div class="tabs" role="tablist" aria-label="Sheet pages">
+            <button type="button" role="tab" id="tab-main" aria-controls="sheet" aria-selected="true" data-page="main">⚔️ Main Sheet</button>
+            <button type="button" role="tab" id="tab-feats" aria-controls="sheet" aria-selected="false" data-page="feats">📜 Feats, Gear &amp; Details</button>
+            <button type="button" role="tab" id="tab-spells" aria-controls="sheet" aria-selected="false" data-page="spells">✨ Spells</button>
+        </div>
+
+        <form class="pf-sheet" id="sheet" data-page="main" autocomplete="off" onsubmit="return false">
+            <!-- ===================== PAGE 1: MAIN ===================== -->
+            <div class="page p-main">
+                <div class="head">
+                    <label class="name"><span class="lbl">Character Name</span><input type="text" name="name" maxlength="80" placeholder="Kaida Ironblossom"></label>
+                    <label><small class="k">Ancestry &amp; Heritage</small><input type="text" name="ancestry" placeholder="Dwarf (Rock)"></label>
+                    <label><small class="k">Background</small><input type="text" name="background" placeholder="Warrior"></label>
+                    <label><small class="k">Class</small><input type="text" name="class" placeholder="Champion"></label>
+                    <label><small class="k">Level</small><input type="text" name="level" maxlength="2" inputmode="numeric" placeholder="1"></label>
+                    <label><small class="k">Size &amp; Traits</small><input type="text" name="size" placeholder="Medium, dwarf, humanoid"></label>
+                    <label><small class="k">Deity</small><input type="text" name="deity" placeholder="Torag"></label>
+                    <label><small class="k">Player</small><input type="text" name="player"></label>
+                    <label><small class="k">Experience</small><input type="text" name="xp" placeholder="0"></label>
+                </div>
+
+                <div class="attrs" id="attrs"></div>
+
+                <div class="main3">
+                    <div class="stack">
+                        <div class="box">
+                            <span class="lbl">Defenses &amp; Perception</span>
+                            <div class="stat head-row"><span>&nbsp;</span><span>Mod</span><span>Rank</span><span>Item</span></div>
+                            <div id="defs"></div>
+                        </div>
+                        <div class="box">
+                            <span class="lbl">Class DC</span>
+                            <div class="stat"><label class="nm" style="display:flex;gap:4px;align-items:center">Key
+                                <select name="keyAttr" aria-label="Key attribute" style="width:4.2em"><option value="">—</option><option value="str">Str</option><option value="dex">Dex</option><option value="con">Con</option><option value="int">Int</option><option value="wis">Wis</option><option value="cha">Cha</option></select></label>
+                                <span class="out" data-out="classdc">—</span>
+                                <select name="r_classdc" aria-label="Class DC rank"></select><span></span></div>
+                        </div>
+                        <div class="big">
+                            <label class="box"><span class="lbl">Armor Class</span><input type="text" name="ac" placeholder="18"></label>
+                            <label class="box"><span class="lbl">Shield +</span><input type="text" name="shieldAc" placeholder="2"></label>
+                            <label class="box"><span class="lbl">Speed</span><input type="text" name="speed" placeholder="20 ft"></label>
+                        </div>
+                        <div class="box"><span class="lbl">Shield</span>
+                            <div class="duo" style="grid-template-columns: repeat(3, 1fr)">
+                                <label><small class="k">Hardness</small><input type="text" name="shHard" placeholder="3"></label>
+                                <label><small class="k">HP (BT)</small><input type="text" name="shHp" placeholder="12 (6)"></label>
+                                <label><small class="k">Current</small><input type="text" name="shCur"></label>
+                            </div>
+                        </div>
+                        <div class="box"><span class="lbl">Armor, Weapon &amp; Other Proficiencies</span><textarea name="profs" rows="3" placeholder="Unarmored T, Light T, Medium T, Heavy T; Simple T, Martial T"></textarea></div>
+                    </div>
+
+                    <div class="stack">
+                        <div class="box">
+                            <div class="duo">
+                                <label><span class="lbl">Max HP</span><input type="text" name="hpMax" placeholder="22" style="text-align:center;font-weight:700;font-size:1.15rem"></label>
+                                <label><span class="lbl">Temp HP</span><input type="text" name="hpTemp" style="text-align:center;font-weight:700"></label>
+                            </div>
+                            <label><span class="lbl" style="margin-top:4px">Current HP</span><input type="text" name="hpCur" style="text-align:center;font-weight:700;font-size:1.15rem"></label>
+                        </div>
+                        <div class="box">
+                            <div class="checks"><b>Dying</b><input type="checkbox" name="dy1" aria-label="Dying 1"><input type="checkbox" name="dy2" aria-label="Dying 2"><input type="checkbox" name="dy3" aria-label="Dying 3"><input type="checkbox" name="dy4" aria-label="Dying 4"></div>
+                            <div class="checks"><b>Wounded</b><input type="text" name="wounded" style="width:3em" aria-label="Wounded value"><b style="min-width:auto;margin-left:8px">Doomed</b><input type="text" name="doomed" style="width:3em" aria-label="Doomed value"></div>
+                            <div class="checks"><b>Hero Points</b><input type="checkbox" name="hp1" aria-label="Hero Point 1"><input type="checkbox" name="hp2" aria-label="Hero Point 2"><input type="checkbox" name="hp3" aria-label="Hero Point 3"></div>
+                        </div>
+                        <div class="box">
+                            <span class="lbl">Strikes</span>
+                            <table class="strikes">
+                                <thead><tr><th>Weapon</th><th>Attack</th><th>Damage</th></tr></thead>
+                                <tbody>
+                                    <tr><td><input type="text" name="s1n" placeholder="Longsword" aria-label="Strike 1"></td><td><input type="text" name="s1a" placeholder="+7" aria-label="Strike 1 attack"></td><td><input type="text" name="s1d" placeholder="1d8+4 S" aria-label="Strike 1 damage"></td></tr>
+                                    <tr><td><input type="text" name="s2n" aria-label="Strike 2"></td><td><input type="text" name="s2a" aria-label="Strike 2 attack"></td><td><input type="text" name="s2d" aria-label="Strike 2 damage"></td></tr>
+                                    <tr><td><input type="text" name="s3n" aria-label="Strike 3"></td><td><input type="text" name="s3a" aria-label="Strike 3 attack"></td><td><input type="text" name="s3d" aria-label="Strike 3 damage"></td></tr>
+                                </tbody>
+                            </table>
+                            <textarea name="strikeNotes" rows="2" placeholder="Traits (agile, finesse…), runes, multiple attack penalty"></textarea>
+                        </div>
+                        <div class="box"><span class="lbl">Senses</span><input type="text" name="senses" placeholder="Darkvision"></div>
+                        <div class="box"><span class="lbl">Languages</span><input type="text" name="languages" placeholder="Common, Dwarven"></div>
+                        <div class="box grow"><span class="lbl">Conditions &amp; Notes</span><textarea name="conditions" rows="3"></textarea></div>
+                    </div>
+
+                    <div class="stack">
+                        <div class="box grow">
+                            <span class="lbl">Skills</span>
+                            <div class="stat head-row"><span>&nbsp;</span><span>Mod</span><span>Rank</span><span>Item</span></div>
+                            <div id="skills"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== PAGE 2: FEATS, GEAR & DETAILS ===================== -->
+            <div class="page p-feats">
+                <div class="head" style="grid-template-columns: 1.6fr repeat(4, 1fr)">
+                    <div class="name"><span class="lbl">Character Name</span><span class="val" data-mirror="name"></span></div>
+                </div>
+                <div class="two">
+                    <div class="stack">
+                        <div class="box grow"><span class="lbl">Ancestry &amp; Heritage Abilities, Ancestry Feats</span><textarea name="ancFeats" rows="4"></textarea></div>
+                        <div class="box grow"><span class="lbl">Class Features &amp; Class Feats</span><textarea name="classFeats" rows="6"></textarea></div>
+                        <div class="box grow"><span class="lbl">Skill Feats</span><textarea name="skillFeats" rows="3"></textarea></div>
+                        <div class="box grow"><span class="lbl">General Feats &amp; Other Feats</span><textarea name="genFeats" rows="3"></textarea></div>
+                    </div>
+                    <div class="stack">
+                        <div class="box grow">
+                            <span class="lbl">Inventory</span>
+                            <div class="coins">
+                                <label><small>CP</small><input type="text" name="cp"></label><label><small>SP</small><input type="text" name="sp"></label><label><small>GP</small><input type="text" name="gp" placeholder="15"></label><label><small>PP</small><input type="text" name="pp"></label>
+                            </div>
+                            <label><small class="k">Worn &amp; invested</small><textarea name="worn" rows="2"></textarea></label>
+                            <label><small class="k">Held &amp; carried</small><textarea name="gear" rows="5"></textarea></label>
+                            <label><small class="k">Bulk</small><input type="text" name="bulk" placeholder="3 (encumbered at 7)"></label>
+                        </div>
+                        <div class="looks">
+                            <label><small class="k">Age</small><input type="text" name="age"></label>
+                            <label><small class="k">Pronouns</small><input type="text" name="pronouns"></label>
+                            <label><small class="k">Height</small><input type="text" name="height"></label>
+                            <label><small class="k">Weight</small><input type="text" name="weight"></label>
+                            <label><small class="k">Ethnicity</small><input type="text" name="ethnicity"></label>
+                        </div>
+                        <div class="box grow"><span class="lbl">Appearance, Personality, Edicts &amp; Anathema</span><textarea name="personality" rows="4"></textarea></div>
+                        <div class="box grow"><span class="lbl">Backstory, Allies &amp; Notes</span><textarea name="backstory" rows="5"></textarea></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== PAGE 3: SPELLS ===================== -->
+            <div class="page p-spells">
+                <div class="spellhead">
+                    <label class="box"><span class="lbl">Tradition</span>
+                        <select name="tradition"><option value="">—</option><option>Arcane</option><option>Divine</option><option>Occult</option><option>Primal</option></select></label>
+                    <label class="box"><span class="lbl">Casting</span>
+                        <select name="castType"><option value="">—</option><option>Prepared</option><option>Spontaneous</option><option>Innate only</option></select></label>
+                    <label class="box"><span class="lbl">Attribute</span>
+                        <select name="spellAttr"><option value="">—</option><option value="int">Intelligence</option><option value="wis">Wisdom</option><option value="cha">Charisma</option></select></label>
+                    <label class="box"><span class="lbl">Rank</span><select name="r_spell" aria-label="Spellcasting proficiency rank"></select></label>
+                    <div class="box"><span class="lbl">Attack</span><span class="out" data-out="satk">—</span></div>
+                    <div class="box"><span class="lbl">DC</span><span class="out" data-out="sdc">—</span></div>
+                </div>
+                <div class="spells" id="spells"></div>
+            </div>
+        </form>
+
+        <div class="sheet-help">
+            <p><strong>How it works.</strong> A sheet auto-saves in this browser once it has a name. Renaming a sheet renames its save. Use the tabs to move between the three pages. <strong>Print</strong> prints all three pages of the current character, one per US Letter sheet, and <strong>Print Blank</strong> prints an empty set. <strong>Export</strong> downloads every sheet as a JSON file and <strong>Import</strong> merges sheets back in; it also accepts a saved Pathbuilder export. Nothing leaves your browser.</p>
+            <p><strong>Worked out for you.</strong> Enter attribute <em>modifiers</em> (the Remaster way). Each skill, save and Perception adds its attribute modifier, its proficiency bonus and any item bonus. The proficiency bonus is your level plus 2 (trained), 4 (expert), 6 (master) or 8 (legendary), and 0 if untrained. Class DC and spell DC are 10 + attribute + proficiency; spell attack is attribute + proficiency. AC depends on your armor, so enter it yourself. See <a href="/pf2_char.html">Character Creation</a> for building a character and the <a href="/pf2_dice_roller.html">Dice Roller</a> to roll with these numbers.</p>
+        </div>
+
+        <div class="print-container" id="printContainer"></div>
+    </main>
+
+    <footer>
+<div class="page-nav">
+    <a class="prev" href="/pf2_dice_roller.html">Dice Roller</a>
+    <a class="next" href="/pf2_100.html">Sample Characters</a>
+</div>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+        var KEY = 'pf2-character-sheets';
+        var sheet = document.getElementById('sheet');
+        var select = document.getElementById('sheetSelect');
+        var $ = function (id) { return document.getElementById(id); };
+
+        var ATTR = [['str', 'Strength'], ['dex', 'Dexterity'], ['con', 'Constitution'], ['int', 'Intelligence'], ['wis', 'Wisdom'], ['cha', 'Charisma']];
+        var RANKS = [['0', 'U'], ['2', 'T'], ['4', 'E'], ['6', 'M'], ['8', 'L']];
+        var DEFS = [['perception', 'Perception', 'wis'], ['fortitude', 'Fortitude', 'con'], ['reflex', 'Reflex', 'dex'], ['will', 'Will', 'wis']];
+        var SKILLS = [['acrobatics', 'Acrobatics', 'dex'], ['arcana', 'Arcana', 'int'], ['athletics', 'Athletics', 'str'], ['crafting', 'Crafting', 'int'],
+            ['deception', 'Deception', 'cha'], ['diplomacy', 'Diplomacy', 'cha'], ['intimidation', 'Intimidation', 'cha'], ['lore1', 'Lore', 'int'], ['lore2', 'Lore', 'int'],
+            ['medicine', 'Medicine', 'wis'], ['nature', 'Nature', 'wis'], ['occultism', 'Occultism', 'int'], ['performance', 'Performance', 'cha'],
+            ['religion', 'Religion', 'wis'], ['society', 'Society', 'int'], ['stealth', 'Stealth', 'dex'], ['survival', 'Survival', 'wis'], ['thievery', 'Thievery', 'dex']];
+        var SPELL_ROWS = [['Cantrips', 8], ['1', 6], ['2', 6], ['3', 6], ['4', 6], ['5', 6], ['6', 5], ['7', 5], ['8', 4], ['9', 4], ['10', 3], ['Focus', 6], ['Innate', 6]];
+
+        var FIELDS = ['name', 'ancestry', 'background', 'class', 'level', 'size', 'deity', 'player', 'xp', 'keyAttr', 'r_classdc', 'ac', 'shieldAc', 'speed',
+            'shHard', 'shHp', 'shCur', 'profs', 'hpMax', 'hpTemp', 'hpCur', 'dy1', 'dy2', 'dy3', 'dy4', 'wounded', 'doomed', 'hp1', 'hp2', 'hp3',
+            's1n', 's1a', 's1d', 's2n', 's2a', 's2d', 's3n', 's3a', 's3d', 'strikeNotes', 'senses', 'languages', 'conditions',
+            'ancFeats', 'classFeats', 'skillFeats', 'genFeats', 'cp', 'sp', 'gp', 'pp', 'worn', 'gear', 'bulk', 'age', 'pronouns', 'height', 'weight', 'ethnicity',
+            'personality', 'backstory', 'tradition', 'castType', 'spellAttr', 'r_spell', 'focusMax', 'focusCur'];
+        var BOOLS = { dy1: 1, dy2: 1, dy3: 1, dy4: 1, hp1: 1, hp2: 1, hp3: 1 };
+        var rankOpts = RANKS.map(function (r) { return '<option value="' + r[0] + '">' + r[1] + '</option>'; }).join('');
+
+        // ----- build the repeated parts -----
+        ATTR.forEach(function (a) {
+            FIELDS.push(a[0]);
+            var d = document.createElement('label'); d.className = 'attr'; d.title = a[1];
+            d.innerHTML = '<span class="lbl">' + a[0].toUpperCase() + '</span><input type="text" name="' + a[0] + '" maxlength="3" placeholder="+0" aria-label="' + a[1] + ' modifier">';
+            $('attrs').appendChild(d);
+        });
+        function statRow(id, label, attr, loreName) {
+            FIELDS.push('r_' + id, 'i_' + id);
+            var r = document.createElement('div'); r.className = 'stat';
+            var nm = loreName ? '<label class="nm lore">' + '<input type="text" name="' + loreName + '" placeholder="Lore (…)" aria-label="Lore subject">' + '</label>'
+                : '<span class="nm">' + label + '<small>' + attr.charAt(0).toUpperCase() + attr.slice(1) + '</small></span>';
+            r.innerHTML = nm + '<span class="out" data-out="' + id + '">+0</span>' +
+                '<select name="r_' + id + '" aria-label="' + label + ' proficiency rank">' + rankOpts + '</select>' +
+                '<input type="text" name="i_' + id + '" maxlength="2" placeholder="+0" aria-label="' + label + ' item bonus">';
+            return r;
+        }
+        DEFS.forEach(function (d) { $('defs').appendChild(statRow(d[0], d[1], d[2])); });
+        SKILLS.forEach(function (s) {
+            var lore = /^lore/.test(s[0]) ? s[0] + 'Name' : null;
+            if (lore) FIELDS.push(lore);
+            $('skills').appendChild(statRow(s[0], s[1], s[2], lore));
+        });
+        sheet.querySelector('[name="r_classdc"]').innerHTML = rankOpts;
+        sheet.querySelector('[name="r_spell"]').innerHTML = rankOpts;
+        SPELL_ROWS.forEach(function (row, idx) {
+            var key = row[0].toLowerCase(), box = document.createElement('div'); box.className = 'lvl';
+            var h = '<div class="lvl-head"><b>' + row[0] + '</b>';
+            if (/^\d+$/.test(row[0])) { FIELDS.push('slots' + key, 'used' + key); h += '<small>Slots</small><input type="text" name="slots' + key + '" aria-label="Rank ' + key + ' slots"><small>Used</small><input type="text" name="used' + key + '" aria-label="Rank ' + key + ' slots used">'; }
+            if (key === 'focus') h += '<small>Points</small><input type="text" name="focusMax" aria-label="Focus Points maximum"><small>Now</small><input type="text" name="focusCur" aria-label="Focus Points now">';
+            h += '</div>';
+            for (var i = 1; i <= row[1]; i++) { var n = 'sp_' + key + '_' + i; FIELDS.push(n); h += '<div class="sp"><input type="text" name="' + n + '" aria-label="' + row[0] + ' spell ' + i + '"></div>'; }
+            box.innerHTML = h; $('spells').appendChild(box);
+        });
+
+        // ----- rules -----
+        var n = function (v) { var x = parseInt(String(v == null ? '' : v).replace('−', '-'), 10); return isNaN(x) ? 0 : x; };
+        var sgn = function (x) { return (x >= 0 ? '+' : '−') + Math.abs(x); };
+        function profBonus(rank, level) { var r = n(rank); return r > 0 ? r + Math.max(1, n(level) || 1) : 0; }
+        function derive(get) {
+            var o = {}, lvl = get('level');
+            DEFS.concat(SKILLS).forEach(function (s) { o[s[0]] = sgn(n(get(s[2])) + profBonus(get('r_' + s[0]), lvl) + n(get('i_' + s[0]))); });
+            var key = get('keyAttr');
+            o.classdc = key ? String(10 + n(get(key)) + profBonus(get('r_classdc'), lvl)) : '—';
+            var sa = get('spellAttr');
+            if (sa) { var b = n(get(sa)) + profBonus(get('r_spell'), lvl); o.satk = sgn(b); o.sdc = String(10 + b); } else { o.satk = '—'; o.sdc = '—'; }
+            return o;
+        }
+        function paint(root, get) {
+            var o = derive(get);
+            root.querySelectorAll('[data-out]').forEach(function (el) { el.textContent = o[el.getAttribute('data-out')]; });
+            root.querySelectorAll('[data-mirror]').forEach(function (el) { el.textContent = get(el.getAttribute('data-mirror')) || ''; });
+        }
+
+        // ----- form plumbing -----
+        function field(nm, root) { return (root || sheet).querySelector('[name="' + nm + '"]'); }
+        function getVal(nm) { var el = field(nm); return !el ? '' : el.type === 'checkbox' ? el.checked : el.value; }
+        function setVal(nm, v) {
+            var el = field(nm); if (!el) return;
+            if (el.type === 'checkbox') el.checked = v === true || v === 'true';
+            else if (el.tagName === 'SELECT' && /^r_/.test(nm)) el.value = ['0', '2', '4', '6', '8'].indexOf(String(v)) >= 0 ? String(v) : '0';
+            else el.value = v == null ? '' : String(v);
+        }
+        function currentName() { return String(getVal('name')).trim(); }
+        function say(m) { $('status').textContent = m; }
+        function sanitize(raw) {
+            if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+            var out = {};
+            FIELDS.forEach(function (f) {
+                var v = raw[f];
+                out[f] = BOOLS[f] ? (v === true || v === 'true') : ((typeof v === 'string' || typeof v === 'number') ? String(v).slice(0, 6000) : '');
+            });
+            return out;
+        }
+        function safeName(x) { return typeof x === 'string' && x.trim() !== '' && ['__proto__', 'constructor', 'prototype'].indexOf(x) < 0; }
+        function load() {
+            var out = {};
+            try {
+                var p = JSON.parse(localStorage.getItem(KEY));
+                if (p && typeof p === 'object' && !Array.isArray(p)) Object.keys(p).forEach(function (k) { var c = sanitize(p[k]); if (safeName(k) && c) out[k] = c; });
+            } catch (e) { /* storage blocked or corrupt */ }
+            return out;
+        }
+        function store(all) { try { localStorage.setItem(KEY, JSON.stringify(all)); return true; } catch (e) { say('Could not save: browser storage is unavailable or full.'); return false; } }
+        function read() { var d = {}; FIELDS.forEach(function (f) { d[f] = getVal(f); }); return d; }
+        function repaint() { paint(sheet, getVal); }
+        function clearAll() { FIELDS.forEach(function (f) { setVal(f, BOOLS[f] ? false : ''); }); repaint(); }
+        function fill(d) { clearAll(); FIELDS.forEach(function (f) { setVal(f, d[f]); }); repaint(); }
+        function refreshSelect(sel) {
+            var all = load();
+            select.innerHTML = '<option value="">— Select Sheet —</option>';
+            Object.keys(all).sort().forEach(function (k) { var o = document.createElement('option'); o.value = k; o.textContent = k; if (k === sel) o.selected = true; select.appendChild(o); });
+        }
+        var currentKey = null, timer = null, armed = false;
+        function disarm() { armed = false; $('deleteBtn').classList.remove('armed'); $('deleteBtn').textContent = '🗑️ Delete'; }
+        function storeCurrent(name) {
+            var all = load();
+            if (currentKey && currentKey !== name) delete all[currentKey];
+            all[name] = read();
+            if (!store(all)) return false;
+            currentKey = name; refreshSelect(name); return true;
+        }
+        function autoSave() {
+            timer = null;
+            var name = currentName();
+            if (!safeName(name)) return;
+            var all = load();
+            if (all[name] && name !== currentKey) { say('A sheet named “' + name + '” already exists. Rename this one, or press Save to replace it.'); return; }
+            if (storeCurrent(name)) say('Saved “' + name + '”.');
+        }
+        function flush() { if (timer) { clearTimeout(timer); autoSave(); } }
+        function onEdit() { disarm(); repaint(); clearTimeout(timer); timer = setTimeout(autoSave, 800); }
+        sheet.addEventListener('input', onEdit);
+        sheet.addEventListener('change', onEdit);
+
+        var tabs = document.querySelectorAll('.tabs [role="tab"]');
+        function show(page) {
+            sheet.setAttribute('data-page', page);
+            tabs.forEach(function (t) { var on = t.getAttribute('data-page') === page; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+        }
+        tabs.forEach(function (t, i) {
+            t.addEventListener('click', function () { show(t.getAttribute('data-page')); });
+            t.addEventListener('keydown', function (e) {
+                if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+                var nx = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; nx.focus(); show(nx.getAttribute('data-page'));
+            });
+        });
+
+        $('newBtn').addEventListener('click', function () { flush(); clearAll(); currentKey = null; select.value = ''; disarm(); show('main'); field('name').focus(); say('New blank sheet.'); });
+        $('saveBtn').addEventListener('click', function () {
+            clearTimeout(timer); timer = null;
+            var name = currentName();
+            if (!safeName(name)) { say('Give the character a name first.'); show('main'); field('name').focus(); return; }
+            if (storeCurrent(name)) say('Saved “' + name + '”.');
+        });
+        $('copyBtn').addEventListener('click', function () {
+            flush();
+            var base = currentName();
+            if (!base) { say('Give the character a name first.'); return; }
+            var all = load(), name = base + ' (copy)', i = 2;
+            while (all[name]) name = base + ' (copy ' + (i++) + ')';
+            var d = read(); d.name = name; all[name] = d;
+            if (!store(all)) return;
+            fill(d); currentKey = name; refreshSelect(name); say('Copied as “' + name + '”.');
+        });
+        $('deleteBtn').addEventListener('click', function () {
+            var name = select.value;
+            if (!name) { say('Choose a saved sheet to delete.'); return; }
+            if (!armed) { armed = true; this.classList.add('armed'); this.textContent = '🗑️ Click again to delete'; say('Click Delete again to remove “' + name + '”.'); return; }
+            clearTimeout(timer); timer = null;
+            var all = load(); delete all[name];
+            if (!store(all)) return;
+            clearAll(); currentKey = null; refreshSelect(''); disarm(); say('Deleted “' + name + '”.');
+        });
+        select.addEventListener('change', function () {
+            flush(); disarm();
+            var name = select.value, all = load();
+            if (!name || !all[name]) { clearAll(); currentKey = null; return; }
+            fill(all[name]); currentKey = name; refreshSelect(name); say('Loaded “' + name + '”.');
+        });
+
+        // ----- print: clone the form and turn every field into plain text -----
+        function staticSheet(d) {
+            var c = sheet.cloneNode(true);
+            c.removeAttribute('id'); c.querySelectorAll('[id]').forEach(function (e) { e.removeAttribute('id'); });
+            c.querySelectorAll('input, select, textarea').forEach(function (el) {
+                var nm = el.getAttribute('name'), v = d[nm];
+                if (el.type === 'checkbox') { var s = document.createElement('span'); s.textContent = v === true ? '☑' : '☐'; s.style.fontSize = '12px'; el.replaceWith(s); return; }
+                var span = document.createElement('span');
+                span.className = 'val' + (el.tagName === 'TEXTAREA' ? ' tx' : '');
+                if (el.tagName === 'SELECT') {
+                    var opt = [].filter.call(el.options, function (o) { return o.value === String(v == null ? '' : v); })[0];
+                    span.textContent = opt && opt.value !== '' ? opt.textContent : (/^r_/.test(nm) ? 'U' : '');
+                } else span.textContent = v == null ? '' : String(v);
+                el.replaceWith(span);
+            });
+            paint(c, function (k) { return d[k]; });
+            return c;
+        }
+        function doPrint(list) {
+            var box = $('printContainer'); box.innerHTML = '';
+            list.forEach(function (d) { box.appendChild(staticSheet(d)); });
+            window.print();
+        }
+        window.addEventListener('afterprint', function () { $('printContainer').innerHTML = ''; });
+        $('printBtn').addEventListener('click', function () { if (!currentName()) { say('Give the character a name first.'); return; } doPrint([read()]); });
+        $('printAllBtn').addEventListener('click', function () {
+            var all = load(), names = Object.keys(all).sort();
+            if (!names.length) { say('No saved sheets to print yet.'); return; }
+            doPrint(names.map(function (k) { return all[k]; }));
+        });
+        $('blankBtn').addEventListener('click', function () { doPrint([{}]); });
+
+        // ===== Pathbuilder 2e import =====
+        // Converts a Pathbuilder 2e "Export JSON" ({success, build:{…}}) into this sheet's fields.
+        var STRIKING = { '': 1, striking: 2, greaterStriking: 3, majorStriking: 4 };
+        function fromPathbuilder(json) {
+            var b = json && json.build ? json.build : json;
+            if (!b || typeof b !== 'object' || !b.abilities || !b.proficiencies || b.class == null) throw new Error('not a Pathbuilder export');
+            var list = function (a) { return Array.isArray(a) ? a : []; }, out = {}, lvl = n(b.level) || 1;
+            var prof = b.proficiencies || {}, mods = b.mods || {};
+            out.name = String(b.name || '').trim();
+            out.level = String(lvl);
+            out['class'] = b['class'] + (b.dualClass ? ' / ' + b.dualClass : '');
+            out.ancestry = b.ancestry + (b.heritage ? ' (' + b.heritage + ')' : '');
+            out.background = b.background || '';
+            out.deity = b.deity && b.deity !== 'Not set' ? b.deity : '';
+            out.size = b.sizeName || ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'][b.size] || '';
+            out.age = b.age && b.age !== 'Not set' ? String(b.age) : '';
+            out.pronouns = b.gender && b.gender !== 'Not set' ? String(b.gender) : '';
+            out.xp = b.xp != null ? String(b.xp) : '';
+            out.keyAttr = b.keyability || '';
+            out.languages = list(b.languages).filter(function (l) { return l && l !== 'None selected'; }).join(', ');
+
+            // attributes: older exports give scores (10 = +0), so convert them to modifiers
+            var ab = b.abilities, vals = ATTR.map(function (a) { return n(ab[a[0]]); });
+            var scores = vals.some(function (v) { return v >= 8; });
+            ATTR.forEach(function (a, i) { var m = scores ? Math.floor((vals[i] - 10) / 2) : vals[i]; out[a[0]] = sgn(m); });
+            var M = function (k) { return n(out[k]); };
+
+            // proficiencies (0/2/4/6/8 = U/T/E/M/L) and item bonuses
+            var itemOf = function (label) { var e = mods[label] || mods[label + ' Save']; return e && e['Item Bonus'] ? String(e['Item Bonus']) : ''; };
+            DEFS.forEach(function (d) { out['r_' + d[0]] = String(n(prof[d[0]])); out['i_' + d[0]] = itemOf(d[1]); });
+            SKILLS.forEach(function (s) { if (!/^lore/.test(s[0])) { out['r_' + s[0]] = String(n(prof[s[0]])); out['i_' + s[0]] = itemOf(s[1]); } });
+            list(b.lores).slice(0, 2).forEach(function (l, i) { out['lore' + (i + 1) + 'Name'] = 'Lore (' + l[0] + ')'; out['r_lore' + (i + 1)] = String(n(l[1])); });
+            var extraLores = list(b.lores).slice(2).map(function (l) { return 'Lore (' + l[0] + ') ' + 'UTEML'.charAt(n(l[1]) / 2); });
+            out.r_classdc = String(n(prof.classDC));
+            var RK = function (v) { return 'UTEML'.charAt(Math.min(8, n(v)) / 2); };
+            out.profs = 'Armor: unarmored ' + RK(prof.unarmored) + ', light ' + RK(prof.light) + ', medium ' + RK(prof.medium) + ', heavy ' + RK(prof.heavy) +
+                '\nWeapons: unarmed ' + RK(prof.unarmed) + ', simple ' + RK(prof.simple) + ', martial ' + RK(prof.martial) + ', advanced ' + RK(prof.advanced) +
+                (extraLores.length ? '\n' + extraLores.join(', ') : '');
+
+            // hit points, speed, AC
+            var at = b.attributes || {};
+            var hp = n(at.ancestryhp) + n(at.bonushp) + lvl * (n(at.classhp) + n(at.bonushpPerLevel) + M('con'));
+            out.hpMax = String(hp); out.hpCur = String(hp);
+            out.speed = (n(at.speed) + n(at.speedBonus)) + ' ft';
+            if (b.acTotal && b.acTotal.acTotal != null) out.ac = String(b.acTotal.acTotal);
+            if (b.acTotal && b.acTotal.shieldBonus) out.shieldAc = String(b.acTotal.shieldBonus);
+            var specials = list(b.specials);
+            out.senses = specials.filter(function (s) { return /vision|scent|tremorsense|sense/i.test(s); }).join(', ');
+
+            // strikes: use Pathbuilder's totals when present, otherwise work them out
+            list(b.weapons).slice(0, 3).forEach(function (w, i) {
+                var r = profBonus(prof[w.prof] != null ? prof[w.prof] : 0, lvl);
+                var atk = w.attack != null ? n(w.attack) : M('str') + r + n(w.pot);
+                var dice = STRIKING[w.str || ''] || 1, dmgMod = w.damageBonus != null ? n(w.damageBonus) : M('str');
+                out['s' + (i + 1) + 'n'] = w.display || w.name;
+                out['s' + (i + 1) + 'a'] = sgn(atk);
+                out['s' + (i + 1) + 'd'] = dice + (w.die || 'd4') + (dmgMod ? (dmgMod > 0 ? '+' : '−') + Math.abs(dmgMod) : '') + (w.damageType ? ' ' + w.damageType : '') + (w.extraDamage && w.extraDamage.length ? ' + ' + w.extraDamage.join(', ') : '');
+            });
+            if (list(b.weapons).length > 3) out.strikeNotes = 'Also: ' + list(b.weapons).slice(3).map(function (w) { return w.display || w.name; }).join(', ');
+
+            // feats, sorted into the sheet's boxes
+            var groups = { anc: [], cls: [], skl: [], gen: [] };
+            list(b.feats).forEach(function (f) {
+                if (!f || !f[0] || f[0] === 'Not Selected') return;
+                var type = String(f[2] || ''), name = f[0] + (f[1] ? ' (' + f[1] + ')' : '') + (f[3] ? ' ' + f[3] : '');
+                if (/Ancestry|Heritage/i.test(type)) groups.anc.push(name);
+                else if (/Class|Archetype|Dedication/i.test(type)) groups.cls.push(name);
+                else if (/Skill/i.test(type)) groups.skl.push(name);
+                else groups.gen.push(name);
+            });
+            var featText = function (a) { return a.join('\n'); };
+            out.ancFeats = featText(groups.anc);
+            out.classFeats = (specials.length ? 'Features: ' + specials.join(', ') + '\n' : '') + featText(groups.cls);
+            out.skillFeats = featText(groups.skl);
+            out.genFeats = featText(groups.gen);
+
+            // inventory
+            var money = b.money || {};
+            ['cp', 'sp', 'gp', 'pp'].forEach(function (k) { out[k] = money[k] ? String(money[k]) : ''; });
+            var worn = list(b.armor).filter(function (a) { return a && (a.worn || a.qty); }).map(function (a) { return a.display || a.name; });
+            var invested = list(b.equipment).filter(function (e) { return e && e[2] === 'Invested'; }).map(function (e) { return e[0]; });
+            out.worn = worn.concat(invested.map(function (x) { return x + ' (invested)'; })).join(' • ');
+            out.gear = list(b.equipment).filter(function (e) { return e && e[0] && e[2] !== 'Invested'; })
+                .map(function (e) { return e[0] + (n(e[1]) > 1 ? ' ×' + e[1] : ''); }).join(' • ');
+
+            // spellcasting: the main caster on the sheet, every other list in the Innate box
+            var casters = list(b.spellCasters);
+            var main = casters.filter(function (c) { return !c.innate && c.magicTradition !== 'focus'; })[0];
+            var cap = function (s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; };
+            var innate = [];
+            if (main) {
+                out.tradition = cap(main.magicTradition);
+                out.castType = cap(main.spellcastingType);
+                out.spellAttr = main.ability || '';
+                out.r_spell = String(n(main.proficiency));
+                list(main.perDay).forEach(function (cnt, rank) { if (rank > 0 && cnt) out['slots' + rank] = String(cnt); });
+                list(main.spells).forEach(function (sel) {
+                    var key = sel.spellLevel === 0 ? 'cantrips' : String(sel.spellLevel), max = (SPELL_ROWS.filter(function (r) { return r[0].toLowerCase() === key; })[0] || [0, 0])[1];
+                    list(sel.list).forEach(function (sp, i) { if (i < max) out['sp_' + key + '_' + (i + 1)] = sp; else innate.push(sp + ' (rank ' + sel.spellLevel + ')'); });
+                });
+            }
+            casters.filter(function (c) { return c !== main; }).forEach(function (c) {
+                list(c.spells).forEach(function (sel) { list(sel.list).forEach(function (sp) { innate.push(sp + (sel.spellLevel ? ' (' + sel.spellLevel + ')' : ' (cantrip)') + ' – ' + c.name); }); });
+            });
+            innate.slice(0, 6).forEach(function (sp, i) { out['sp_innate_' + (i + 1)] = sp; });
+            if (innate.length > 6) out.conditions = 'More spells: ' + innate.slice(6).join(', ');
+            var focus = [];
+            Object.keys(b.focus || {}).forEach(function (trad) {
+                Object.keys(b.focus[trad] || {}).forEach(function (abl) {
+                    var f = b.focus[trad][abl] || {};
+                    list(f.focusCantrips).concat(list(f.focusSpells)).forEach(function (sp) { if (focus.indexOf(sp) < 0) focus.push(sp); });
+                });
+            });
+            focus.slice(0, 6).forEach(function (sp, i) { out['sp_focus_' + (i + 1)] = sp; });
+            if (b.focusPoints) { out.focusMax = String(b.focusPoints); out.focusCur = String(b.focusPoints); }
+            return sanitize(out);
+        }
+        window.pathbuilder = { fromPathbuilder: fromPathbuilder };
+
+        function importPB(json) {
+            var d = fromPathbuilder(json), name = d.name;
+            if (!safeName(name)) throw new Error('This character has no name.');
+            var all = load(), existed = !!all[name];
+            all[name] = d;
+            if (!store(all)) return;
+            fill(d); currentKey = name; refreshSelect(name); show('main');
+            say((existed ? 'Updated “' : 'Imported “') + name + '” from Pathbuilder.');
+            $('pbPanel').open = false;
+        }
+        $('pbOpen').addEventListener('click', function () {
+            var id = String($('pbId').value).replace(/\D/g, '');
+            if (!id) { say('Enter the number Pathbuilder showed you when you exported.'); $('pbId').focus(); return; }
+            window.open('https://pathbuilder2e.com/json.php?id=' + encodeURIComponent(id), '_blank', 'noopener');
+        });
+        $('pbPaste').addEventListener('click', function () {
+            var txt = $('pbJson').value.trim();
+            if (!txt) { say('Paste the exported character first.'); return; }
+            try { flush(); importPB(JSON.parse(txt)); $('pbJson').value = ''; }
+            catch (e) { say('That does not look like a Pathbuilder export. Copy the whole page, starting with {"success":true.'); }
+        });
+        $('pbFileBtn').addEventListener('click', function () { $('pbFile').click(); });
+        function readFile(file, done) {
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) { say('That file is too large to be a character file.'); return; }
+            var r = new FileReader();
+            r.onload = function () { try { done(JSON.parse(r.result)); } catch (e) { say('Could not read that file.'); } };
+            r.onerror = function () { say('Could not read that file.'); };
+            r.readAsText(file);
+        }
+        $('pbFile').addEventListener('change', function (ev) {
+            var f = ev.target.files && ev.target.files[0]; ev.target.value = '';
+            readFile(f, function (j) { try { flush(); importPB(j); } catch (e) { say('That file is not a Pathbuilder export.'); } });
+        });
+
+        // ----- export / import -----
+        $('exportBtn').addEventListener('click', function () {
+            flush();
+            var all = load(), cnt = Object.keys(all).length;
+            if (!cnt) { say('No sheets to export yet.'); return; }
+            var url = URL.createObjectURL(new Blob([JSON.stringify(all, null, 2)], { type: 'application/json' }));
+            var a = document.createElement('a'); a.href = url; a.download = 'pf2-character-sheets.json';
+            document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+            say('Exported ' + cnt + (cnt === 1 ? ' sheet.' : ' sheets.'));
+        });
+        $('importBtn').addEventListener('click', function () { $('importFile').click(); });
+        $('importFile').addEventListener('change', function (ev) {
+            var f = ev.target.files && ev.target.files[0]; ev.target.value = '';
+            readFile(f, function (data) {
+                flush();
+                if (data && (data.build || (data.abilities && data.proficiencies))) { try { importPB(data); } catch (e) { say('That Pathbuilder file could not be read.'); } return; }
+                if (!data || typeof data !== 'object' || Array.isArray(data)) { say('That is not a sheet file.'); return; }
+                var all = load(), count = 0;
+                Object.keys(data).forEach(function (k) {
+                    var d = sanitize(data[k]); if (!d) return;
+                    var name = String(d.name || '').trim().slice(0, 200);
+                    if (!safeName(name)) return;
+                    all[name] = d; count++;
+                });
+                if (!count) { say('No valid sheets found in that file.'); return; }
+                if (!store(all)) return;
+                refreshSelect(currentKey || ''); say('Imported ' + count + (count === 1 ? ' sheet.' : ' sheets.'));
+            });
+        });
+
+        window.pf2Sheet = { profBonus: profBonus, derive: derive };
+        clearAll(); refreshSelect('');
+    })();
+    </script>
+<div class="site-footer">&copy; 2026 Ray de la Paz. The Pathfinder 2e Guide. All rights reserved. &middot; <a href="https://rays-home.netlify.app/">Ray's House of Fun</a><br>Pathfinder is a registered trademark of Paizo Inc. This guide is an unofficial fan resource.</div>
+</body>
+</html>
