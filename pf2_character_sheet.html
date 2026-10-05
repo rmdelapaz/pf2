@@ -104,9 +104,11 @@
         .pf-sheet .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .pf-sheet .looks { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px 10px; margin-bottom: 10px; }
 
-        .pf-sheet .spellhead { display: grid; grid-template-columns: 1.2fr 1fr 1fr 0.8fr 0.8fr 0.8fr; gap: 6px 10px; margin-bottom: 10px; align-items: end; }
+        .pf-sheet .spellhead { display: grid; grid-template-columns: 1.5fr 1.2fr 1fr 1fr 0.8fr 0.8fr 0.8fr; gap: 6px 10px; margin-bottom: 10px; align-items: end; }
         .pf-sheet .spellhead .box { text-align: center; }
         .pf-sheet .spellhead .out { font-size: 1.2rem; }
+        .pf-sheet .spellhead .sh-name .val { font-weight: 700; font-size: 1.05rem; border-bottom: 0; }
+        @media (max-width: 760px) { .pf-sheet .spellhead > .sh-name { grid-column: 1 / -1; } }
         .pf-sheet .spells { columns: 3 230px; column-gap: 10px; }
         .pf-sheet .lvl { break-inside: avoid; border: 1.5px solid var(--line); border-radius: 5px; padding: 4px 6px; margin: 0 0 8px; }
         .pf-sheet .lvl-head { display: flex; gap: 6px; align-items: center; border-bottom: 1.5px solid var(--ink); padding-bottom: 2px; margin-bottom: 2px; }
@@ -324,6 +326,7 @@
             <!-- ===================== PAGE 3: SPELLS ===================== -->
             <div class="page p-spells">
                 <div class="spellhead">
+                    <div class="box sh-name"><span class="lbl">Character Name</span><span class="val" data-mirror="name"></span></div>
                     <label class="box"><span class="lbl">Tradition</span>
                         <select name="tradition"><option value="">—</option><option>Arcane</option><option>Divine</option><option>Occult</option><option>Primal</option></select></label>
                     <label class="box"><span class="lbl">Casting</span>
