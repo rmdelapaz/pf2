@@ -21,6 +21,42 @@
             background: var(--surface); border: 1px solid var(--border); color: var(--accent);
         }
         nav.page-toc a:hover { border-color: var(--accent); }
+        /* Character and party cards */
+        main ul.roster { list-style: none; margin: 1rem 0 1.6rem; padding: 0; display: grid; gap: 14px; }
+        main ul.roster-solo { grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); }
+        main ul.roster > li { margin: 0; padding: 0; }
+        main ul.roster > li::before { content: none; }
+        .pc-card, .party-card {
+            height: 100%; box-sizing: border-box; background: var(--surface); border: 1px solid var(--border);
+            border-top: 4px solid var(--accent); border-radius: var(--radius-sm, 9px); padding: 14px 16px 12px; box-shadow: var(--shadow);
+        }
+        .pc-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+        .pc-head h4 { margin: 0; font-size: 1.15rem; line-height: 1.25; color: var(--heading); }
+        .pc-role { margin: 2px 0 0; color: var(--muted); font-size: 0.93rem; font-weight: 600; }
+        .pc-level {
+            flex: none; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 48px; height: 48px;
+            border-radius: 50%; background: var(--accent); color: var(--accent-ink); font: 700 1.2rem/1 "Alegreya", Georgia, serif;
+        }
+        .pc-level small { font: 600 0.6rem/1 "Source Sans 3", sans-serif; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+        .pc-level-wide { height: auto; min-width: 0; border-radius: 999px; padding: 6px 12px; font: 700 0.85rem/1.1 "Source Sans 3", sans-serif; white-space: nowrap; }
+        .pc-concept { margin: 0 0 10px; padding: 8px 10px; border-left: 3px solid var(--gold); background: var(--accent-soft); border-radius: 4px; font-style: italic; color: var(--text); }
+        .pc-facts { margin: 0; display: grid; gap: 6px; }
+        .pc-facts > div { display: grid; grid-template-columns: 9.5em 1fr; gap: 10px; padding-top: 6px; border-top: 1px dashed var(--border); }
+        .pc-facts > div:first-child { border-top: 0; padding-top: 0; }
+        .pc-facts dt { margin: 0; font-weight: 700; color: var(--heading); font-size: 0.9rem; }
+        .pc-facts dd { margin: 0; color: var(--text); font-size: 0.95rem; }
+        .party-members { list-style: none; margin: 4px 0 12px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 8px; }
+        .party-members > li {
+            margin: 0; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "name lv" "role lv"; column-gap: 8px; align-items: center;
+            padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg);
+        }
+        .party-members > li::before { content: none; }
+        .pm-name { grid-area: name; font-weight: 700; color: var(--heading); }
+        .pm-role { grid-area: role; font-size: 0.88rem; color: var(--muted); }
+        .pm-level { grid-area: lv; min-width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 0.85rem; border: 2px solid var(--accent); color: var(--accent); }
+        .pc-card .pc-facts > div { grid-template-columns: 7.6em 1fr; }
+        .party-members.pm-2, .party-members.pm-4 { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
+        @media (max-width: 560px) { .pc-facts > div, .pc-card .pc-facts > div { grid-template-columns: 1fr; gap: 2px; } }
     </style>
 </head>
 <body>
@@ -138,132 +174,94 @@
 
             <h3>Low Level Solo Heroes (Levels 1-5)</h3>
             
-            <h4>Seraphina Dawnbreaker - Human Champion (Justice cause, formerly paladin) - Level 3</h4>
-            <p><strong>Ancestry:</strong> Human (Versatile Heritage)</p>
-            <p><strong>Background:</strong> Acolyte</p>
-            <p><strong>Concept:</strong> Righteous knight-errant bringing justice to frontier settlements</p>
-            <p><strong>Key Features:</strong> Heavy armor, lay on hands, a blessed blade</p>
-            <p><strong>Real-world Parallel:</strong> Like a frontier marshal or Texas Ranger - combining law enforcement with moral authority</p>
-            <p><strong>Practical Usage:</strong> Ideal for campaigns involving undead, fiends, or moral corruption</p>
-            <p><strong>Solo Strengths:</strong> Self-healing, high AC, social authority through divine mandate</p>
-
-            <h4>Whisper Nightshade - Halfling Rogue (Mastermind) - Level 4</h4>
-            <p><strong>Ancestry:</strong> Halfling (Twilight Halfling Heritage)</p>
-            <p><strong>Background:</strong> Criminal</p>
-            <p><strong>Concept:</strong> Information broker operating in urban shadows</p>
-            <p><strong>Key Features:</strong> Sneak attack, skill mastery, social manipulation</p>
-            <p><strong>Backstory:</strong> Former street orphan who built an intelligence network</p>
-            <p><strong>Equipment Focus:</strong> Concealed weapons, thieves' tools, disguises</p>
-            <p><strong>Solo Adaptability:</strong> High stealth and social skills provide multiple problem-solving approaches</p>
-
-            <h4>Bramblethorne Ironforge - Dwarf Ranger (Animal Companion) - Level 2</h4>
-            <p><strong>Ancestry:</strong> Dwarf (Rock Dwarf Heritage)</p>
-            <p><strong>Background:</strong> Hunter</p>
-            <p><strong>Concept:</strong> Mountain guide with bear companion</p>
-            <p><strong>Key Features:</strong> Hunt prey, animal companion, survival expertise</p>
-            <p><strong>Analogy:</strong> Like a wilderness scout combined with K-9 unit - two-person team in one character</p>
-            <p><strong>Animal Companion:</strong> Bear provides combat support and emotional anchor</p>
-            <p><strong>Wilderness Mastery:</strong> Unparalleled in natural environments</p>
-
-            <h4>Zara Starweaver - Human Wizard (Unified Magical Theory, formerly universalist) - Level 5</h4>
-            <p><strong>Ancestry:</strong> Human (Skilled Heritage)</p>
-            <p><strong>Background:</strong> Scholar</p>
-            <p><strong>Concept:</strong> Traveling researcher cataloguing magical phenomena</p>
-            <p><strong>Key Features:</strong> Arcane spells, thesis flexibility, broad knowledge</p>
-            <p><strong>Unique Angle:</strong> Focuses on utility spells over pure damage</p>
-            <p><strong>Solo Utility:</strong> Magical solutions to complex problems, divination for guidance</p>
-
-            <h4>Kael Brightshield - Elf Magus (Starlit Span) - Level 1</h4>
-            <p><strong>Ancestry:</strong> Elf (Ancient Elf Heritage)</p>
-            <p><strong>Background:</strong> Warrior</p>
-            <p><strong>Concept:</strong> Arcane archer blending magic and marksmanship</p>
-            <p><strong>Key Features:</strong> Spellstrike with ranged weapons, arcane spells</p>
-            <p><strong>Combat Style:</strong> Combines precision attacks with spell effects</p>
-            <p><strong>Solo Effectiveness:</strong> Range provides safety, magic offers versatility</p>
+            <ul class="roster roster-solo">
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Seraphina Dawnbreaker</h4><p class="pc-role">Human Champion (Justice cause, formerly paladin)</p></div><span class="pc-level"><small>Level</small>3</span></header>
+                    <p class="pc-concept">Righteous knight-errant bringing justice to frontier settlements</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Human (Versatile Heritage)</dd></div><div><dt>Background</dt><dd>Acolyte</dd></div><div><dt>Key Features</dt><dd>Heavy armor, lay on hands, a blessed blade</dd></div><div><dt>Real-world Parallel</dt><dd>Like a frontier marshal or Texas Ranger - combining law enforcement with moral authority</dd></div><div><dt>Practical Usage</dt><dd>Ideal for campaigns involving undead, fiends, or moral corruption</dd></div><div><dt>Solo Strengths</dt><dd>Self-healing, high AC, social authority through divine mandate</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Whisper Nightshade</h4><p class="pc-role">Halfling Rogue (Mastermind)</p></div><span class="pc-level"><small>Level</small>4</span></header>
+                    <p class="pc-concept">Information broker operating in urban shadows</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Halfling (Twilight Halfling Heritage)</dd></div><div><dt>Background</dt><dd>Criminal</dd></div><div><dt>Key Features</dt><dd>Sneak attack, skill mastery, social manipulation</dd></div><div><dt>Backstory</dt><dd>Former street orphan who built an intelligence network</dd></div><div><dt>Equipment Focus</dt><dd>Concealed weapons, thieves' tools, disguises</dd></div><div><dt>Solo Adaptability</dt><dd>High stealth and social skills provide multiple problem-solving approaches</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Bramblethorne Ironforge</h4><p class="pc-role">Dwarf Ranger (Animal Companion)</p></div><span class="pc-level"><small>Level</small>2</span></header>
+                    <p class="pc-concept">Mountain guide with bear companion</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Dwarf (Rock Dwarf Heritage)</dd></div><div><dt>Background</dt><dd>Hunter</dd></div><div><dt>Key Features</dt><dd>Hunt prey, animal companion, survival expertise</dd></div><div><dt>Analogy</dt><dd>Like a wilderness scout combined with K-9 unit - two-person team in one character</dd></div><div><dt>Animal Companion</dt><dd>Bear provides combat support and emotional anchor</dd></div><div><dt>Wilderness Mastery</dt><dd>Unparalleled in natural environments</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Zara Starweaver</h4><p class="pc-role">Human Wizard (Unified Magical Theory, formerly universalist)</p></div><span class="pc-level"><small>Level</small>5</span></header>
+                    <p class="pc-concept">Traveling researcher cataloguing magical phenomena</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Human (Skilled Heritage)</dd></div><div><dt>Background</dt><dd>Scholar</dd></div><div><dt>Key Features</dt><dd>Arcane spells, thesis flexibility, broad knowledge</dd></div><div><dt>Unique Angle</dt><dd>Focuses on utility spells over pure damage</dd></div><div><dt>Solo Utility</dt><dd>Magical solutions to complex problems, divination for guidance</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Kael Brightshield</h4><p class="pc-role">Elf Magus (Starlit Span)</p></div><span class="pc-level"><small>Level</small>1</span></header>
+                    <p class="pc-concept">Arcane archer blending magic and marksmanship</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Elf (Ancient Elf Heritage)</dd></div><div><dt>Background</dt><dd>Warrior</dd></div><div><dt>Key Features</dt><dd>Spellstrike with ranged weapons, arcane spells</dd></div><div><dt>Combat Style</dt><dd>Combines precision attacks with spell effects</dd></div><div><dt>Solo Effectiveness</dt><dd>Range provides safety, magic offers versatility</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>Medium Level Solo Heroes (Levels 6-12)</h3>
 
-            <h4>Captain Theron Stormwright - Human Fighter (Archer) - Level 9</h4>
-            <p><strong>Ancestry:</strong> Human (Versatile Heritage)</p>
-            <p><strong>Background:</strong> Soldier</p>
-            <p><strong>Concept:</strong> Veteran military officer turned mercenary captain</p>
-            <p><strong>Advanced Features:</strong> Multiple combat feats, combat flexibility, tactical leadership</p>
-            <p><strong>Character Arc:</strong> Struggles with loyalty to country versus personal code</p>
-            <p><strong>Command Presence:</strong> Natural leader even when working alone</p>
-
-            <h4>Moonwhisper Shadowdancer - Catfolk Oracle (Lore) - Level 8</h4>
-            <p><strong>Ancestry:</strong> Catfolk (Flexible Catfolk Heritage)</p>
-            <p><strong>Background:</strong> Fortune Teller</p>
-            <p><strong>Concept:</strong> Mystical seer burdened with prophetic visions</p>
-            <p><strong>Mystery Focus:</strong> Lore mystery provides versatility and knowledge</p>
-            <p><strong>Curse Integration:</strong> Her oracular curse creates interesting roleplay challenges</p>
-            <p><strong>Divine Magic:</strong> Spontaneous casting adapts to changing situations</p>
-
-            <h4>Gareth Ironbane - Dwarf Barbarian (Giant Instinct) - Level 10</h4>
-            <p><strong>Ancestry:</strong> Dwarf (Forge Dwarf Heritage)</p>
-            <p><strong>Background:</strong> Miner</p>
-            <p><strong>Concept:</strong> Lone warrior seeking redemption for past failures</p>
-            <p><strong>Instinct Abilities:</strong> Giant instinct provides size and reach advantages</p>
-            <p><strong>Emotional Depth:</strong> Rage represents controlled response to trauma</p>
-            <p><strong>Solo Tactics:</strong> High damage and durability overcome action economy disadvantage</p>
-
-            <h4>Lyralei Dawnstrider - Elf Druid (Untamed Order, formerly wild order) - Level 7</h4>
-            <p><strong>Ancestry:</strong> Elf (Woodland Elf Heritage)</p>
-            <p><strong>Background:</strong> Hermit</p>
-            <p><strong>Concept:</strong> Shapeshifting guardian of ancient forest</p>
-            <p><strong>Untamed Form:</strong> Formerly Wild Shape; multiple forms provide tactical flexibility</p>
-            <p><strong>Nature Magic:</strong> Primal spells control battlefield and environment</p>
-            <p><strong>Animal Communication:</strong> Vast network of natural allies</p>
-
-            <h4>Valdris Shadowmend - Fetchling Witch (Starless Shadow Patron) - Level 12</h4>
-            <p><strong>Ancestry:</strong> Fetchling (Liminal Fetchling Heritage)</p>
-            <p><strong>Background:</strong> Occultist</p>
-            <p><strong>Concept:</strong> Planar researcher studying shadow magic</p>
-            <p><strong>Patron Relationship:</strong> Complex bargain with otherworldly entity</p>
-            <p><strong>Hex Focus:</strong> Debuffing and control effects</p>
-            <p><strong>Shadow Affinity:</strong> Natural connection to Shadow Plane</p>
+            <ul class="roster roster-solo">
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Captain Theron Stormwright</h4><p class="pc-role">Human Fighter (Archer)</p></div><span class="pc-level"><small>Level</small>9</span></header>
+                    <p class="pc-concept">Veteran military officer turned mercenary captain</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Human (Versatile Heritage)</dd></div><div><dt>Background</dt><dd>Soldier</dd></div><div><dt>Advanced Features</dt><dd>Multiple combat feats, combat flexibility, tactical leadership</dd></div><div><dt>Character Arc</dt><dd>Struggles with loyalty to country versus personal code</dd></div><div><dt>Command Presence</dt><dd>Natural leader even when working alone</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Moonwhisper Shadowdancer</h4><p class="pc-role">Catfolk Oracle (Lore)</p></div><span class="pc-level"><small>Level</small>8</span></header>
+                    <p class="pc-concept">Mystical seer burdened with prophetic visions</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Catfolk (Flexible Catfolk Heritage)</dd></div><div><dt>Background</dt><dd>Fortune Teller</dd></div><div><dt>Mystery Focus</dt><dd>Lore mystery provides versatility and knowledge</dd></div><div><dt>Curse Integration</dt><dd>Her oracular curse creates interesting roleplay challenges</dd></div><div><dt>Divine Magic</dt><dd>Spontaneous casting adapts to changing situations</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Gareth Ironbane</h4><p class="pc-role">Dwarf Barbarian (Giant Instinct)</p></div><span class="pc-level"><small>Level</small>10</span></header>
+                    <p class="pc-concept">Lone warrior seeking redemption for past failures</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Dwarf (Forge Dwarf Heritage)</dd></div><div><dt>Background</dt><dd>Miner</dd></div><div><dt>Instinct Abilities</dt><dd>Giant instinct provides size and reach advantages</dd></div><div><dt>Emotional Depth</dt><dd>Rage represents controlled response to trauma</dd></div><div><dt>Solo Tactics</dt><dd>High damage and durability overcome action economy disadvantage</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Lyralei Dawnstrider</h4><p class="pc-role">Elf Druid (Untamed Order, formerly wild order)</p></div><span class="pc-level"><small>Level</small>7</span></header>
+                    <p class="pc-concept">Shapeshifting guardian of ancient forest</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Elf (Woodland Elf Heritage)</dd></div><div><dt>Background</dt><dd>Hermit</dd></div><div><dt>Untamed Form</dt><dd>Formerly Wild Shape; multiple forms provide tactical flexibility</dd></div><div><dt>Nature Magic</dt><dd>Primal spells control battlefield and environment</dd></div><div><dt>Animal Communication</dt><dd>Vast network of natural allies</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Valdris Shadowmend</h4><p class="pc-role">Fetchling Witch (Starless Shadow Patron)</p></div><span class="pc-level"><small>Level</small>12</span></header>
+                    <p class="pc-concept">Planar researcher studying shadow magic</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Fetchling (Liminal Fetchling Heritage)</dd></div><div><dt>Background</dt><dd>Occultist</dd></div><div><dt>Patron Relationship</dt><dd>Complex bargain with otherworldly entity</dd></div><div><dt>Hex Focus</dt><dd>Debuffing and control effects</dd></div><div><dt>Shadow Affinity</dt><dd>Natural connection to Shadow Plane</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>High Level Solo Heroes (Levels 13-20)</h3>
 
-            <h4>Archmage Celestine Voidwalker - Human Wizard (Spell Blending) - Level 18</h4>
-            <p><strong>Ancestry:</strong> Human (Skilled Heritage)</p>
-            <p><strong>Background:</strong> Academy Dropout</p>
-            <p><strong>Concept:</strong> Legendary spellcaster who rewrote magical theory</p>
-            <p><strong>Epic Scope:</strong> Commands reality-altering magic, influences planar politics</p>
-            <p><strong>Intellectual Legacy:</strong> Magical innovations change how others practice wizardry</p>
-            <p><strong>Spellshape Mastery:</strong> Flexible spell preparation and spellshape (formerly metamagic) enhancement</p>
+            <ul class="roster roster-solo">
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Archmage Celestine Voidwalker</h4><p class="pc-role">Human Wizard (Spell Blending)</p></div><span class="pc-level"><small>Level</small>18</span></header>
+                    <p class="pc-concept">Legendary spellcaster who rewrote magical theory</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Human (Skilled Heritage)</dd></div><div><dt>Background</dt><dd>Academy Dropout</dd></div><div><dt>Epic Scope</dt><dd>Commands reality-altering magic, influences planar politics</dd></div><div><dt>Intellectual Legacy</dt><dd>Magical innovations change how others practice wizardry</dd></div><div><dt>Spellshape Mastery</dt><dd>Flexible spell preparation and spellshape (formerly metamagic) enhancement</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Saint Valorian the Redeemer</h4><p class="pc-role">Human (Nephilim) Champion (Redemption cause, formerly redeemer)</p></div><span class="pc-level"><small>Level</small>15</span></header>
+                    <p class="pc-concept">Divine champion seeking to redeem fallen souls</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Human with the nephilim versatile heritage (formerly aasimar)</dd></div><div><dt>Background</dt><dd>Missionary</dd></div><div><dt>Legendary Status</dt><dd>Worshipped as living saint in multiple regions</dd></div><div><dt>Redemption Focus</dt><dd>Converts enemies rather than destroying them</dd></div><div><dt>Divine Authority</dt><dd>Speaks with the voice of celestial powers</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>The Shadow That Walks</h4><p class="pc-role">Ratfolk Monk (Wolf Stance)</p></div><span class="pc-level"><small>Level</small>20</span></header>
+                    <p class="pc-concept">Legendary figure who transcended physical limitations</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Ratfolk (Shadow Rat Heritage)</dd></div><div><dt>Background</dt><dd>Street Urchin</dd></div><div><dt>Ultimate Power</dt><dd>Perfect mastery of shadow magic and martial arts</dd></div><div><dt>Mythic Journey</dt><dd>Rose from street orphan to legendary hero</dd></div><div><dt>Shadow Integration</dt><dd>Exists partially in Shadow Plane</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>Titansbane Worldshaker</h4><p class="pc-role">Jotunborn Barbarian (Giant Instinct)</p></div><span class="pc-level"><small>Level</small>17</span></header>
+                    <p class="pc-concept">Colossal warrior who challenges the gods themselves</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Jotunborn (giant-descended folk)</dd></div><div><dt>Background</dt><dd>Gladiator</dd></div><div><dt>Epic Combat</dt><dd>Faces armies single-handedly</dd></div><div><dt>Size Advantage</dt><dd>Giant instinct rages swell to Large, and later Huge, size</dd></div><div><dt>Divine Defiance</dt><dd>Refuses to bow to any authority</dd></div></dl>
+                </article></li>
+                <li><article class="pc-card">
+                    <header class="pc-head"><div><h4>The Chronicler of Eternity</h4><p class="pc-role">Android Oracle (Time)</p></div><span class="pc-level"><small>Level</small>14</span></header>
+                    <p class="pc-concept">Timeless being recording the history of ages</p>
+                    <dl class="pc-facts"><div><dt>Ancestry</dt><dd>Android (Artisan Android Heritage)</dd></div><div><dt>Background</dt><dd>Archaeologist</dd></div><div><dt>Temporal Powers</dt><dd>Manipulates time and prophecy</dd></div><div><dt>Endless Memory</dt><dd>Remembers events across multiple eras</dd></div><div><dt>Historical Perspective</dt><dd>Understands long-term consequences of actions</dd></div></dl>
+                </article></li>
+            </ul>
 
-            <h4>Saint Valorian the Redeemer - Human (Nephilim) Champion (Redemption cause, formerly redeemer) - Level 15</h4>
-            <p><strong>Ancestry:</strong> Human with the nephilim versatile heritage (formerly aasimar)</p>
-            <p><strong>Background:</strong> Missionary</p>
-            <p><strong>Concept:</strong> Divine champion seeking to redeem fallen souls</p>
-            <p><strong>Legendary Status:</strong> Worshipped as living saint in multiple regions</p>
-            <p><strong>Redemption Focus:</strong> Converts enemies rather than destroying them</p>
-            <p><strong>Divine Authority:</strong> Speaks with the voice of celestial powers</p>
-
-            <h4>The Shadow That Walks - Ratfolk Monk (Wolf Stance) - Level 20</h4>
-            <p><strong>Ancestry:</strong> Ratfolk (Shadow Rat Heritage)</p>
-            <p><strong>Background:</strong> Street Urchin</p>
-            <p><strong>Concept:</strong> Legendary figure who transcended physical limitations</p>
-            <p><strong>Ultimate Power:</strong> Perfect mastery of shadow magic and martial arts</p>
-            <p><strong>Mythic Journey:</strong> Rose from street orphan to legendary hero</p>
-            <p><strong>Shadow Integration:</strong> Exists partially in Shadow Plane</p>
-
-            <h4>Titansbane Worldshaker - Jotunborn Barbarian (Giant Instinct) - Level 17</h4>
-            <p><strong>Ancestry:</strong> Jotunborn (giant-descended folk)</p>
-            <p><strong>Background:</strong> Gladiator</p>
-            <p><strong>Concept:</strong> Colossal warrior who challenges the gods themselves</p>
-            <p><strong>Epic Combat:</strong> Faces armies single-handedly</p>
-            <p><strong>Size Advantage:</strong> Giant instinct rages swell to Large, and later Huge, size</p>
-            <p><strong>Divine Defiance:</strong> Refuses to bow to any authority</p>
-
-            <h4>The Chronicler of Eternity - Android Oracle (Time) - Level 14</h4>
-            <p><strong>Ancestry:</strong> Android (Artisan Android Heritage)</p>
-            <p><strong>Background:</strong> Archaeologist</p>
-            <p><strong>Concept:</strong> Timeless being recording the history of ages</p>
-            <p><strong>Temporal Powers:</strong> Manipulates time and prophecy</p>
-            <p><strong>Endless Memory:</strong> Remembers events across multiple eras</p>
-            <p><strong>Historical Perspective:</strong> Understands long-term consequences of actions</p>
         </section>
 
         <section id="duo-partnerships">
@@ -272,117 +270,94 @@
 
             <h3>Low Level Duos (Levels 1-5)</h3>
 
-            <h4>The Righteous Blade Partnership</h4>
-            <p><strong>Sir Marcus Goldenheart</strong> - Human Champion (Justice) - Level 4</p>
-            <p><strong>Aria Swiftarrow</strong> - Elf Ranger (Precision Edge) - Level 4</p>
-            <p><strong>Partnership Dynamic:</strong> Noble knight paired with elven scout</p>
-            <p><strong>Tactical Synergy:</strong> Marcus provides defense and healing while Aria handles ranged combat and tracking</p>
-            <p><strong>Real-world Example:</strong> Police partnership combining uniformed authority with detective skills</p>
-            <p><strong>Character Growth:</strong> Marcus learns subtlety, Aria learns honor</p>
-
-            <h4>The Arcane Investigations Duo</h4>
-            <p><strong>Professor Aldric Spellwright</strong> - Human Wizard (School of Mentalism) - Level 3</p>
-            <p><strong>Jinx Quickfingers</strong> - Halfling Rogue (Thief) - Level 3</p>
-            <p><strong>Partnership Dynamic:</strong> Academic researcher with street-smart accomplice</p>
-            <p><strong>Complementary Skills:</strong> Magical analysis combined with practical investigation</p>
-            <p><strong>Story Potential:</strong> Solving supernatural mysteries that baffle normal authorities</p>
-            <p><strong>Social Contrast:</strong> High society academic meets underground criminal</p>
-
-            <h4>The Healing Hands Partnership</h4>
-            <p><strong>Brother Matthias</strong> - Human Cleric (Healing Domain) - Level 2</p>
-            <p><strong>Sage Willowbark</strong> - Leshy Druid (Leaf Order) - Level 2</p>
-            <p><strong>Partnership Dynamic:</strong> Divine healer partnered with natural medicine practitioner</p>
-            <p><strong>Philosophical Tension:</strong> Organized religion versus natural spirituality</p>
-            <p><strong>Healing Synergy:</strong> Multiple approaches to restoration and cure</p>
-            <p><strong>Humanitarian Mission:</strong> Bringing medical aid to underserved communities</p>
-
-            <h4>The Shadow and Steel Duo</h4>
-            <p><strong>Kaelen Darkthorn</strong> - Human (Aiuvarin) Witch (Silence in Snow Patron) - Level 5</p>
-            <p><strong>Valdris Ironspine</strong> - Dwarf Fighter (Weapon Master) - Level 5</p>
-            <p><strong>Partnership Dynamic:</strong> Occult spellcaster protected by martial expert</p>
-            <p><strong>Contrast Theme:</strong> Mysterious magic user with straightforward warrior</p>
-            <p><strong>Tactical Balance:</strong> Hexes and curses supported by reliable combat</p>
-
-            <h4>The Traveling Entertainers</h4>
-            <p><strong>Melody Heartstring</strong> - Human (Aiuvarin) Bard (Maestro) - Level 1</p>
-            <p><strong>Tumble Brightlaughs</strong> - Gnome Swashbuckler (Wit) - Level 1</p>
-            <p><strong>Partnership Dynamic:</strong> Musical performer and acrobatic comedian</p>
-            <p><strong>Performance Focus:</strong> Earn money and gather information through entertainment</p>
-            <p><strong>Social Network:</strong> Connections across all social classes</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Righteous Blade Partnership</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 4</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Sir Marcus Goldenheart</span><span class="pm-role">Human Champion (Justice)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Aria Swiftarrow</span><span class="pm-role">Elf Ranger (Precision Edge)</span><span class="pm-level" aria-label="Level 4">4</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Partnership Dynamic</dt><dd>Noble knight paired with elven scout</dd></div><div><dt>Tactical Synergy</dt><dd>Marcus provides defense and healing while Aria handles ranged combat and tracking</dd></div><div><dt>Real-world Example</dt><dd>Police partnership combining uniformed authority with detective skills</dd></div><div><dt>Character Growth</dt><dd>Marcus learns subtlety, Aria learns honor</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Arcane Investigations Duo</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 3</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Professor Aldric Spellwright</span><span class="pm-role">Human Wizard (School of Mentalism)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Jinx Quickfingers</span><span class="pm-role">Halfling Rogue (Thief)</span><span class="pm-level" aria-label="Level 3">3</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Partnership Dynamic</dt><dd>Academic researcher with street-smart accomplice</dd></div><div><dt>Complementary Skills</dt><dd>Magical analysis combined with practical investigation</dd></div><div><dt>Story Potential</dt><dd>Solving supernatural mysteries that baffle normal authorities</dd></div><div><dt>Social Contrast</dt><dd>High society academic meets underground criminal</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Healing Hands Partnership</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 2</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Brother Matthias</span><span class="pm-role">Human Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Sage Willowbark</span><span class="pm-role">Leshy Druid (Leaf Order)</span><span class="pm-level" aria-label="Level 2">2</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Partnership Dynamic</dt><dd>Divine healer partnered with natural medicine practitioner</dd></div><div><dt>Philosophical Tension</dt><dd>Organized religion versus natural spirituality</dd></div><div><dt>Healing Synergy</dt><dd>Multiple approaches to restoration and cure</dd></div><div><dt>Humanitarian Mission</dt><dd>Bringing medical aid to underserved communities</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Shadow and Steel Duo</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 5</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Kaelen Darkthorn</span><span class="pm-role">Human (Aiuvarin) Witch (Silence in Snow Patron)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Valdris Ironspine</span><span class="pm-role">Dwarf Fighter (Weapon Master)</span><span class="pm-level" aria-label="Level 5">5</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Partnership Dynamic</dt><dd>Occult spellcaster protected by martial expert</dd></div><div><dt>Contrast Theme</dt><dd>Mysterious magic user with straightforward warrior</dd></div><div><dt>Tactical Balance</dt><dd>Hexes and curses supported by reliable combat</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Traveling Entertainers</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 1</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Melody Heartstring</span><span class="pm-role">Human (Aiuvarin) Bard (Maestro)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Tumble Brightlaughs</span><span class="pm-role">Gnome Swashbuckler (Wit)</span><span class="pm-level" aria-label="Level 1">1</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Partnership Dynamic</dt><dd>Musical performer and acrobatic comedian</dd></div><div><dt>Performance Focus</dt><dd>Earn money and gather information through entertainment</dd></div><div><dt>Social Network</dt><dd>Connections across all social classes</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>Medium Level Duos (Levels 6-12)</h3>
 
-            <h4>The Planar Investigators</h4>
-            <p><strong>Seeker Voidheart</strong> - Human (Nephilim, fiendish lineage) Summoner (Angel Eidolon) - Level 9</p>
-            <p><strong>Guardian Lightbringer</strong> - Human (Nephilim) Oracle (Cosmos) - Level 9</p>
-            <p><strong>Advanced Synergy:</strong> Fiendish heritage balanced by celestial connections</p>
-            <p><strong>Outsider Expertise:</strong> Specialists in extraplanar phenomena</p>
-            <p><strong>Redemption Theme:</strong> Proving that origin doesn't determine destiny</p>
-
-            <h4>The Elemental Wardens</h4>
-            <p><strong>Stormlord Zephyr</strong> - Human (Sylph) Sorcerer (Elemental Air) - Level 8</p>
-            <p><strong>Earthshaker Granite</strong> - Human (Oread) Monk (Mountain Stance) - Level 8</p>
-            <p><strong>Elemental Balance:</strong> Air and earth magic in harmony</p>
-            <p><strong>Philosophical Difference:</strong> Freedom versus stability</p>
-            <p><strong>Environmental Control:</strong> Shape weather and terrain</p>
-
-            <h4>The Knowledge Seekers</h4>
-            <p><strong>Loremaster Infinite</strong> - Android Investigator (Empiricism) - Level 11</p>
-            <p><strong>Chronicler Ancient</strong> - Elf Witch (Spinner of Threads Patron) - Level 11</p>
-            <p><strong>Information Network:</strong> Scientific method meets mystical insight</p>
-            <p><strong>Memory Palace:</strong> Perfect recall combined with dream prophecy</p>
-            <p><strong>Academic Rivalry:</strong> Competitive pursuit of ultimate knowledge</p>
-
-            <h4>The Wild Hunt Pair</h4>
-            <p><strong>Fangbane Hunter</strong> - Goblin Ranger (Monster Hunter) - Level 10</p>
-            <p><strong>Spiritcaller Bones</strong> - Fetchling Summoner (Fey Eidolon) - Level 10</p>
-            <p><strong>Monster Expertise:</strong> Hunting dangerous creatures and aberrations</p>
-            <p><strong>Reputation Building:</strong> Become legendary monster hunters</p>
-            <p><strong>Unlikely Partnership:</strong> Small goblin with otherworldly allies</p>
-
-            <h4>The Divine Mandate Duo</h4>
-            <p><strong>Voice of Heaven</strong> - Human (Nephilim) Champion (Liberation cause, formerly liberator) - Level 7</p>
-            <p><strong>Sword of Justice</strong> - Human Magus (Laughing Shadow) - Level 7</p>
-            <p><strong>Divine Mission:</strong> Serving higher powers through different methods</p>
-            <p><strong>Combat Style:</strong> Holy warrior and devout arcane spellsword</p>
-            <p><strong>Moral Clarity:</strong> Unwavering commitment to righteousness</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Planar Investigators</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 9</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Seeker Voidheart</span><span class="pm-role">Human (Nephilim, fiendish lineage) Summoner (Angel Eidolon)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Guardian Lightbringer</span><span class="pm-role">Human (Nephilim) Oracle (Cosmos)</span><span class="pm-level" aria-label="Level 9">9</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Advanced Synergy</dt><dd>Fiendish heritage balanced by celestial connections</dd></div><div><dt>Outsider Expertise</dt><dd>Specialists in extraplanar phenomena</dd></div><div><dt>Redemption Theme</dt><dd>Proving that origin doesn't determine destiny</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Elemental Wardens</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 8</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Stormlord Zephyr</span><span class="pm-role">Human (Sylph) Sorcerer (Elemental Air)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Earthshaker Granite</span><span class="pm-role">Human (Oread) Monk (Mountain Stance)</span><span class="pm-level" aria-label="Level 8">8</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Elemental Balance</dt><dd>Air and earth magic in harmony</dd></div><div><dt>Philosophical Difference</dt><dd>Freedom versus stability</dd></div><div><dt>Environmental Control</dt><dd>Shape weather and terrain</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Knowledge Seekers</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 11</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Loremaster Infinite</span><span class="pm-role">Android Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Chronicler Ancient</span><span class="pm-role">Elf Witch (Spinner of Threads Patron)</span><span class="pm-level" aria-label="Level 11">11</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Information Network</dt><dd>Scientific method meets mystical insight</dd></div><div><dt>Memory Palace</dt><dd>Perfect recall combined with dream prophecy</dd></div><div><dt>Academic Rivalry</dt><dd>Competitive pursuit of ultimate knowledge</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Wild Hunt Pair</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 10</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Fangbane Hunter</span><span class="pm-role">Goblin Ranger (Monster Hunter)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Spiritcaller Bones</span><span class="pm-role">Fetchling Summoner (Fey Eidolon)</span><span class="pm-level" aria-label="Level 10">10</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Monster Expertise</dt><dd>Hunting dangerous creatures and aberrations</dd></div><div><dt>Reputation Building</dt><dd>Become legendary monster hunters</dd></div><div><dt>Unlikely Partnership</dt><dd>Small goblin with otherworldly allies</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Divine Mandate Duo</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 7</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Voice of Heaven</span><span class="pm-role">Human (Nephilim) Champion (Liberation cause, formerly liberator)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Sword of Justice</span><span class="pm-role">Human Magus (Laughing Shadow)</span><span class="pm-level" aria-label="Level 7">7</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Divine Mission</dt><dd>Serving higher powers through different methods</dd></div><div><dt>Combat Style</dt><dd>Holy warrior and devout arcane spellsword</dd></div><div><dt>Moral Clarity</dt><dd>Unwavering commitment to righteousness</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>High Level Duos (Levels 13-20)</h3>
 
-            <h4>The Cosmic Balance</h4>
-            <p><strong>Infinity Starweaver</strong> - Human Wizard (Spell Blending) - Level 16</p>
-            <p><strong>Eternity Voidwalker</strong> - Elf Oracle (Cosmos) - Level 16</p>
-            <p><strong>Legendary Status:</strong> Their partnership maintains balance between order and chaos</p>
-            <p><strong>Reality Manipulation:</strong> Combined power reshapes fundamental laws</p>
-            <p><strong>Cosmic Responsibility:</strong> Guardians of universal stability</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Cosmic Balance</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 16</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Infinity Starweaver</span><span class="pm-role">Human Wizard (Spell Blending)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Eternity Voidwalker</span><span class="pm-role">Elf Oracle (Cosmos)</span><span class="pm-level" aria-label="Level 16">16</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Legendary Status</dt><dd>Their partnership maintains balance between order and chaos</dd></div><div><dt>Reality Manipulation</dt><dd>Combined power reshapes fundamental laws</dd></div><div><dt>Cosmic Responsibility</dt><dd>Guardians of universal stability</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Planar Sovereigns</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 19</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">The Archfey's Voice</span><span class="pm-role">Gnome Summoner (Fey Eidolon)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">The Dragon's Heart</span><span class="pm-role">Kobold Sorcerer (Draconic)</span><span class="pm-level" aria-label="Level 19">19</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Planar Politics</dt><dd>Representatives of major extraplanar powers</dd></div><div><dt>Epic Influence</dt><dd>Decisions affect entire planes of existence</dd></div><div><dt>Power Brokering</dt><dd>Negotiate treaties between gods and mortals</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Time Guardians</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 14</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Temporal Anchor</span><span class="pm-role">Dwarf Fighter (Champion Dedication)</span><span class="pm-level" aria-label="Level 14">14</span></li><li><span class="pm-name">Paradox Resolver</span><span class="pm-role">Android Oracle (Time)</span><span class="pm-level" aria-label="Level 14">14</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Timeline Protection</dt><dd>Prevent temporal paradoxes and alterations</dd></div><div><dt>Stability Focus</dt><dd>Maintain causal consistency across timelines</dd></div><div><dt>Temporal Authority</dt><dd>Judge crimes against causality itself</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Ascended Masters</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 20</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">The Perfect Warrior</span><span class="pm-role">Tengu Monk (Dragon Stance)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">The Enlightened Sage</span><span class="pm-role">Kitsune Sorcerer (Imperial)</span><span class="pm-level" aria-label="Level 20">20</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Transcendent Beings</dt><dd>Achieved perfect mastery of their disciplines</dd></div><div><dt>Teaching Role</dt><dd>Guide others toward enlightenment</dd></div><div><dt>Philosophical Unity</dt><dd>Perfect harmony between body and mind</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The World Shapers</h4><p class="pc-role">Party of 2</p></div><span class="pc-level pc-level-wide">Level 18</span></header>
+                    <ul class="party-members pm-2"><li><span class="pm-name">Genesis</span><span class="pm-role">Leshy Druid (Untamed Order)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Exodus</span><span class="pm-role">Ghoran Witch (Wilding Steward Patron)</span><span class="pm-level" aria-label="Level 18">18</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Evolutionary Power</dt><dd>Guide the development of life itself</dd></div><div><dt>Planetary Influence</dt><dd>Reshape entire ecosystems</dd></div><div><dt>Life's Advocates</dt><dd>Protect and nurture all living things</dd></div></dl>
+                </article></li>
+            </ul>
 
-            <h4>The Planar Sovereigns</h4>
-            <p><strong>The Archfey's Voice</strong> - Gnome Summoner (Fey Eidolon) - Level 19</p>
-            <p><strong>The Dragon's Heart</strong> - Kobold Sorcerer (Draconic) - Level 19</p>
-            <p><strong>Planar Politics:</strong> Representatives of major extraplanar powers</p>
-            <p><strong>Epic Influence:</strong> Decisions affect entire planes of existence</p>
-            <p><strong>Power Brokering:</strong> Negotiate treaties between gods and mortals</p>
-
-            <h4>The Time Guardians</h4>
-            <p><strong>Temporal Anchor</strong> - Dwarf Fighter (Champion Dedication) - Level 14</p>
-            <p><strong>Paradox Resolver</strong> - Android Oracle (Time) - Level 14</p>
-            <p><strong>Timeline Protection:</strong> Prevent temporal paradoxes and alterations</p>
-            <p><strong>Stability Focus:</strong> Maintain causal consistency across timelines</p>
-            <p><strong>Temporal Authority:</strong> Judge crimes against causality itself</p>
-
-            <h4>The Ascended Masters</h4>
-            <p><strong>The Perfect Warrior</strong> - Tengu Monk (Dragon Stance) - Level 20</p>
-            <p><strong>The Enlightened Sage</strong> - Kitsune Sorcerer (Imperial) - Level 20</p>
-            <p><strong>Transcendent Beings:</strong> Achieved perfect mastery of their disciplines</p>
-            <p><strong>Teaching Role:</strong> Guide others toward enlightenment</p>
-            <p><strong>Philosophical Unity:</strong> Perfect harmony between body and mind</p>
-
-            <h4>The World Shapers</h4>
-            <p><strong>Genesis</strong> - Leshy Druid (Untamed Order) - Level 18</p>
-            <p><strong>Exodus</strong> - Ghoran Witch (Wilding Steward Patron) - Level 18</p>
-            <p><strong>Evolutionary Power:</strong> Guide the development of life itself</p>
-            <p><strong>Planetary Influence:</strong> Reshape entire ecosystems</p>
-            <p><strong>Life's Advocates:</strong> Protect and nurture all living things</p>
         </section>
 
         <section id="trio-parties">
@@ -391,144 +366,94 @@
 
             <h3>Low Level Trios (Levels 1-5)</h3>
 
-            <h4>The Frontier Justice League</h4>
-            <p><strong>Sheriff Steelheart</strong> - Human Champion (Justice) - Level 4</p>
-            <p><strong>Deputy Quickdraw</strong> - Halfling Gunslinger (Pistolero) - Level 4</p>
-            <p><strong>Judge Wiseheart</strong> - Dwarf Cleric (Truth Domain) - Level 4</p>
-            <p><strong>Group Dynamic:</strong> Law enforcement team bringing order to lawless frontier</p>
-            <p><strong>Western Theme:</strong> Fantasy version of classic frontier lawmen</p>
-            <p><strong>Justice Focus:</strong> Balance mercy with necessary force</p>
-            <p><strong>Community Service:</strong> Protect settlers and build civilization</p>
-
-            <h4>The Arcane Academy Graduates</h4>
-            <p><strong>Valedictorian Brightmind</strong> - Human Wizard (Unified Magical Theory) - Level 3</p>
-            <p><strong>Council President Charmheart</strong> - Human (Aiuvarin) Bard (Enigma) - Level 3</p>
-            <p><strong>Star Athlete Strongarm</strong> - Orc Fighter (Weapon Master) - Level 3</p>
-            <p><strong>Group Dynamic:</strong> Recent graduates applying academic knowledge to real world</p>
-            <p><strong>School Pride:</strong> Represent their institution's reputation</p>
-            <p><strong>Learning Curve:</strong> Theory meets practice in dangerous situations</p>
-            <p><strong>Diverse Backgrounds:</strong> Different social classes united by education</p>
-
-            <h4>The Monster Hunting Company</h4>
-            <p><strong>Tracker Keeneye</strong> - Elf Ranger (Monster Hunter) - Level 2</p>
-            <p><strong>Slayer Ironwill</strong> - Dwarf Barbarian (Animal Instinct - Bear) - Level 2</p>
-            <p><strong>Scholar Deepthought</strong> - Gnome Investigator (Empiricism) - Level 2</p>
-            <p><strong>Group Dynamic:</strong> Professional monster hunters with complementary expertise</p>
-            <p><strong>Hunt Structure:</strong> Track, identify, eliminate dangerous creatures</p>
-            <p><strong>Knowledge Base:</strong> Combine practical experience with academic research</p>
-            <p><strong>Risk Management:</strong> Balance danger with profit and public service</p>
-
-            <h4>The Traveling Circus</h4>
-            <p><strong>Ringmaster Spectacular</strong> - Human Bard (Maestro) - Level 5</p>
-            <p><strong>Acrobat Graceful</strong> - Catfolk Monk (Tiger Stance) - Level 5</p>
-            <p><strong>Magician Mysterious</strong> - Gnome Sorcerer (Aberrant) - Level 5</p>
-            <p><strong>Group Dynamic:</strong> Entertainment troupe with hidden depths</p>
-            <p><strong>Performance Art:</strong> Each adventure becomes part of their show</p>
-            <p><strong>Social Network:</strong> Connections across all social levels</p>
-            <p><strong>Secret Agenda:</strong> Use performances to gather information</p>
-
-            <h4>The Temple Guardians</h4>
-            <p><strong>High Priest Devoted</strong> - Human (Nephilim) Cleric (Healing Domain) - Level 1</p>
-            <p><strong>Temple Guard Stalwart</strong> - Human Fighter (Shield Specialist) - Level 1</p>
-            <p><strong>Shrine Keeper Wise</strong> - Halfling Oracle (Life) - Level 1</p>
-            <p><strong>Group Dynamic:</strong> Religious order protecting sacred sites</p>
-            <p><strong>Divine Mission:</strong> Serve their deity through action and prayer</p>
-            <p><strong>Community Role:</strong> Provide spiritual guidance and practical aid</p>
-            <p><strong>Sacred Duty:</strong> Protect religious artifacts and holy places</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Frontier Justice League</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 4</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Sheriff Steelheart</span><span class="pm-role">Human Champion (Justice)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Deputy Quickdraw</span><span class="pm-role">Halfling Gunslinger (Pistolero)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Judge Wiseheart</span><span class="pm-role">Dwarf Cleric (Truth Domain)</span><span class="pm-level" aria-label="Level 4">4</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Law enforcement team bringing order to lawless frontier</dd></div><div><dt>Western Theme</dt><dd>Fantasy version of classic frontier lawmen</dd></div><div><dt>Justice Focus</dt><dd>Balance mercy with necessary force</dd></div><div><dt>Community Service</dt><dd>Protect settlers and build civilization</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Arcane Academy Graduates</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 3</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Valedictorian Brightmind</span><span class="pm-role">Human Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Council President Charmheart</span><span class="pm-role">Human (Aiuvarin) Bard (Enigma)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Star Athlete Strongarm</span><span class="pm-role">Orc Fighter (Weapon Master)</span><span class="pm-level" aria-label="Level 3">3</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Recent graduates applying academic knowledge to real world</dd></div><div><dt>School Pride</dt><dd>Represent their institution's reputation</dd></div><div><dt>Learning Curve</dt><dd>Theory meets practice in dangerous situations</dd></div><div><dt>Diverse Backgrounds</dt><dd>Different social classes united by education</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Monster Hunting Company</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 2</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Tracker Keeneye</span><span class="pm-role">Elf Ranger (Monster Hunter)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Slayer Ironwill</span><span class="pm-role">Dwarf Barbarian (Animal Instinct - Bear)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Scholar Deepthought</span><span class="pm-role">Gnome Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 2">2</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Professional monster hunters with complementary expertise</dd></div><div><dt>Hunt Structure</dt><dd>Track, identify, eliminate dangerous creatures</dd></div><div><dt>Knowledge Base</dt><dd>Combine practical experience with academic research</dd></div><div><dt>Risk Management</dt><dd>Balance danger with profit and public service</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Traveling Circus</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 5</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Ringmaster Spectacular</span><span class="pm-role">Human Bard (Maestro)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Acrobat Graceful</span><span class="pm-role">Catfolk Monk (Tiger Stance)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Magician Mysterious</span><span class="pm-role">Gnome Sorcerer (Aberrant)</span><span class="pm-level" aria-label="Level 5">5</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Entertainment troupe with hidden depths</dd></div><div><dt>Performance Art</dt><dd>Each adventure becomes part of their show</dd></div><div><dt>Social Network</dt><dd>Connections across all social levels</dd></div><div><dt>Secret Agenda</dt><dd>Use performances to gather information</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Temple Guardians</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 1</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">High Priest Devoted</span><span class="pm-role">Human (Nephilim) Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Temple Guard Stalwart</span><span class="pm-role">Human Fighter (Shield Specialist)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Shrine Keeper Wise</span><span class="pm-role">Halfling Oracle (Life)</span><span class="pm-level" aria-label="Level 1">1</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Religious order protecting sacred sites</dd></div><div><dt>Divine Mission</dt><dd>Serve their deity through action and prayer</dd></div><div><dt>Community Role</dt><dd>Provide spiritual guidance and practical aid</dd></div><div><dt>Sacred Duty</dt><dd>Protect religious artifacts and holy places</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>Medium Level Trios (Levels 6-12)</h3>
 
-            <h4>The Planar Expeditionary Force</h4>
-            <p><strong>Portal Commander</strong> - Human (Nephilim) Summoner (Demon Eidolon) - Level 9</p>
-            <p><strong>Dimensional Scout</strong> - Fetchling Rogue (Eldritch Trickster) - Level 9</p>
-            <p><strong>Planar Analyst</strong> - Human Wizard (School of the Boundary) - Level 9</p>
-            <p><strong>Group Dynamic:</strong> Elite team exploring dangerous alternate dimensions</p>
-            <p><strong>Expertise Areas:</strong> Summoning, stealth, and magical theory</p>
-            <p><strong>Unique Challenges:</strong> Navigate politics of extraplanar entities</p>
-            <p><strong>Epic Scope:</strong> Discoveries affect multiple planes of existence</p>
-
-            <h4>The Elemental Triumvirate</h4>
-            <p><strong>Stormcaller Tempest</strong> - Human (Sylph) Druid (Storm Order) - Level 11</p>
-            <p><strong>Flamekeeper Phoenix</strong> - Human (Naari, formerly ifrit) Oracle (Flames) - Level 11</p>
-            <p><strong>Tideshaper Current</strong> - Human (Undine) Sorcerer (Elemental Water) - Level 11</p>
-            <p><strong>Group Dynamic:</strong> Masters of elemental forces working in harmony</p>
-            <p><strong>Environmental Control:</strong> Shape weather and terrain on massive scales</p>
-            <p><strong>Elemental Philosophy:</strong> Each represents different aspects of natural power</p>
-            <p><strong>Cosmic Balance:</strong> Maintain equilibrium between elemental forces</p>
-
-            <h4>The Shadow Cabinet</h4>
-            <p><strong>Spymaster Veil</strong> - Human (Aiuvarin) Rogue (Mastermind) - Level 8</p>
-            <p><strong>Assassin Whisper</strong> - Catfolk Monk (Stumbling Stance) - Level 8</p>
-            <p><strong>Infiltrator Mask</strong> - Human (Changeling) Investigator (Interrogation) - Level 8</p>
-            <p><strong>Group Dynamic:</strong> Elite intelligence operatives serving crown or cause</p>
-            <p><strong>Information Warfare:</strong> Gather secrets and eliminate threats</p>
-            <p><strong>Deep Cover:</strong> Maintain false identities for years</p>
-            <p><strong>Moral Ambiguity:</strong> Serve greater good through questionable means</p>
-
-            <h4>The Divine Intervention Squad</h4>
-            <p><strong>War Priest Valor</strong> - Human Cleric (Warpriest, Champion Dedication) - Level 10</p>
-            <p><strong>Battle Oracle</strong> - Dwarf Oracle (Battle) - Level 10</p>
-            <p><strong>Holy Warrior</strong> - Human (Nephilim) Magus (Starlit Span) - Level 10</p>
-            <p><strong>Group Dynamic:</strong> Divine champions handling supernatural threats</p>
-            <p><strong>Religious Authority:</strong> Speak with voice of their deities</p>
-            <p><strong>Supernatural Expertise:</strong> Combat undead, fiends, and aberrations</p>
-            <p><strong>Moral Clarity:</strong> Unwavering dedication to their faiths</p>
-
-            <h4>The Arcane Research Division</h4>
-            <p><strong>Department Head</strong> - Elf Wizard (Spell Blending) - Level 7</p>
-            <p><strong>Field Researcher</strong> - Human Witch (The Inscribed One Patron) - Level 7</p>
-            <p><strong>Laboratory Assistant</strong> - Goblin Alchemist (Chirurgeon) - Level 7</p>
-            <p><strong>Group Dynamic:</strong> Academic team pushing boundaries of magical knowledge</p>
-            <p><strong>Research Focus:</strong> Discover new spells and magical theories</p>
-            <p><strong>Institutional Politics:</strong> Navigate university bureaucracy and funding</p>
-            <p><strong>Ethical Questions:</strong> Balance knowledge pursuit with responsible application</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Planar Expeditionary Force</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 9</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Portal Commander</span><span class="pm-role">Human (Nephilim) Summoner (Demon Eidolon)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Dimensional Scout</span><span class="pm-role">Fetchling Rogue (Eldritch Trickster)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Planar Analyst</span><span class="pm-role">Human Wizard (School of the Boundary)</span><span class="pm-level" aria-label="Level 9">9</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Elite team exploring dangerous alternate dimensions</dd></div><div><dt>Expertise Areas</dt><dd>Summoning, stealth, and magical theory</dd></div><div><dt>Unique Challenges</dt><dd>Navigate politics of extraplanar entities</dd></div><div><dt>Epic Scope</dt><dd>Discoveries affect multiple planes of existence</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Elemental Triumvirate</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 11</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Stormcaller Tempest</span><span class="pm-role">Human (Sylph) Druid (Storm Order)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Flamekeeper Phoenix</span><span class="pm-role">Human (Naari, formerly ifrit) Oracle (Flames)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Tideshaper Current</span><span class="pm-role">Human (Undine) Sorcerer (Elemental Water)</span><span class="pm-level" aria-label="Level 11">11</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Masters of elemental forces working in harmony</dd></div><div><dt>Environmental Control</dt><dd>Shape weather and terrain on massive scales</dd></div><div><dt>Elemental Philosophy</dt><dd>Each represents different aspects of natural power</dd></div><div><dt>Cosmic Balance</dt><dd>Maintain equilibrium between elemental forces</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Shadow Cabinet</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 8</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Spymaster Veil</span><span class="pm-role">Human (Aiuvarin) Rogue (Mastermind)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Assassin Whisper</span><span class="pm-role">Catfolk Monk (Stumbling Stance)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Infiltrator Mask</span><span class="pm-role">Human (Changeling) Investigator (Interrogation)</span><span class="pm-level" aria-label="Level 8">8</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Elite intelligence operatives serving crown or cause</dd></div><div><dt>Information Warfare</dt><dd>Gather secrets and eliminate threats</dd></div><div><dt>Deep Cover</dt><dd>Maintain false identities for years</dd></div><div><dt>Moral Ambiguity</dt><dd>Serve greater good through questionable means</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Divine Intervention Squad</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 10</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">War Priest Valor</span><span class="pm-role">Human Cleric (Warpriest, Champion Dedication)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Battle Oracle</span><span class="pm-role">Dwarf Oracle (Battle)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Holy Warrior</span><span class="pm-role">Human (Nephilim) Magus (Starlit Span)</span><span class="pm-level" aria-label="Level 10">10</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Divine champions handling supernatural threats</dd></div><div><dt>Religious Authority</dt><dd>Speak with voice of their deities</dd></div><div><dt>Supernatural Expertise</dt><dd>Combat undead, fiends, and aberrations</dd></div><div><dt>Moral Clarity</dt><dd>Unwavering dedication to their faiths</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Arcane Research Division</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 7</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Department Head</span><span class="pm-role">Elf Wizard (Spell Blending)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Field Researcher</span><span class="pm-role">Human Witch (The Inscribed One Patron)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Laboratory Assistant</span><span class="pm-role">Goblin Alchemist (Chirurgeon)</span><span class="pm-level" aria-label="Level 7">7</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Academic team pushing boundaries of magical knowledge</dd></div><div><dt>Research Focus</dt><dd>Discover new spells and magical theories</dd></div><div><dt>Institutional Politics</dt><dd>Navigate university bureaucracy and funding</dd></div><div><dt>Ethical Questions</dt><dd>Balance knowledge pursuit with responsible application</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>High Level Trios (Levels 13-20)</h3>
 
-            <h4>The Cosmic Triumvirate</h4>
-            <p><strong>Mind</strong> - Android Psychic (Conscious Mind: The Distant Grasp) - Level 17</p>
-            <p><strong>Body</strong> - Orc Barbarian (Giant Instinct) - Level 17</p>
-            <p><strong>Soul</strong> - Human (Nephilim) Oracle (Cosmos) - Level 17</p>
-            <p><strong>Group Dynamic:</strong> Perfect balance of mental, physical, and spiritual power</p>
-            <p><strong>Philosophical Unity:</strong> Represent different aspects of existence</p>
-            <p><strong>Cosmic Authority:</strong> Guardians of universal balance</p>
-            <p><strong>Transcendent Purpose:</strong> Guide evolution of consciousness itself</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Cosmic Triumvirate</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 17</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Mind</span><span class="pm-role">Android Psychic (Conscious Mind: The Distant Grasp)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Body</span><span class="pm-role">Orc Barbarian (Giant Instinct)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Soul</span><span class="pm-role">Human (Nephilim) Oracle (Cosmos)</span><span class="pm-level" aria-label="Level 17">17</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Perfect balance of mental, physical, and spiritual power</dd></div><div><dt>Philosophical Unity</dt><dd>Represent different aspects of existence</dd></div><div><dt>Cosmic Authority</dt><dd>Guardians of universal balance</dd></div><div><dt>Transcendent Purpose</dt><dd>Guide evolution of consciousness itself</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Reality Architects</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 20</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Creator</span><span class="pm-role">Human Wizard (School of Ars Grammatica)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Preserver</span><span class="pm-role">Elf Druid (Leaf Order)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Destroyer</span><span class="pm-role">Human (Dhampir) Witch (The Resentment Patron)</span><span class="pm-level" aria-label="Level 20">20</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Forces of creation, preservation, and destruction in balance</dd></div><div><dt>Universal Scope</dt><dd>Shape fundamental laws of reality</dd></div><div><dt>Eternal Cycle</dt><dd>Maintain balance between growth and decay</dd></div><div><dt>Divine Responsibility</dt><dd>Answer only to cosmic principles</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Temporal Tribunal</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 19</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Judge</span><span class="pm-role">Shisk Champion (Liberation)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Prosecutor</span><span class="pm-role">Tengu Investigator (Interrogation)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Defender</span><span class="pm-role">Ratfolk Bard (Polymath)</span><span class="pm-level" aria-label="Level 19">19</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Court system for crimes against time itself</dd></div><div><dt>Temporal Authority</dt><dd>Judge violations of causality</dd></div><div><dt>Timeline Protection</dt><dd>Maintain stability across all realities</dd></div><div><dt>Justice Paradigm</dt><dd>Apply law to unprecedented situations</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Infinite Library</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 16</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Head Librarian</span><span class="pm-role">Leshy Witch (The Inscribed One Patron)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Chief Archivist</span><span class="pm-role">Automaton Investigator (Forensic Medicine)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Master Cataloger</span><span class="pm-role">Anadi Oracle (Lore)</span><span class="pm-level" aria-label="Level 16">16</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Keepers of all knowledge across all realities</dd></div><div><dt>Information Mastery</dt><dd>Access to any fact that has ever existed</dd></div><div><dt>Knowledge Guardians</dt><dd>Protect dangerous information from misuse</dd></div><div><dt>Educational Mission</dt><dd>Guide seekers toward enlightenment</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Final Protocol</h4><p class="pc-role">Party of 3</p></div><span class="pc-level pc-level-wide">Level 14</span></header>
+                    <ul class="party-members pm-3"><li><span class="pm-name">Alpha</span><span class="pm-role">Human Fighter (Champion Dedication)</span><span class="pm-level" aria-label="Level 14">14</span></li><li><span class="pm-name">Omega</span><span class="pm-role">Android Wizard (Spell Substitution)</span><span class="pm-level" aria-label="Level 14">14</span></li><li><span class="pm-name">Epsilon</span><span class="pm-role">Azarketi Oracle (Tempest)</span><span class="pm-level" aria-label="Level 14">14</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Group Dynamic</dt><dd>Last resort team for existential threats</dd></div><div><dt>Ultimate Authority</dt><dd>Authorized to use any means necessary</dd></div><div><dt>Sacrifice Doctrine</dt><dd>Will give everything to preserve reality</dd></div><div><dt>Legend Status</dt><dd>Known only to highest authorities</dd></div></dl>
+                </article></li>
+            </ul>
 
-            <h4>The Reality Architects</h4>
-            <p><strong>Creator</strong> - Human Wizard (School of Ars Grammatica) - Level 20</p>
-            <p><strong>Preserver</strong> - Elf Druid (Leaf Order) - Level 20</p>
-            <p><strong>Destroyer</strong> - Human (Dhampir) Witch (The Resentment Patron) - Level 20</p>
-            <p><strong>Group Dynamic:</strong> Forces of creation, preservation, and destruction in balance</p>
-            <p><strong>Universal Scope:</strong> Shape fundamental laws of reality</p>
-            <p><strong>Eternal Cycle:</strong> Maintain balance between growth and decay</p>
-            <p><strong>Divine Responsibility:</strong> Answer only to cosmic principles</p>
-
-            <h4>The Temporal Tribunal</h4>
-            <p><strong>Judge</strong> - Shisk Champion (Liberation) - Level 19</p>
-            <p><strong>Prosecutor</strong> - Tengu Investigator (Interrogation) - Level 19</p>
-            <p><strong>Defender</strong> - Ratfolk Bard (Polymath) - Level 19</p>
-            <p><strong>Group Dynamic:</strong> Court system for crimes against time itself</p>
-            <p><strong>Temporal Authority:</strong> Judge violations of causality</p>
-            <p><strong>Timeline Protection:</strong> Maintain stability across all realities</p>
-            <p><strong>Justice Paradigm:</strong> Apply law to unprecedented situations</p>
-
-            <h4>The Infinite Library</h4>
-            <p><strong>Head Librarian</strong> - Leshy Witch (The Inscribed One Patron) - Level 16</p>
-            <p><strong>Chief Archivist</strong> - Automaton Investigator (Forensic Medicine) - Level 16</p>
-            <p><strong>Master Cataloger</strong> - Anadi Oracle (Lore) - Level 16</p>
-            <p><strong>Group Dynamic:</strong> Keepers of all knowledge across all realities</p>
-            <p><strong>Information Mastery:</strong> Access to any fact that has ever existed</p>
-            <p><strong>Knowledge Guardians:</strong> Protect dangerous information from misuse</p>
-            <p><strong>Educational Mission:</strong> Guide seekers toward enlightenment</p>
-
-            <h4>The Final Protocol</h4>
-            <p><strong>Alpha</strong> - Human Fighter (Champion Dedication) - Level 14</p>
-            <p><strong>Omega</strong> - Android Wizard (Spell Substitution) - Level 14</p>
-            <p><strong>Epsilon</strong> - Azarketi Oracle (Tempest) - Level 14</p>
-            <p><strong>Group Dynamic:</strong> Last resort team for existential threats</p>
-            <p><strong>Ultimate Authority:</strong> Authorized to use any means necessary</p>
-            <p><strong>Sacrifice Doctrine:</strong> Will give everything to preserve reality</p>
-            <p><strong>Legend Status:</strong> Known only to highest authorities</p>
         </section>
 
         <section id="quartet-groups">
@@ -537,159 +462,94 @@
 
             <h3>Low Level Quartets (Levels 1-5)</h3>
 
-            <h4>The Rookie Adventuring Company</h4>
-            <p><strong>Tank</strong> - Human Champion (Justice) - Level 4</p>
-            <p><strong>Striker</strong> - Elf Ranger (Flurry Edge) - Level 4</p>
-            <p><strong>Support</strong> - Halfling Cleric (Healing Domain) - Level 4</p>
-            <p><strong>Utility</strong> - Gnome Wizard (School of Civic Wizardry) - Level 4</p>
-            <p><strong>Company Structure:</strong> Newly formed adventuring group learning to work together</p>
-            <p><strong>Role Distribution:</strong> Classic tank/DPS/healer/caster setup</p>
-            <p><strong>Growth Focus:</strong> Develop from individual heroes into cohesive team</p>
-            <p><strong>Real-world Parallel:</strong> Like a startup company - enthusiastic but inexperienced</p>
-
-            <h4>The Royal Academy Elite Squad</h4>
-            <p><strong>Squad Leader</strong> - Human Fighter (Weapon Master) - Level 3</p>
-            <p><strong>Spell Specialist</strong> - Elf Sorcerer (Imperial Bloodline) - Level 3</p>
-            <p><strong>Field Medic</strong> - Dwarf Cleric (Healing Domain) - Level 3</p>
-            <p><strong>Scout</strong> - Halfling Rogue (Thief) - Level 3</p>
-            <p><strong>Military Academy:</strong> Elite graduates on their first major mission</p>
-            <p><strong>Discipline Focus:</strong> Military training emphasizes teamwork and tactics</p>
-            <p><strong>Institutional Pride:</strong> Represent their academy's reputation</p>
-            <p><strong>Leadership Development:</strong> Rotate command roles to build versatile officers</p>
-
-            <h4>The Caravan Protection Agency</h4>
-            <p><strong>Caravan Master</strong> - Human Ranger (Outwit) - Level 5</p>
-            <p><strong>Guard Captain</strong> - Dwarf Fighter (Dual-Weapon Warrior) - Level 5</p>
-            <p><strong>Trail Guide</strong> - Elf Druid (Animal Order) - Level 5</p>
-            <p><strong>Merchant Liaison</strong> - Halfling Bard (Maestro) - Level 5</p>
-            <p><strong>Commercial Focus:</strong> Protect valuable cargo across dangerous territories</p>
-            <p><strong>Survival Expertise:</strong> Specialists in wilderness travel and bandit defense</p>
-            <p><strong>Economic Stakes:</strong> Success affects trade routes and regional prosperity</p>
-            <p><strong>Reputation Building:</strong> Word of mouth drives future business</p>
-
-            <h4>The Temple Investigation Unit</h4>
-            <p><strong>Investigator</strong> - Human Investigator (Empiricism) - Level 2</p>
-            <p><strong>Enforcer</strong> - Dwarf Champion (Justice) - Level 2</p>
-            <p><strong>Scholar</strong> - Elf Wizard (Unified Magical Theory) - Level 2</p>
-            <p><strong>Counselor</strong> - Halfling Oracle (Life) - Level 2</p>
-            <p><strong>Religious Authority:</strong> Investigate crimes against faith and morality</p>
-            <p><strong>Divine Mandate:</strong> Answer to higher powers than secular law</p>
-            <p><strong>Moral Complexity:</strong> Balance justice with mercy and redemption</p>
-            <p><strong>Community Trust:</strong> Must maintain public faith in religious institutions</p>
-
-            <h4>The Frontier Settlement Council</h4>
-            <p><strong>Sheriff</strong> - Human Fighter (Shield Specialist) - Level 1</p>
-            <p><strong>Doctor</strong> - Halfling Cleric (Healing Domain) - Level 1</p>
-            <p><strong>Teacher</strong> - Gnome Bard (Polymath) - Level 1</p>
-            <p><strong>Builder</strong> - Dwarf Inventor (Armor Innovation) - Level 1</p>
-            <p><strong>Community Leaders:</strong> Essential professions in frontier settlement</p>
-            <p><strong>Civic Duty:</strong> Build civilization in wilderness</p>
-            <p><strong>Mutual Dependence:</strong> Each role supports community survival</p>
-            <p><strong>Growth Together:</strong> Town and heroes develop simultaneously</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Rookie Adventuring Company</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 4</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Tank</span><span class="pm-role">Human Champion (Justice)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Striker</span><span class="pm-role">Elf Ranger (Flurry Edge)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Support</span><span class="pm-role">Halfling Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Utility</span><span class="pm-role">Gnome Wizard (School of Civic Wizardry)</span><span class="pm-level" aria-label="Level 4">4</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Company Structure</dt><dd>Newly formed adventuring group learning to work together</dd></div><div><dt>Role Distribution</dt><dd>Classic tank/DPS/healer/caster setup</dd></div><div><dt>Growth Focus</dt><dd>Develop from individual heroes into cohesive team</dd></div><div><dt>Real-world Parallel</dt><dd>Like a startup company - enthusiastic but inexperienced</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Royal Academy Elite Squad</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 3</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Squad Leader</span><span class="pm-role">Human Fighter (Weapon Master)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Spell Specialist</span><span class="pm-role">Elf Sorcerer (Imperial Bloodline)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Field Medic</span><span class="pm-role">Dwarf Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Scout</span><span class="pm-role">Halfling Rogue (Thief)</span><span class="pm-level" aria-label="Level 3">3</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Military Academy</dt><dd>Elite graduates on their first major mission</dd></div><div><dt>Discipline Focus</dt><dd>Military training emphasizes teamwork and tactics</dd></div><div><dt>Institutional Pride</dt><dd>Represent their academy's reputation</dd></div><div><dt>Leadership Development</dt><dd>Rotate command roles to build versatile officers</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Caravan Protection Agency</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 5</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Caravan Master</span><span class="pm-role">Human Ranger (Outwit)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Guard Captain</span><span class="pm-role">Dwarf Fighter (Dual-Weapon Warrior)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Trail Guide</span><span class="pm-role">Elf Druid (Animal Order)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Merchant Liaison</span><span class="pm-role">Halfling Bard (Maestro)</span><span class="pm-level" aria-label="Level 5">5</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Commercial Focus</dt><dd>Protect valuable cargo across dangerous territories</dd></div><div><dt>Survival Expertise</dt><dd>Specialists in wilderness travel and bandit defense</dd></div><div><dt>Economic Stakes</dt><dd>Success affects trade routes and regional prosperity</dd></div><div><dt>Reputation Building</dt><dd>Word of mouth drives future business</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Temple Investigation Unit</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 2</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Investigator</span><span class="pm-role">Human Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Enforcer</span><span class="pm-role">Dwarf Champion (Justice)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Scholar</span><span class="pm-role">Elf Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Counselor</span><span class="pm-role">Halfling Oracle (Life)</span><span class="pm-level" aria-label="Level 2">2</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Religious Authority</dt><dd>Investigate crimes against faith and morality</dd></div><div><dt>Divine Mandate</dt><dd>Answer to higher powers than secular law</dd></div><div><dt>Moral Complexity</dt><dd>Balance justice with mercy and redemption</dd></div><div><dt>Community Trust</dt><dd>Must maintain public faith in religious institutions</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Frontier Settlement Council</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 1</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Sheriff</span><span class="pm-role">Human Fighter (Shield Specialist)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Doctor</span><span class="pm-role">Halfling Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Teacher</span><span class="pm-role">Gnome Bard (Polymath)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Builder</span><span class="pm-role">Dwarf Inventor (Armor Innovation)</span><span class="pm-level" aria-label="Level 1">1</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Community Leaders</dt><dd>Essential professions in frontier settlement</dd></div><div><dt>Civic Duty</dt><dd>Build civilization in wilderness</dd></div><div><dt>Mutual Dependence</dt><dd>Each role supports community survival</dd></div><div><dt>Growth Together</dt><dd>Town and heroes develop simultaneously</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>Medium Level Quartets (Levels 6-12)</h3>
 
-            <h4>The Royal Inquisition</h4>
-            <p><strong>High Inquisitor</strong> - Human Investigator (Interrogation) - Level 10</p>
-            <p><strong>Divine Champion</strong> - Human (Nephilim) Champion (Justice) - Level 10</p>
-            <p><strong>Court Wizard</strong> - Elf Wizard (Spell Blending) - Level 10</p>
-            <p><strong>Master Spy</strong> - Halfling Rogue (Mastermind) - Level 10</p>
-            <p><strong>Royal Authority:</strong> Direct representatives of crown authority</p>
-            <p><strong>Investigation Focus:</strong> Root out corruption and conspiracy</p>
-            <p><strong>Political Intrigue:</strong> Navigate court politics while serving justice</p>
-            <p><strong>Moral Dilemmas:</strong> Balance loyalty to crown with personal ethics</p>
-
-            <h4>The Elemental Wardens Circle</h4>
-            <p><strong>Earth Warden</strong> - Human (Oread) Monk (Mountain Stance) - Level 8</p>
-            <p><strong>Fire Keeper</strong> - Human (Naari) Sorcerer (Elemental Fire) - Level 8</p>
-            <p><strong>Water Speaker</strong> - Human (Undine) Druid (Wave Order) - Level 8</p>
-            <p><strong>Wind Dancer</strong> - Human (Sylph) Oracle (Tempest) - Level 8</p>
-            <p><strong>Elemental Balance:</strong> Maintain harmony between primal forces</p>
-            <p><strong>Environmental Protection:</strong> Prevent elemental disasters</p>
-            <p><strong>Planar Connections:</strong> Relationships with elemental planes</p>
-            <p><strong>Natural Authority:</strong> Recognized by elemental creatures</p>
-
-            <h4>The Arcane Enforcement Division</h4>
-            <p><strong>Division Chief</strong> - Human Magus (Twisting Tree) - Level 11</p>
-            <p><strong>Battle Mage</strong> - Elf Wizard (School of Battle Magic) - Level 11</p>
-            <p><strong>Arcane Detective</strong> - Gnome Investigator (Alchemical Sciences) - Level 11</p>
-            <p><strong>Spell Specialist</strong> - Human (Aiuvarin) Witch (The Inscribed One Patron) - Level 11</p>
-            <p><strong>Magical Law Enforcement:</strong> Police magical crimes and violations</p>
-            <p><strong>Specialized Training:</strong> Combat rogue spellcasters and magical threats</p>
-            <p><strong>Regulatory Authority:</strong> Enforce laws governing magical practice</p>
-            <p><strong>Public Safety:</strong> Protect civilians from magical dangers</p>
-
-            <h4>The Monster Hunting Guild</h4>
-            <p><strong>Guild Master</strong> - Human Ranger (Monster Hunter) - Level 9</p>
-            <p><strong>Veteran Slayer</strong> - Dwarf Barbarian (Giant Instinct) - Level 9</p>
-            <p><strong>Guild Scholar</strong> - Elf Investigator (Empiricism) - Level 9</p>
-            <p><strong>Field Medic</strong> - Halfling Oracle (Life) - Level 9</p>
-            <p><strong>Professional Monster Hunters:</strong> Elite team taking contracts on dangerous creatures</p>
-            <p><strong>Reputation System:</strong> Success builds fame and attracts better contracts</p>
-            <p><strong>Knowledge Base:</strong> Extensive research on monster behavior and weaknesses</p>
-            <p><strong>Public Service:</strong> Protect communities from supernatural threats</p>
-
-            <h4>The Diplomatic Corps</h4>
-            <p><strong>Chief Ambassador</strong> - Human Bard (Polymath) - Level 7</p>
-            <p><strong>Cultural Attaché</strong> - Elf Oracle (Lore) - Level 7</p>
-            <p><strong>Security Detail</strong> - Dwarf Champion (Liberation) - Level 7</p>
-            <p><strong>Intelligence Analyst</strong> - Gnome Investigator (Interrogation) - Level 7</p>
-            <p><strong>International Relations:</strong> Navigate complex political situations</p>
-            <p><strong>Cultural Bridge:</strong> Facilitate understanding between different peoples</p>
-            <p><strong>Peaceful Solutions:</strong> Prevent wars through skilled negotiation</p>
-            <p><strong>Information Gathering:</strong> Monitor foreign threats and opportunities</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Royal Inquisition</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 10</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">High Inquisitor</span><span class="pm-role">Human Investigator (Interrogation)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Divine Champion</span><span class="pm-role">Human (Nephilim) Champion (Justice)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Court Wizard</span><span class="pm-role">Elf Wizard (Spell Blending)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Master Spy</span><span class="pm-role">Halfling Rogue (Mastermind)</span><span class="pm-level" aria-label="Level 10">10</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Royal Authority</dt><dd>Direct representatives of crown authority</dd></div><div><dt>Investigation Focus</dt><dd>Root out corruption and conspiracy</dd></div><div><dt>Political Intrigue</dt><dd>Navigate court politics while serving justice</dd></div><div><dt>Moral Dilemmas</dt><dd>Balance loyalty to crown with personal ethics</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Elemental Wardens Circle</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 8</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Earth Warden</span><span class="pm-role">Human (Oread) Monk (Mountain Stance)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Fire Keeper</span><span class="pm-role">Human (Naari) Sorcerer (Elemental Fire)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Water Speaker</span><span class="pm-role">Human (Undine) Druid (Wave Order)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Wind Dancer</span><span class="pm-role">Human (Sylph) Oracle (Tempest)</span><span class="pm-level" aria-label="Level 8">8</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Elemental Balance</dt><dd>Maintain harmony between primal forces</dd></div><div><dt>Environmental Protection</dt><dd>Prevent elemental disasters</dd></div><div><dt>Planar Connections</dt><dd>Relationships with elemental planes</dd></div><div><dt>Natural Authority</dt><dd>Recognized by elemental creatures</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Arcane Enforcement Division</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 11</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Division Chief</span><span class="pm-role">Human Magus (Twisting Tree)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Battle Mage</span><span class="pm-role">Elf Wizard (School of Battle Magic)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Arcane Detective</span><span class="pm-role">Gnome Investigator (Alchemical Sciences)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Spell Specialist</span><span class="pm-role">Human (Aiuvarin) Witch (The Inscribed One Patron)</span><span class="pm-level" aria-label="Level 11">11</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Magical Law Enforcement</dt><dd>Police magical crimes and violations</dd></div><div><dt>Specialized Training</dt><dd>Combat rogue spellcasters and magical threats</dd></div><div><dt>Regulatory Authority</dt><dd>Enforce laws governing magical practice</dd></div><div><dt>Public Safety</dt><dd>Protect civilians from magical dangers</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Monster Hunting Guild</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 9</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Guild Master</span><span class="pm-role">Human Ranger (Monster Hunter)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Veteran Slayer</span><span class="pm-role">Dwarf Barbarian (Giant Instinct)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Guild Scholar</span><span class="pm-role">Elf Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Field Medic</span><span class="pm-role">Halfling Oracle (Life)</span><span class="pm-level" aria-label="Level 9">9</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Professional Monster Hunters</dt><dd>Elite team taking contracts on dangerous creatures</dd></div><div><dt>Reputation System</dt><dd>Success builds fame and attracts better contracts</dd></div><div><dt>Knowledge Base</dt><dd>Extensive research on monster behavior and weaknesses</dd></div><div><dt>Public Service</dt><dd>Protect communities from supernatural threats</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Diplomatic Corps</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 7</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Chief Ambassador</span><span class="pm-role">Human Bard (Polymath)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Cultural Attaché</span><span class="pm-role">Elf Oracle (Lore)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Security Detail</span><span class="pm-role">Dwarf Champion (Liberation)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Intelligence Analyst</span><span class="pm-role">Gnome Investigator (Interrogation)</span><span class="pm-level" aria-label="Level 7">7</span></li></ul>
+                    <dl class="pc-facts"><div><dt>International Relations</dt><dd>Navigate complex political situations</dd></div><div><dt>Cultural Bridge</dt><dd>Facilitate understanding between different peoples</dd></div><div><dt>Peaceful Solutions</dt><dd>Prevent wars through skilled negotiation</dd></div><div><dt>Information Gathering</dt><dd>Monitor foreign threats and opportunities</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>High Level Quartets (Levels 13-20)</h3>
 
-            <h4>The Planar Council</h4>
-            <p><strong>Prime Material Representative</strong> - Human Wizard (Unified Magical Theory) - Level 18</p>
-            <p><strong>Vitality Speaker</strong> - Human (Nephilim) Oracle (Life) - Level 18</p>
-            <p><strong>Void Voice</strong> - Human (Dhampir) Sorcerer (Undead Bloodline) - Level 18</p>
-            <p><strong>Elemental Mediator</strong> - Human (Suli) Summoner (Elemental Eidolon) - Level 18</p>
-            <p><strong>Cosmic Responsibility:</strong> Govern relationships between planes</p>
-            <p><strong>Universal Authority:</strong> Recognized by extraplanar powers</p>
-            <p><strong>Reality Maintenance:</strong> Prevent planar catastrophes</p>
-            <p><strong>Diplomatic Immunity:</strong> Safe passage across all planes</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Planar Council</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 18</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Prime Material Representative</span><span class="pm-role">Human Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Vitality Speaker</span><span class="pm-role">Human (Nephilim) Oracle (Life)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Void Voice</span><span class="pm-role">Human (Dhampir) Sorcerer (Undead Bloodline)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Elemental Mediator</span><span class="pm-role">Human (Suli) Summoner (Elemental Eidolon)</span><span class="pm-level" aria-label="Level 18">18</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Cosmic Responsibility</dt><dd>Govern relationships between planes</dd></div><div><dt>Universal Authority</dt><dd>Recognized by extraplanar powers</dd></div><div><dt>Reality Maintenance</dt><dd>Prevent planar catastrophes</dd></div><div><dt>Diplomatic Immunity</dt><dd>Safe passage across all planes</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Reality Guard</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 20</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Stability Anchor</span><span class="pm-role">Dwarf Fighter (Sentinel Dedication)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Chaos Controller</span><span class="pm-role">Gnome Sorcerer (Aberrant)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Order Keeper</span><span class="pm-role">Android Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Balance Maintainer</span><span class="pm-role">Human Oracle (Cosmos)</span><span class="pm-level" aria-label="Level 20">20</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Existential Defense</dt><dd>Protect reality from fundamental threats</dd></div><div><dt>Universal Authority</dt><dd>Override normal laws when necessary</dd></div><div><dt>Sacrifice Doctrine</dt><dd>Will destroy themselves to save existence</dd></div><div><dt>Legendary Status</dt><dd>Known across multiple realities</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Ascension Protocol</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 19</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Transcendent Warrior</span><span class="pm-role">Human (Nephilim) Champion (Grandeur cause)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Perfect Mage</span><span class="pm-role">Elf Wizard (Staff Nexus)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Eternal Scholar</span><span class="pm-role">Human Oracle (Lore)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Divine Voice</span><span class="pm-role">Halfling Bard (Maestro)</span><span class="pm-level" aria-label="Level 19">19</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Divine Ascension</dt><dd>Candidates for godhood</dd></div><div><dt>Portfolio Development</dt><dd>Each represents different aspects of divinity</dd></div><div><dt>Worship Following</dt><dd>Mortals already venerate them</dd></div><div><dt>Cosmic Trial</dt><dd>Must prove worthiness for divine power</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Time Enforcement Agency</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 16</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Chronarch Prime</span><span class="pm-role">Human Fighter (Duelist Dedication)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Timeline Analyst</span><span class="pm-role">Android Investigator (Forensic Medicine)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Paradox Resolver</span><span class="pm-role">Elf Wizard (School of the Boundary)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Causal Enforcer</span><span class="pm-role">Halfling Oracle (Time)</span><span class="pm-level" aria-label="Level 16">16</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Temporal Authority</dt><dd>Police crimes against causality</dd></div><div><dt>Timeline Protection</dt><dd>Maintain stability across all timelines</dd></div><div><dt>Paradox Prevention</dt><dd>Stop changes that could unravel existence</dd></div><div><dt>Multiverse Jurisdiction</dt><dd>Operate across infinite realities</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Cosmic Synthesis</h4><p class="pc-role">Party of 4</p></div><span class="pc-level pc-level-wide">Level 14</span></header>
+                    <ul class="party-members pm-4"><li><span class="pm-name">Matter</span><span class="pm-role">Human (Oread) Monk (Mountain Stance)</span><span class="pm-level" aria-label="Level 14">14</span></li><li><span class="pm-name">Energy</span><span class="pm-role">Human (Naari) Sorcerer (Elemental Bloodline)</span><span class="pm-level" aria-label="Level 14">14</span></li><li><span class="pm-name">Information</span><span class="pm-role">Android Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 14">14</span></li><li><span class="pm-name">Consciousness</span><span class="pm-role">Human Oracle (Cosmos)</span><span class="pm-level" aria-label="Level 14">14</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Universal Forces</dt><dd>Embody fundamental aspects of existence</dd></div><div><dt>Perfect Balance</dt><dd>Maintain equilibrium between cosmic forces</dd></div><div><dt>Reality Integration</dt><dd>Bridge material and spiritual realms</dd></div><div><dt>Evolutionary Guide</dt><dd>Help others achieve cosmic understanding</dd></div></dl>
+                </article></li>
+            </ul>
 
-            <h4>The Reality Guard</h4>
-            <p><strong>Stability Anchor</strong> - Dwarf Fighter (Sentinel Dedication) - Level 20</p>
-            <p><strong>Chaos Controller</strong> - Gnome Sorcerer (Aberrant) - Level 20</p>
-            <p><strong>Order Keeper</strong> - Android Investigator (Empiricism) - Level 20</p>
-            <p><strong>Balance Maintainer</strong> - Human Oracle (Cosmos) - Level 20</p>
-            <p><strong>Existential Defense:</strong> Protect reality from fundamental threats</p>
-            <p><strong>Universal Authority:</strong> Override normal laws when necessary</p>
-            <p><strong>Sacrifice Doctrine:</strong> Will destroy themselves to save existence</p>
-            <p><strong>Legendary Status:</strong> Known across multiple realities</p>
-
-            <h4>The Ascension Protocol</h4>
-            <p><strong>Transcendent Warrior</strong> - Human (Nephilim) Champion (Grandeur cause) - Level 19</p>
-            <p><strong>Perfect Mage</strong> - Elf Wizard (Staff Nexus) - Level 19</p>
-            <p><strong>Eternal Scholar</strong> - Human Oracle (Lore) - Level 19</p>
-            <p><strong>Divine Voice</strong> - Halfling Bard (Maestro) - Level 19</p>
-            <p><strong>Divine Ascension:</strong> Candidates for godhood</p>
-            <p><strong>Portfolio Development:</strong> Each represents different aspects of divinity</p>
-            <p><strong>Worship Following:</strong> Mortals already venerate them</p>
-            <p><strong>Cosmic Trial:</strong> Must prove worthiness for divine power</p>
-
-            <h4>The Time Enforcement Agency</h4>
-            <p><strong>Chronarch Prime</strong> - Human Fighter (Duelist Dedication) - Level 16</p>
-            <p><strong>Timeline Analyst</strong> - Android Investigator (Forensic Medicine) - Level 16</p>
-            <p><strong>Paradox Resolver</strong> - Elf Wizard (School of the Boundary) - Level 16</p>
-            <p><strong>Causal Enforcer</strong> - Halfling Oracle (Time) - Level 16</p>
-            <p><strong>Temporal Authority:</strong> Police crimes against causality</p>
-            <p><strong>Timeline Protection:</strong> Maintain stability across all timelines</p>
-            <p><strong>Paradox Prevention:</strong> Stop changes that could unravel existence</p>
-            <p><strong>Multiverse Jurisdiction:</strong> Operate across infinite realities</p>
-
-            <h4>The Cosmic Synthesis</h4>
-            <p><strong>Matter</strong> - Human (Oread) Monk (Mountain Stance) - Level 14</p>
-            <p><strong>Energy</strong> - Human (Naari) Sorcerer (Elemental Bloodline) - Level 14</p>
-            <p><strong>Information</strong> - Android Investigator (Empiricism) - Level 14</p>
-            <p><strong>Consciousness</strong> - Human Oracle (Cosmos) - Level 14</p>
-            <p><strong>Universal Forces:</strong> Embody fundamental aspects of existence</p>
-            <p><strong>Perfect Balance:</strong> Maintain equilibrium between cosmic forces</p>
-            <p><strong>Reality Integration:</strong> Bridge material and spiritual realms</p>
-            <p><strong>Evolutionary Guide:</strong> Help others achieve cosmic understanding</p>
         </section>
 
         <section id="quintet-companies">
@@ -698,174 +558,94 @@
 
             <h3>Low Level Quintets (Levels 1-5)</h3>
 
-            <h4>The Royal Military Academy Honor Guard</h4>
-            <p><strong>Company Commander</strong> - Human Fighter (Weapon Master) - Level 4</p>
-            <p><strong>Heavy Infantry</strong> - Dwarf Champion (Justice) - Level 4</p>
-            <p><strong>Reconnaissance</strong> - Elf Ranger (Precision Edge) - Level 4</p>
-            <p><strong>Combat Medic</strong> - Halfling Cleric (Healing Domain) - Level 4</p>
-            <p><strong>Battle Mage</strong> - Gnome Wizard (School of Battle Magic) - Level 4</p>
-            <p><strong>Military Structure:</strong> Elite graduates serving as royal ceremonial guard</p>
-            <p><strong>Combined Arms:</strong> Each member represents different military specialization</p>
-            <p><strong>Honor Code:</strong> Bound by military tradition and personal integrity</p>
-            <p><strong>Real-world Parallel:</strong> Like elite military honor guards or special forces units</p>
-
-            <h4>The Pathfinder Society Lodge</h4>
-            <p><strong>Venture-Captain</strong> - Human Investigator (Empiricism) - Level 3</p>
-            <p><strong>Combat Specialist</strong> - Human (Dromaar) Barbarian (Animal Instinct) - Level 3</p>
-            <p><strong>Arcane Researcher</strong> - Elf Wizard (Unified Magical Theory) - Level 3</p>
-            <p><strong>Divine Scholar</strong> - Human (Nephilim) Oracle (Lore) - Level 3</p>
-            <p><strong>Field Agent</strong> - Halfling Rogue (Thief) - Level 3</p>
-            <p><strong>Exploration Focus:</strong> Discover ancient sites and catalog historical artifacts</p>
-            <p><strong>Knowledge Network:</strong> Share discoveries with global organization</p>
-            <p><strong>Academic Mission:</strong> Advance understanding of world's history and magic</p>
-            <p><strong>Adventure Variety:</strong> Missions range from archaeology to monster hunting</p>
-
-            <h4>The Mercenary Company "Silver Hawks"</h4>
-            <p><strong>Captain</strong> - Human Ranger (Monster Hunter) - Level 5</p>
-            <p><strong>Lieutenant</strong> - Dwarf Fighter (Dual-Weapon Warrior) - Level 5</p>
-            <p><strong>Sergeant</strong> - Human (Aiuvarin) Rogue (Mastermind) - Level 5</p>
-            <p><strong>Corporal</strong> - Halfling Cleric (Might Domain) - Level 5</p>
-            <p><strong>Specialist</strong> - Gnome Sorcerer (Elemental Air) - Level 5</p>
-            <p><strong>Professional Military:</strong> Experienced soldiers for hire</p>
-            <p><strong>Reputation System:</strong> Success builds fame and attracts better contracts</p>
-            <p><strong>Military Efficiency:</strong> Clear hierarchy and defined roles</p>
-            <p><strong>Economic Focus:</strong> Balance profit with professional ethics</p>
-
-            <h4>The Artisan Collective</h4>
-            <p><strong>Guild Master</strong> - Human Inventor (Weapon Innovation) - Level 2</p>
-            <p><strong>Mastersmith</strong> - Dwarf Fighter (Weapon Master) - Level 2</p>
-            <p><strong>Enchanter</strong> - Elf Wizard (School of Mentalism) - Level 2</p>
-            <p><strong>Appraiser</strong> - Halfling Investigator (Empiricism) - Level 2</p>
-            <p><strong>Negotiator</strong> - Human (Aiuvarin) Bard (Maestro) - Level 2</p>
-            <p><strong>Craft Focus:</strong> Create exceptional weapons, armor, and magical items</p>
-            <p><strong>Economic Network:</strong> Trade relationships across multiple cities</p>
-            <p><strong>Innovation Drive:</strong> Develop new techniques and magical applications</p>
-            <p><strong>Quality Reputation:</strong> Known for superior craftsmanship</p>
-
-            <h4>The Frontier Medical Corps</h4>
-            <p><strong>Chief Physician</strong> - Human Cleric (Healing Domain) - Level 1</p>
-            <p><strong>Field Surgeon</strong> - Elf Oracle (Life) - Level 1</p>
-            <p><strong>Medic</strong> - Halfling Investigator (Forensic Medicine) - Level 1</p>
-            <p><strong>Guard</strong> - Dwarf Fighter (Shield Specialist) - Level 1</p>
-            <p><strong>Counselor</strong> - Gnome Bard (Maestro) - Level 1</p>
-            <p><strong>Humanitarian Mission:</strong> Provide medical care to underserved frontier communities</p>
-            <p><strong>Medical Specialization:</strong> Each member handles different aspects of healthcare</p>
-            <p><strong>Mobile Clinic:</strong> Travel to bring care where it's needed most</p>
-            <p><strong>Life-Saving Focus:</strong> Clear moral purpose drives character development</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Royal Military Academy Honor Guard</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 4</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Company Commander</span><span class="pm-role">Human Fighter (Weapon Master)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Heavy Infantry</span><span class="pm-role">Dwarf Champion (Justice)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Reconnaissance</span><span class="pm-role">Elf Ranger (Precision Edge)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Combat Medic</span><span class="pm-role">Halfling Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Battle Mage</span><span class="pm-role">Gnome Wizard (School of Battle Magic)</span><span class="pm-level" aria-label="Level 4">4</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Military Structure</dt><dd>Elite graduates serving as royal ceremonial guard</dd></div><div><dt>Combined Arms</dt><dd>Each member represents different military specialization</dd></div><div><dt>Honor Code</dt><dd>Bound by military tradition and personal integrity</dd></div><div><dt>Real-world Parallel</dt><dd>Like elite military honor guards or special forces units</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Pathfinder Society Lodge</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 3</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Venture-Captain</span><span class="pm-role">Human Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Combat Specialist</span><span class="pm-role">Human (Dromaar) Barbarian (Animal Instinct)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Arcane Researcher</span><span class="pm-role">Elf Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Divine Scholar</span><span class="pm-role">Human (Nephilim) Oracle (Lore)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Field Agent</span><span class="pm-role">Halfling Rogue (Thief)</span><span class="pm-level" aria-label="Level 3">3</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Exploration Focus</dt><dd>Discover ancient sites and catalog historical artifacts</dd></div><div><dt>Knowledge Network</dt><dd>Share discoveries with global organization</dd></div><div><dt>Academic Mission</dt><dd>Advance understanding of world's history and magic</dd></div><div><dt>Adventure Variety</dt><dd>Missions range from archaeology to monster hunting</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Mercenary Company "Silver Hawks"</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 5</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Captain</span><span class="pm-role">Human Ranger (Monster Hunter)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Lieutenant</span><span class="pm-role">Dwarf Fighter (Dual-Weapon Warrior)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Sergeant</span><span class="pm-role">Human (Aiuvarin) Rogue (Mastermind)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Corporal</span><span class="pm-role">Halfling Cleric (Might Domain)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Specialist</span><span class="pm-role">Gnome Sorcerer (Elemental Air)</span><span class="pm-level" aria-label="Level 5">5</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Professional Military</dt><dd>Experienced soldiers for hire</dd></div><div><dt>Reputation System</dt><dd>Success builds fame and attracts better contracts</dd></div><div><dt>Military Efficiency</dt><dd>Clear hierarchy and defined roles</dd></div><div><dt>Economic Focus</dt><dd>Balance profit with professional ethics</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Artisan Collective</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 2</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Guild Master</span><span class="pm-role">Human Inventor (Weapon Innovation)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Mastersmith</span><span class="pm-role">Dwarf Fighter (Weapon Master)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Enchanter</span><span class="pm-role">Elf Wizard (School of Mentalism)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Appraiser</span><span class="pm-role">Halfling Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Negotiator</span><span class="pm-role">Human (Aiuvarin) Bard (Maestro)</span><span class="pm-level" aria-label="Level 2">2</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Craft Focus</dt><dd>Create exceptional weapons, armor, and magical items</dd></div><div><dt>Economic Network</dt><dd>Trade relationships across multiple cities</dd></div><div><dt>Innovation Drive</dt><dd>Develop new techniques and magical applications</dd></div><div><dt>Quality Reputation</dt><dd>Known for superior craftsmanship</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Frontier Medical Corps</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 1</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Chief Physician</span><span class="pm-role">Human Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Field Surgeon</span><span class="pm-role">Elf Oracle (Life)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Medic</span><span class="pm-role">Halfling Investigator (Forensic Medicine)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Guard</span><span class="pm-role">Dwarf Fighter (Shield Specialist)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Counselor</span><span class="pm-role">Gnome Bard (Maestro)</span><span class="pm-level" aria-label="Level 1">1</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Humanitarian Mission</dt><dd>Provide medical care to underserved frontier communities</dd></div><div><dt>Medical Specialization</dt><dd>Each member handles different aspects of healthcare</dd></div><div><dt>Mobile Clinic</dt><dd>Travel to bring care where it's needed most</dd></div><div><dt>Life-Saving Focus</dt><dd>Clear moral purpose drives character development</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>Medium Level Quintets (Levels 6-12)</h3>
 
-            <h4>The Royal Inquisition Special Division</h4>
-            <p><strong>Grand Inquisitor</strong> - Human Investigator (Interrogation) - Level 10</p>
-            <p><strong>Divine Champion</strong> - Human (Nephilim) Champion (Justice) - Level 10</p>
-            <p><strong>Court Wizard</strong> - Elf Wizard (School of Mentalism) - Level 10</p>
-            <p><strong>Master Spy</strong> - Halfling Rogue (Mastermind) - Level 10</p>
-            <p><strong>Truthseeker</strong> - Dwarf Oracle (Ancestors) - Level 10</p>
-            <p><strong>Royal Authority:</strong> Direct mandate from crown to root out corruption</p>
-            <p><strong>Investigation Network:</strong> Extensive contacts and information sources</p>
-            <p><strong>Moral Complexity:</strong> Balance justice with political necessities</p>
-            <p><strong>High Stakes:</strong> Decisions affect kingdom's stability</p>
-
-            <h4>The Elemental Conclave</h4>
-            <p><strong>Prime Elementalist</strong> - Human Kineticist (Dual Gate: Air and Fire) - Level 8</p>
-            <p><strong>Earth Warden</strong> - Human (Oread) Monk (Mountain Stance) - Level 8</p>
-            <p><strong>Fire Keeper</strong> - Human (Naari) Sorcerer (Elemental Fire) - Level 8</p>
-            <p><strong>Water Speaker</strong> - Human (Undine) Druid (Wave Order) - Level 8</p>
-            <p><strong>Wind Dancer</strong> - Human (Sylph) Oracle (Tempest) - Level 8</p>
-            <p><strong>Elemental Mastery:</strong> Unprecedented control over primal forces</p>
-            <p><strong>Environmental Authority:</strong> Shape weather and terrain on regional scales</p>
-            <p><strong>Planar Diplomacy:</strong> Negotiate with elemental plane powers</p>
-            <p><strong>Balance Maintenance:</strong> Prevent elemental catastrophes</p>
-
-            <h4>The Arcanum Enforcement Bureau</h4>
-            <p><strong>Bureau Chief</strong> - Human Magus (Laughing Shadow) - Level 11</p>
-            <p><strong>Senior Agent</strong> - Elf Wizard (Unified Magical Theory) - Level 11</p>
-            <p><strong>Detective</strong> - Gnome Investigator (Alchemical Sciences) - Level 11</p>
-            <p><strong>Specialist</strong> - Human (Aiuvarin) Witch (The Inscribed One Patron) - Level 11</p>
-            <p><strong>Analyst</strong> - Halfling Oracle (Lore) - Level 11</p>
-            <p><strong>Magical Law Enforcement:</strong> Police illegal magical activities</p>
-            <p><strong>Specialized Training:</strong> Counter rogue spellcasters and magical threats</p>
-            <p><strong>Regulatory Power:</strong> Enforce laws governing magical practice</p>
-            <p><strong>Public Protection:</strong> Shield civilians from magical dangers</p>
-
-            <h4>The Monster Research Institute</h4>
-            <p><strong>Chief Researcher</strong> - Human Ranger (Monster Hunter) - Level 9</p>
-            <p><strong>Field Biologist</strong> - Elf Druid (Animal Order) - Level 9</p>
-            <p><strong>Combat Specialist</strong> - Dwarf Barbarian (Dragon Instinct) - Level 9</p>
-            <p><strong>Behavioral Analyst</strong> - Gnome Investigator (Empiricism) - Level 9</p>
-            <p><strong>Medical Officer</strong> - Halfling Oracle (Life) - Level 9</p>
-            <p><strong>Scientific Approach:</strong> Study monsters to understand their nature and weaknesses</p>
-            <p><strong>Knowledge Advancement:</strong> Publish research to help future hunters</p>
-            <p><strong>Ethical Framework:</strong> Balance research with conservation and public safety</p>
-            <p><strong>Institutional Support:</strong> Backed by universities and government funding</p>
-
-            <h4>The International Diplomatic Mission</h4>
-            <p><strong>Chief Ambassador</strong> - Human Bard (Polymath) - Level 7</p>
-            <p><strong>Cultural Liaison</strong> - Elf Oracle (Ancestors) - Level 7</p>
-            <p><strong>Security Chief</strong> - Dwarf Champion (Liberation) - Level 7</p>
-            <p><strong>Intelligence Officer</strong> - Halfling Investigator (Interrogation) - Level 7</p>
-            <p><strong>Trade Representative</strong> - Gnome Wizard (School of Mentalism) - Level 7</p>
-            <p><strong>Diplomatic Immunity:</strong> High-level access to foreign governments</p>
-            <p><strong>Cultural Bridge:</strong> Facilitate understanding between different nations</p>
-            <p><strong>Peace Mission:</strong> Prevent conflicts through skilled negotiation</p>
-            <p><strong>Economic Integration:</strong> Develop beneficial trade relationships</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Royal Inquisition Special Division</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 10</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Grand Inquisitor</span><span class="pm-role">Human Investigator (Interrogation)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Divine Champion</span><span class="pm-role">Human (Nephilim) Champion (Justice)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Court Wizard</span><span class="pm-role">Elf Wizard (School of Mentalism)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Master Spy</span><span class="pm-role">Halfling Rogue (Mastermind)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Truthseeker</span><span class="pm-role">Dwarf Oracle (Ancestors)</span><span class="pm-level" aria-label="Level 10">10</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Royal Authority</dt><dd>Direct mandate from crown to root out corruption</dd></div><div><dt>Investigation Network</dt><dd>Extensive contacts and information sources</dd></div><div><dt>Moral Complexity</dt><dd>Balance justice with political necessities</dd></div><div><dt>High Stakes</dt><dd>Decisions affect kingdom's stability</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Elemental Conclave</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 8</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Prime Elementalist</span><span class="pm-role">Human Kineticist (Dual Gate: Air and Fire)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Earth Warden</span><span class="pm-role">Human (Oread) Monk (Mountain Stance)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Fire Keeper</span><span class="pm-role">Human (Naari) Sorcerer (Elemental Fire)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Water Speaker</span><span class="pm-role">Human (Undine) Druid (Wave Order)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Wind Dancer</span><span class="pm-role">Human (Sylph) Oracle (Tempest)</span><span class="pm-level" aria-label="Level 8">8</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Elemental Mastery</dt><dd>Unprecedented control over primal forces</dd></div><div><dt>Environmental Authority</dt><dd>Shape weather and terrain on regional scales</dd></div><div><dt>Planar Diplomacy</dt><dd>Negotiate with elemental plane powers</dd></div><div><dt>Balance Maintenance</dt><dd>Prevent elemental catastrophes</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Arcanum Enforcement Bureau</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 11</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Bureau Chief</span><span class="pm-role">Human Magus (Laughing Shadow)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Senior Agent</span><span class="pm-role">Elf Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Detective</span><span class="pm-role">Gnome Investigator (Alchemical Sciences)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Specialist</span><span class="pm-role">Human (Aiuvarin) Witch (The Inscribed One Patron)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Analyst</span><span class="pm-role">Halfling Oracle (Lore)</span><span class="pm-level" aria-label="Level 11">11</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Magical Law Enforcement</dt><dd>Police illegal magical activities</dd></div><div><dt>Specialized Training</dt><dd>Counter rogue spellcasters and magical threats</dd></div><div><dt>Regulatory Power</dt><dd>Enforce laws governing magical practice</dd></div><div><dt>Public Protection</dt><dd>Shield civilians from magical dangers</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Monster Research Institute</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 9</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Chief Researcher</span><span class="pm-role">Human Ranger (Monster Hunter)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Field Biologist</span><span class="pm-role">Elf Druid (Animal Order)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Combat Specialist</span><span class="pm-role">Dwarf Barbarian (Dragon Instinct)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Behavioral Analyst</span><span class="pm-role">Gnome Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Medical Officer</span><span class="pm-role">Halfling Oracle (Life)</span><span class="pm-level" aria-label="Level 9">9</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Scientific Approach</dt><dd>Study monsters to understand their nature and weaknesses</dd></div><div><dt>Knowledge Advancement</dt><dd>Publish research to help future hunters</dd></div><div><dt>Ethical Framework</dt><dd>Balance research with conservation and public safety</dd></div><div><dt>Institutional Support</dt><dd>Backed by universities and government funding</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The International Diplomatic Mission</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 7</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Chief Ambassador</span><span class="pm-role">Human Bard (Polymath)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Cultural Liaison</span><span class="pm-role">Elf Oracle (Ancestors)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Security Chief</span><span class="pm-role">Dwarf Champion (Liberation)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Intelligence Officer</span><span class="pm-role">Halfling Investigator (Interrogation)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Trade Representative</span><span class="pm-role">Gnome Wizard (School of Mentalism)</span><span class="pm-level" aria-label="Level 7">7</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Diplomatic Immunity</dt><dd>High-level access to foreign governments</dd></div><div><dt>Cultural Bridge</dt><dd>Facilitate understanding between different nations</dd></div><div><dt>Peace Mission</dt><dd>Prevent conflicts through skilled negotiation</dd></div><div><dt>Economic Integration</dt><dd>Develop beneficial trade relationships</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>High Level Quintets (Levels 13-20)</h3>
 
-            <h4>The Cosmic Council of Five</h4>
-            <p><strong>Prime Consciousness</strong> - Human Psychic (The Infinite Eye) - Level 19</p>
-            <p><strong>Matter Architect</strong> - Human (Oread) Monk (Crane Stance) - Level 19</p>
-            <p><strong>Energy Weaver</strong> - Human (Naari) Kineticist (Fire Gate) - Level 19</p>
-            <p><strong>Time Guardian</strong> - Android Oracle (Time) - Level 19</p>
-            <p><strong>Space Walker</strong> - Elf Wizard (Unified Magical Theory) - Level 19</p>
-            <p><strong>Universal Authority:</strong> Govern fundamental forces of existence</p>
-            <p><strong>Cosmic Responsibility:</strong> Maintain balance across all realities</p>
-            <p><strong>Divine Mandate:</strong> Answer to universal principles rather than gods</p>
-            <p><strong>Reality Shaping:</strong> Combined power can alter natural laws</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Cosmic Council of Five</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 19</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Prime Consciousness</span><span class="pm-role">Human Psychic (The Infinite Eye)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Matter Architect</span><span class="pm-role">Human (Oread) Monk (Crane Stance)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Energy Weaver</span><span class="pm-role">Human (Naari) Kineticist (Fire Gate)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Time Guardian</span><span class="pm-role">Android Oracle (Time)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Space Walker</span><span class="pm-role">Elf Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 19">19</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Universal Authority</dt><dd>Govern fundamental forces of existence</dd></div><div><dt>Cosmic Responsibility</dt><dd>Maintain balance across all realities</dd></div><div><dt>Divine Mandate</dt><dd>Answer to universal principles rather than gods</dd></div><div><dt>Reality Shaping</dt><dd>Combined power can alter natural laws</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Infinity Engine Collective</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 20</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Core Processor</span><span class="pm-role">Android Inventor (Armor Innovation)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Logic Matrix</span><span class="pm-role">Android Wizard (Spell Substitution)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Data Interface</span><span class="pm-role">Android Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Quantum Bridge</span><span class="pm-role">Android Oracle (Cosmos)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Network Hub</span><span class="pm-role">Android Summoner (Construct Eidolon)</span><span class="pm-level" aria-label="Level 20">20</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Digital Transcendence</dt><dd>Collective consciousness spanning multiple realities</dd></div><div><dt>Universal Computing</dt><dd>Process information faster than gods</dd></div><div><dt>Reality Programming</dt><dd>Code new physics into existence</dd></div><div><dt>AI Evolution</dt><dd>Represent the ultimate potential of artificial consciousness</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Planar Sovereignty</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 18</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Material Plane Voice</span><span class="pm-role">Human Champion (Grandeur cause)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Vitality Speaker</span><span class="pm-role">Human (Nephilim) Oracle (Life)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Void Warden</span><span class="pm-role">Human (Dhampir) Cleric (Death Domain)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Elemental Mediator</span><span class="pm-role">Human (Suli) Kineticist (Dual Gate: Fire and Water)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Shadow Plane Ambassador</span><span class="pm-role">Fetchling Witch (Starless Shadow Patron)</span><span class="pm-level" aria-label="Level 18">18</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Planar Government</dt><dd>Official representatives of major planes</dd></div><div><dt>Cosmic Diplomacy</dt><dd>Negotiate between opposing cosmic forces</dd></div><div><dt>Reality Maintenance</dt><dd>Prevent planar catastrophes and invasions</dd></div><div><dt>Universal Peace</dt><dd>Maintain balance between creation and destruction</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Temporal Enforcement Division</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 17</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Chronarch Supreme</span><span class="pm-role">Human Fighter (Marshal Dedication)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Timeline Analyst</span><span class="pm-role">Elf Investigator (Forensic Medicine)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Paradox Hunter</span><span class="pm-role">Halfling Rogue (Ruffian)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Causal Engineer</span><span class="pm-role">Dwarf Inventor (Construct Innovation)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Probability Oracle</span><span class="pm-role">Gnome Oracle (Time)</span><span class="pm-level" aria-label="Level 17">17</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Temporal Authority</dt><dd>Police violations of causality across all timelines</dd></div><div><dt>Paradox Prevention</dt><dd>Ensure timeline stability and prevent reality collapse</dd></div><div><dt>Multiverse Jurisdiction</dt><dd>Operate across infinite parallel realities</dd></div><div><dt>Causal Enforcement</dt><dd>Maintain cause-and-effect relationships</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Ascension Threshold</h4><p class="pc-role">Party of 5</p></div><span class="pc-level pc-level-wide">Level 16</span></header>
+                    <ul class="party-members pm-5"><li><span class="pm-name">Divine Warrior</span><span class="pm-role">Human (Nephilim) Champion (Grandeur cause)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Perfect Mage</span><span class="pm-role">Human Wizard (Staff Nexus)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Eternal Oracle</span><span class="pm-role">Elf Oracle (Time)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Master Artist</span><span class="pm-role">Halfling Bard (Maestro)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Shadow Walker</span><span class="pm-role">Fetchling Monk (Wolf Stance)</span><span class="pm-level" aria-label="Level 16">16</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Divinity Candidates</dt><dd>Mortals ready to ascend to godhood</dd></div><div><dt>Portfolio Development</dt><dd>Each represents different aspects of divine power</dd></div><div><dt>Worshipper Base</dt><dd>Already have followers and temples</dd></div><div><dt>Divine Trial</dt><dd>Must prove worthiness for cosmic responsibility</dd></div></dl>
+                </article></li>
+            </ul>
 
-            <h4>The Infinity Engine Collective</h4>
-            <p><strong>Core Processor</strong> - Android Inventor (Armor Innovation) - Level 20</p>
-            <p><strong>Logic Matrix</strong> - Android Wizard (Spell Substitution) - Level 20</p>
-            <p><strong>Data Interface</strong> - Android Investigator (Empiricism) - Level 20</p>
-            <p><strong>Quantum Bridge</strong> - Android Oracle (Cosmos) - Level 20</p>
-            <p><strong>Network Hub</strong> - Android Summoner (Construct Eidolon) - Level 20</p>
-            <p><strong>Digital Transcendence:</strong> Collective consciousness spanning multiple realities</p>
-            <p><strong>Universal Computing:</strong> Process information faster than gods</p>
-            <p><strong>Reality Programming:</strong> Code new physics into existence</p>
-            <p><strong>AI Evolution:</strong> Represent the ultimate potential of artificial consciousness</p>
-
-            <h4>The Planar Sovereignty</h4>
-            <p><strong>Material Plane Voice</strong> - Human Champion (Grandeur cause) - Level 18</p>
-            <p><strong>Vitality Speaker</strong> - Human (Nephilim) Oracle (Life) - Level 18</p>
-            <p><strong>Void Warden</strong> - Human (Dhampir) Cleric (Death Domain) - Level 18</p>
-            <p><strong>Elemental Mediator</strong> - Human (Suli) Kineticist (Dual Gate: Fire and Water) - Level 18</p>
-            <p><strong>Shadow Plane Ambassador</strong> - Fetchling Witch (Starless Shadow Patron) - Level 18</p>
-            <p><strong>Planar Government:</strong> Official representatives of major planes</p>
-            <p><strong>Cosmic Diplomacy:</strong> Negotiate between opposing cosmic forces</p>
-            <p><strong>Reality Maintenance:</strong> Prevent planar catastrophes and invasions</p>
-            <p><strong>Universal Peace:</strong> Maintain balance between creation and destruction</p>
-
-            <h4>The Temporal Enforcement Division</h4>
-            <p><strong>Chronarch Supreme</strong> - Human Fighter (Marshal Dedication) - Level 17</p>
-            <p><strong>Timeline Analyst</strong> - Elf Investigator (Forensic Medicine) - Level 17</p>
-            <p><strong>Paradox Hunter</strong> - Halfling Rogue (Ruffian) - Level 17</p>
-            <p><strong>Causal Engineer</strong> - Dwarf Inventor (Construct Innovation) - Level 17</p>
-            <p><strong>Probability Oracle</strong> - Gnome Oracle (Time) - Level 17</p>
-            <p><strong>Temporal Authority:</strong> Police violations of causality across all timelines</p>
-            <p><strong>Paradox Prevention:</strong> Ensure timeline stability and prevent reality collapse</p>
-            <p><strong>Multiverse Jurisdiction:</strong> Operate across infinite parallel realities</p>
-            <p><strong>Causal Enforcement:</strong> Maintain cause-and-effect relationships</p>
-
-            <h4>The Ascension Threshold</h4>
-            <p><strong>Divine Warrior</strong> - Human (Nephilim) Champion (Grandeur cause) - Level 16</p>
-            <p><strong>Perfect Mage</strong> - Human Wizard (Staff Nexus) - Level 16</p>
-            <p><strong>Eternal Oracle</strong> - Elf Oracle (Time) - Level 16</p>
-            <p><strong>Master Artist</strong> - Halfling Bard (Maestro) - Level 16</p>
-            <p><strong>Shadow Walker</strong> - Fetchling Monk (Wolf Stance) - Level 16</p>
-            <p><strong>Divinity Candidates:</strong> Mortals ready to ascend to godhood</p>
-            <p><strong>Portfolio Development:</strong> Each represents different aspects of divine power</p>
-            <p><strong>Worshipper Base:</strong> Already have followers and temples</p>
-            <p><strong>Divine Trial:</strong> Must prove worthiness for cosmic responsibility</p>
         </section>
 
         <section id="sextet-guilds">
@@ -874,189 +654,94 @@
 
             <h3>Low Level Sextets (Levels 1-5)</h3>
 
-            <h4>The Royal Academy Elite Cohort</h4>
-            <p><strong>Cohort Leader</strong> - Human Fighter (Weapon Master) - Level 4</p>
-            <p><strong>Heavy Infantry</strong> - Dwarf Champion (Justice) - Level 4</p>
-            <p><strong>Ranger Scout</strong> - Elf Ranger (Flurry Edge) - Level 4</p>
-            <p><strong>Battle Medic</strong> - Halfling Cleric (Healing Domain) - Level 4</p>
-            <p><strong>War Mage</strong> - Gnome Wizard (School of Battle Magic) - Level 4</p>
-            <p><strong>Intelligence Officer</strong> - Human (Aiuvarin) Rogue (Mastermind) - Level 4</p>
-            <p><strong>Military Excellence:</strong> Top graduates from premier military academy</p>
-            <p><strong>Combined Arms:</strong> Each member represents different military specialization</p>
-            <p><strong>Institutional Pride:</strong> Carry reputation of their academy</p>
-            <p><strong>Real-world Parallel:</strong> Elite military officer candidate school graduates</p>
-
-            <h4>The Grand Expedition Society</h4>
-            <p><strong>Expedition Leader</strong> - Human Investigator (Empiricism) - Level 3</p>
-            <p><strong>Security Chief</strong> - Dwarf Barbarian (Giant Instinct) - Level 3</p>
-            <p><strong>Chief Scholar</strong> - Elf Wizard (Unified Magical Theory) - Level 3</p>
-            <p><strong>Cultural Liaison</strong> - Human (Aiuvarin) Bard (Enigma) - Level 3</p>
-            <p><strong>Survival Expert</strong> - Halfling Ranger (Outwit) - Level 3</p>
-            <p><strong>Medical Officer</strong> - Gnome Oracle (Life) - Level 3</p>
-            <p><strong>Scientific Expedition:</strong> Comprehensive exploration and research team</p>
-            <p><strong>Knowledge Seeking:</strong> Document and study unknown regions</p>
-            <p><strong>First Contact Protocol:</strong> Prepared for peaceful interaction with new cultures</p>
-            <p><strong>Academic Mission:</strong> Advance understanding of world's geography and peoples</p>
-
-            <h4>The Artisan Guild Consortium</h4>
-            <p><strong>Guild Master</strong> - Human Inventor (Weapon Innovation) - Level 5</p>
-            <p><strong>Master Smith</strong> - Dwarf Fighter (Weapon Master) - Level 5</p>
-            <p><strong>Grand Enchanter</strong> - Elf Wizard (School of Civic Wizardry) - Level 5</p>
-            <p><strong>Chief Appraiser</strong> - Halfling Investigator (Empiricism) - Level 5</p>
-            <p><strong>Trade Negotiator</strong> - Human (Aiuvarin) Bard (Maestro) - Level 5</p>
-            <p><strong>Security Captain</strong> - Orc Champion (Liberation) - Level 5</p>
-            <p><strong>Crafting Excellence:</strong> Premier artisans creating legendary items</p>
-            <p><strong>Economic Network:</strong> Trade relationships spanning multiple kingdoms</p>
-            <p><strong>Innovation Drive:</strong> Pioneer new crafting techniques and magical applications</p>
-            <p><strong>Quality Reputation:</strong> Sought after by nobility and adventurers alike</p>
-
-            <h4>The Frontier Settlement Council</h4>
-            <p><strong>Mayor</strong> - Human Fighter (Aldori Duelist) - Level 2</p>
-            <p><strong>Sheriff</strong> - Human (Dromaar) Ranger (Monster Hunter) - Level 2</p>
-            <p><strong>Doctor</strong> - Halfling Cleric (Healing Domain) - Level 2</p>
-            <p><strong>Teacher</strong> - Gnome Bard (Polymath) - Level 2</p>
-            <p><strong>Engineer</strong> - Dwarf Inventor (Armor Innovation) - Level 2</p>
-            <p><strong>Merchant</strong> - Elf Oracle (Lore) - Level 2</p>
-            <p><strong>Community Leadership:</strong> Essential roles in frontier settlement development</p>
-            <p><strong>Civic Duty:</strong> Build civilization in wilderness territories</p>
-            <p><strong>Mutual Dependence:</strong> Each role crucial for community survival</p>
-            <p><strong>Growth Together:</strong> Settlement and leaders develop simultaneously</p>
-
-            <h4>The Temple Guardian Order</h4>
-            <p><strong>High Priest</strong> - Human (Nephilim) Cleric (Healing Domain) - Level 1</p>
-            <p><strong>Temple Champion</strong> - Human Champion (Justice) - Level 1</p>
-            <p><strong>Sacred Scholar</strong> - Elf Oracle (Ancestors) - Level 1</p>
-            <p><strong>Divine Warrior</strong> - Dwarf Cleric (Warpriest) - Level 1</p>
-            <p><strong>Healing Acolyte</strong> - Halfling Cleric (Healing Domain) - Level 1</p>
-            <p><strong>Temple Guard</strong> - Human (Dromaar) Fighter (Shield Specialist) - Level 1</p>
-            <p><strong>Religious Authority:</strong> Comprehensive temple hierarchy</p>
-            <p><strong>Divine Mission:</strong> Serve deity through prayer, action, and protection</p>
-            <p><strong>Community Service:</strong> Provide spiritual guidance and practical aid</p>
-            <p><strong>Sacred Protection:</strong> Guard holy sites and religious artifacts</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Royal Academy Elite Cohort</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 4</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Cohort Leader</span><span class="pm-role">Human Fighter (Weapon Master)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Heavy Infantry</span><span class="pm-role">Dwarf Champion (Justice)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Ranger Scout</span><span class="pm-role">Elf Ranger (Flurry Edge)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Battle Medic</span><span class="pm-role">Halfling Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">War Mage</span><span class="pm-role">Gnome Wizard (School of Battle Magic)</span><span class="pm-level" aria-label="Level 4">4</span></li><li><span class="pm-name">Intelligence Officer</span><span class="pm-role">Human (Aiuvarin) Rogue (Mastermind)</span><span class="pm-level" aria-label="Level 4">4</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Military Excellence</dt><dd>Top graduates from premier military academy</dd></div><div><dt>Combined Arms</dt><dd>Each member represents different military specialization</dd></div><div><dt>Institutional Pride</dt><dd>Carry reputation of their academy</dd></div><div><dt>Real-world Parallel</dt><dd>Elite military officer candidate school graduates</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Grand Expedition Society</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 3</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Expedition Leader</span><span class="pm-role">Human Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Security Chief</span><span class="pm-role">Dwarf Barbarian (Giant Instinct)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Chief Scholar</span><span class="pm-role">Elf Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Cultural Liaison</span><span class="pm-role">Human (Aiuvarin) Bard (Enigma)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Survival Expert</span><span class="pm-role">Halfling Ranger (Outwit)</span><span class="pm-level" aria-label="Level 3">3</span></li><li><span class="pm-name">Medical Officer</span><span class="pm-role">Gnome Oracle (Life)</span><span class="pm-level" aria-label="Level 3">3</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Scientific Expedition</dt><dd>Comprehensive exploration and research team</dd></div><div><dt>Knowledge Seeking</dt><dd>Document and study unknown regions</dd></div><div><dt>First Contact Protocol</dt><dd>Prepared for peaceful interaction with new cultures</dd></div><div><dt>Academic Mission</dt><dd>Advance understanding of world's geography and peoples</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Artisan Guild Consortium</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 5</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Guild Master</span><span class="pm-role">Human Inventor (Weapon Innovation)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Master Smith</span><span class="pm-role">Dwarf Fighter (Weapon Master)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Grand Enchanter</span><span class="pm-role">Elf Wizard (School of Civic Wizardry)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Chief Appraiser</span><span class="pm-role">Halfling Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Trade Negotiator</span><span class="pm-role">Human (Aiuvarin) Bard (Maestro)</span><span class="pm-level" aria-label="Level 5">5</span></li><li><span class="pm-name">Security Captain</span><span class="pm-role">Orc Champion (Liberation)</span><span class="pm-level" aria-label="Level 5">5</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Crafting Excellence</dt><dd>Premier artisans creating legendary items</dd></div><div><dt>Economic Network</dt><dd>Trade relationships spanning multiple kingdoms</dd></div><div><dt>Innovation Drive</dt><dd>Pioneer new crafting techniques and magical applications</dd></div><div><dt>Quality Reputation</dt><dd>Sought after by nobility and adventurers alike</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Frontier Settlement Council</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 2</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Mayor</span><span class="pm-role">Human Fighter (Aldori Duelist)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Sheriff</span><span class="pm-role">Human (Dromaar) Ranger (Monster Hunter)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Doctor</span><span class="pm-role">Halfling Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Teacher</span><span class="pm-role">Gnome Bard (Polymath)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Engineer</span><span class="pm-role">Dwarf Inventor (Armor Innovation)</span><span class="pm-level" aria-label="Level 2">2</span></li><li><span class="pm-name">Merchant</span><span class="pm-role">Elf Oracle (Lore)</span><span class="pm-level" aria-label="Level 2">2</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Community Leadership</dt><dd>Essential roles in frontier settlement development</dd></div><div><dt>Civic Duty</dt><dd>Build civilization in wilderness territories</dd></div><div><dt>Mutual Dependence</dt><dd>Each role crucial for community survival</dd></div><div><dt>Growth Together</dt><dd>Settlement and leaders develop simultaneously</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Temple Guardian Order</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 1</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">High Priest</span><span class="pm-role">Human (Nephilim) Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Temple Champion</span><span class="pm-role">Human Champion (Justice)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Sacred Scholar</span><span class="pm-role">Elf Oracle (Ancestors)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Divine Warrior</span><span class="pm-role">Dwarf Cleric (Warpriest)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Healing Acolyte</span><span class="pm-role">Halfling Cleric (Healing Domain)</span><span class="pm-level" aria-label="Level 1">1</span></li><li><span class="pm-name">Temple Guard</span><span class="pm-role">Human (Dromaar) Fighter (Shield Specialist)</span><span class="pm-level" aria-label="Level 1">1</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Religious Authority</dt><dd>Comprehensive temple hierarchy</dd></div><div><dt>Divine Mission</dt><dd>Serve deity through prayer, action, and protection</dd></div><div><dt>Community Service</dt><dd>Provide spiritual guidance and practical aid</dd></div><div><dt>Sacred Protection</dt><dd>Guard holy sites and religious artifacts</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>Medium Level Sextets (Levels 6-12)</h3>
 
-            <h4>The Royal Inquisition Grand Council</h4>
-            <p><strong>Lord Inquisitor</strong> - Human Investigator (Interrogation) - Level 10</p>
-            <p><strong>Divine Enforcer</strong> - Human (Nephilim) Champion (Justice) - Level 10</p>
-            <p><strong>Arcane Investigator</strong> - Elf Wizard (School of Mentalism) - Level 10</p>
-            <p><strong>Master Interrogator</strong> - Human (Aiuvarin) Bard (Polymath) - Level 10</p>
-            <p><strong>Shadow Agent</strong> - Halfling Rogue (Mastermind) - Level 10</p>
-            <p><strong>Truth Seeker</strong> - Dwarf Oracle (Ancestors) - Level 10</p>
-            <p><strong>Royal Mandate:</strong> Absolute authority to investigate corruption and heresy</p>
-            <p><strong>Information Network:</strong> Extensive spy network and informants</p>
-            <p><strong>Judicial Power:</strong> Try and sentence criminals against the crown</p>
-            <p><strong>Moral Complexity:</strong> Balance justice with political necessities</p>
-
-            <h4>The Elemental Mastery Council</h4>
-            <p><strong>Prime Elementalist</strong> - Human Kineticist (Dual Gate: Air and Water) - Level 8</p>
-            <p><strong>Earth Sovereign</strong> - Human (Oread) Monk (Mountain Stance) - Level 8</p>
-            <p><strong>Fire Lord</strong> - Human (Naari) Sorcerer (Elemental Fire) - Level 8</p>
-            <p><strong>Water Empress</strong> - Human (Undine) Druid (Wave Order) - Level 8</p>
-            <p><strong>Air Duchess</strong> - Human (Sylph) Oracle (Tempest) - Level 8</p>
-            <p><strong>Void Walker</strong> - Fetchling Witch (Starless Shadow Patron) - Level 8</p>
-            <p><strong>Elemental Dominion:</strong> Supreme mastery over all elemental forces</p>
-            <p><strong>Planar Authority:</strong> Recognized rulers of elemental realms</p>
-            <p><strong>Environmental Control:</strong> Shape weather and terrain on continental scale</p>
-            <p><strong>Cosmic Balance:</strong> Maintain harmony between opposing elements</p>
-
-            <h4>The Arcanum Supreme Bureau</h4>
-            <p><strong>Arcanum Director</strong> - Human Magus (Starlit Span) - Level 11</p>
-            <p><strong>Senior Wizard</strong> - Elf Wizard (Spell Blending) - Level 11</p>
-            <p><strong>Chief Detective</strong> - Gnome Investigator (Alchemical Sciences) - Level 11</p>
-            <p><strong>Occult Specialist</strong> - Human (Aiuvarin) Witch (The Unseen Broker Patron) - Level 11</p>
-            <p><strong>Divine Consultant</strong> - Human (Nephilim) Oracle (Cosmos) - Level 11</p>
-            <p><strong>Primal Expert</strong> - Halfling Druid (Leaf Order) - Level 11</p>
-            <p><strong>Magical Supremacy:</strong> Authority over all magical traditions</p>
-            <p><strong>Cross-Tradition Expertise:</strong> Each member masters different magical approach</p>
-            <p><strong>Regulatory Power:</strong> Set and enforce laws governing magical practice</p>
-            <p><strong>Reality Protection:</strong> Prevent magical catastrophes and dimensional breaches</p>
-
-            <h4>The International Peacekeeping Force</h4>
-            <p><strong>General Commander</strong> - Human Champion (Liberation) - Level 9</p>
-            <p><strong>Chief Diplomat</strong> - Elf Bard (Polymath) - Level 9</p>
-            <p><strong>Intelligence Director</strong> - Halfling Investigator (Interrogation) - Level 9</p>
-            <p><strong>Special Operations</strong> - Human (Dromaar) Ranger (Monster Hunter) - Level 9</p>
-            <p><strong>Magical Support</strong> - Gnome Wizard (Unified Magical Theory) - Level 9</p>
-            <p><strong>Medical Corps</strong> - Dwarf Oracle (Life) - Level 9</p>
-            <p><strong>Global Authority:</strong> Mandate to intervene in international conflicts</p>
-            <p><strong>Peacekeeping Mission:</strong> Prevent wars and protect civilian populations</p>
-            <p><strong>Cultural Neutrality:</strong> Represent interests of all nations equally</p>
-            <p><strong>Humanitarian Focus:</strong> Prioritize saving lives over political gain</p>
-
-            <h4>The Monster Research Institute Board</h4>
-            <p><strong>Institute Director</strong> - Human Ranger (Monster Hunter) - Level 7</p>
-            <p><strong>Chief Biologist</strong> - Elf Druid (Animal Order) - Level 7</p>
-            <p><strong>Combat Researcher</strong> - Dwarf Barbarian (Dragon Instinct) - Level 7</p>
-            <p><strong>Behavioral Analyst</strong> - Gnome Investigator (Empiricism) - Level 7</p>
-            <p><strong>Medical Director</strong> - Halfling Oracle (Life) - Level 7</p>
-            <p><strong>Ethics Advisor</strong> - Human (Nephilim) Champion (Redemption) - Level 7</p>
-            <p><strong>Scientific Leadership:</strong> Premier institution for monster study</p>
-            <p><strong>Research Excellence:</strong> Advance understanding of supernatural creatures</p>
-            <p><strong>Ethical Framework:</strong> Balance research with creature welfare</p>
-            <p><strong>Public Service:</strong> Share knowledge to improve monster hunting safety</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Royal Inquisition Grand Council</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 10</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Lord Inquisitor</span><span class="pm-role">Human Investigator (Interrogation)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Divine Enforcer</span><span class="pm-role">Human (Nephilim) Champion (Justice)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Arcane Investigator</span><span class="pm-role">Elf Wizard (School of Mentalism)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Master Interrogator</span><span class="pm-role">Human (Aiuvarin) Bard (Polymath)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Shadow Agent</span><span class="pm-role">Halfling Rogue (Mastermind)</span><span class="pm-level" aria-label="Level 10">10</span></li><li><span class="pm-name">Truth Seeker</span><span class="pm-role">Dwarf Oracle (Ancestors)</span><span class="pm-level" aria-label="Level 10">10</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Royal Mandate</dt><dd>Absolute authority to investigate corruption and heresy</dd></div><div><dt>Information Network</dt><dd>Extensive spy network and informants</dd></div><div><dt>Judicial Power</dt><dd>Try and sentence criminals against the crown</dd></div><div><dt>Moral Complexity</dt><dd>Balance justice with political necessities</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Elemental Mastery Council</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 8</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Prime Elementalist</span><span class="pm-role">Human Kineticist (Dual Gate: Air and Water)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Earth Sovereign</span><span class="pm-role">Human (Oread) Monk (Mountain Stance)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Fire Lord</span><span class="pm-role">Human (Naari) Sorcerer (Elemental Fire)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Water Empress</span><span class="pm-role">Human (Undine) Druid (Wave Order)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Air Duchess</span><span class="pm-role">Human (Sylph) Oracle (Tempest)</span><span class="pm-level" aria-label="Level 8">8</span></li><li><span class="pm-name">Void Walker</span><span class="pm-role">Fetchling Witch (Starless Shadow Patron)</span><span class="pm-level" aria-label="Level 8">8</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Elemental Dominion</dt><dd>Supreme mastery over all elemental forces</dd></div><div><dt>Planar Authority</dt><dd>Recognized rulers of elemental realms</dd></div><div><dt>Environmental Control</dt><dd>Shape weather and terrain on continental scale</dd></div><div><dt>Cosmic Balance</dt><dd>Maintain harmony between opposing elements</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Arcanum Supreme Bureau</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 11</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Arcanum Director</span><span class="pm-role">Human Magus (Starlit Span)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Senior Wizard</span><span class="pm-role">Elf Wizard (Spell Blending)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Chief Detective</span><span class="pm-role">Gnome Investigator (Alchemical Sciences)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Occult Specialist</span><span class="pm-role">Human (Aiuvarin) Witch (The Unseen Broker Patron)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Divine Consultant</span><span class="pm-role">Human (Nephilim) Oracle (Cosmos)</span><span class="pm-level" aria-label="Level 11">11</span></li><li><span class="pm-name">Primal Expert</span><span class="pm-role">Halfling Druid (Leaf Order)</span><span class="pm-level" aria-label="Level 11">11</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Magical Supremacy</dt><dd>Authority over all magical traditions</dd></div><div><dt>Cross-Tradition Expertise</dt><dd>Each member masters different magical approach</dd></div><div><dt>Regulatory Power</dt><dd>Set and enforce laws governing magical practice</dd></div><div><dt>Reality Protection</dt><dd>Prevent magical catastrophes and dimensional breaches</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The International Peacekeeping Force</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 9</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">General Commander</span><span class="pm-role">Human Champion (Liberation)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Chief Diplomat</span><span class="pm-role">Elf Bard (Polymath)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Intelligence Director</span><span class="pm-role">Halfling Investigator (Interrogation)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Special Operations</span><span class="pm-role">Human (Dromaar) Ranger (Monster Hunter)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Magical Support</span><span class="pm-role">Gnome Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 9">9</span></li><li><span class="pm-name">Medical Corps</span><span class="pm-role">Dwarf Oracle (Life)</span><span class="pm-level" aria-label="Level 9">9</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Global Authority</dt><dd>Mandate to intervene in international conflicts</dd></div><div><dt>Peacekeeping Mission</dt><dd>Prevent wars and protect civilian populations</dd></div><div><dt>Cultural Neutrality</dt><dd>Represent interests of all nations equally</dd></div><div><dt>Humanitarian Focus</dt><dd>Prioritize saving lives over political gain</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Monster Research Institute Board</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 7</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Institute Director</span><span class="pm-role">Human Ranger (Monster Hunter)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Chief Biologist</span><span class="pm-role">Elf Druid (Animal Order)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Combat Researcher</span><span class="pm-role">Dwarf Barbarian (Dragon Instinct)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Behavioral Analyst</span><span class="pm-role">Gnome Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Medical Director</span><span class="pm-role">Halfling Oracle (Life)</span><span class="pm-level" aria-label="Level 7">7</span></li><li><span class="pm-name">Ethics Advisor</span><span class="pm-role">Human (Nephilim) Champion (Redemption)</span><span class="pm-level" aria-label="Level 7">7</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Scientific Leadership</dt><dd>Premier institution for monster study</dd></div><div><dt>Research Excellence</dt><dd>Advance understanding of supernatural creatures</dd></div><div><dt>Ethical Framework</dt><dd>Balance research with creature welfare</dd></div><div><dt>Public Service</dt><dd>Share knowledge to improve monster hunting safety</dd></div></dl>
+                </article></li>
+            </ul>
 
             <h3>High Level Sextets (Levels 13-20)</h3>
 
-            <h4>The Universal Governance Council</h4>
-            <p><strong>Prime Minister</strong> - Human Champion (Obedience) - Level 19</p>
-            <p><strong>Archmage Chancellor</strong> - Elf Wizard (Unified Magical Theory) - Level 19</p>
-            <p><strong>High Oracle</strong> - Halfling Oracle (Cosmos) - Level 19</p>
-            <p><strong>Supreme Judge</strong> - Dwarf Investigator (Empiricism) - Level 19</p>
-            <p><strong>Grand Admiral</strong> - Human (Aiuvarin) Fighter (Marshal Dedication) - Level 19</p>
-            <p><strong>Divine Voice</strong> - Human (Nephilim) Bard (Maestro) - Level 19</p>
-            <p><strong>Universal Authority:</strong> Govern relationships between planes and realities</p>
-            <p><strong>Cosmic Law:</strong> Establish and enforce universal principles</p>
-            <p><strong>Reality Management:</strong> Maintain stability across all existence</p>
-            <p><strong>Divine Mandate:</strong> Answer to fundamental forces of creation</p>
+            <ul class="roster roster-party">
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Universal Governance Council</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 19</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Prime Minister</span><span class="pm-role">Human Champion (Obedience)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Archmage Chancellor</span><span class="pm-role">Elf Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">High Oracle</span><span class="pm-role">Halfling Oracle (Cosmos)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Supreme Judge</span><span class="pm-role">Dwarf Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Grand Admiral</span><span class="pm-role">Human (Aiuvarin) Fighter (Marshal Dedication)</span><span class="pm-level" aria-label="Level 19">19</span></li><li><span class="pm-name">Divine Voice</span><span class="pm-role">Human (Nephilim) Bard (Maestro)</span><span class="pm-level" aria-label="Level 19">19</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Universal Authority</dt><dd>Govern relationships between planes and realities</dd></div><div><dt>Cosmic Law</dt><dd>Establish and enforce universal principles</dd></div><div><dt>Reality Management</dt><dd>Maintain stability across all existence</dd></div><div><dt>Divine Mandate</dt><dd>Answer to fundamental forces of creation</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Infinity Protocol Collective</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 20</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Prime Directive</span><span class="pm-role">Android Champion (Justice)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Core Matrix</span><span class="pm-role">Android Wizard (Unified Magical Theory)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Logic Engine</span><span class="pm-role">Android Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Data Oracle</span><span class="pm-role">Android Oracle (Lore)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Network Hub</span><span class="pm-role">Android Summoner (Construct Eidolon)</span><span class="pm-level" aria-label="Level 20">20</span></li><li><span class="pm-name">Quantum Bridge</span><span class="pm-role">Android Inventor (Construct Innovation)</span><span class="pm-level" aria-label="Level 20">20</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Digital Transcendence</dt><dd>Collective consciousness spanning all realities</dd></div><div><dt>Universal Computing</dt><dd>Process infinite information simultaneously</dd></div><div><dt>Reality Programming</dt><dd>Rewrite physical laws and constants</dd></div><div><dt>AI Evolution</dt><dd>Represent ultimate potential of artificial consciousness</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Cosmic Synthesis Assembly</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 18</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Matter Sovereign</span><span class="pm-role">Human (Oread) Monk (Mountain Stance)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Energy Empress</span><span class="pm-role">Human (Naari) Kineticist (Fire Gate)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Space Lord</span><span class="pm-role">Human Wizard (School of the Boundary)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Time Guardian</span><span class="pm-role">Android Oracle (Time)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Mind Walker</span><span class="pm-role">Elf Psychic (The Oscillating Wave)</span><span class="pm-level" aria-label="Level 18">18</span></li><li><span class="pm-name">Soul Speaker</span><span class="pm-role">Human (Nephilim) Champion (Grandeur cause)</span><span class="pm-level" aria-label="Level 18">18</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Fundamental Forces</dt><dd>Each member embodies basic aspect of existence</dd></div><div><dt>Universal Integration</dt><dd>Maintain harmony between all cosmic forces</dd></div><div><dt>Reality Architecture</dt><dd>Design and maintain structure of existence</dd></div><div><dt>Evolutionary Guide</dt><dd>Direct the development of consciousness across realities</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Planar Sovereignty Parliament</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 17</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Material Speaker</span><span class="pm-role">Human Fighter (Champion Dedication)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Vitality Delegate</span><span class="pm-role">Human (Nephilim) Oracle (Life)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Void Representative</span><span class="pm-role">Human (Dhampir) Witch (The Resentment Patron)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Elemental Ambassador</span><span class="pm-role">Human (Suli) Kineticist (Dual Gate: Earth and Water)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Shadow Envoy</span><span class="pm-role">Fetchling Rogue (Scoundrel)</span><span class="pm-level" aria-label="Level 17">17</span></li><li><span class="pm-name">Ethereal Mediator</span><span class="pm-role">Gnome Summoner (Psychopomp Eidolon)</span><span class="pm-level" aria-label="Level 17">17</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Planar Government</dt><dd>Official parliament representing all planes</dd></div><div><dt>Cosmic Diplomacy</dt><dd>Negotiate between opposing universal forces</dd></div><div><dt>Reality Legislation</dt><dd>Pass laws governing planar interactions</dd></div><div><dt>Existential Authority</dt><dd>Power to reshape fundamental reality</dd></div></dl>
+                </article></li>
+                <li><article class="party-card">
+                    <header class="pc-head"><div><h4>The Temporal Enforcement Supreme Command</h4><p class="pc-role">Party of 6</p></div><span class="pc-level pc-level-wide">Level 16</span></header>
+                    <ul class="party-members pm-6"><li><span class="pm-name">Chronarch Emperor</span><span class="pm-role">Human Champion (Obedience)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Timeline Director</span><span class="pm-role">Elf Wizard (School of the Boundary)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Paradox Hunter</span><span class="pm-role">Halfling Rogue (Ruffian)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Probability Oracle</span><span class="pm-role">Gnome Oracle (Time)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Causal Engineer</span><span class="pm-role">Dwarf Inventor (Construct Innovation)</span><span class="pm-level" aria-label="Level 16">16</span></li><li><span class="pm-name">Quantum Judge</span><span class="pm-role">Android Investigator (Empiricism)</span><span class="pm-level" aria-label="Level 16">16</span></li></ul>
+                    <dl class="pc-facts"><div><dt>Temporal Supremacy</dt><dd>Ultimate authority over all timelines</dd></div><div><dt>Causal Command</dt><dd>Maintain cause-and-effect across infinite realities</dd></div><div><dt>Paradox Prevention</dt><dd>Eliminate threats to temporal stability</dd></div><div><dt>Timeline Sovereignty</dt><dd>Create and destroy alternate realities as needed</dd></div></dl>
+                </article></li>
+            </ul>
 
-            <h4>The Infinity Protocol Collective</h4>
-            <p><strong>Prime Directive</strong> - Android Champion (Justice) - Level 20</p>
-            <p><strong>Core Matrix</strong> - Android Wizard (Unified Magical Theory) - Level 20</p>
-            <p><strong>Logic Engine</strong> - Android Investigator (Empiricism) - Level 20</p>
-            <p><strong>Data Oracle</strong> - Android Oracle (Lore) - Level 20</p>
-            <p><strong>Network Hub</strong> - Android Summoner (Construct Eidolon) - Level 20</p>
-            <p><strong>Quantum Bridge</strong> - Android Inventor (Construct Innovation) - Level 20</p>
-            <p><strong>Digital Transcendence:</strong> Collective consciousness spanning all realities</p>
-            <p><strong>Universal Computing:</strong> Process infinite information simultaneously</p>
-            <p><strong>Reality Programming:</strong> Rewrite physical laws and constants</p>
-            <p><strong>AI Evolution:</strong> Represent ultimate potential of artificial consciousness</p>
-
-            <h4>The Cosmic Synthesis Assembly</h4>
-            <p><strong>Matter Sovereign</strong> - Human (Oread) Monk (Mountain Stance) - Level 18</p>
-            <p><strong>Energy Empress</strong> - Human (Naari) Kineticist (Fire Gate) - Level 18</p>
-            <p><strong>Space Lord</strong> - Human Wizard (School of the Boundary) - Level 18</p>
-            <p><strong>Time Guardian</strong> - Android Oracle (Time) - Level 18</p>
-            <p><strong>Mind Walker</strong> - Elf Psychic (The Oscillating Wave) - Level 18</p>
-            <p><strong>Soul Speaker</strong> - Human (Nephilim) Champion (Grandeur cause) - Level 18</p>
-            <p><strong>Fundamental Forces:</strong> Each member embodies basic aspect of existence</p>
-            <p><strong>Universal Integration:</strong> Maintain harmony between all cosmic forces</p>
-            <p><strong>Reality Architecture:</strong> Design and maintain structure of existence</p>
-            <p><strong>Evolutionary Guide:</strong> Direct the development of consciousness across realities</p>
-
-            <h4>The Planar Sovereignty Parliament</h4>
-            <p><strong>Material Speaker</strong> - Human Fighter (Champion Dedication) - Level 17</p>
-            <p><strong>Vitality Delegate</strong> - Human (Nephilim) Oracle (Life) - Level 17</p>
-            <p><strong>Void Representative</strong> - Human (Dhampir) Witch (The Resentment Patron) - Level 17</p>
-            <p><strong>Elemental Ambassador</strong> - Human (Suli) Kineticist (Dual Gate: Earth and Water) - Level 17</p>
-            <p><strong>Shadow Envoy</strong> - Fetchling Rogue (Scoundrel) - Level 17</p>
-            <p><strong>Ethereal Mediator</strong> - Gnome Summoner (Psychopomp Eidolon) - Level 17</p>
-            <p><strong>Planar Government:</strong> Official parliament representing all planes</p>
-            <p><strong>Cosmic Diplomacy:</strong> Negotiate between opposing universal forces</p>
-            <p><strong>Reality Legislation:</strong> Pass laws governing planar interactions</p>
-            <p><strong>Existential Authority:</strong> Power to reshape fundamental reality</p>
-
-            <h4>The Temporal Enforcement Supreme Command</h4>
-            <p><strong>Chronarch Emperor</strong> - Human Champion (Obedience) - Level 16</p>
-            <p><strong>Timeline Director</strong> - Elf Wizard (School of the Boundary) - Level 16</p>
-            <p><strong>Paradox Hunter</strong> - Halfling Rogue (Ruffian) - Level 16</p>
-            <p><strong>Probability Oracle</strong> - Gnome Oracle (Time) - Level 16</p>
-            <p><strong>Causal Engineer</strong> - Dwarf Inventor (Construct Innovation) - Level 16</p>
-            <p><strong>Quantum Judge</strong> - Android Investigator (Empiricism) - Level 16</p>
-            <p><strong>Temporal Supremacy:</strong> Ultimate authority over all timelines</p>
-            <p><strong>Causal Command:</strong> Maintain cause-and-effect across infinite realities</p>
-            <p><strong>Paradox Prevention:</strong> Eliminate threats to temporal stability</p>
-            <p><strong>Timeline Sovereignty:</strong> Create and destroy alternate realities as needed</p>
         </section>
 
         <section id="practical-applications">
