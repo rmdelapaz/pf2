@@ -108,7 +108,7 @@
         .pf-sheet .spellhead .box { text-align: center; }
         .pf-sheet .spellhead .out { font-size: 1.2rem; }
         .pf-sheet .spellhead .sh-name .val { font-weight: 700; font-size: 1.05rem; border-bottom: 0; }
-        @media (max-width: 760px) { .pf-sheet .spellhead > .sh-name { grid-column: 1 / -1; } }
+        @media screen and (max-width: 760px) { .pf-sheet .spellhead > .sh-name { grid-column: 1 / -1; } }
         .pf-sheet .spells { columns: 3 230px; column-gap: 10px; }
         .pf-sheet .lvl { break-inside: avoid; border: 1.5px solid var(--line); border-radius: 5px; padding: 4px 6px; margin: 0 0 8px; }
         .pf-sheet .lvl-head { display: flex; gap: 6px; align-items: center; border-bottom: 1.5px solid var(--ink); padding-bottom: 2px; margin-bottom: 2px; }
@@ -117,7 +117,7 @@
         .pf-sheet .lvl-head input, .pf-sheet .lvl-head .val { width: 2.6em; text-align: center; }
         .pf-sheet .sp input[type="text"], .pf-sheet .sp .val { font-size: 13px; padding: 1px 2px; }
 
-        @media (max-width: 760px) {
+        @media screen and (max-width: 760px) {
             .pf-sheet { padding: 12px; }
             .pf-sheet .head { grid-template-columns: 1fr 1fr; }
             .pf-sheet .head .name { grid-column: 1 / -1; grid-row: auto; }
@@ -149,6 +149,9 @@
             .print-container .pf-sheet .grow { flex: 1; display: flex; flex-direction: column; }
             .print-container .pf-sheet .grow .tx.val { flex: 1; }
             .print-container .pf-sheet .spells { flex: 1; }
+            /* a long name must not wrap the spell header onto extra lines and push the last spell rows off the page */
+            .print-container .pf-sheet .spellhead { margin-bottom: 6px; }
+            .print-container .pf-sheet .spellhead .sh-name .val { font-size: 1em; line-height: 1.1; min-height: 0; }
             .print-container .pf-sheet .sp .val { font-size: 10px; min-height: 2.6em; }
             .print-container .pf-sheet .lvl { margin-bottom: 5px; padding: 3px 5px; }
         }
