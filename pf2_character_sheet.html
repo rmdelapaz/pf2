@@ -179,6 +179,7 @@
             <button type="button" id="blankBtn">📄 Print Blank</button>
             <button type="button" id="exportBtn">📤 Export</button>
             <button type="button" id="importBtn">📥 Import</button>
+            <button type="button" id="sampleBtn">🗂️ Load sample characters</button>
             <input type="file" id="importFile" accept=".json,application/json">
         </div>
         <p class="sheet-status" id="status" role="status" aria-live="polite"></p>
@@ -343,6 +344,7 @@
 
         <div class="sheet-help">
             <p><strong>How it works.</strong> A sheet auto-saves in this browser once it has a name. Renaming a sheet renames its save. Use the tabs to move between the three pages. <strong>Print</strong> prints all three pages of the current character, one per US Letter sheet, and <strong>Print Blank</strong> prints an empty set. <strong>Export</strong> downloads every sheet as a JSON file and <strong>Import</strong> merges sheets back in; it also accepts a saved Pathbuilder export. Nothing leaves your browser.</p>
+            <p><strong>Sample sheets.</strong> <strong>Load sample characters</strong> adds all 315 characters from <a href="/pf2_100.html">Sample Characters</a> (the solo heroes and every party member, with each party under Backstory, Allies &amp; Notes), replacing any saved sheet with the same name just as Import does; you can also <a href="/pf2_sample_sheets.json" download>download the sample sheet file</a> and import it yourself.</p>
             <p><strong>Worked out for you.</strong> Enter attribute <em>modifiers</em> (the Remaster way). Each skill, save and Perception adds its attribute modifier, its proficiency bonus and any item bonus. The proficiency bonus is your level plus 2 (trained), 4 (expert), 6 (master) or 8 (legendary), and 0 if untrained. Class DC and spell DC are 10 + attribute + proficiency; spell attack is attribute + proficiency. AC depends on your armor, so enter it yourself. See <a href="/pf2_char.html">Character Creation</a> for building a character and the <a href="/pf2_dice_roller.html">Dice Roller</a> to roll with these numbers.</p>
         </div>
 
@@ -739,27 +741,55 @@
             setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
             say('Exported ' + cnt + (cnt === 1 ? ' sheet.' : ' sheets.'));
         });
+        // Merge a {name: sheet} object into saved sheets; a sheet with the same name is replaced and other sheets are kept.
+        // Returns { count, added, replaced } (replaced = names already saved before the merge), or null if storage failed.
+        function mergeSheets(data) {
+            var all = load(), before = {}, seen = {}, count = 0, replaced = 0;
+            Object.keys(all).forEach(function (k) { before[k] = true; });
+            Object.keys(data).forEach(function (k) {
+                var d = sanitize(data[k]); if (!d) return;
+                var name = String(d.name || '').trim().slice(0, 200);
+                if (!safeName(name)) return;
+                d.name = name;
+                if (!seen[name]) { seen[name] = true; count++; if (before[name]) replaced++; }
+                all[name] = d;
+            });
+            if (!count) return { count: 0, added: 0, replaced: 0 };
+            if (!store(all)) return null;
+            if (currentKey && seen[currentKey] && all[currentKey]) fill(all[currentKey]);   // the open sheet was replaced: show the new copy
+            refreshSelect(currentKey || '');
+            return { count: count, added: count - replaced, replaced: replaced };
+        }
         $('importBtn').addEventListener('click', function () { $('importFile').click(); });
+        $('sampleBtn').addEventListener('click', function () {
+            var btn = this;
+            flush(); disarm(); btn.disabled = true; say('Loading the sample sheets…');
+            fetch('/pf2_sample_sheets.json', { cache: 'no-cache' })
+                .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                .then(function (data) {
+                    if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('bad file');
+                    var res = mergeSheets(data);
+                    if (!res) return;
+                    if (!res.count) { say('No valid sheets found in the sample file.'); return; }
+                    say('Loaded ' + res.count + ' sample sheets: ' + res.added + ' added, ' + res.replaced + ' replaced.');
+                })
+                .catch(function () { say('Could not load the sample sheets. Check your connection, or download the file and use Import.'); })
+                .then(function () { btn.disabled = false; });
+        });
         $('importFile').addEventListener('change', function (ev) {
             var f = ev.target.files && ev.target.files[0]; ev.target.value = '';
             readFile(f, function (data) {
                 flush();
                 if (data && (data.build || (data.abilities && data.proficiencies))) { try { importPB(data); } catch (e) { say('That Pathbuilder file could not be read.'); } return; }
                 if (!data || typeof data !== 'object' || Array.isArray(data)) { say('That is not a sheet file.'); return; }
-                var all = load(), count = 0;
-                Object.keys(data).forEach(function (k) {
-                    var d = sanitize(data[k]); if (!d) return;
-                    var name = String(d.name || '').trim().slice(0, 200);
-                    if (!safeName(name)) return;
-                    all[name] = d; count++;
-                });
-                if (!count) { say('No valid sheets found in that file.'); return; }
-                if (!store(all)) return;
-                refreshSelect(currentKey || ''); say('Imported ' + count + (count === 1 ? ' sheet.' : ' sheets.'));
+                var res = mergeSheets(data);
+                if (!res) return;
+                if (!res.count) { say('No valid sheets found in that file.'); return; }
+                say('Imported ' + res.count + (res.count === 1 ? ' sheet.' : ' sheets.'));
             });
         });
 
-        window.pf2Sheet = { profBonus: profBonus, derive: derive };
+        window.pf2Sheet = { profBonus: profBonus, derive: derive, sanitize: sanitize, fields: FIELDS, bools: BOOLS };
         clearAll(); refreshSelect('');
     })();
     </script>
